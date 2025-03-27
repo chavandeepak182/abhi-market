@@ -1,7 +1,7 @@
 @extends('frontend.layouts.header')
-@section('title', "Welcome to Kitara Cloud Techlabs")
-@section('description', "Kitaracloud is the team of Expert and Certified Professionals in Salesforce CRM domain who is able take you the next level.")
-@section('keywords', "Salesforce Consulting Services, Salesforce Implementation Services, Community Cloud Implementation")
+@section('title', "Abhishek Market")
+@section('description', "")
+@section('keywords', "")
 
 @section('content')
 

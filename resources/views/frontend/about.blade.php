@@ -1,110 +1,9 @@
-<!DOCTYPE html>
-<html lang="zxx">
+@extends('frontend.layouts.header')
+@section('title', "About Us")
+@section('description', "")
+@section('keywords', "")
 
-<!-- Mirrored from html.awaikenthemes.com/fintech/about.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 27 Mar 2025 10:31:13 GMT -->
-<head>
-	<!-- Meta -->
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-	<meta name="description" content="">
-	<meta name="keywords" content="">
-	<meta name="author" content="Awaiken">
-	<!-- Page Title -->
-    <title>Fintech - Business Consulting HTML Template</title>
-	<!-- Favicon Icon -->
-	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
-	<!-- Google Fonts Css-->
-	<link rel="preconnect" href="https://fonts.googleapis.com/">
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;display=swap" rel="stylesheet">
-	<!-- Bootstrap Css -->
-	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-	<!-- SlickNav Css -->
-	<link href="css/slicknav.min.css" rel="stylesheet">
-	<!-- Swiper Css -->
-	<link rel="stylesheet" href="css/swiper-bundle.min.css">
-	<!-- Font Awesome Icon Css-->
-	<link href="css/all.min.css" rel="stylesheet" media="screen">
-	<!-- Animated Css -->
-	<link href="css/animate.css" rel="stylesheet">
-    <!-- Magnific Popup Core Css File -->
-	<link rel="stylesheet" href="css/magnific-popup.css">
-	<!-- Mouse Cursor Css File -->
-	<link rel="stylesheet" href="css/mousecursor.css">
-	<!-- Main Custom Css -->
-	<link href="css/custom.css" rel="stylesheet" media="screen">
-</head>
-<body>
-
-    <!-- Preloader Start -->
-	<div class="preloader">
-		<div class="loading-container">
-			<div class="loading"></div>
-			<div id="loading-icon"><img src="images/loader.svg" alt=""></div>
-		</div>
-	</div>
-	<!-- Preloader End -->
-
-    <!-- Header Start -->
-	<header class="main-header">
-		<div class="header-sticky">
-			<nav class="navbar navbar-expand-lg">
-				<div class="container">
-					<!-- Logo Start -->
-					<a class="navbar-brand" href="index.html">
-						<img src="images/logo.svg" alt="Logo">
-					</a>
-					<!-- Logo End -->
-
-					<!-- Main Menu Start -->
-					<div class="collapse navbar-collapse main-menu">
-                        <div class="nav-menu-wrapper">
-                            <ul class="navbar-nav mr-auto" id="menu">
-                                <li class="nav-item submenu"><a class="nav-link" href="index.html">Home</a>
-                                    <ul>
-                                        <li class="nav-item"><a class="nav-link" href="index-2.html">Home - Main</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="index-image.html">Home - Image</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="index-video.html">Home - Video</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="index-slider.html">Home - Slider</a></li>
-                                    </ul>
-                                </li>                                
-                                <li class="nav-item"><a class="nav-link" href="about.html">About Us</a>
-                                <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
-                                <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
-                                <li class="nav-item submenu"><a class="nav-link" href="#">Pages</a>
-                                    <ul>                                        
-                                        <li class="nav-item"><a class="nav-link" href="service-single.html">Service Details</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="blog-single.html">Blog Details</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="team.html">Our Team</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="team-single.html">Team Details</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="pricing.html">Pricing Plan</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="clients.html">Clients</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="testimonial.html">Testimonials</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="image-gallery.html">Image Gallery</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="video-gallery.html">Video Gallery</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="faqs.html">FAQs</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="404.html">404</a></li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item highlighted-menu"><a class="nav-link" href="contact.html">Contact Us</a></li>                           
-                            </ul>
-                        </div>
-                        <!-- Header Btn Start -->
-                        <div class="header-btn d-inline-flex">
-                            <a href="contact.html" class="btn-default btn-highlighted">contact us</a>
-                        </div>
-                        <!-- Header Btn End -->
-					</div>
-					<!-- Main Menu End -->
-					<div class="navbar-toggle"></div>
-				</div>
-			</nav>
-			<div class="responsive-menu"></div>
-		</div>
-	</header>
-	<!-- Header End -->
-
+@section('content')
     <!-- Page Header Start -->
     <div class="page-header">
         <div class="container">
@@ -113,12 +12,12 @@
                     <!-- Page Header Box Start -->
                     <div class="page-header-box">
                         <h1 class="text-anime-style-2" data-cursor="-opaque">About us</h1>
-                        <nav class="wow fadeInUp">
+                        <!-- <nav class="wow fadeInUp">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">home</a></li>
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">about us</li>
                             </ol>
-                        </nav>
+                        </nav> -->
                     </div>
                     <!-- Page Header Box End -->
                 </div>
@@ -137,7 +36,7 @@
                         <!-- About Image 1 Start -->
                         <div class="about-img-1">
                             <figure class="image-anime reveal">
-                                <img src="images/about-img-1.jpg" alt="">
+                                <img src="{{ asset('assets') }}/images/about-img-1.jpg" alt="">
                             </figure>
                         </div>
                         <!-- About Image 1 End -->
@@ -145,14 +44,14 @@
                         <!-- About Image 2 Start -->
                         <div class="about-img-2">
                             <figure class="image-anime reveal">
-                                <img src="images/about-img-2.jpg" alt="">
+                                <img src="{{ asset('assets') }}/images/about-img-2.jpg" alt="">
                             </figure>
                         </div>
                         <!-- About Image 2 End -->
 
                         <!-- Contact Circle Start -->
                         <div class="contact-circle">
-                            <img src="images/contact-us-img.svg" alt="">
+                            <img src="{{ asset('assets') }}/images/contact-us-img.svg" alt="">
                         </div>
                         <!-- Contact Circle End -->
                     </div>
@@ -179,7 +78,7 @@
                                         <!-- About Goal Box Start -->
                                         <div class="about-goal-box wow fadeInUp" data-wow-delay="0.4s">
                                             <div class="icon-box">
-                                                <img src="images/icon-financial-strategies.svg" alt="">
+                                                <img src="{{ asset('assets') }}/images/icon-financial-strategies.svg" alt="">
                                             </div>
             
                                             <div class="about-goal-box-content">
@@ -192,7 +91,7 @@
                                         <!-- About Contact Box Start -->
                                         <div class="about-contact-box wow fadeInUp" data-wow-delay="0.6s">
                                             <div class="icon-box">
-                                                <img src="images/icon-phone.svg" alt="">
+                                                <img src="{{ asset('assets') }}/images/icon-phone.svg" alt="">
                                             </div>
 
                                             <div class="about-contact-content">
@@ -210,7 +109,7 @@
                                         <!-- About Info Box Start -->
                                         <div class="about-info-box">
                                             <figure class="image-anime reveal">
-                                                <img src="images/author-1.jpg" alt="">
+                                                <img src="{{ asset('assets') }}/images/author-1.jpg" alt="">
                                             </figure>
             
                                             <div class="about-author-content">
@@ -272,7 +171,7 @@
                         <!-- Mission Vision Header Start -->
                         <div class="mission-vission-header">
                             <div class="icon-box">
-                                <img src="images/icon-our-mission.svg" alt="">
+                                <img src="{{ asset('assets') }}/images/icon-our-mission.svg" alt="">
                             </div>
 
                             <div class="mission-vission-content">
@@ -285,7 +184,7 @@
                         <!-- Mission Vision Image Start -->
                         <div class="mission-vission-image">
                             <figure class="image-anime">
-                                <img src="images/our-mission-img.jpg" alt="">
+                                <img src="{{ asset('assets') }}/images/our-mission-img.jpg" alt="">
                             </figure>
                         </div>
                         <!-- Mission Vision Image End -->
@@ -299,7 +198,7 @@
                         <!-- Mission Vision Header Start -->
                         <div class="mission-vission-header">
                             <div class="icon-box">
-                                <img src="images/icon-our-vision.svg" alt="">
+                                <img src="{{ asset('assets') }}/images/icon-our-vision.svg" alt="">
                             </div>
 
                             <div class="mission-vission-content">
@@ -312,7 +211,7 @@
                         <!-- Mission Vision Image Start -->
                         <div class="mission-vission-image">
                             <figure class="image-anime">
-                                <img src="images/our-vision-img.jpg" alt="">
+                                <img src="{{ asset('assets') }}/images/our-vision-img.jpg" alt="">
                             </figure>
                         </div>
                         <!-- Mission Vision Image End -->
@@ -326,7 +225,7 @@
                         <!-- Mission Vision Header Start -->
                         <div class="mission-vission-header">
                             <div class="icon-box">
-                                <img src="images/icon-our-value.svg" alt="">
+                                <img src="{{ asset('assets') }}/images/icon-our-value.svg" alt="">
                             </div>
 
                             <div class="mission-vission-content">
@@ -339,7 +238,7 @@
                         <!-- Mission Vision Image Start -->
                         <div class="mission-vission-image">
                             <figure class="image-anime">
-                                <img src="images/our-value-img.jpg" alt="">
+                                <img src="{{ asset('assets') }}/images/our-value-img.jpg" alt="">
                             </figure>
                         </div>
                         <!-- Mission Vision Image End -->
@@ -370,7 +269,7 @@
                             <!-- Why Choose Box Start -->
                             <div class="why-choose-box wow fadeInUp" data-wow-delay="0.2s">
                                 <div class="icon-box">
-                                    <img src="images/icon-why-choose-1.svg" alt="">
+                                    <img src="{{ asset('assets') }}/images/icon-why-choose-1.svg" alt="">
                                 </div>
 
                                 <div class="why-choose-box-content">
@@ -383,7 +282,7 @@
                             <!-- Why Choose Box Start -->
                             <div class="why-choose-box wow fadeInUp" data-wow-delay="0.2s">
                                 <div class="icon-box">
-                                    <img src="images/icon-why-choose-2.svg" alt="">
+                                    <img src="{{ asset('assets') }}/images/icon-why-choose-2.svg" alt="">
                                 </div>
 
                                 <div class="why-choose-box-content">
@@ -413,7 +312,7 @@
                         <!-- Why Choose Image 1 Start -->
                         <div class="why-choose-img-1">
                             <figure class="image-anime reveal">
-                                <img src="images/why-choose-img-1.jpg" alt="">
+                                <img src="{{ asset('assets') }}/images/why-choose-img-1.jpg" alt="">
                             </figure>
                         </div>
                         <!-- Why Choose Image 1 End -->
@@ -421,14 +320,14 @@
                         <!-- Why Choose Image 2 Start -->
                         <div class="why-choose-img-2">
                             <figure class="image-anime reveal">
-                                <img src="images/why-choose-img-2.jpg" alt="">
+                                <img src="{{ asset('assets') }}/images/why-choose-img-2.jpg" alt="">
                             </figure>
                         </div>
                         <!-- Why Choose Image 2 End -->
 
                         <!-- Why Choose Contact Circle Start -->
                         <div class="why-choose-contact-circle">
-                            <img src="images/contact-us-img.svg" alt="">
+                            <img src="{{ asset('assets') }}/images/contact-us-img.svg" alt="">
                         </div>
                         <!-- Why Choose Contact Circle Start -->
                     </div>
@@ -468,7 +367,7 @@
                         <!-- Feature Item Start -->
                         <div class="our-feature-item wow fadeInUp">
                             <div class="icon-box">
-                                <img src="images/icon-our-feature-1.svg" alt="">
+                                <img src="{{ asset('assets') }}/images/icon-our-feature-1.svg" alt="">
                             </div>
                             <div class="feature-item-content">
                                 <h3>financial solutions</h3>
@@ -480,7 +379,7 @@
                         <!-- Feature Item Start -->
                         <div class="our-feature-item wow fadeInUp" data-wow-delay="0.2s">
                             <div class="icon-box">
-                                <img src="images/icon-our-feature-2.svg" alt="">
+                                <img src="{{ asset('assets') }}/images/icon-our-feature-2.svg" alt="">
                             </div>
                             <div class="feature-item-content">
                                 <h3>wealth management</h3>
@@ -492,7 +391,7 @@
                         <!-- Feature Item Start -->
                         <div class="our-feature-item wow fadeInUp" data-wow-delay="0.4s">
                             <div class="icon-box">
-                                <img src="images/icon-our-feature-3.svg" alt="">
+                                <img src="{{ asset('assets') }}/images/icon-our-feature-3.svg" alt="">
                             </div>
                             <div class="feature-item-content">
                                 <h3>in-depth market analysis</h3>
@@ -504,7 +403,7 @@
                         <!-- Feature Item Start -->
                         <div class="our-feature-item wow fadeInUp" data-wow-delay="0.6s">
                             <div class="icon-box">
-                                <img src="images/icon-our-feature-4.svg" alt="">
+                                <img src="{{ asset('assets') }}/images/icon-our-feature-4.svg" alt="">
                             </div>
                             <div class="feature-item-content">
                                 <h3>risk management</h3>
@@ -516,7 +415,7 @@
                         <!-- Feature Item Start -->
                         <div class="our-feature-item wow fadeInUp" data-wow-delay="0.8s">
                             <div class="icon-box">
-                                <img src="images/icon-our-feature-5.svg" alt="">
+                                <img src="{{ asset('assets') }}/images/icon-our-feature-5.svg" alt="">
                             </div>
                             <div class="feature-item-content">
                                 <h3>tax efficiency strategies</h3>
@@ -528,7 +427,7 @@
                         <!-- Feature Item Start -->
                         <div class="our-feature-item wow fadeInUp" data-wow-delay="1s">
                             <div class="icon-box">
-                                <img src="images/icon-our-feature-6.svg" alt="">
+                                <img src="{{ asset('assets') }}/images/icon-our-feature-6.svg" alt="">
                             </div>
                             <div class="feature-item-content">
                                 <h3>strategic business advisory</h3>
@@ -575,7 +474,7 @@
 
                         <div class="our-benefit-img">
                             <figure class="image-anime reveal">
-                                <img src="images/our-benefit-img.jpg" alt="">
+                                <img src="{{ asset('assets') }}/images/our-benefit-img.jpg" alt="">
                             </figure>
                         </div>
                     </div>
@@ -590,7 +489,7 @@
                             <!-- Our Benefit Item Start -->
                             <div class="our-benefit-item wow fadeInUp">
                                 <div class="icon-box">
-                                    <img src="images/icon-our-benefit-1.svg" alt="">
+                                    <img src="{{ asset('assets') }}/images/icon-our-benefit-1.svg" alt="">
                                 </div>
                                 <div class="benefit-item-content">
                                     <h3>expert guidance</h3>
@@ -602,7 +501,7 @@
                             <!-- Our Benefit Item Start -->
                             <div class="our-benefit-item wow fadeInUp" data-wow-delay="0.2s">
                                 <div class="icon-box">
-                                    <img src="images/icon-our-benefit-2.svg" alt="">
+                                    <img src="{{ asset('assets') }}/images/icon-our-benefit-2.svg" alt="">
                                 </div>
                                 <div class="benefit-item-content">
                                     <h3>risk management</h3>
@@ -614,7 +513,7 @@
                             <!-- Our Benefit Item Start -->
                             <div class="our-benefit-item wow fadeInUp" data-wow-delay="0.4s">
                                 <div class="icon-box">
-                                    <img src="images/icon-our-benefit-3.svg" alt="">
+                                    <img src="{{ asset('assets') }}/images/icon-our-benefit-3.svg" alt="">
                                 </div>
                                 <div class="benefit-item-content">
                                     <h3>long-term growth</h3>
@@ -626,7 +525,7 @@
                             <!-- Our Benefit Item Start -->
                             <div class="our-benefit-item wow fadeInUp" data-wow-delay="0.6s">
                                 <div class="icon-box">
-                                    <img src="images/icon-our-benefit-4.svg" alt="">
+                                    <img src="{{ asset('assets') }}/images/icon-our-benefit-4.svg" alt="">
                                 </div>
                                 <div class="benefit-item-content">
                                     <h3>time efficiency</h3>
@@ -691,7 +590,7 @@
                         <!-- What We Do Image 1 Start -->
                         <div class="what-do-we-img-1">
                             <figure class="image-anime reveal">
-                                <img src="images/what-we-do-img-1.jpg" alt="">
+                                <img src="{{ asset('assets') }}/images/what-we-do-img-1.jpg" alt="">
                             </figure>
                         </div>
                         <!-- What We Do Image 1 End -->
@@ -699,7 +598,7 @@
                         <!-- What We Do Image 2 Start -->
                         <div class="what-do-we-img-2">
                             <figure class="image-anime reveal">
-                                <img src="images/what-we-do-img-2.jpg" alt="">
+                                <img src="{{ asset('assets') }}/images/what-we-do-img-2.jpg" alt="">
                             </figure>
                         </div>
                         <!-- What We Do Image 2 End -->
@@ -824,43 +723,43 @@
                     <div class="our-partners-list">
                         <!-- Our Partner Item Start -->
                         <div class="our-partner-item wow fadeInUp">
-                            <img src="images/our-partner-1.svg" alt="">
+                            <img src="{{ asset('assets') }}/images/our-partner-1.svg" alt="">
                         </div>
                         <!-- Our Partner Item End -->
 
                         <!-- Our Partner Item Start -->
                         <div class="our-partner-item wow fadeInUp" data-wow-delay="0.2s">
-                            <img src="images/our-partner-2.svg" alt="">
+                            <img src="{{ asset('assets') }}/images/our-partner-2.svg" alt="">
                         </div>
                         <!-- Our Partner Item End -->
 
                         <!-- Our Partner Item Start -->
                         <div class="our-partner-item wow fadeInUp" data-wow-delay="0.4s">
-                            <img src="images/our-partner-3.svg" alt="">
+                            <img src="{{ asset('assets') }}/images/our-partner-3.svg" alt="">
                         </div>
                         <!-- Our Partner Item End -->
 
                         <!-- Our Partner Item Start -->
                         <div class="our-partner-item wow fadeInUp" data-wow-delay="0.6s">
-                            <img src="images/our-partner-4.svg" alt="">
+                            <img src="{{ asset('assets') }}/images/our-partner-4.svg" alt="">
                         </div>
                         <!-- Our Partner Item End -->
 
                         <!-- Our Partner Item Start -->
                         <div class="our-partner-item wow fadeInUp" data-wow-delay="0.8s">
-                            <img src="images/our-partner-1.svg" alt="">
+                            <img src="{{ asset('assets') }}/images/our-partner-1.svg" alt="">
                         </div>
                         <!-- Our Partner Item End -->
 
                         <!-- Our Partner Item Start -->
                         <div class="our-partner-item wow fadeInUp" data-wow-delay="1s">
-                            <img src="images/our-partner-2.svg" alt="">
+                            <img src="{{ asset('assets') }}/images/our-partner-2.svg" alt="">
                         </div>
                         <!-- Our Partner Item End -->
 
                         <!-- Our Partner Item Start -->
                         <div class="our-partner-item wow fadeInUp" data-wow-delay="1.2s">
-                            <img src="images/our-partner-3.svg" alt="">
+                            <img src="{{ asset('assets') }}/images/our-partner-3.svg" alt="">
                         </div>
                         <!-- Our Partner Item End -->
                     </div>
@@ -901,7 +800,7 @@
                         <div class="team-image">
                             <a href="team-single.html" data-cursor-text="View">
                                 <figure class="image-anime">
-                                    <img src="images/team-1.jpg" alt="">
+                                    <img src="{{ asset('assets') }}/images/team-1.jpg" alt="">
                                 </figure>
                             </a>
                         </div>
@@ -938,7 +837,7 @@
                         <div class="team-image">
                             <a href="team-single.html" data-cursor-text="View">
                                 <figure class="image-anime">
-                                    <img src="images/team-2.jpg" alt="">
+                                    <img src="{{ asset('assets') }}/images/team-2.jpg" alt="">
                                 </figure>
                             </a>
                         </div>
@@ -975,7 +874,7 @@
                         <div class="team-image">
                             <a href="team-single.html" data-cursor-text="View">
                                 <figure class="image-anime">
-                                    <img src="images/team-3.jpg" alt="">
+                                    <img src="{{ asset('assets') }}/images/team-3.jpg" alt="">
                                 </figure>
                             </a>
                         </div>
@@ -1048,13 +947,13 @@
                                             <div class="testimonial-header">
                                                 <!-- Customer Logo Start -->
                                                 <div class="customer-logo">
-                                                    <img src="images/customer-logo.svg" alt="">
+                                                    <img src="{{ asset('assets') }}/images/customer-logo.svg" alt="">
                                                 </div>
                                                 <!-- Customer Logo End -->
 
                                                 <!-- Testimonial Quotes Start -->
                                                 <div class="testimonial-quotes">
-                                                    <img src="images/testimonial-quotes.svg" alt="">
+                                                    <img src="{{ asset('assets') }}/images/testimonial-quotes.svg" alt="">
                                                 </div>
                                                 <!-- Testimonial Quotes End -->
                                             </div>
@@ -1071,7 +970,7 @@
                                                 <!-- Author Image Start -->
                                                 <div class="author-image">
                                                     <figure class="image-anime">
-                                                        <img src="images/author-1.jpg" alt="">
+                                                        <img src="{{ asset('assets') }}/images/author-1.jpg" alt="">
                                                     </figure>
                                                 </div>
                                                 <!-- Author Image End -->
@@ -1096,13 +995,13 @@
                                             <div class="testimonial-header">
                                                 <!-- Customer Logo Start -->
                                                 <div class="customer-logo">
-                                                    <img src="images/customer-logo.svg" alt="">
+                                                    <img src="{{ asset('assets') }}/images/customer-logo.svg" alt="">
                                                 </div>
                                                 <!-- Customer Logo End -->
 
                                                 <!-- Testimonial Quotes Start -->
                                                 <div class="testimonial-quotes">
-                                                    <img src="images/testimonial-quotes.svg" alt="">
+                                                    <img src="{{ asset('assets') }}/images/testimonial-quotes.svg" alt="">
                                                 </div>
                                                 <!-- Testimonial Quotes End -->
                                             </div>
@@ -1119,7 +1018,7 @@
                                                 <!-- Author Image Start -->
                                                 <div class="author-image">
                                                     <figure class="image-anime">
-                                                        <img src="images/author-2.jpg" alt="">
+                                                        <img src="{{ asset('assets') }}/images/author-2.jpg" alt="">
                                                     </figure>
                                                 </div>
                                                 <!-- Author Image End -->
@@ -1144,13 +1043,13 @@
                                             <div class="testimonial-header">
                                                 <!-- Customer Logo Start -->
                                                 <div class="customer-logo">
-                                                    <img src="images/customer-logo.svg" alt="">
+                                                    <img src="{{ asset('assets') }}/images/customer-logo.svg" alt="">
                                                 </div>
                                                 <!-- Customer Logo End -->
 
                                                 <!-- Testimonial Quotes Start -->
                                                 <div class="testimonial-quotes">
-                                                    <img src="images/testimonial-quotes.svg" alt="">
+                                                    <img src="{{ asset('assets') }}/images/testimonial-quotes.svg" alt="">
                                                 </div>
                                                 <!-- Testimonial Quotes End -->
                                             </div>
@@ -1167,7 +1066,7 @@
                                                 <!-- Author Image Start -->
                                                 <div class="author-image">
                                                     <figure class="image-anime">
-                                                        <img src="images/author-3.jpg" alt="">
+                                                        <img src="{{ asset('assets') }}/images/author-3.jpg" alt="">
                                                     </figure>
                                                 </div>
                                                 <!-- Author Image End -->
@@ -1195,7 +1094,7 @@
                             <div class="customer-rating-box">
                                 <!-- Customer Rating Image Start -->
                                 <div class="customer-rating-image">
-                                    <img src="images/icon-google.svg" alt="">
+                                    <img src="{{ asset('assets') }}/images/icon-google.svg" alt="">
                                 </div>
                                 <!-- Customer Rating Image End -->
 
@@ -1236,7 +1135,7 @@
                                     </div>
 
                                     <div class="star-rating-img">
-                                        <img src="images/customer-rating-img.svg" alt="">
+                                        <img src="{{ asset('assets') }}/images/customer-rating-img.svg" alt="">
                                     </div>
                                 </div>
                                 <!-- Customer Rating Counter End -->
@@ -1287,7 +1186,7 @@
                         <!-- Our FAQs Img Start -->
                         <div class="our-faqs-img">
                             <figure class="image-anime reveal">
-                                <img src="images/faqs-img.jpg" alt="">
+                                <img src="{{ asset('assets') }}/images/faqs-img.jpg" alt="">
                             </figure>
                         </div>
                         <!-- Our FAQs Img End -->
@@ -1305,7 +1204,7 @@
                                 <!-- Client Image Start -->
                                 <div class="client-image">
                                     <figure class="image-anime">
-                                        <img src="images/satisfy-client-img-1.jpg" alt="">
+                                        <img src="{{ asset('assets') }}/images/satisfy-client-img-1.jpg" alt="">
                                     </figure>
                                 </div>
                                 <!-- Client Image End -->
@@ -1313,7 +1212,7 @@
                                 <!-- Client Image Start -->
                                 <div class="client-image">
                                     <figure class="image-anime">
-                                        <img src="images/satisfy-client-img-2.jpg" alt="">
+                                        <img src="{{ asset('assets') }}/images/satisfy-client-img-2.jpg" alt="">
                                     </figure>
                                 </div>
                                 <!-- Client Image End -->
@@ -1321,7 +1220,7 @@
                                 <!-- Client Image Start -->
                                 <div class="client-image">
                                     <figure class="image-anime">
-                                        <img src="images/satisfy-client-img-3.jpg" alt="">
+                                        <img src="{{ asset('assets') }}/images/satisfy-client-img-3.jpg" alt="">
                                     </figure>
                                 </div>
                                 <!-- Client Image End -->
@@ -1329,7 +1228,7 @@
                                 <!-- Client Image Start -->
                                 <div class="client-image">
                                     <figure class="image-anime">
-                                        <img src="images/satisfy-client-img-4.jpg" alt="">
+                                        <img src="{{ asset('assets') }}/images/satisfy-client-img-4.jpg" alt="">
                                     </figure>
                                 </div>
                                 <!-- Client Image End -->
@@ -1337,7 +1236,7 @@
                                 <!-- Client Image Start -->
                                 <div class="client-image">
                                     <figure class="image-anime">
-                                        <img src="images/satisfy-client-img-5.jpg" alt="">
+                                        <img src="{{ asset('assets') }}/images/satisfy-client-img-5.jpg" alt="">
                                     </figure>
                                 </div>
                                 <!-- Client Image End -->
@@ -1443,169 +1342,4 @@
         </div>
     </div>
     <!-- Our FAQs Section End-->
-
-    <!-- Footer Section Start -->
-    <footer class="main-footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <!-- Footer Newsletter Box Start -->
-                    <div class="footer-newsletter-box">
-                        <!-- Footer Newsletter Title Start -->
-                        <div class="footer-newsletter-title">
-                            <h3>Don't missed subscribed!</h3>
-                        </div>
-                        <!-- Footer Newsletter Title End -->
-
-                        <!-- Newsletter Form start -->
-                        <div class="newsletter-form">
-                            <form id="newsletterForm" action="#" method="POST">
-                                <div class="form-group">
-                                    <input type="email" name="email" class="form-control" id="mail" placeholder="Your Email" required="">
-                                    <button type="submit" class="newsletter-btn"><img src="images/arrow-white.svg" alt=""></button>
-                                </div>
-                            </form>
-                        </div>
-                        <!-- Newsletter Form end -->
-                    </div>
-                    <!-- Footer Newsletter Box End -->
-                </div>
-                
-                <div class="col-lg-2 col-md-4">
-                    <!-- Footer Links Start -->
-                    <div class="footer-links">
-                        <h3>company</h3>
-                        <ul>
-                            <li><a href="index-2.html">home</a></li>
-                            <li><a href="about.html">about Us</a></li>
-                            <li><a href="services.html">services</a></li>
-                            <li><a href="blog.html">blog</a></li>
-                        </ul>
-                    </div>
-                    <!-- Footer Links End -->
-                </div>
-
-                <div class="col-lg-2  col-md-4">
-                    <!-- Footer Links Start -->
-                    <div class="footer-links">
-                        <h3>support</h3>
-                        <ul>
-                            <li><a href="#">help</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Term & Condition</a></li>
-                            <li><a href="contact.html">Contact us</a></li>
-                        </ul>
-                    </div>
-                    <!-- Footer Links End -->
-                </div>
-
-                <div class="col-lg-2  col-md-4">
-                    <!-- Footer Links Start -->
-                    <div class="footer-links">
-                        <h3>service</h3>
-                        <ul>
-                            <li><a href="service-single.html">Financial planning</a></li>
-                            <li><a href="service-single.html">Investment management</a></li>
-                            <li><a href="service-single.html">Retirement planning</a></li>
-                            <li><a href="service-single.html">Budgeting & forecasting</a></li>
-                        </ul>
-                    </div>
-                    <!-- Footer Links End -->
-                </div>
-
-                <div class="col-lg-12">
-                    <!-- About Footer Start -->
-                    <div class="footer-cta-box">
-                        <!-- Footer Logo Start -->
-                        <div class="footer-logo">
-                            <img src="images/footer-logo.svg" alt="">
-                        </div>
-                        <!-- Footer Logo End -->
-                    
-                        <!-- Footer Contact Box Start -->
-                        <div class="footer-contact-box">
-                            <!-- Footer Contact Item Start -->
-                            <div class="footer-contact-item">
-                                <p>Need help!</p>
-                                <h3>+1.809.120.6705</h3>
-                            </div>
-                            <!-- Footer Contact Item End -->
-
-                            <!-- Footer Contact Item Start -->
-                            <div class="footer-contact-item">
-                                <p>E-mail now</p>
-                                <h3>info@domain.com</h3>
-                            </div>
-                            <!-- Footer Contact Item End -->
-                        </div>
-                        <!-- Footer Contact Box End -->
-                    </div>
-                    <!-- About Footer End -->
-                </div>
-            </div>
-
-            <!-- Footer Copyright Section Start -->
-            <div class="footer-copyright">
-                <div class="row align-items-center">
-                    <div class="col-md-5">
-                        <!-- Footer Copyright Start -->
-                        <div class="footer-copyright-text">
-                            <p>Copyright © 2024 All Rights Reserved.</p>
-                        </div>
-                        <!-- Footer Copyright End -->
-                    </div>
-
-                    <div class="col-md-7">
-                        <!-- Footer Menu Start -->
-                        <div class="footer-menu">
-                            <ul>                            
-                                <li><a href="#">LinkedIn</a></li>
-                                <li><a href="#">Facebook</a></li>
-                                <li><a href="#">Instagram</a></li>
-                                <li><a href="#">Twitter</a></li>
-                            </ul>
-                        </div>
-                        <!-- Footer Menu End -->
-                    </div>
-                </div>
-            </div>
-            <!-- Footer Copyright Section End -->
-        </div>
-    </footer>
-    <!-- Footer Section End -->
-
-    <!-- Jquery Library File -->
-    <script src="js/jquery-3.7.1.min.js"></script>
-    <!-- Bootstrap js file -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- Validator js file -->
-    <script src="js/validator.min.js"></script>
-    <!-- SlickNav js file -->
-    <script src="js/jquery.slicknav.js"></script>
-    <!-- Swiper js file -->
-    <script src="js/swiper-bundle.min.js"></script>
-    <!-- Counter js file -->
-    <script src="js/jquery.waypoints.min.js"></script>
-    <script src="js/jquery.counterup.min.js"></script>
-    <!-- Magnific js file -->
-    <script src="js/jquery.magnific-popup.min.js"></script>
-    <!-- SmoothScroll -->
-    <script src="js/SmoothScroll.js"></script>
-    <!-- Parallax js -->
-    <script src="js/parallaxie.js"></script>
-    <!-- MagicCursor js file -->
-    <script src="js/gsap.min.js"></script>
-    <script src="js/magiccursor.js"></script>
-    <!-- Text Effect js file -->
-    <script src="js/SplitText.js"></script>
-    <script src="js/ScrollTrigger.min.js"></script>
-    <!-- YTPlayer js File -->
-    <script src="js/jquery.mb.YTPlayer.min.js"></script>
-    <!-- Wow js file -->
-    <script src="js/wow.min.js"></script>
-    <!-- Main Custom js file -->
-    <script src="js/function.js"></script>
-</body>
-
-<!-- Mirrored from html.awaikenthemes.com/fintech/about.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 27 Mar 2025 10:31:17 GMT -->
-</html>
+@endsection

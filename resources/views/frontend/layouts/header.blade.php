@@ -48,7 +48,9 @@
                 <div class="row v-center align-items-center">
                 <div class="header-item item-left">
                     <div class="logo">
-                        <a href="{{ url('/') }}">logo</a>
+                        <a class="navbar-brand" href="{{ url('/') }}">
+                            <img alt="JFinMate" src="{{ asset('assets') }}/images/logo.png" width="150" height="25">
+                        </a>
                     </div>
                 </div>
                 <!-- menu start here -->
@@ -66,7 +68,7 @@
                                 </li>
                                 
                                 <li class="menu-item-has-children">
-                                    <a href="#">Insights <i class="fas fa-plus"></i></a>
+                                    <a href="{{ url('/insights') }}">Insights <i class="fas fa-plus"></i></a>
                                     <div class="sub-menu mega-menu mega-menu-column-4">
                                         <div class="list-item">
                                             <h4 class="title"><a href="#">Industries</a></h4>

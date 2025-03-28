@@ -44,7 +44,7 @@
             <!-- sidebar close btn -->
             
             <a href="index.html" class="sidebar__logo text-center p-20 position-sticky inset-block-start-0 bg-white w-100 z-1 pb-10">
-                <img src="{{ asset('dashboard') }}/assets/images/logo/logo.png" alt="Logo">
+                <img src="{{ asset('assets') }}/images/logo.png" alt="Logo" width="120" height="20">
             </a>
 
             <div class="sidebar-menu-wrapper overflow-y-auto scroll-sm">

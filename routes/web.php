@@ -33,3 +33,15 @@ Route::get('/service-details', function () {
 Route::get('/admin-dash', function () {
     return view('backend.admin-dash');
 });
+
+Route::get('/sign-in', function () {
+    return view('backend.sign-in');
+});
+
+Route::get('/sign-up', function () {
+    return view('backend.sign-up');
+});
+
+Route::get('/user', function () {
+    return view('backend.user');
+});

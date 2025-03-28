@@ -66,129 +66,153 @@
                                 </li>
                                 
                                 <li class="menu-item-has-children">
-                                    <a href="{{ url('/insights') }}">Insights <i class="fa fa-angle-down"></i></a>
+                                    <a href="#">Insights <i class="fas fa-plus"></i></a>
                                     <div class="sub-menu mega-menu mega-menu-column-4">
                                         <div class="list-item">
-                                            <h4 class="title">Men's Fashion</h4>
+                                            <h4 class="title"><a href="#">Industries</a></h4>
                                             <ul>
-                                                <li><a href="#">T-Shirts</a></li>
-                                                <li><a href="#">Jeans</a></li>
-                                                <li><a href="#">Suit</a></li>
-                                                <li><a href="#">Kurta</a></li>
-                                                <li><a href="#">Watch</a></li>
-                                            </ul>
-                                            <h4 class="title">Beauty</h4>
-                                            <ul>
-                                                <li><a href="#">Moisturizer</a></li>
-                                                <li><a href="#">Face powder</a></li>
-                                                <li><a href="#">Lipstick</a></li>
-                                            </ul>
-                                            <h4 class="title">Beauty</h4>
-                                            <ul>
-                                                <li><a href="#">Moisturizer</a></li>
-                                                <li><a href="#">Face powder</a></li>
-                                                <li><a href="#">Lipstick</a></li>
+                                                <li><a href="#">Business Services</a></li>
+                                                <li><a href="#">Consumer Products</a></li>
+                                                <li><a href="#">Education</a></li>
+                                                <li><a href="#">Energy & Environment</a></li>
+                                                <li><a href="#">Financial Services</a></li>
+                                                <li><a href="#">Healthcare Services</a></li>
+                                                <li><a href="#">Industrials</a></li>
+                                                <li><a href="#">Life Sciences & Pharma</a></li>
                                             </ul>
                                         </div>
                                         <div class="list-item">
-                                            <h4 class="title">Women's Fashion</h4>
+                                            <h4 class="title invisible">Industries<</h4>
                                             <ul>
-                                                <li><a href="#">Sarees</a></li>
-                                                <li><a href="#">Sandals</a></li>
-                                                <li><a href="#">Watchs</a></li>
-                                                <li><a href="#">Shoes</a></li>
-                                            </ul>
-                                            <h4 class="title">Furniture</h4>
-                                            <ul>
-                                                <li><a href="#">Chairs</a></li>
-                                                <li><a href="#">Tables</a></li>
-                                                <li><a href="#">Doors</a></li>
-                                                <li><a href="#">Bed</a></li>
+                                                <li><a href="#">Media & Entertainment</a></li>
+                                                <li><a href="#">MedTech</a></li>
+                                                <li><a href="#">Private Equity</a></li>
+                                                <li><a href="#">Retail</a></li>
+                                                <li><a href="#">Sustainability</a></li>
+                                                <li><a href="#">Technology</a></li>
+                                                <li><a href="#">Travel, Transport & Logistics</a></li>
                                             </ul>
                                         </div>
                                         <div class="list-item">
-                                            <h4 class="title">Home, Kitchen</h4>
+                                            <h4 class="title"><a href="#">Sustainability Centre of Excellence</a></h4>
                                             <ul>
-                                                <li><a href="#">Kettle</a></li>
-                                                <li><a href="#">Toaster</a></li>
-                                                <li><a href="#">Dishwasher</a></li>
-                                                <li><a href="#">Microwave oven</a></li>
-                                                <li><a href="#">Pitcher</a></li>
-                                                <li><a href="#">Blender</a></li>
-                                                <li><a href="#">Colander</a></li>
-                                                <li><a href="#">Tureen</a></li>
-                                                <li><a href="#">Cookware</a></li>
+                                                <li><a href="#">Navigating the Journey to Decarbonisation</a></li>
+                                                <li><a href="#">Fuelling the Future of Aviation</a></li>
+                                                <li><a href="#">Creating Value Through Sustainability</a></li>
+                                                <li><a href="#">Consumer Sustainability Survey 2024</a></li>
                                             </ul>
                                         </div>
                                         <div class="list-item">
-                                            <img src="https://images.unsplash.com/photo-1549497538-303791108f95?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=761&q=80" alt="Chair"/>
+                                            <h4 class="title"><a href="#">Other Insights</a></h4>
+                                            <ul>
+                                                <li><a href="#">Consumer Insights Center</a></li>
+                                                <li><a href="#">Healthcare Insights Center</a></li>
+                                                <li><a href="#">Webinars</a></li>
+                                                <li><a href="#">Podcasts</a></li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </li>
 
                                 <li class="menu-item-has-children">
-                                    <a href="{{ url('/industries') }}">Industries <i class="fa fa-angle-down"></i></a>
+                                    <a href="{{ url('/industries') }}">Industries <i class="fas fa-plus"></i></a>
                                     <div class="sub-menu mega-menu mega-menu-column-4">
                                         <div class="list-item">
-                                            <h4 class="title">Men's Fashion</h4>
+                                            <h4 class="title"><a href="#">Business Services</a></h4>
                                             <ul>
-                                                <li><a href="#">T-Shirts</a></li>
-                                                <li><a href="#">Jeans</a></li>
-                                                <li><a href="#">Suit</a></li>
-                                                <li><a href="#">Kurta</a></li>
-                                                <li><a href="#">Watch</a></li>
+                                                <li><a href="#">Industrial and Professional Services</a></li>
+                                                <li><a href="#">Freight & Logistics</a></li>
+                                                <li><a href="#">Outsourcing and Support Services</a></li>
+                                                <li><a href="#">Properties and Facilities Management</a></li>
                                             </ul>
-                                            <h4 class="title">Beauty</h4>
+                                            <h4 class="title"><a href="#">Education</a></h4>
                                             <ul>
-                                                <li><a href="#">Moisturizer</a></li>
-                                                <li><a href="#">Face powder</a></li>
-                                                <li><a href="#">Lipstick</a></li>
+                                                <li><a href="#">Transnational Education</a></li>
+                                                <li><a href="#">K-12</a></li>
+                                                <li><a href="#">Higher Education</a></li>
+                                                <li><a href="#">Education Technology</a></li>
                                             </ul>
-                                            <h4 class="title">Beauty</h4>
+                                            <h4 class="title"><a href="#">Energy & Environment</a></h4>
                                             <ul>
-                                                <li><a href="#">Moisturizer</a></li>
-                                                <li><a href="#">Face powder</a></li>
-                                                <li><a href="#">Lipstick</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="list-item">
-                                            <h4 class="title">Women's Fashion</h4>
-                                            <ul>
-                                                <li><a href="#">Sarees</a></li>
-                                                <li><a href="#">Sandals</a></li>
-                                                <li><a href="#">Watchs</a></li>
-                                                <li><a href="#">Shoes</a></li>
-                                            </ul>
-                                            <h4 class="title">Furniture</h4>
-                                            <ul>
-                                                <li><a href="#">Chairs</a></li>
-                                                <li><a href="#">Tables</a></li>
-                                                <li><a href="#">Doors</a></li>
-                                                <li><a href="#">Bed</a></li>
+                                                <li><a href="#">Environmental Services</a></li>
+                                                <li><a href="#">Oil & Gas</a></li>
+                                                <li><a href="#">Power & Utilities</a></li>
+                                                <li><a href="#">Renewables</a></li>
                                             </ul>
                                         </div>
                                         <div class="list-item">
-                                            <h4 class="title">Home, Kitchen</h4>
+                                            <h4 class="title"><a href="#">Consumer Products</a></h4>
                                             <ul>
-                                                <li><a href="#">Kettle</a></li>
-                                                <li><a href="#">Toaster</a></li>
-                                                <li><a href="#">Dishwasher</a></li>
-                                                <li><a href="#">Microwave oven</a></li>
-                                                <li><a href="#">Pitcher</a></li>
-                                                <li><a href="#">Blender</a></li>
-                                                <li><a href="#">Colander</a></li>
-                                                <li><a href="#">Tureen</a></li>
-                                                <li><a href="#">Cookware</a></li>
+                                                <li><a href="#">Business Services</a></li>
+                                                <li><a href="#">Consumer Products</a></li>
+                                                <li><a href="#">Education</a></li>
+                                                <li><a href="#">Energy & Environment</a></li>
+                                            </ul>
+                                            <h4 class="title"><a href="#">Life Sciences & Pharma</a></h4>
+                                            <ul>
+                                                <li><a href="#">Biotech and Pharmaceuticals</a></li>
+                                                <li><a href="#">Pharma Services</a></li>
+                                                <li><a href="#">Diagnostics, Research Tools</a></li>
+                                                <li><a href="#">Drug Delivery</a></li>
+                                            </ul>
+                                            <h4 class="title"><a href="#">Media & Entertainment</a></h4>
+                                            <ul>
+                                                <li><a href="#">OTT and Direct-to-Consumer Services</a></li>
+                                                <li><a href="#">Movies & Film</a></li>
+                                                <li><a href="#">Lotteries and Casinos</a></li>
+                                                <li><a href="#">Music and Radio</a></li>
                                             </ul>
                                         </div>
                                         <div class="list-item">
-                                            <img src="https://images.unsplash.com/photo-1549497538-303791108f95?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=761&q=80" alt="Chair"/>
+                                            <h4 class="title"><a href="#">Financial Services</a></h4>
+                                            <ul>
+                                                <li><a href="#">Banking</a></li>
+                                                <li><a href="#">Debt Management</a></li>
+                                                <li><a href="#">Insurance</a></li>
+                                                <li><a href="#">Investment & Wealth Management</a></li>
+                                            </ul>
+                                            <h4 class="title"><a href="#">Industrials</a></h4>
+                                            <ul>
+                                                <li><a href="#">Aerospace & Defense</a></li>
+                                                <li><a href="#">Agribusiness</a></li>
+                                                <li><a href="#">Automotive</a></li>
+                                                <li><a href="#">Building & Construction</a></li>
+                                            </ul>
+                                            <h4 class="title"><a href="#">MedTech</a></h4>
+                                            <ul>
+                                                <li><a href="#">Consumables and Disposables</a></li>
+                                                <li><a href="#">Drug Delivery</a></li>
+                                                <li><a href="#">Medical Equipment</a></li>
+                                                <li><a href="#">Procedure-Specific Devices</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="list-item">
+                                            <h4 class="title"><a href="#">Healthcare Services</a></h4>
+                                            <ul>
+                                                <li><a href="#">Health Plan and Private Health Insurance</a></li>
+                                                <li><a href="#">Employer Healthcare</a></li>
+                                                <li><a href="#">Acute Care and Hospital</a></li>
+                                                <li><a href="#">Physician Practice Management</a></li>
+                                            </ul>
+                                            <h4 class="title"><a href="#">Private Equity</a></h4>
+                                            <ul>
+                                                <li><a href="#">Commercial Due Diligence</a></li>
+                                                <li><a href="#">Portfolio Company Value Enhancement</a></li>
+                                                <li><a href="#">Vendor Due Diligence</a></li>
+                                            </ul>
+                                            <h4 class="title"><a href="#">Retail</a></h4>
+                                            <ul>
+                                                <li><a href="#">Consumer Services</a></li>
+                                                <li><a href="#">Direct Selling</a></li>
+                                                <li><a href="#">Ecommerce</a></li>
+                                                <li><a href="#">Foodservice</a></li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </li>
 
                                 <li class="menu-item-has-children">
-                                    <a href="{{ url('/services') }}">Services <i class="fa fa-angle-down"></i></a>
+                                    <a href="{{ url('/services') }}">Services <i class="fas fa-plus"></i></a>
                                     <div class="sub-menu mega-menu mega-menu-column-4">
                                         <div class="list-item">
                                             <h4 class="title">Men's Fashion</h4>
@@ -250,19 +274,23 @@
 
                                 <li>
                                     <a href="{{ url('/about') }}">About Us</a>
-                                </li>                                
-                            </ul>
+                                </li>
+                                
+                                <div class="header-item float-end">
+                                    <!-- Header Btn Start -->
+                                    <div class="header-btn d-inline-flex">
+                                        <a href="{{ url('/contact') }}" class="btn-default btn-highlighted">contact us</a>
+                                    </div>
+                                    <!-- Header Btn End -->
+                                </div>
+                            </ul>                            
                         </nav>
                     </div>
                     <!-- menu end here -->
                     <div class="header-item item-right">
-                        <!-- Header Btn Start -->
-                        <div class="header-btn d-inline-flex">
-                            <a href="{{ url('/contact') }}" class="btn-default btn-highlighted">contact us</a>
-                        </div>
-                        <!-- Header Btn End -->
+                        <!-- mobile menu trigger -->
                         <div class="mobile-menu-trigger">
-                        <span></span>
+                            <span></span>
                         </div>
                     </div>
                 </div>

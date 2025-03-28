@@ -29,3 +29,7 @@ Route::get('/contact', function () {
 Route::get('/service-details', function () {
     return view('frontend.service-details');
 });
+
+Route::get('/admin-dash', function () {
+    return view('backend.admin-dash');
+});

@@ -25,3 +25,7 @@ Route::get('/about', function () {
 Route::get('/contact', function () {
     return view('frontend.contact');
 });
+
+Route::get('/service-details', function () {
+    return view('frontend.service-details');
+});

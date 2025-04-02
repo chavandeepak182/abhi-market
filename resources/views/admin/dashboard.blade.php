@@ -1,4 +1,4 @@
-@extends('backend.layouts.header')
+@extends('admin.layouts.header')
 @section('title', "Welcome to JFinMate")
 
 @section('content')

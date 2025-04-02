@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\EnquiryController;
+use App\Http\Controllers\BannerController;
 
 Route::get('/', function () {
     return view('frontend.index-slider');
@@ -44,59 +45,6 @@ Route::middleware('isAdmin')->group(function () {
         Route::get('admin/allUsers', [UsersController::class, 'allUsers'])->name('allUsers');
         Route::post('update-user-status/{id}', [UserController::class, 'updateStatus']);
         Route::post('admin/assignAgent', [LoanApplicationController::class, 'assignAgent'])->name('assignAgent');
-
-        //activity list
-        Route::get('admin/activities', [AdminController::class, 'activities'])->name('activities');  
-    
-        
-        //referral
-        Route::get('admin/referral_earnings', [ReferralController::class, 'referral_earnings'])->name('referral_earnings');
-        Route::get('/admin/refer-tool', [ReferralController::class, 'listUsers'])->name('admin.refer.tool');
-
-
-        //bank 
-        Route::get('admin/allbanks', [BankController::class, 'allbanks'])->name('allbanks');
-        Route::post('bank/insertBank',[BankController::class,'insertBank'])->name('insertBank');
-        Route::get('/editBank/{bank_id}', [BankController::class, 'editBank'])->name('editBank');
-        Route::post('/updateBank', [BankController::class, 'updateBank'])->name('updateBank');
-        Route::post('/deleteBank', [BankController::class, 'deleteBank'])->name('deleteBank');  
-        //Bank loan
-        Route::get('admin/loanbanks', [BankController::class, 'loanbanks'])->name('loanbanks');
-        Route::post('bank/insertLoanBank',[BankController::class,'insertLoanBank'])->name('insertLoanBank');
-        Route::get('/editLoanBank/{bank_id}', [BankController::class, 'editLoanBank'])->name('editLoanBank');
-        Route::post('/updateLoanBank', [BankController::class, 'updateLoanBank'])->name('updateLoanBank');
-        Route::post('/deleteLoanBank', [BankController::class, 'deleteLoanBank'])->name('deleteLoanBank');  
-
-        //calculator
-        Route::get('admin/sanctioncalculator', [AdminController::class, 'getSanctionCalculator'])->name('sanctioncalculator');
-        Route::post('admin/add_sanction_calculator', [AdminController::class, 'postAddSanctionCalculator']);
-        Route::get('admin/sanctioncalculatorhistory', [AdminController::class, 'getSanctionCalculatorHistory']);
-        Route::get('admin/sanctioncalculatorhistoryAll', [AdminController::class, 'getAllSanctionCalculatorHistory']);
-        Route::post('admin/add_sanction_calculator', [AdminController::class, 'postAddSanctionCalculator']);
-        Route::get('admin/sanctioncalculator/{id}', [AdminController::class, 'getEditSanctionCalculator']);
-        Route::post('admin/sanctioncalculator/{id}', [AdminController::class, 'postEditSanctionCalculator']);
-        
-        //MLM
-        Route::get('admin/mlm', [MlmController::class, 'mlmView'])->name('mlmView');  
-        Route::post('addMember', [MlmController::class, 'addMember'])->name('addMember');
-
-        //commission
-        Route::get('admin/allCommission', [CommissionController::class, 'allCommission'])->name('allCommission');
-        Route::post('commission/insertCommission',[CommissionController::class,'insertCommission'])->name('insertCommission');
-        Route::get('/editCommission/{com_id}', [CommissionController::class, 'editCommission'])->name('editCommission');
-        Route::post('/updateCommission',[CommissionController::class,'updateCommission'])->name('updateCommission');
-        Route::post('/deleteCommission',[CommissionController::class,'deleteCommission'])->name('deleteCommission');
-
-        //eligibilityCriteria
-        Route::get('/eligibilityCriteria',[EligibilityCriteriaController::class,'eligibilityCriteria'])->name('eligibilityCriteria');
-        Route::get('/eligiblityDetails/{loan_id}', [EligibilityCriteriaController::class, 'eligiblityDetails'])->name('eligiblityDetails');
-        Route::post('/calculate-eligibilityself', [EligibilityCriteriaController::class, 'calculateEligibility'])->name('calculate.eligibility');
-        Route::post('/calculate-eligibilitysalaried', [EligibilityCriteriaController::class, 'calculateEligibilitysalaried'])->name('calculate.eligibility.salaried');
-
-        //standalone
-        Route::post('/calculate-eligibility-standalone', [EligibilityCriteriaController::class, 'calculateStandaloneEligibility'])->name('calculateEligibilitystandalone');
-        Route::get('/standalone-self', [EligibilityCriteriaController::class, 'showStandaloneForm'])
-        ->name('standalone.self');
     });
 
 //admin user profile
@@ -147,3 +95,10 @@ Route::get('/signup', function () {
 
 //enquiry
 Route::get('admin/enquiries', [EnquiryController::class, 'enquiryLead'])->name('enquiries.enquiryLead');
+
+//banner
+Route::get('/admin/banners', [BannerController::class, 'index'])->name('banners.index');
+Route::post('/banners', [BannerController::class, 'store'])->name('banners.store');
+Route::get('/banners/{id}/edit', [BannerController::class, 'edit'])->name('banners.edit');
+Route::put('/banners/{id}', [BannerController::class, 'update'])->name('banners.update');
+Route::delete('/banners/{id}', [BannerController::class, 'destroy'])->name('banners.destroy');

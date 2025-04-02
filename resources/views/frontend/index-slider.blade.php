@@ -5,116 +5,72 @@
 
 @section('content')
 
+    @php
+        $banners = App\Models\Banner::latest()->get(); // Fetch latest 5 banners
+    @endphp
     <!-- Hero Section Start -->
     <div class="hero hero-bg-image hero-slider-layout">
         <div class="swiper">
-            <div class="swiper-wrapper">
-                <!-- Hero Slide Start -->
-                <div class="swiper-slide">
-                    <div class="hero-slide">
-                        <!-- Slider Image Start -->
-                        <div class="hero-slider-image">
-                            <img src="{{ asset('assets') }}/images/hero-bg.jpg" alt="">
-                        </div>
-                        <!-- Slider Image End -->
+            @if ($banners->count())
+                <div class="swiper-wrapper">
+                    @foreach ($banners as $index => $banner)
+                        <div class="swiper-slide">
+                            <div class="hero-slide">
+                                <!-- Slider Image Start -->
+                                <div class="hero-slider-image">
+                                    <img src="{{ asset('storage/'.$banner->image) }}" alt="{{ $banner->title ?? 'Banner Image' }}">
+                                </div>
+                                <!-- Slider Image End -->
 
-                        <div class="container">
-                            <div class="row align-items-center">
-                                <div class="col-lg-12">
-                                    <!-- Hero Content Start -->
-                                    <div class="hero-content">
-                                        <!-- Section Title Start -->
-                                        <div class="section-title dark-section">
-                                            <h3 class="wow fadeInUp">welcome to financial</h3>
-                                            <h1 class="text-anime-style-2" data-cursor="-opaque"><span>Empowering</span> your financial success journey</h1>
-                                            <p class="wow fadeInUp" data-wow-delay="0.2s">Guiding you with expert insights and strategic solutions to achieve financial growth, stability, and long-term success.</p>
-                                        </div>
-                                        <!-- Section Title End -->
-                
-                                        <!-- Hero Content Body Start -->
-                                        <div class="hero-content-body wow fadeInUp" data-wow-delay="0.4s">
-                                            <!-- Hero Button Start -->
-                                            <div class="hero-btn">
-                                                <a href="contact.html" class="btn-default">get started</a>
-                                            </div>
-                                            <!-- Hero Button End -->
-                
-                                            <!-- Hero Introduction Video Start -->
-                                            <div class="hero-introduction-video">
-                                                <!-- Video Play Button Start -->
-                                                <div class="video-play-button">
-                                                    <a href="https://www.youtube.com/watch?v=Y-x0efG1seA" class="popup-video" data-cursor-text="Play">
-                                                        <img src="{{ asset('assets') }}/images/icon-play.svg" alt="">
-                                                    </a>
-                                                    <p>introduction</p>
+                                <div class="container">
+                                    <div class="row align-items-center">
+                                        <div class="col-lg-12">
+                                            <!-- Hero Content Start -->
+                                            <div class="hero-content">
+                                                <!-- Section Title Start -->
+                                                <div class="section-title dark-section">
+                                                    <h3 class="wow fadeInUp">Welcome to Financial</h3>
+                                                    <h1 class="text-anime-style-2" data-cursor="-opaque">
+                                                        <span>Empowering</span> your financial success journey
+                                                    </h1>
+                                                    <p class="wow fadeInUp" data-wow-delay="0.2s">
+                                                        {{ $banner->description ?? 'Guiding you with expert insights and strategic solutions to achieve financial growth, stability, and long-term success.' }}
+                                                    </p>
                                                 </div>
-                                                <!-- Video Play Button End -->
+                                                <!-- Section Title End -->
+                            
+                                                <!-- Hero Content Body Start -->
+                                                <div class="hero-content-body wow fadeInUp" data-wow-delay="0.4s">
+                                                    <!-- Hero Button Start -->
+                                                    <div class="hero-btn">
+                                                        <a href="{{ url('/contact') }}" class="btn-default">Get Started</a>
+                                                    </div>
+                                                    <!-- Hero Button End -->
+                            
+                                                    <!-- Hero Introduction Video Start -->
+                                                    @if (!empty($banner->video_url))
+                                                        <div class="hero-introduction-video">
+                                                            <div class="video-play-button">
+                                                                <a href="{{ $banner->video_url }}" class="popup-video" data-cursor-text="Play">
+                                                                    <img src="{{ asset('assets/images/icon-play.svg') }}" alt="Play Video">
+                                                                </a>
+                                                                <p>Introduction</p>
+                                                            </div>
+                                                        </div>
+                                                    @endif
+                                                    <!-- Hero Introduction Video End -->
+                                                </div>
+                                                <!-- Hero Content Body End -->
                                             </div>
-                                            <!-- Hero Introduction Video End -->
+                                            <!-- Hero Content End -->
                                         </div>
-                                        <!-- Hero Content Body End -->
                                     </div>
-                                    <!-- Hero Content End -->
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @endforeach
                 </div>
-                <!-- Hero Slide End -->
-
-                <!-- Hero Slide Start -->
-                <div class="swiper-slide">
-                    <div class="hero-slide">
-                        <!-- Slider Image Start -->
-                        <div class="hero-slider-image">
-                            <img src="{{ asset('assets') }}/images/hero-bg-2.jpg" alt="">
-                        </div>
-                        <!-- Slider Image End -->
-
-                        <div class="container">
-                            <div class="row align-items-center">
-                                <div class="col-lg-12">
-                                    <!-- Hero Content Start -->
-                                    <div class="hero-content">
-                                        <!-- Section Title Start -->
-                                        <div class="section-title dark-section">
-                                            <h3 class="wow fadeInUp">welcome to financial</h3>
-                                            <h1 class="text-anime-style-2" data-cursor="-opaque"><span>Empowering</span> your financial success journey</h1>
-                                            <p class="wow fadeInUp" data-wow-delay="0.2s">Guiding you with expert insights and strategic solutions to achieve financial growth, stability, and long-term success.</p>
-                                        </div>
-                                        <!-- Section Title End -->
-                
-                                        <!-- Hero Content Body Start -->
-                                        <div class="hero-content-body wow fadeInUp" data-wow-delay="0.4s">
-                                            <!-- Hero Button Start -->
-                                            <div class="hero-btn">
-                                                <a href="contact.html" class="btn-default">get started</a>
-                                            </div>
-                                            <!-- Hero Button End -->
-                
-                                            <!-- Hero Introduction Video Start -->
-                                            <div class="hero-introduction-video">
-                                                <!-- Video Play Button Start -->
-                                                <div class="video-play-button">
-                                                    <a href="https://www.youtube.com/watch?v=Y-x0efG1seA" class="popup-video" data-cursor-text="Play">
-                                                        <img src="{{ asset('assets') }}/images/icon-play.svg" alt="">
-                                                    </a>
-                                                    <p>introduction</p>
-                                                </div>
-                                                <!-- Video Play Button End -->
-                                            </div>
-                                            <!-- Hero Introduction Video End -->
-                                        </div>
-                                        <!-- Hero Content Body End -->
-                                    </div>
-                                    <!-- Hero Content End -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Hero Slide End -->
-            </div>
+            @endif
             <div class="hero-pagination"></div>
         </div>        
     </div>

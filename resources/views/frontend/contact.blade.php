@@ -124,25 +124,21 @@
 
                     <div class="contact-form">
                         <!-- Contact Form Start -->
-                        <form id="contactForm" action="#" method="POST" data-toggle="validator" class="wow fadeInUp" data-wow-delay="0.4s">
+                        <form id="contactForm" action="{{ route('enquiry.store') }}" method="POST" data-toggle="validator" class="wow fadeInUp" data-wow-delay="0.4s">
+                            @csrf
                             <div class="row">
                                 <div class="form-group col-md-6 mb-4">
-                                    <input type="text" name="fname" class="form-control" id="fname" placeholder="First name" required>
+                                    <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" placeholder="Your Name" required>
                                     <div class="help-block with-errors"></div>
                                 </div>
 
                                 <div class="form-group col-md-6 mb-4">
-                                    <input type="text" name="lname" class="form-control" id="lname" placeholder="Last name" required>
+                                    <input type="text" class="form-control" id="contact" name="contact" value="{{ old('contact') }}" placeholder="Phone" required>
                                     <div class="help-block with-errors"></div>
                                 </div>
 
-                                <div class="form-group col-md-6 mb-4">
-                                    <input type="text" name="phone" class="form-control" id="phone" placeholder="Phone no" required>
-                                    <div class="help-block with-errors"></div>
-                                </div>
-
-                                <div class="form-group col-md-6 mb-4">
-                                    <input type="email" name="email" class="form-control" id="email" placeholder="E-mail address" required>
+                                <div class="form-group col-md-12 mb-4">
+                                    <input type="text" class="form-control" name="email" id="email" value="{{ old('email') }}" placeholder="Your Email" required>
                                     <div class="help-block with-errors"></div>
                                 </div>
 

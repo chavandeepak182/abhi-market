@@ -15,7 +15,7 @@
         <!-- file upload -->
         <link rel="stylesheet" href="{{ asset('dashboard') }}/assets/css/plyr.css">
         <!-- DataTables -->
-        <link rel="stylesheet" href="../../cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
         <!-- full calendar -->
         <link rel="stylesheet" href="{{ asset('dashboard') }}/assets/css/full-calendar.css">
         <!-- jquery Ui -->
@@ -30,6 +30,11 @@
         <link rel="stylesheet" href="{{ asset('dashboard') }}/assets/css/jquery-jvectormap-2.0.5.css">
         <!-- Main css -->
         <link rel="stylesheet" href="{{ asset('dashboard') }}/assets/css/main.css">
+        <!-- Fontawesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
     </head> 
     <body>
         <div class="preloader">
@@ -43,51 +48,49 @@
             <button type="button" class="sidebar-close-btn text-gray-500 hover-text-white hover-bg-main-600 text-md w-24 h-24 border border-gray-100 hover-border-main-600 d-xl-none d-flex flex-center rounded-circle position-absolute"><i class="ph ph-x"></i></button>
             <!-- sidebar close btn -->
             
-            <a href="index.html" class="sidebar__logo text-center p-20 position-sticky inset-block-start-0 bg-white w-100 z-1 pb-10">
+            <a href="{{ url('/') }}" class="sidebar__logo text-center p-20 position-sticky inset-block-start-0 bg-white w-100 z-1 pb-10">
                 <img src="{{ asset('assets') }}/images/logo.png" alt="Logo" width="120" height="20">
             </a>
 
             <div class="sidebar-menu-wrapper overflow-y-auto scroll-sm">
                 <div class="p-20 pt-10">
                     <ul class="sidebar-menu">
-                        <li class="sidebar-menu__item">
-                            <a href="{{ url('/admin-dash') }}" class="sidebar-menu__link">
+                        <li class="sidebar-menu__item {{ Request::is('admin/dashboard') ? 'activePage' : '' }}">
+                            <a href="{{ url('admin/dashboard') }}" class="sidebar-menu__link">
                                 <span class="icon"><i class="ph ph-squares-four"></i></span>
                                 <span class="text">Dashboard</span>
                             </a>
                         </li>
-                        <li class="sidebar-menu__item has-dropdown">
+                        <!-- <li class="sidebar-menu__item has-dropdown {{ Request::is('admin/allUsers') ? 'activePage' : '' }}">
                             <a href="javascript:void(0)" class="sidebar-menu__link">
                                 <span class="icon"><i class="ph ph-graduation-cap"></i></span>
-                                <span class="text">Courses</span>
+                                <span class="text">Users</span>
                             </a>
-                            <!-- Submenu start -->
                             <ul class="sidebar-submenu">
-                                <li class="sidebar-submenu__item">
-                                    <a href="#" class="sidebar-submenu__link"> Student Courses </a>
+                                <li class="sidebar-submenu__item {{ Request::is('admin/allUsers') ? 'activePage' : '' }}">
+                                    <a href="{{ url('admin/allUsers') }}" class="sidebar-submenu__link"> All Users </a>
                                 </li>
-                                <li class="sidebar-submenu__item">
-                                    <a href="#" class="sidebar-submenu__link"> Mentor Courses </a>
+                                <li class="sidebar-submenu__item {{ Request::is('admin/addUser') ? 'activePage' : '' }}">
+                                    <a href="{{ url('admin/addUser') }}" class="sidebar-submenu__link"> Add New User </a>
                                 </li>
                                 <li class="sidebar-submenu__item">
                                     <a href="#" class="sidebar-submenu__link"> Create Course </a>
                                 </li>
                             </ul>
-                            <!-- Submenu End -->
-                        </li>
-                        <li class="sidebar-menu__item">
-                            <a href="#" class="sidebar-menu__link">
+                        </li> -->
+                        <li class="sidebar-menu__item {{ Request::is('admin/allUsers') ? 'activePage' : '' }}">
+                            <a href="{{ url('admin/allUsers') }}" class="sidebar-menu__link">
                                 <span class="icon"><i class="ph ph-users-three"></i></span>
-                                <span class="text">Students</span>
+                                <span class="text">Users</span>
                             </a>
                         </li>
-                        <li class="sidebar-menu__item">
-                            <a href="#" class="sidebar-menu__link">
+                        <li class="sidebar-menu__item {{ Request::is('admin/enquiries') ? 'activePage' : '' }}">
+                            <a href="{{ url('admin/enquiries') }}" class="sidebar-menu__link">
                                 <span class="icon"><i class="ph ph-clipboard-text"></i></span>
-                                <span class="text">Assignments</span>
+                                <span class="text">All Enquiries</span>
                             </a>
                         </li>
-                        <li class="sidebar-menu__item">
+                        <!-- <li class="sidebar-menu__item">
                             <a href="#" class="sidebar-menu__link">
                                 <span class="icon"><i class="ph ph-users"></i></span>
                                 <span class="text">Mentors</span>
@@ -145,7 +148,6 @@
                                 <span class="icon"><i class="ph ph-shield-check"></i></span>
                                 <span class="text">Authetication</span>
                             </a>
-                            <!-- Submenu start -->
                             <ul class="sidebar-submenu">
                                 <li class="sidebar-submenu__item">
                                     <a href="sign-in.html" class="sidebar-submenu__link">Sign In</a>
@@ -166,12 +168,10 @@
                                     <a href="two-step-verification.html" class="sidebar-submenu__link">Two Step Verification</a>
                                 </li>
                             </ul>
-                            <!-- Submenu End -->
-                        </li>
-                        
+                        </li>  -->                      
                     </ul>
                 </div>
-                <div class="p-20 pt-80">
+                <!-- <div class="p-20 pt-80">
                     <div class="bg-main-50 p-20 pt-0 rounded-16 text-center mt-74">
                         <span class="border border-5 bg-white mx-auto border-primary-50 w-114 h-114 rounded-circle flex-center text-success-600 text-2xl translate-n74">
                             <img src="{{ asset('dashboard') }}/assets/images/icons/certificate.png" alt="" class="centerised-img">
@@ -182,9 +182,8 @@
                             <a href="pricing-plan.html" class="btn btn-main mt-16 rounded-pill">Get Access</a>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
-
         </aside> 
 
         <div class="dashboard-main-wrapper">
@@ -286,64 +285,11 @@
                                             </div>
                                         </div>
                                         <a href="#" class="py-13 px-24 fw-bold text-center d-block text-primary-600 border-top border-gray-100 hover-text-decoration-underline"> View All </a>
-
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- Notification Start -->
-                        
-                        <!-- Language Start -->
-                        <div class="dropdown">
-                            <button class="text-gray-500 w-40 h-40 bg-main-50 hover-bg-main-100 transition-2 rounded-circle text-xl flex-center" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="ph ph-globe"></i>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu--md border-0 bg-transparent p-0">
-                                <div class="card border border-gray-100 rounded-12 box-shadow-custom">
-                                    <div class="card-body">
-                                        <div class="max-h-270 overflow-y-auto scroll-sm pe-8">
-                                            <div class="form-check form-radio d-flex align-items-center justify-content-between ps-0 mb-16">
-                                            <label class="ps-0 form-check-label line-height-1 fw-medium text-secondary-light" for="arabic"> 
-                                                <span class="text-black hover-bg-transparent hover-text-primary d-flex align-items-center gap-8"> 
-                                                <img src="{{ asset('dashboard') }}/assets/images/thumbs/flag1.png" alt="" class="w-32-px h-32-px border borde border-gray-100 rounded-circle flex-shrink-0">
-                                                <span class="text-15 fw-semibold mb-0">Arabic</span>
-                                                </span>
-                                            </label>
-                                            <input class="form-check-input" type="radio" name="language" id="arabic">
-                                            </div>
-                                            <div class="form-check form-radio d-flex align-items-center justify-content-between ps-0 mb-16">
-                                            <label class="ps-0 form-check-label line-height-1 fw-medium text-secondary-light" for="germany"> 
-                                                <span class="text-black hover-bg-transparent hover-text-primary d-flex align-items-center gap-8"> 
-                                                <img src="{{ asset('dashboard') }}/assets/images/thumbs/flag2.png" alt="" class="w-32-px h-32-px border borde border-gray-100 rounded-circle flex-shrink-0">
-                                                <span class="text-15 fw-semibold mb-0">Germany</span>
-                                                </span>
-                                            </label>
-                                            <input class="form-check-input" type="radio" name="language" id="germany">
-                                            </div>
-                                            <div class="form-check form-radio d-flex align-items-center justify-content-between ps-0 mb-16">
-                                            <label class="ps-0 form-check-label line-height-1 fw-medium text-secondary-light" for="english"> 
-                                                <span class="text-black hover-bg-transparent hover-text-primary d-flex align-items-center gap-8"> 
-                                                <img src="{{ asset('dashboard') }}/assets/images/thumbs/flag3.png" alt="" class="w-32-px h-32-px border borde border-gray-100 rounded-circle flex-shrink-0">
-                                                <span class="text-15 fw-semibold mb-0">English</span>
-                                                </span>
-                                            </label>
-                                            <input class="form-check-input" type="radio" name="language" id="english">
-                                            </div>
-                                            <div class="form-check form-radio d-flex align-items-center justify-content-between ps-0">
-                                            <label class="ps-0 form-check-label line-height-1 fw-medium text-secondary-light" for="spanish"> 
-                                                <span class="text-black hover-bg-transparent hover-text-primary d-flex align-items-center gap-8"> 
-                                                <img src="{{ asset('dashboard') }}/assets/images/thumbs/flag4.png" alt="" class="w-32-px h-32-px border borde border-gray-100 rounded-circle flex-shrink-0">
-                                                <span class="text-15 fw-semibold mb-0">Spanish</span>
-                                                </span>
-                                            </label>
-                                            <input class="form-check-input" type="radio" name="language" id="spanish">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Language Start -->
                     </div>
 
                     <!-- User Profile Start -->
@@ -366,39 +312,15 @@
                                     </div>
                                     <ul class="max-h-270 overflow-y-auto scroll-sm pe-4">
                                         <li class="mb-4">
-                                            <a href="setting.html" class="py-12 text-15 px-20 hover-bg-gray-50 text-gray-300 rounded-8 flex-align gap-8 fw-medium text-15">
-                                                <span class="text-2xl text-primary-600 d-flex"><i class="ph ph-gear"></i></span>
-                                                <span class="text">Account Settings</span>
+                                            <a href="{{ url('/logout') }}" class="py-12 text-15 px-20 hover-bg-gray-50 text-gray-300 rounded-8 flex-align gap-8 fw-medium text-15">
+                                                <span class="text-2xl text-primary-600 d-flex"><i class="ph ph-door-open"></i></span>
+                                                <span class="text">Logout</span>
                                             </a>
                                         </li>
                                         <li class="mb-4">
-                                            <a href="pricing-plan.html" class="py-12 text-15 px-20 hover-bg-gray-50 text-gray-300 rounded-8 flex-align gap-8 fw-medium text-15">
-                                                <span class="text-2xl text-primary-600 d-flex"><i class="ph ph-chart-bar"></i></span>
-                                                <span class="text">Upgrade Plan</span>
-                                            </a>
-                                        </li>
-                                        <li class="mb-4">
-                                            <a href="analytics.html" class="py-12 text-15 px-20 hover-bg-gray-50 text-gray-300 rounded-8 flex-align gap-8 fw-medium text-15">
-                                                <span class="text-2xl text-primary-600 d-flex"><i class="ph ph-chart-line-up"></i></span>
-                                                <span class="text">Daily Activity</span>
-                                            </a>
-                                        </li>
-                                        <li class="mb-4">
-                                            <a href="message.html" class="py-12 text-15 px-20 hover-bg-gray-50 text-gray-300 rounded-8 flex-align gap-8 fw-medium text-15">
-                                                <span class="text-2xl text-primary-600 d-flex"><i class="ph ph-chats-teardrop"></i></span>
-                                                <span class="text">Inbox</span>
-                                            </a>
-                                        </li>
-                                        <li class="mb-4">
-                                            <a href="email.html" class="py-12 text-15 px-20 hover-bg-gray-50 text-gray-300 rounded-8 flex-align gap-8 fw-medium text-15">
-                                                <span class="text-2xl text-primary-600 d-flex"><i class="ph ph-envelope-simple"></i></span>
-                                                <span class="text">Email</span>
-                                            </a>
-                                        </li>
-                                        <li class="pt-8 border-top border-gray-100">
-                                            <a href="sign-in.html" class="py-12 text-15 px-20 hover-bg-danger-50 text-gray-300 hover-text-danger-600 rounded-8 flex-align gap-8 fw-medium text-15">
-                                                <span class="text-2xl text-danger-600 d-flex"><i class="ph ph-sign-out"></i></span>
-                                                <span class="text">Log Out</span>
+                                            <a href="{{ url('/reset') }}" class="py-12 text-15 px-20 hover-bg-gray-50 text-gray-300 rounded-8 flex-align gap-8 fw-medium text-15">
+                                                <span class="text-2xl text-primary-600 d-flex"><i class="ph ph-pen"></i></span>
+                                                <span class="text">Reset Password</span>
                                             </a>
                                         </li>
                                     </ul>
@@ -412,6 +334,6 @@
 
             @yield('content')
 
-            @include('backend.layouts.footer')  
+            @include('admin.layouts.footer')  
     </body>
 </html>

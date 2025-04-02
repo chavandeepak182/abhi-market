@@ -35,6 +35,10 @@ Route::get('/service-details', function () {
     return view('frontend.service-details');
 });
 
+Route::get('/details', function () {
+    return view('frontend.details');
+});
+
 Route::middleware('isAdmin')->group(function () {
     Route::post('admin/insertUser',[UsersController::class,'insertUser'])->name('insertUser');
         Route::get('editUser/{user_id}', [UsersController::class, 'editUser'])->name('editUser');
@@ -95,6 +99,10 @@ Route::get('/signup', function () {
 
 //enquiry
 Route::get('admin/enquiries', [EnquiryController::class, 'enquiryLead'])->name('enquiries.enquiryLead');
+
+//enquiry form
+Route::get('enquiry', [EnquiryController::class, 'showForm'])->name('enquiry.form');
+Route::post('enquiry', [EnquiryController::class, 'store'])->name('enquiry.store');
 
 //banner
 Route::get('/admin/banners', [BannerController::class, 'index'])->name('banners.index');

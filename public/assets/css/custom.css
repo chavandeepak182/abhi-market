@@ -6950,3 +6950,49 @@ footer.main-footer{
         height: 350px;
     }
 }
+
+.search-container {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #333; /* Adjust color as needed */
+    width: 100%;
+    max-width: 400px; /* Adjust width */
+    padding: 5px;
+}
+
+.search-input {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: #666;
+    background: transparent;
+}
+
+.search-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.search-btn img {
+    width: 20px; /* Adjust size */
+    height: 20px;
+    color: green; /* Match the icon color */
+}
+
+.reports-card .mission-vission-header {
+    padding: 40px 10px;
+}
+
+.reports-card .mission-vission-header .mission-vission-content h3>a {
+    color:#000000;
+}
+
+.reports-card .mission-vission-header .mission-vission-content h3>a:hover {
+    color:#00CC61;
+}
+
+.details-head{
+	padding: 200px 0;
+}

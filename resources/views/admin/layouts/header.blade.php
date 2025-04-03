@@ -61,23 +61,6 @@
                                 <span class="text">Dashboard</span>
                             </a>
                         </li>
-                        <!-- <li class="sidebar-menu__item has-dropdown {{ Request::is('admin/allUsers') ? 'activePage' : '' }}">
-                            <a href="javascript:void(0)" class="sidebar-menu__link">
-                                <span class="icon"><i class="ph ph-graduation-cap"></i></span>
-                                <span class="text">Users</span>
-                            </a>
-                            <ul class="sidebar-submenu">
-                                <li class="sidebar-submenu__item {{ Request::is('admin/allUsers') ? 'activePage' : '' }}">
-                                    <a href="{{ url('admin/allUsers') }}" class="sidebar-submenu__link"> All Users </a>
-                                </li>
-                                <li class="sidebar-submenu__item {{ Request::is('admin/addUser') ? 'activePage' : '' }}">
-                                    <a href="{{ url('admin/addUser') }}" class="sidebar-submenu__link"> Add New User </a>
-                                </li>
-                                <li class="sidebar-submenu__item">
-                                    <a href="#" class="sidebar-submenu__link"> Create Course </a>
-                                </li>
-                            </ul>
-                        </li> -->
                         <li class="sidebar-menu__item {{ Request::is('admin/allUsers') ? 'activePage' : '' }}">
                             <a href="{{ url('admin/allUsers') }}" class="sidebar-menu__link">
                                 <span class="icon"><i class="ph ph-users-three"></i></span>
@@ -89,6 +72,20 @@
                                 <span class="icon"><i class="ph ph-image"></i></span>
                                 <span class="text">Banners</span>
                             </a>
+                        </li>
+                        <li class="sidebar-menu__item has-dropdown {{ Request::is('admin/allUsers') ? 'activePage' : '' }}">
+                            <a href="javascript:void(0)" class="sidebar-menu__link">
+                                <span class="icon"><i class="ph ph-graduation-cap"></i></span>
+                                <span class="text">Services</span>
+                            </a>
+                            <ul class="sidebar-submenu">
+                                <li class="sidebar-submenu__item {{ Request::is('categories') ? 'activePage' : '' }}">
+                                    <a href="{{ url('categories') }}" class="sidebar-submenu__link"> Categories </a>
+                                </li>
+                                <li class="sidebar-submenu__item {{ Request::is('subcategories') ? 'activePage' : '' }}">
+                                    <a href="{{ url('subcategories') }}" class="sidebar-submenu__link"> Sub Categories </a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="sidebar-menu__item {{ Request::is('admin/enquiries') ? 'activePage' : '' }}">
                             <a href="{{ url('admin/enquiries') }}" class="sidebar-menu__link">

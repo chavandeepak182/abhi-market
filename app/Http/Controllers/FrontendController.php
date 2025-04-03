@@ -79,4 +79,18 @@ class FrontendController extends Controller
         session()->flush();
         return redirect('/');
     }
+    public function PropDetailsView($property_id){
+        $data['propertie_details'] = DB::select('select * from properties as p, price_range as pr, property_category as pc where 
+        p.price_range_id = pr.range_id and pc.pid = p.property_type_id and p.properties_id =' . $property_id);
+        $data['additional_images'] = DB::table('property_images')
+        ->where('properties_id', $property_id)
+        ->get();
+
+        return view('frontend.property-details-test',compact('data'))
+        ->with([
+            'meta_title' => $propertyDetails[0]->meta_title ?? 'Default Property Title',
+            'meta_description' => $propertyDetails[0]->meta_description ?? 'Default Property Description',
+            'meta_keywords' => $propertyDetails[0]->meta_keywords ?? 'Default Keywords'
+        ]);;
+    }
 }

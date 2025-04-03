@@ -39,6 +39,10 @@ Route::get('/details', function () {
     return view('frontend.details');
 });
 
+Route::get('/overview', function () {
+    return view('frontend.overview');
+});
+
 Route::middleware('isAdmin')->group(function () {
     Route::post('admin/insertUser',[UsersController::class,'insertUser'])->name('insertUser');
         Route::get('editUser/{user_id}', [UsersController::class, 'editUser'])->name('editUser');

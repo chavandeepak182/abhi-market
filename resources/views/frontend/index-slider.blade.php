@@ -6,7 +6,7 @@
 @section('content')
 
     @php
-        $banners = App\Models\Banner::latest()->get(); // Fetch latest 5 banners
+        $banners = App\Models\Banner::latest()->take(2)->get(); // Fetch latest 3 banners
     @endphp
     <!-- Hero Section Start -->
     <div class="hero hero-bg-image hero-slider-layout">
@@ -29,13 +29,10 @@
                                             <div class="hero-content">
                                                 <!-- Section Title Start -->
                                                 <div class="section-title dark-section">
-                                                    <h3 class="wow fadeInUp">Welcome to Financial</h3>
+                                                    <h3 class="wow fadeInUp">Welcome to JFinMate</h3>
                                                     <h1 class="text-anime-style-2" data-cursor="-opaque">
-                                                        <span>Empowering</span> your financial success journey
+                                                        {{ $banner->title ?? '<span>Empowering</span> your financial success journey' }}
                                                     </h1>
-                                                    <p class="wow fadeInUp" data-wow-delay="0.2s">
-                                                        {{ $banner->description ?? 'Guiding you with expert insights and strategic solutions to achieve financial growth, stability, and long-term success.' }}
-                                                    </p>
                                                 </div>
                                                 <!-- Section Title End -->
                             
@@ -46,19 +43,6 @@
                                                         <a href="{{ url('/contact') }}" class="btn-default">Get Started</a>
                                                     </div>
                                                     <!-- Hero Button End -->
-                            
-                                                    <!-- Hero Introduction Video Start -->
-                                                    @if (!empty($banner->video_url))
-                                                        <div class="hero-introduction-video">
-                                                            <div class="video-play-button">
-                                                                <a href="{{ $banner->video_url }}" class="popup-video" data-cursor-text="Play">
-                                                                    <img src="{{ asset('assets/images/icon-play.svg') }}" alt="Play Video">
-                                                                </a>
-                                                                <p>Introduction</p>
-                                                            </div>
-                                                        </div>
-                                                    @endif
-                                                    <!-- Hero Introduction Video End -->
                                                 </div>
                                                 <!-- Hero Content Body End -->
                                             </div>

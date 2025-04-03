@@ -5,15 +5,11 @@
 
 @section('content')
     <!-- Page Header Start -->
-    <div class="page-header details-head" style="background-image: url('https://www.lek.com/sites/default/files/styles/large_card_540h_/public/hero-images/insights/ai-delta-transformation-rewrite-hero.jpg?itok=zdKOvpTI')">
+    <div class="page-header details-head" style="background-image: url('../../assets/images/details-bnr.jpg')">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6">
-                    <!-- Page Header Box Start -->
-                    <div class="page-header-box text-start">
-                        <h1 class="text-anime-style-2" data-cursor="-opaque">About us</h1>
-                    </div>
-                    <!-- Page Header Box End -->
+                    <h1 class="details-heading" data-cursor="-opaque">Your AI Transformation Needs a Different Leadership Approach</h1>
                 </div>
             </div>
         </div>
@@ -21,7 +17,7 @@
     <!-- Page Header End -->
 
     <!-- Our Approach Section Start -->
-    <div class="our-approach">
+    <div class="our-approach bg-white">
         <div class="container">
             <div class="row section-row align-items-center">
                 <div class="col-lg-6">

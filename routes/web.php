@@ -6,6 +6,10 @@ use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\EnquiryController;
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\PropertyController;
+use App\Http\Controllers\PropertyCategoryController;
+use App\Http\Controllers\ServiceController;
+
 
 Route::get('/', function () {
     return view('frontend.index-slider');
@@ -114,3 +118,57 @@ Route::post('/banners', [BannerController::class, 'store'])->name('banners.store
 Route::get('/banners/{id}/edit', [BannerController::class, 'edit'])->name('banners.edit');
 Route::put('/banners/{id}', [BannerController::class, 'update'])->name('banners.update');
 Route::delete('/banners/{id}', [BannerController::class, 'destroy'])->name('banners.destroy');
+
+//channel partner
+Route::middleware('isPartner')->group(function () {
+    Route::get('partner/partnerDashboard', [PartnerController::class, 'partnerDashboard'])->name('partnerDashboard');
+    Route::get('partner/allPartners', [PartnerController::class, 'allPartners'])->name('allPartners');
+    Route::post('partner/insertPartner',[PartnerController::class,'insertPartner'])->name('insertPartner');
+    Route::get('/editPartner/{user_id}', [PartnerController::class, 'editPartner'])->name('editPartner');
+    Route::post('/updatePartner', [PartnerController::class, 'updatePartner'])->name('updatePartner');
+    Route::post('/deletePartner', [PartnerController::class, 'deletePartner'])->name('deletePartner');
+
+    //property
+    Route::get('partner/pendingProperties', [PropertyController::class, 'pendingProperties'])->name('pendingProperties');
+    Route::get('partner/addProperty', [PropertyController::class, 'addProperty'])->name('addProperty');
+    Route::post('partner/insertProperty',[PropertyController::class,'insertProperty'])->name('insertProperty');
+    Route::get('partner/allProperties', [PropertyController::class, 'allProperties'])->name('allProperties');
+    Route::get('/viewDetails/{property_id}', [PropertyController::class, 'viewDetails'])->name('viewDetails');
+    Route::get('/editProperty/{property_id}', [PropertyController::class, 'editProperty'])->name('editProperty');
+    Route::post('/updatePropertie', [PropertyController::class, 'updatePropertie'])->name('updatePropertie');
+    Route::post('/deletePropertie', [PropertyController::class, 'deletePropertie'])->name('deletePropertie');
+    Route::post('/activate', [PropertyController::class, 'activate'])->name('activate');
+    //profile
+    Route::get('/partner/profile', [ProfileController::class, 'showPartnerProfile'])->name('partner.profile');
+    Route::post('/partner/profile/update', [ProfileController::class, 'updatePartnerProfile'])->name('partner.updateProfile');
+    Route::post('/tinymce/upload', [PropertyController::class, 'uploadTinyMCEImage'])->name('tinymce.upload');
+});
+Route::post('/toggle-featured', [PropertyController::class, 'toggleFeatured'])->name('toggleFeatured');    
+/// Show the locality selection form for a specific property (GET)
+Route::get('/admin/localities', [PropertyController::class, 'getLocalities'])->name('admin.localities');
+Route::post('/admin/localities', [PropertyController::class, 'storeLocalities'])->name('admin.localities.store');
+Route::get('property-details/{property_id}', [FrontendController::class, 'PropDetailsView'])->name('property.details');
+
+//category & subcategory
+Route::get('/categories', [PropertyCategoryController::class, 'index'])->name('categories.index');
+Route::post('/categories/store', [PropertyCategoryController::class, 'store'])->name('categories.store');
+Route::get('/categories/edit/{id}', [PropertyCategoryController::class, 'edit'])->name('categories.edit');
+Route::post('/categories/update/{id}', [PropertyCategoryController::class, 'update'])->name('categories.update');
+Route::get('/categories/delete/{id}', [PropertyCategoryController::class, 'destroy'])->name('categories.delete');
+
+Route::get('/subcategories', [PropertyCategoryController::class, 'subcategories'])->name('subcategories.index');
+Route::post('/subcategories/store', [PropertyCategoryController::class, 'storeSubcategory'])->name('subcategories.store');
+Route::get('/subcategories/edit/{id}', [PropertyCategoryController::class, 'editSubcategory'])->name('subcategories.edit');
+Route::post('/subcategories/update/{id}', [PropertyCategoryController::class, 'updateSubcategory'])->name('subcategories.update');
+Route::get('/subcategories/delete/{id}', [PropertyCategoryController::class, 'deleteSubcategory'])->name('subcategories.delete');
+
+//services
+Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
+
+Route::post('/categories/store', [ServiceController::class, 'storeCategory'])->name('categories.store');
+Route::post('/subcategories/store', [ServiceController::class, 'storeSubcategory'])->name('subcategories.store');
+Route::post('/services/store', [ServiceController::class, 'storeService'])->name('services.store');
+
+Route::get('/categories/delete/{id}', [ServiceController::class, 'deleteCategory'])->name('categories.delete');
+Route::get('/subcategories/delete/{id}', [ServiceController::class, 'deleteSubcategory'])->name('subcategories.delete');
+Route::get('/services/delete/{id}', [ServiceController::class, 'deleteService'])->name('services.delete');

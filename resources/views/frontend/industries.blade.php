@@ -30,109 +30,30 @@
     <div class="page-services">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <!-- Service Item Start -->
-                    <div class="service-item wow fadeInUp">
-                        <div class="icon-box">
-                            <img src="{{ asset('assets') }}/images/icon-service-1.svg" alt="">
-                        </div>
+                @foreach($allIndustries as $industry)
+                    <?php 
+                        $img = env('baseURL'). "/" . $industry->image;
+                        $industryName = $industry->industries_name;
+                        $description = $industry->description;
+                    ?>
+                    <div class="col-lg-4 col-md-6">
+                        <!-- Industry Item Start -->
+                        <div class="service-item wow fadeInUp">
+                            <div class="icon-box">
+                                <img src="{{ $img }}" alt="{{ $industryName }}">
+                            </div>
 
-                        <div class="service-item-content">
-                            <h3>financial planning</h3>
-                            <p>Financial planing involve creating strategy to manage your income, expenses, term financial goals.</p>
-                            <a href="service-single.html" class="service-btn"><img src="{{ asset('assets') }}/images/arrow-white.svg" alt=""></a>
+                            <div class="service-item-content">
+                                <h3>{{ $industryName }}</h3>
+                                <p>{{ $description }}</p>
+                                <a href="{{ url('industry-details/'.$industry->id) }}" class="service-btn">
+                                    <img src="{{ asset('assets') }}/images/arrow-white.svg" alt="">
+                                </a>
+                            </div>
                         </div>
+                        <!-- Industry Item End -->
                     </div>
-                    <!-- Service Item End -->
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <!-- Service Item Start -->
-                    <div class="service-item wow fadeInUp" data-wow-delay="0.2s">
-                        <div class="icon-box">
-                            <img src="{{ asset('assets') }}/images/icon-service-2.svg" alt="">
-                        </div>
-
-                        <div class="service-item-content">
-                            <h3>investment management</h3>
-                            <p>Financial planing involve creating strategy to manage your income, expenses, term financial goals.</p>
-                            <a href="service-single.html" class="service-btn"><img src="{{ asset('assets') }}/images/arrow-white.svg" alt=""></a>
-                        </div>
-                    </div>
-                    <!-- Service Item End -->
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <!-- Service Item Start -->
-                    <div class="service-item wow fadeInUp" data-wow-delay="0.4s">
-                        <div class="icon-box">
-                            <img src="{{ asset('assets') }}/images/icon-service-3.svg" alt="">
-                        </div>
-
-                        <div class="service-item-content">
-                            <h3>retirement planning</h3>
-                            <p>Financial planing involve creating strategy to manage your income, expenses, term financial goals.</p>
-                            <a href="service-single.html" class="service-btn"><img src="{{ asset('assets') }}/images/arrow-white.svg" alt=""></a>
-                        </div>
-                    </div>
-                    <!-- Service Item End -->
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <!-- Service Item Start -->
-                    <div class="service-item wow fadeInUp" data-wow-delay="0.6s">
-                        <div class="icon-box">
-                            <img src="{{ asset('assets') }}/images/icon-service-4.svg" alt="">
-                        </div>
-
-                        <div class="service-item-content">
-                            <h3>tax optimization</h3>
-                            <p>Financial planing involve creating strategy to manage your income, expenses, term financial goals.</p>
-                            <a href="service-single.html" class="service-btn"><img src="{{ asset('assets') }}/images/arrow-white.svg" alt=""></a>
-                        </div>
-                    </div>
-                    <!-- Service Item End -->
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <!-- Service Item Start -->
-                    <div class="service-item wow fadeInUp" data-wow-delay="0.8s">
-                        <div class="icon-box">
-                            <img src="{{ asset('assets') }}/images/icon-service-5.svg" alt="">
-                        </div>
-
-                        <div class="service-item-content">
-                            <h3>risk assessment</h3>
-                            <p>Financial planing involve creating strategy to manage your income, expenses, term financial goals.</p>
-                            <a href="service-single.html" class="service-btn"><img src="{{ asset('assets') }}/images/arrow-white.svg" alt=""></a>
-                        </div>
-                    </div>
-                    <!-- Service Item End -->
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <!-- Service Item Start -->
-                    <div class="service-item wow fadeInUp" data-wow-delay="1s">
-                        <div class="icon-box">
-                            <img src="{{ asset('assets') }}/images/icon-service-6.svg" alt="">
-                        </div>
-
-                        <div class="service-item-content">
-                            <h3>budgeting & forecasting</h3>
-                            <p>Financial planing involve creating strategy to manage your income, expenses, term financial goals.</p>
-                            <a href="service-single.html" class="service-btn"><img src="{{ asset('assets') }}/images/arrow-white.svg" alt=""></a>
-                        </div>
-                    </div>
-                    <!-- Service Item End -->
-                </div>
-
-                <div class="col-lg-12">
-                    <!-- Service Footer Start -->
-                    <div class="service-footer wow fadeInUp" data-wow-delay="1.2s">
-                        <p>Let's make something great work together. <a href="contact.html">Get Free Quote</a></p>
-                    </div>
-                    <!-- Service Footer End -->
-                </div>
+                @endforeach
             </div>
         </div>
     </div>

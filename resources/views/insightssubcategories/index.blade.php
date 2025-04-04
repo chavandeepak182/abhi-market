@@ -36,7 +36,7 @@
                         </div>
                         <div class="position-relative">
                             <label for="name" class="form-label">Subcategory Name:</label>
-                            <input type="text" name="name" class="text-counter placeholder-13 form-control py-11 pe-76" placeholder="Enter Subcategory Name:" required>
+                            <input type="text" name="name" class="text-counter form-control py-11 pe-76" placeholder="Enter Subcategory Name:" required>
                         </div>
                         <div class="flex-align mt-10">
                             <button type="submit" class="btn btn-main rounded-pill py-9">Add Category</button>

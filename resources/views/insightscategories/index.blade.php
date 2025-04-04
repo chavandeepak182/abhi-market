@@ -28,7 +28,7 @@
                             <label class="h5 fw-semibold font-heading mb-0">Add Category <span class="text-13 text-gray-400 fw-medium"></span> </label>
                         </div>
                         <div class="position-relative">
-                            <input type="text" name="category_name" class="text-counter placeholder-13 form-control py-11 pe-76" placeholder="Enter Category Name:">
+                            <input type="text" name="category_name" class="text-counter form-control py-11 pe-76" placeholder="Enter Category Name:">
                         </div>
                         <div class="flex-align mt-10">
                             <button type="submit" class="btn btn-main rounded-pill py-9">Add Category</button>

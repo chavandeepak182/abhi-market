@@ -23,9 +23,9 @@
                 <div class="col-md-5 col-sm-5">
                     <form action="{{ route('subcategories.update', $subcategory->property_subcategory_id) }}" method="POST">
                         @csrf
-                        <div class="mb-3">
+                        <div class="position-relative">
                             <label for="pid" class="form-label">Select Category:</label>
-                            <select name="pid" class="form-control" required>
+                            <select name="pid" class="form-control placeholder-13 py-11 pe-76" required>
                                 @foreach($categories as $category)
                                     <option value="{{ $category->pid }}" {{ $subcategory->pid == $category->pid ? 'selected' : '' }}>
                                         {{ $category->category_name }}
@@ -34,13 +34,15 @@
                             </select>
                         </div>
 
-                        <div class="mb-3">
+                        <div class="position-relative">
                             <label for="name" class="form-label">Subcategory Name:</label>
-                            <input type="text" name="name" class="form-control" value="{{ $subcategory->name }}" required>
+                            <input type="text" name="name" class="form-control placeholder-13 py-11 pe-76" value="{{ $subcategory->name }}" required>
                         </div>
-
-                        <button type="submit" class="btn btn-main rounded-pill py-9">Update Subcategory</button>
-                        <a href="{{ route('subcategories.index') }}" class="btn btn-secondary rounded-pill py-9 ms-10">Back</a>
+                        
+                        <div class="flex-align mt-10">
+                            <button type="submit" class="btn btn-main rounded-pill py-9">Subcategory</button>
+                            <a href="{{ route('subcategories.index') }}" class="btn btn-secondary rounded-pill py-9 ms-10">Back</a>
+                        </div>
                     </form>
                 </div>
             </div>

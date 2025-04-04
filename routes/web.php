@@ -9,6 +9,8 @@ use App\Http\Controllers\BannerController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\PropertyCategoryController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\InsightsController;
+use App\Http\Controllers\InsightsCategoryController;
 
 
 Route::get('/', function () {
@@ -149,7 +151,7 @@ Route::get('/admin/localities', [PropertyController::class, 'getLocalities'])->n
 Route::post('/admin/localities', [PropertyController::class, 'storeLocalities'])->name('admin.localities.store');
 Route::get('property-details/{property_id}', [FrontendController::class, 'PropDetailsView'])->name('property.details');
 
-//category & subcategory
+//serivce category & subcategory
 Route::get('/categories', [PropertyCategoryController::class, 'index'])->name('categories.index');
 Route::post('/categories/store', [PropertyCategoryController::class, 'store'])->name('categories.store');
 Route::get('/categories/edit/{id}', [PropertyCategoryController::class, 'edit'])->name('categories.edit');
@@ -163,10 +165,32 @@ Route::post('/subcategories/update/{id}', [PropertyCategoryController::class, 'u
 Route::get('/subcategories/delete/{id}', [PropertyCategoryController::class, 'deleteSubcategory'])->name('subcategories.delete');
 
 //services
-Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
+Route::get('admin/services', [ServiceController::class, 'index'])->name('services.index');
 Route::post('/services/store', [ServiceController::class, 'storeService'])->name('services.store');
 Route::get('/services/edit/{id}', [ServiceController::class, 'edit'])->name('services.edit');
 Route::put('/services/update/{id}', [ServiceController::class, 'update'])->name('services.update');
 Route::get('/services/delete/{id}', [ServiceController::class, 'deleteService'])->name('services.delete');
 Route::get('/services/create', [ServiceController::class, 'create'])->name('services.create');
 Route::get('/get-subcategories/{categoryId}', [ServiceController::class, 'getSubcategories']);
+
+//insights
+Route::get('admin/insights', [InsightsController::class, 'index'])->name('insights.index');
+Route::post('/insights/store', [InsightsController::class, 'storeService'])->name('insights.store');
+Route::get('/insights/edit/{id}', [InsightsController::class, 'edit'])->name('insights.edit');
+Route::put('/insights/update/{id}', [InsightsController::class, 'update'])->name('insights.update');
+Route::get('/insights/delete/{id}', [InsightsController::class, 'deleteService'])->name('insights.delete');
+Route::get('/insights/create', [InsightsController::class, 'create'])->name('insights.create');
+Route::get('/get-subcategories-insights/{categoryId}', [InsightsController::class, 'getSubcategories']);
+
+//serivce category & subcategory
+Route::get('/insights-categories', [InsightsCategoryController::class, 'index'])->name('insights.categories.index');
+Route::post('/insights-categories/store', [InsightsCategoryController::class, 'store'])->name('insights.categories.store');
+Route::get('/insights-categories/edit/{id}', [InsightsCategoryController::class, 'edit'])->name('insights.categories.edit');
+Route::post('/insights-categories/update/{id}', [InsightsCategoryController::class, 'update'])->name('insights.categories.update');
+Route::get('/insights-categories/delete/{id}', [InsightsCategoryController::class, 'destroy'])->name('insights.categories.delete');
+
+Route::get('/insights-subcategories', [InsightsCategoryController::class, 'subcategories'])->name('insights.subcategories.index');
+Route::post('/insights-subcategories/store', [InsightsCategoryController::class, 'storeSubcategory'])->name('insights.subcategories.store');
+Route::get('/insights-subcategories/edit/{id}', [InsightsCategoryController::class, 'editSubcategory'])->name('insights.subcategories.edit');
+Route::post('/insights-subcategories/update/{id}', [InsightsCategoryController::class, 'updateSubcategory'])->name('insights.subcategories.update');
+Route::get('/insightssubcategories/delete/{id}', [InsightsCategoryController::class, 'deleteSubcategory'])->name('insights.subcategories.delete');

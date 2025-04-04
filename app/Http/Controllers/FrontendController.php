@@ -79,6 +79,7 @@ class FrontendController extends Controller
         session()->flush();
         return redirect('/');
     }
+
     public function PropDetailsView($property_id){
         $data['propertie_details'] = DB::select('select * from properties as p, price_range as pr, property_category as pc where 
         p.price_range_id = pr.range_id and pc.pid = p.property_type_id and p.properties_id =' . $property_id);
@@ -92,5 +93,25 @@ class FrontendController extends Controller
             'meta_description' => $propertyDetails[0]->meta_description ?? 'Default Property Description',
             'meta_keywords' => $propertyDetails[0]->meta_keywords ?? 'Default Keywords'
         ]);;
+    }
+
+    public function services()
+    {
+        $data['allServices'] = DB::table('services')
+            ->select(
+                'id',
+                'property_subcategory_id',
+                'image',
+                'service_name',
+                'description',
+                'meta_title',
+                'meta_keywords',
+                'meta_description',
+                'created_at',
+                'updated_at'
+            )
+            ->paginate(700);
+
+        return view('frontend.services', $data);
     }
 }

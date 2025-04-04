@@ -51,7 +51,7 @@
                             <tbody>
                                 @foreach($categories as $category)
                                 <tr>
-                                    <td>{{ $category->pid }}</td>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>{{ $category->category_name }}</td>
                                     <td>
                                         <a href="{{ route('categories.edit', $category->pid) }}" class="btn btn-warning"><i class="far fa-edit"></i></a>

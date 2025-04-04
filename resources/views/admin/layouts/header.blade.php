@@ -73,8 +73,8 @@
                                 <span class="text">Banners</span>
                             </a>
                         </li>
-                        <li class="sidebar-menu__item has-dropdown {{ Request::is('admin/allUsers') ? 'activePage' : '' }}">
-                            <a href="javascript:void(0)" class="sidebar-menu__link">
+                        <li class="sidebar-menu__item has-dropdown {{ Request::is('admin/services') || Request::is('services/create') || Request::is('services/edit/*') ? 'activePage' : '' }}">
+                            <a href="/admin/services" class="sidebar-menu__link">
                                 <span class="icon"><i class="ph ph-graduation-cap"></i></span>
                                 <span class="text">Services</span>
                             </a>

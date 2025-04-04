@@ -74,7 +74,7 @@ All Enquiries
                             <span class="h6 mb-0 fw-medium text-gray-300">{{ $enquiry->contact }}</span>
                         </td>
                         <td>
-                            <a class="btn btn-primary btn-xs edit" title="View" href="#">
+                            <a class="btn btn-info btn-xs edit" title="View" href="#">
                                 <i class="far fa-eye"></i>
                             </a>
                         </td>

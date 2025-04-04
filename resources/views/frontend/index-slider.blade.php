@@ -110,7 +110,7 @@
                                     <!-- About Content Info Start -->
                                     <div class="about-content-info">
                                         <!-- About Goal Box Start -->
-                                        <div class="about-goal-box wow fadeInUp" data-wow-delay="0.4s">x            
+                                        <div class="about-goal-box wow fadeInUp" data-wow-delay="0.4s">            
                                             <div class="about-goal-box-content">
                                                 <h3>Tailored Strategies</h3>
                                                 <p>Strategic insights and tailored plans designed to drive your unique market growth and business goals.</p>

@@ -36,14 +36,11 @@
                     <div class="service-sidebar">
                         <!-- Service Category List Start -->
                         <div class="service-catagery-list wow fadeInUp">
-                            <h3>our services</h3>
-                            <ul>
-                                <li><a href="#">financial planning</a></li>
-                                <li><a href="#">retirement planning</a></li>
-                                <li><a href="#">investment management</a></li>
-                                <li><a href="#">tax optimization</a></li>
-                                <li><a href="#">risk assessment</a></li>
+                            <h3>Our Services</h3>
+                            <ul id="category-list">
+                                {{-- Categories will be loaded here via AJAX --}}
                             </ul>
+                            <button id="loadMore" class="btn btn-primary">Load More</button>
                         </div>
                         <!-- Service Category List End -->
 
@@ -85,7 +82,11 @@
                         <!-- Case Study Image Start -->
                         <div class="service-featured-image">
                             <figure class="image-anime reveal">
-                                <img src="{{ asset('assets') }}/images/service-single-img.jpg" alt="">
+                                @if($service->image)
+                                    <img src="{{ asset($service->image) }}" alt="{{ $service->service_name }}">
+                                @else
+                                    <img src="{{ asset('assets/images/default-service.jpg') }}" alt="Default Image">
+                                @endif
                             </figure>
                         </div>
                         <!-- Case Study Image End -->
@@ -375,5 +376,36 @@
         </div>
     </div>
     <!-- Page Service Single End -->
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+    let limit = 5; // Initial limit
 
+    function loadCategories() {
+        fetch(`/get-categories?limit=${limit}`)
+            .then(response => response.json())
+            .then(data => {
+                let categoryList = document.getElementById('category-list');
+                categoryList.innerHTML = ''; // Clear existing categories
+
+                data.forEach(category => {
+                    categoryList.innerHTML += `<li><a href="#">${category.category_name}</a></li>`;
+                });
+
+                // Hide "Load More" button if no more categories
+                if (data.length < limit) {
+                    document.getElementById('loadMore').style.display = 'none';
+                }
+            });
+    }
+
+    // Initial Load
+    loadCategories();
+
+    // Load More Button Click
+    document.getElementById('loadMore').addEventListener('click', function() {
+        limit += 5; // Increase limit by 5
+        loadCategories();
+    });
+});
+</script>
 @endsection

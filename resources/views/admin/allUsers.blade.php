@@ -84,7 +84,7 @@
                             </span>
                         </td>
                         <td>
-                            <a class="btn btn-primary btn-xs edit" title="Edit" href="{{ url('editUser/'.$user->id) }}">
+                            <a class="btn btn-warning btn-xs edit" title="Edit" href="{{ url('editUser/'.$user->id) }}">
                                 <i class="far fa-edit"></i>
                             </a> 
                             <button class="btn btn-danger btn-xs delete" title="Delete" onclick="deleteUser('{{ $user->id }}')">

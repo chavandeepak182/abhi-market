@@ -163,7 +163,7 @@ Route::post('/subcategories/update/{id}', [PropertyCategoryController::class, 'u
 Route::get('/subcategories/delete/{id}', [PropertyCategoryController::class, 'deleteSubcategory'])->name('subcategories.delete');
 
 //services
-Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
+Route::get('admin/services', [ServiceController::class, 'index'])->name('services.index');
 Route::post('/services/store', [ServiceController::class, 'storeService'])->name('services.store');
 Route::get('/services/edit/{id}', [ServiceController::class, 'edit'])->name('services.edit');
 Route::put('/services/update/{id}', [ServiceController::class, 'update'])->name('services.update');

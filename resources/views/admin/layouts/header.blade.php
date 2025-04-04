@@ -87,6 +87,20 @@
                                 </li>
                             </ul>
                         </li>
+                        <li class="sidebar-menu__item has-dropdown {{ Request::is('admin/insights') || Request::is('insights/create') || Request::is('insights/edit/*') ? 'activePage' : '' }}">
+                            <a href="/admin/insights" class="sidebar-menu__link">
+                                <span class="icon"><i class="ph ph-bookmarks"></i></span>
+                                <span class="text">Insights</span>
+                            </a>
+                            <ul class="sidebar-submenu">
+                                <li class="sidebar-submenu__item {{ Request::is('insights-categories') ? 'activePage' : '' }}">
+                                    <a href="{{ url('insights-categories') }}" class="sidebar-submenu__link"> Categories </a>
+                                </li>
+                                <li class="sidebar-submenu__item {{ Request::is('insights-subcategories') ? 'activePage' : '' }}">
+                                    <a href="{{ url('insights-subcategories') }}" class="sidebar-submenu__link"> Sub Categories </a>
+                                </li>
+                            </ul>
+                        </li>
                         <li class="sidebar-menu__item {{ Request::is('admin/enquiries') ? 'activePage' : '' }}">
                             <a href="{{ url('admin/enquiries') }}" class="sidebar-menu__link">
                                 <span class="icon"><i class="ph ph-clipboard-text"></i></span>

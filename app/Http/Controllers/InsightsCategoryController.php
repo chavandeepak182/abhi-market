@@ -80,6 +80,19 @@ class InsightsCategoryController extends Controller
         $categories = DB::table('insights_category')->get();
         return view('insightssubcategories.edit', compact('subcategory', 'categories'));
     }
+    public function getSubcategories($categoryId)
+{
+    try {
+        $subcategories = DB::table('industries_subcategory')
+                            ->where('pid', $categoryId)
+                            ->get();
+
+        return response()->json($subcategories);
+    } catch (\Exception $e) {
+        \Log::error('Error fetching subcategories', ['error' => $e->getMessage()]);
+        return response()->json(['error' => 'Something went wrong!'], 500);
+    }
+}
 
     public function updateSubcategory(Request $request, $id)
     {

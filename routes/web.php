@@ -11,6 +11,8 @@ use App\Http\Controllers\PropertyCategoryController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\InsightsController;
 use App\Http\Controllers\InsightsCategoryController;
+use App\Http\Controllers\IndustriesCategoryController;
+use App\Http\Controllers\IndustriesController;
 
 
 Route::get('/', function () {
@@ -194,3 +196,26 @@ Route::post('/insights-subcategories/store', [InsightsCategoryController::class,
 Route::get('/insights-subcategories/edit/{id}', [InsightsCategoryController::class, 'editSubcategory'])->name('insights.subcategories.edit');
 Route::post('/insights-subcategories/update/{id}', [InsightsCategoryController::class, 'updateSubcategory'])->name('insights.subcategories.update');
 Route::get('/insightssubcategories/delete/{id}', [InsightsCategoryController::class, 'deleteSubcategory'])->name('insights.subcategories.delete');
+
+//industries
+Route::get('admin/industries', [IndustriesController::class, 'index'])->name('industries.index');
+Route::post('/industries/store', [IndustriesController::class, 'storeService'])->name('industries.store');
+Route::get('/industries/edit/{id}', [IndustriesController::class, 'edit'])->name('industries.edit');
+Route::put('/industries/update/{id}', [IndustriesController::class, 'update'])->name('industries.update');
+Route::get('/industries/delete/{id}', [IndustriesController::class, 'deleteService'])->name('industries.delete');
+Route::get('/industries/create', [IndustriesController::class, 'create'])->name('industries.create');
+Route::get('/get-subcategories-industries/{categoryId}', [IndustriesCategoryController::class, 'getSubcategories']);
+
+//industries category & subcategory
+Route::get('/industries-categories', [IndustriesCategoryController::class, 'index'])->name('industries.categories.index');
+Route::post('/industries-categories/store', [IndustriesCategoryController::class, 'store'])->name('industries.categories.store');
+Route::get('/industries-categories/edit/{id}', [IndustriesCategoryController::class, 'edit'])->name('industries.categories.edit');
+Route::post('/industries-categories/update/{id}', [IndustriesCategoryController::class, 'update'])->name('industries.categories.update');
+Route::get('/industries-categories/delete/{id}', [IndustriesCategoryController::class, 'destroy'])->name('industries.categories.delete');
+
+Route::get('/industries-subcategories', [IndustriesCategoryController::class, 'subcategories'])->name('industries.subcategories.index');
+Route::post('/industries-subcategories/store', [IndustriesCategoryController::class, 'storeSubcategory'])->name('industries.subcategories.store');
+Route::get('/industries-subcategories/edit/{id}', [IndustriesCategoryController::class, 'editSubcategory'])->name('industries.subcategories.edit');
+Route::post('/industries-subcategories/update/{id}', [IndustriesCategoryController::class, 'updateSubcategory'])->name('industries.subcategories.update');
+Route::get('/industriessubcategories/delete/{id}', [IndustriesCategoryController::class, 'deleteSubcategory'])->name('industries.subcategories.delete');
+

@@ -162,13 +162,11 @@ Route::get('/subcategories/edit/{id}', [PropertyCategoryController::class, 'edit
 Route::post('/subcategories/update/{id}', [PropertyCategoryController::class, 'updateSubcategory'])->name('subcategories.update');
 Route::get('/subcategories/delete/{id}', [PropertyCategoryController::class, 'deleteSubcategory'])->name('subcategories.delete');
 
-// //services
-// Route::get('/admin/services', [ServiceController::class, 'index'])->name('services.index');
-
-// Route::post('/categories/store', [ServiceController::class, 'storeCategory'])->name('categories.store');
-// Route::post('/subcategories/store', [ServiceController::class, 'storeSubcategory'])->name('subcategories.store');
-// Route::post('/services/store', [ServiceController::class, 'storeService'])->name('services.store');
-
-// Route::get('/categories/delete/{id}', [ServiceController::class, 'deleteCategory'])->name('categories.delete');
-// Route::get('/subcategories/delete/{id}', [ServiceController::class, 'deleteSubcategory'])->name('subcategories.delete');
-// Route::get('/services/delete/{id}', [ServiceController::class, 'deleteService'])->name('services.delete');
+//services
+Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
+Route::post('/services/store', [ServiceController::class, 'storeService'])->name('services.store');
+Route::get('/services/edit/{id}', [ServiceController::class, 'edit'])->name('services.edit');
+Route::put('/services/update/{id}', [ServiceController::class, 'update'])->name('services.update');
+Route::get('/services/delete/{id}', [ServiceController::class, 'deleteService'])->name('services.delete');
+Route::get('/services/create', [ServiceController::class, 'create'])->name('services.create');
+Route::get('/get-subcategories/{categoryId}', [ServiceController::class, 'getSubcategories']);

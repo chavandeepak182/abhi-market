@@ -2,7 +2,7 @@
 @section('content')
 <div class="container">
     <h2>Manage Services</h2>
-
+    <a href="{{ route('services.create') }}" class="btn btn-primary">Add Service</a>
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif

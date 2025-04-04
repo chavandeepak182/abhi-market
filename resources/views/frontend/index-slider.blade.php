@@ -98,8 +98,8 @@
                         <!-- Section Title Start -->
                         <div class="section-title">
                             <h3 class="wow fadeInUp">about us</h3>
-                            <h2 class="text-anime-style-2" data-cursor="-opaque">Trusted guidance for <span>financial growth</span></h2>
-                            <p class="wow fadeInUp" data-wow-delay="0.2s">With years of expertise in finance and consulting, we provide tailored strategies to help you achieve sustainable growth. Our commitment is to guide you  integrity, insight, and a personalized approach.</p>
+                            <h2 class="text-anime-style-2" data-cursor="-opaque">Expert Insights for<span> Strategic Market Growth</span></h2>
+                            <p class="wow fadeInUp" data-wow-delay="0.2s">With deep expertise in market research and consulting, we deliver strategic insights tailored for sustainable growth. Our commitment is to guide you with integrity, data-driven solutions, and a personalized approach.</p>
                         </div>
                         <!-- Section Title End -->
 
@@ -110,14 +110,10 @@
                                     <!-- About Content Info Start -->
                                     <div class="about-content-info">
                                         <!-- About Goal Box Start -->
-                                        <div class="about-goal-box wow fadeInUp" data-wow-delay="0.4s">
-                                            <div class="icon-box">
-                                                <img src="{{ asset('assets') }}/images/icon-financial-strategies.svg" alt="">
-                                            </div>
-            
+                                        <div class="about-goal-box wow fadeInUp" data-wow-delay="0.4s">x            
                                             <div class="about-goal-box-content">
-                                                <h3>financial strategies</h3>
-                                                <p>Tailored plans to meet your unique financial needs and goals.</p>
+                                                <h3>Tailored Strategies</h3>
+                                                <p>Strategic insights and tailored plans designed to drive your unique market growth and business goals.</p>
                                             </div>
                                         </div>
                                         <!-- About Goal Box End -->
@@ -147,8 +143,8 @@
                                             </figure>
             
                                             <div class="about-author-content">
-                                                <h3>Sarah T.</h3>
-                                                <p>Co. founder</p>
+                                                <h3>Swapnil D.</h3>
+                                                <p>Vice Precident</p>
                                             </div>
                                         </div>
                                         <!-- About Info Box End -->
@@ -186,13 +182,13 @@
                         <!-- Section Title Start -->
                         <div class="section-title">
                             <h3 class="wow fadeInUp">services</h3>
-                            <h2 class="text-anime-style-2" data-cursor="-opaque">Expert finance & consult services <span>for success</span></h2>
+                            <h2 class="text-anime-style-2" data-cursor="-opaque">Expert Market Research <span>& Growth Strategies</span></h2>
                         </div>
                         <!-- Section Title End -->
                         
                         <!-- Section content Button Start -->
                         <div class="service-content-btn wow fadeInUp" data-wow-delay="0.25s">
-                            <a href="services.html" class="btn-default">all services</a>
+                            <a href="{{ url('/services') }}" class="btn-default">all services</a>
                         </div>
                         <!-- Section content Button End -->
                     </div>
@@ -213,9 +209,9 @@
                                 </div>
     
                                 <div class="service-item-content">
-                                    <h3>financial planning</h3>
-                                    <p>Financial planing involve creating strategy to manage your income, expenses, term financial goals.</p>
-                                    <a href="service-single.html" class="service-btn"><img src="{{ asset('assets') }}/images/arrow-white.svg" alt=""></a>
+                                    <h3>Industry & Market Analysis</h3>
+                                    <p>In-depth research on market trends, opportunities, and competitive landscapes.</p>
+                                    <a href="#" class="service-btn"><img src="{{ asset('assets') }}/images/arrow-white.svg" alt=""></a>
                                 </div>
                             </div>
                         </div>
@@ -232,9 +228,9 @@
                                 </div>
     
                                 <div class="service-item-content">
-                                    <h3>investment management</h3>
-                                    <p>Financial planing involve creating strategy to manage your income, expenses, term financial goals.</p>
-                                    <a href="service-single.html" class="service-btn"><img src="{{ asset('assets') }}/images/arrow-white.svg" alt=""></a>
+                                    <h3>Consumer Insights & Behavior Analysis</h3>
+                                    <p>Understanding customer preferences, buying habits, and pain points.</p>
+                                    <a href="#" class="service-btn"><img src="{{ asset('assets') }}/images/arrow-white.svg" alt=""></a>
                                 </div>
                             </div>
                         </div>
@@ -251,9 +247,9 @@
                                 </div>
     
                                 <div class="service-item-content">
-                                    <h3>retirement planning</h3>
-                                    <p>Financial planing involve creating strategy to manage your income, expenses, term financial goals.</p>
-                                    <a href="service-single.html" class="service-btn"><img src="{{ asset('assets') }}/images/arrow-white.svg" alt=""></a>
+                                    <h3>Competitive Intelligence</h3>
+                                    <p>Benchmarking competitors, identifying strengths, and spotting market gaps.</p>
+                                    <a href="#" class="service-btn"><img src="{{ asset('assets') }}/images/arrow-white.svg" alt=""></a>
                                 </div>
                             </div>
                         </div>
@@ -270,9 +266,9 @@
                                 </div>
     
                                 <div class="service-item-content">
-                                    <h3>tax optimization</h3>
-                                    <p>Financial planing involve creating strategy to manage your income, expenses, term financial goals.</p>
-                                    <a href="service-single.html" class="service-btn"><img src="{{ asset('assets') }}/images/arrow-white.svg" alt=""></a>
+                                    <h3>Brand Perception & Positioning</h3>
+                                    <p>Measuring brand awareness, reputation, and market positioning.</p>
+                                    <a href="#" class="service-btn"><img src="{{ asset('assets') }}/images/arrow-white.svg" alt=""></a>
                                 </div>
                             </div>
                         </div>
@@ -289,9 +285,9 @@
                                 </div>
     
                                 <div class="service-item-content">
-                                    <h3>risk assessment</h3>
-                                    <p>Financial planing involve creating strategy to manage your income, expenses, term financial goals.</p>
-                                    <a href="service-single.html" class="service-btn"><img src="{{ asset('assets') }}/images/arrow-white.svg" alt=""></a>
+                                    <h3>Product & Service Feasibility Studies</h3>
+                                    <p>Assessing market demand and potential for new offerings.</p>
+                                    <a href="#" class="service-btn"><img src="{{ asset('assets') }}/images/arrow-white.svg" alt=""></a>
                                 </div>
                             </div>
                         </div>
@@ -308,9 +304,9 @@
                                 </div>
     
                                 <div class="service-item-content">
-                                    <h3>budgeting & forecasting</h3>
-                                    <p>Financial planing involve creating strategy to manage your income, expenses, term financial goals.</p>
-                                    <a href="service-single.html" class="service-btn"><img src="{{ asset('assets') }}/images/arrow-white.svg" alt=""></a>
+                                    <h3>Segmentation & Targeting Analysis</h3>
+                                    <p>Identifying key customer segments for focused marketing strategies.</p>
+                                    <a href="#" class="service-btn"><img src="{{ asset('assets') }}/images/arrow-white.svg" alt=""></a>
                                 </div>
                             </div>
                         </div>
@@ -320,7 +316,7 @@
 
                     <!-- Service Footer Start -->
                     <div class="service-footer wow fadeInUp" data-wow-delay="0.8s">
-                        <p>Let's make something great work together. <a href="contact.html">Get Free Quote</a></p>
+                        <p>Let's make something great work together. <a href="{{ url('/contact') }}">Discuss Now</a></p>
                     </div>
                     <!-- Service Footer End -->
                 </div>
@@ -339,7 +335,7 @@
                         <!-- Section Title Start -->
                         <div class="section-title">
                             <h3 class="wow fadeInUp">why choose us</h3>
-                            <h2 class="text-anime-style-2" data-cursor="-opaque">Why trust us <span>our finances</span></h2>
+                            <h2 class="text-anime-style-2" data-cursor="-opaque">Why Trust Us <span>for Market Insights?</span></h2>
                         </div>
                         <!-- Section Title End -->
 
@@ -352,8 +348,8 @@
                                 </div>
 
                                 <div class="why-choose-box-content">
-                                    <h3>financial strategies</h3>
-                                    <p>Tailored plans to meet your unique financial needs and goals.</p>
+                                    <h3>Market Strategies</h3>
+                                    <p>Customized Insights for Your Business Growth and Success.</p>
                                 </div>
                             </div>
                             <!-- Why Choose Box End -->
@@ -365,8 +361,8 @@
                                 </div>
 
                                 <div class="why-choose-box-content">
-                                    <h3>tax optimization</h3>
-                                    <p>Tailored plans to meet your unique financial needs and goals.</p>
+                                    <h3>Market Analysis & Strategy</h3>
+                                    <p>Tailored Market Insights & Strategies for Sustainable Business Growth</p>
                                 </div>
                             </div>
                             <!-- Why Choose Box End -->
@@ -376,8 +372,8 @@
                         <!-- Why Choose List Start -->
                         <div class="why-choose-list wow fadeInUp" data-wow-delay="0.4s">
                             <ul>
-                                <li>strategic financial planning</li>
-                                <li>expert investment advisory</li>
+                                <li>Data-Driven Market Insights</li>
+                                <li>Customized Growth Strategies</li>
                             </ul>
                         </div>
                         <!-- Why Choose List End -->
@@ -425,7 +421,7 @@
                     <!-- Section Title Start -->
                     <div class="section-title dark-section">
                         <h3 class="wow fadeInUp">our feature</h3>
-                        <h2 class="text-anime-style-2" data-cursor="-opaque">Key features of our finance <span>and consulting</span></h2>
+                        <h2 class="text-anime-style-2" data-cursor="-opaque">Key Features of Our Market Research <span>and Consulting</span></h2>
                     </div>
                     <!-- Section Title End -->
                 </div>
@@ -433,7 +429,7 @@
                 <div class="col-lg-6">
                     <!-- Section Button Start -->
                     <div class="section-btn wow fadeInUp" data-wow-delay="0.2s">
-                        <a href="contact.html" class="btn-default">contact now</a>
+                        <a href="{{ url('/contact') }}" class="btn-default">contact now</a>
                     </div>
                     <!-- Section Button End -->
                 </div>
@@ -449,8 +445,8 @@
                                 <img src="{{ asset('assets') }}/images/icon-our-feature-1.svg" alt="">
                             </div>
                             <div class="feature-item-content">
-                                <h3>financial solutions</h3>
-                                <p>Our Financial Solutions offer tailored and strategies to meet your unique  goals, from  and risk management.</p>
+                                <h3>Data-Driven Insights</h3>
+                                <p>Leverage accurate market data to make informed business decisions and drive growth.</p>
                             </div>
                         </div>
                         <!-- Feature Item End -->
@@ -461,8 +457,8 @@
                                 <img src="{{ asset('assets') }}/images/icon-our-feature-2.svg" alt="">
                             </div>
                             <div class="feature-item-content">
-                                <h3>wealth management</h3>
-                                <p>Our Financial Solutions offer tailored and strategies to meet your unique  goals, from  and risk management.</p>
+                                <h3>Competitor Analysis</h3>
+                                <p>Identify market gaps, strengths, and opportunities by analyzing competitors’ strategies and positioning.</p>
                             </div>
                         </div>
                         <!-- Feature Item End -->
@@ -473,8 +469,8 @@
                                 <img src="{{ asset('assets') }}/images/icon-our-feature-3.svg" alt="">
                             </div>
                             <div class="feature-item-content">
-                                <h3>in-depth market analysis</h3>
-                                <p>Our Financial Solutions offer tailored and strategies to meet your unique  goals, from  and risk management.</p>
+                                <h3>Consumer Behavior Research</h3>
+                                <p>Understand customer preferences, trends, and buying patterns to enhance targeting and engagement.</p>
                             </div>
                         </div>
                         <!-- Feature Item End -->
@@ -485,8 +481,8 @@
                                 <img src="{{ asset('assets') }}/images/icon-our-feature-4.svg" alt="">
                             </div>
                             <div class="feature-item-content">
-                                <h3>risk management</h3>
-                                <p>Our Financial Solutions offer tailored and strategies to meet your unique  goals, from  and risk management.</p>
+                                <h3>Market Trend Forecasting</h3>
+                                <p>Predict future industry shifts and emerging opportunities for proactive business strategies.</p>
                             </div>
                         </div>
                         <!-- Feature Item End -->
@@ -497,8 +493,8 @@
                                 <img src="{{ asset('assets') }}/images/icon-our-feature-5.svg" alt="">
                             </div>
                             <div class="feature-item-content">
-                                <h3>tax efficiency strategies</h3>
-                                <p>Our Financial Solutions offer tailored and strategies to meet your unique  goals, from  and risk management.</p>
+                                <h3>Customized Growth Strategies</h3>
+                                <p>Develop tailored research-backed plans aligned with your business goals and market landscape.</p>
                             </div>
                         </div>
                         <!-- Feature Item End -->
@@ -509,8 +505,8 @@
                                 <img src="{{ asset('assets') }}/images/icon-our-feature-6.svg" alt="">
                             </div>
                             <div class="feature-item-content">
-                                <h3>strategic business advisory</h3>
-                                <p>Our Financial Solutions offer tailored and strategies to meet your unique  goals, from  and risk management.</p>
+                                <h3>Brand Perception Analysis</h3>
+                                <p>Evaluate market sentiment and brand positioning to enhance reputation and competitive advantage.</p>
                             </div>
                         </div>
                         <!-- Feature Item End -->
@@ -520,9 +516,9 @@
 
                 <div class="col-lg-12">
                     <!-- Our Featured Footer Start -->
-                    <div class="our-feature-footer wow fadeInUp" data-wow-delay="1.2s">
+                    <!-- <div class="our-feature-footer wow fadeInUp" data-wow-delay="1.2s">
                         <p><span>Free</span> Let's make something great work together. <a href="contact.html">Get Free Quote</a></p>
-                    </div>
+                    </div> -->
                     <!-- Our Featured Footer End -->
                 </div>
             </div>
@@ -546,9 +542,9 @@
                         <!-- Fact Counter img End -->
 
                         <!-- Fact Counter Skillbar Start -->
-                        <div class="fact-counter-skillbar">
+                        <!-- <div class="fact-counter-skillbar">
                             <img src="{{ asset('assets') }}/images/fact-counter-skillbar-img.png" alt="">
-                        </div>
+                        </div> -->
                         <!-- Fact Counter Skillbar End -->
                     </div>
                     <!-- Fact Counter Image End -->
@@ -560,7 +556,7 @@
                         <!-- Section Title Start -->
                         <div class="section-title">
                             <h3 class="wow fadeInUp">some facts</h3>
-                            <h2 class="text-anime-style-2" data-cursor="-opaque">Key facts our <span>expertise</span></h2>
+                            <h2 class="text-anime-style-2" data-cursor="-opaque">Core Expertise & <span>Key Insights</span></h2>
                             <p class="wow fadeInUp" data-wow-delay="0.2s">Our expertise is built on years of industry experience, proven financial strategies and a commitment to client success.</p>
                         </div>
                         <!-- Section Title End -->
@@ -611,8 +607,8 @@
                         <!-- Fact Counter List Start -->
                         <div class="fact-counter-list wow fadeInUp" data-wow-delay="0.4s">
                             <ul>
-                                <li>Strategic financial planning</li>
-                                <li>Expert investment advisory</li>
+                                <li>Competitive Landscape Analysis</li>
+                                <li>Targeted Business Intelligence</li>
                             </ul>
                         </div>
                         <!-- Fact Counter List End -->
@@ -634,25 +630,25 @@
                         <!-- Section Title Start -->
                         <div class="section-title">
                             <h3 class="wow fadeInUp">what we do</h3>
-                            <h2 class="text-anime-style-2" data-cursor="-opaque">Driving financial growth <span>and success</span></h2>
-                            <p class="wow fadeInUp" data-wow-delay="0.2s">We provide expert financial and consulting solutions designed to foster growth, stability, and long-term success.</p>
+                            <h2 class="text-anime-style-2" data-cursor="-opaque">Driving Market Growth & <span>Competitive Success</span></h2>
+                            <p class="wow fadeInUp" data-wow-delay="0.2s">We provide expert market research and consulting solutions designed to unlock opportunities, enhance decision-making, and drive sustainable business growth.</p>
                         </div>
                         <!-- Section Title End -->
 
                         <!-- What We Do List Start -->
                         <div class="what-we-do-list wow fadeInUp" data-wow-delay="0.4s">
                             <ul>
-                                <li>strategic financial planning</li>
-                                <li>expert investment advisory</li>
-                                <li>risk assessment & mitigation</li>
-                                <li>retirement & future planning</li>
+                                <li>Strategic Market Analysis</li>
+                                <li>Consumer Insights & Behavior</li>
+                                <li>Competitive Intelligence</li>
+                                <li>Risk Assessment & Strategies</li>
                             </ul>
                         </div>
                         <!-- What We Do List End -->
 
                         <!-- What We Do Button Start -->
                         <div class="what-we-do-btn wow fadeInUp" data-wow-delay="0.6s">
-                            <a href="contact.html" class="btn-default">contact now</a>
+                            <a href="{{ url('/contact') }}" class="btn-default">contact now</a>
                         </div>
                         <!-- What We Do Button End -->
                     </div>
@@ -677,17 +673,6 @@
                             </figure>
                         </div>
                         <!-- What We Do Image 2 End -->
-
-                        <!-- Experience Counter Box Start -->
-                        <div class="experience-counter-box">
-                            <div class="experience-counter-no">
-                                <h2><span class="counter">25</span>+</h2>
-                            </div>
-                            <div class="experience-counter-content">
-                                <p>Years of experience in finance</p>
-                            </div>
-                        </div>
-                        <!-- Experience Counter Box Start End -->
                     </div>
                     <!-- What We Do Images End -->
                 </div>
@@ -706,14 +691,14 @@
                         <!-- Section Title Start -->
                         <div class="section-title">
                             <h3 class="wow fadeInUp">how it work</h3>
-                            <h2 class="text-anime-style-2" data-cursor="-opaque">Our process for financial <span>success</span></h2>
+                            <h2 class="text-anime-style-2" data-cursor="-opaque">Our Process for <span>Success</span></h2>
                             <p class="wow fadeInUp" data-wow-delay="0.2s">Our process is designed to guide you every step of the way. From initial consultation to personalized strategy development.</p>
                         </div>
                         <!-- Section Title End -->
 
                         <!-- How It Work Button Start -->
                         <div class="how-it-work-btn wow fadeInUp" data-wow-delay="0.4s">
-                            <a href="contact.html" class="btn-default">learn more</a>
+                            <a href="{{ url('/about') }}" class="btn-default">learn more</a>
                         </div>
                         <!-- How It Work Button End -->
                     </div>
@@ -777,7 +762,7 @@
                     <!-- Section Title Start -->
                     <div class="section-title">
                         <h3 class="wow fadeInUp">pricing plan</h3>
-                        <h2 class="text-anime-style-2" data-cursor="-opaque">Flexible pricing plans for <span>you finance</span></h2>
+                        <h2 class="text-anime-style-2" data-cursor="-opaque">We've Flexible Plan</h2>
                     </div>
                     <!-- Section Title End -->
                 </div>
@@ -785,7 +770,7 @@
                 <div class="col-lg-7">
                     <!-- Section Button Start -->
                     <div class="section-btn wow fadeInUp" data-wow-delay="0.2s">
-                        <a href="contact.html" class="btn-default">contact now</a>
+                        <a href="{{ url('/contact') }}" class="btn-default">contact now</a>
                     </div>
                     <!-- Section Button End -->
                 </div>
@@ -938,7 +923,7 @@
                     <!-- Section Title Start -->
                     <div class="section-title">
                         <h3 class="wow fadeInUp">faqs</h3>
-                        <h2 class="text-anime-style-2" data-cursor="-opaque">Your most frequently asked <span>questions answered</span></h2>
+                        <h2 class="text-anime-style-2" data-cursor="-opaque">Your Most Frequently Asked <span>Questions Answered</span></h2>
                     </div>
                     <!-- Section Title End -->
                 </div>
@@ -1126,7 +1111,7 @@
                         <!-- Section Title Start -->
                         <div class="section-title dark-section">
                             <h3 class="wow fadeInUp">our testimonial</h3>
-                            <h2 class="text-anime-style-2" data-cursor="-opaque">1250+ customer say <span>about our finance</span></h2>
+                            <h2 class="text-anime-style-2" data-cursor="-opaque">What Customer Says <span>About JFinMate</span></h2>
                             <p class="wow fadeInUp" data-wow-delay="0.2s">With over 1,250 satisfied clients, our finance and consulting services have earned praise for reliability, personalized guidance, and impactful results.</p>
                         </div>
                         <!-- Section Title End -->
@@ -1373,7 +1358,7 @@
                     <!-- Section Title Start -->
                     <div class="section-title">
                         <h3 class="wow fadeInUp">blog / post</h3>
-                        <h2 class="text-anime-style-2" data-cursor="-opaque">Finance insights, updates <span>and trends</span></h2>
+                        <h2 class="text-anime-style-2" data-cursor="-opaque">Market Insights, Updates <span>& Latest Trends</span></h2>
                     </div>
                     <!-- Section Title End -->
                 </div>

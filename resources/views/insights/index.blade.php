@@ -1,5 +1,5 @@
 @extends('admin.layouts.header')
-@section('title', "User Management")
+@section('title', "Manage Insights")
 
 @section('content')
 <div class="dashboard-body">

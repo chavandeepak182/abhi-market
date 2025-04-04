@@ -114,4 +114,44 @@ class FrontendController extends Controller
 
         return view('frontend.services', $data);
     }
+
+    public function insights()
+    {
+        $data['allInsights'] = DB::table('insights')
+            ->select(
+                'id',
+                'image',
+                'insights_name',
+                'description',
+                'meta_title',
+                'meta_keywords',
+                'meta_description',
+                'created_at',
+                'updated_at',
+                'insights_subcategory_id'
+            )
+            ->paginate(700);
+
+        return view('frontend.insights', $data);
+    }
+
+    public function industries()
+    {
+        $data['allIndustries'] = DB::table('industries')
+            ->select(
+                'id',
+                'image',
+                'industries_name',  // Fixed column name
+                'description',
+                'meta_title',
+                'meta_keywords',
+                'meta_description',
+                'created_at',
+                'updated_at',
+                'industries_subcategory_id' // Fixed column name
+            )
+            ->paginate(700);
+
+        return view('frontend.industries', $data);
+    }
 }

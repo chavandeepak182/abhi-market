@@ -19,13 +19,9 @@ Route::get('/', function () {
     return view('frontend.index-slider');
 });
 
-Route::get('/insights', function () {
-    return view('frontend.insights');
-});
+Route::get('/insights', [FrontendController::class, 'insights'])->name('insights');
 
-Route::get('/industries', function () {
-    return view('frontend.industries');
-});
+Route::get('/industries', [FrontendController::class, 'industries'])->name('industries');
 
 Route::get('/services', [FrontendController::class, 'services'])->name('services');
 

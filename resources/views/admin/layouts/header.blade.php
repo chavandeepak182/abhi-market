@@ -101,6 +101,20 @@
                                 </li>
                             </ul>
                         </li>
+                        <li class="sidebar-menu__item has-dropdown {{ Request::is('admin/industries') || Request::is('industries/create') || Request::is('industries/edit/*') ? 'activePage' : '' }}">
+                            <a href="/admin/industries" class="sidebar-menu__link">
+                                <span class="icon"><i class="ph ph-chats-teardrop"></i></span>
+                                <span class="text">Industries</span>
+                            </a>
+                            <ul class="sidebar-submenu">
+                                <li class="sidebar-submenu__item {{ Request::is('industries-categories') ? 'activePage' : '' }}">
+                                    <a href="{{ url('industries-categories') }}" class="sidebar-submenu__link"> Categories </a>
+                                </li>
+                                <li class="sidebar-submenu__item {{ Request::is('industries-subcategories') ? 'activePage' : '' }}">
+                                    <a href="{{ url('industries-subcategories') }}" class="sidebar-submenu__link"> Sub Categories </a>
+                                </li>
+                            </ul>
+                        </li>
                         <li class="sidebar-menu__item {{ Request::is('admin/enquiries') ? 'activePage' : '' }}">
                             <a href="{{ url('admin/enquiries') }}" class="sidebar-menu__link">
                                 <span class="icon"><i class="ph ph-clipboard-text"></i></span>

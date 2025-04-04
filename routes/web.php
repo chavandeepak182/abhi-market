@@ -27,9 +27,7 @@ Route::get('/industries', function () {
     return view('frontend.industries');
 });
 
-Route::get('/services', function () {
-    return view('frontend.services');
-});
+Route::get('/services', [FrontendController::class, 'services'])->name('services');
 
 Route::get('/about', function () {
     return view('frontend.about');

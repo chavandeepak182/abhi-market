@@ -37,10 +37,6 @@ Route::get('/contact', function () {
     return view('frontend.contact');
 });
 
-Route::get('/service-details', function () {
-    return view('frontend.service-details');
-});
-
 Route::get('/details', function () {
     return view('frontend.details');
 });
@@ -172,6 +168,8 @@ Route::put('/services/update/{id}', [ServiceController::class, 'update'])->name(
 Route::get('/services/delete/{id}', [ServiceController::class, 'deleteService'])->name('services.delete');
 Route::get('/services/create', [ServiceController::class, 'create'])->name('services.create');
 Route::get('/get-subcategories/{categoryId}', [ServiceController::class, 'getSubcategories']);
+Route::get('/service-details/{id}', [ServiceController::class, 'show'])->name('service.details');
+Route::get('/get-categories', [ServiceController::class, 'getCategories']);
 
 //insights
 Route::get('admin/insights', [InsightsController::class, 'index'])->name('insights.index');

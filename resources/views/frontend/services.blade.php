@@ -47,7 +47,7 @@
                                 <h3>{{ $serviceName }}</h3>
                                 <p>{{ $description }}</p>
                                 <a href="{{ url('service-details/'.$service->id) }}" class="service-btn">
-                                    <img src="{{ asset('assets') }}/images/arrow-white.svg" alt="">
+                                    <img src="{{ asset('assets/images/arrow-white.svg') }}" alt="View Details">
                                 </a>
                             </div>
                         </div>

@@ -28,6 +28,14 @@ class ServiceController extends Controller
         $subcategories = DB::table('property_subcategory')->where('pid', $categoryId)->get();
         return response()->json($subcategories);
     }
+    public function getCategories(Request $request)
+{
+    $limit = $request->input('limit', 5); // Default limit is 5
+    $categories = DB::table('property_category')->limit($limit)->get();
+
+    return response()->json($categories);
+}
+
 
     public function storeService(Request $request)
 {
@@ -172,6 +180,17 @@ public function deleteService($id)
     DB::table('services')->where('id', $id)->delete();
     
     return redirect()->route('services.index')->with('success', 'Service deleted.');
+}
+
+public function show($id)
+{
+    $service = DB::table('services')->where('id', $id)->first();
+
+    if (!$service) {
+        return redirect()->route('services.index')->with('error', 'Service not found.');
+    }
+
+    return view('frontend.service-details', compact('service'));
 }
 
 }

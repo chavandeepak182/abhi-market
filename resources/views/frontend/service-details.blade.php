@@ -48,7 +48,6 @@
                     <div class="sidebar-cta-box wow fadeInUp" data-wow-delay="0.25s">
                         <!-- CTA Contact Content Start -->
                         <div class="cta-box-content">
-                            <img src="{{ asset('assets') }}/images/logo.svg" alt="">
                             <h3>Need Help? We Are Here To Help You</h3>
                         </div>
                         <!-- CTA Contact Content End -->
@@ -57,15 +56,30 @@
                         <div class="cta-contact-info">
                             <!-- CTA Info Item Start -->
                             <div class="cta-info-item">
-                                <p>Need help!</p>
-                                <h3>+91 - 123 456 890</h3>
-                            </div>
-                            <!-- CTA Info Item End -->
+                                <form id="enquiryctForm" action="#" method="POST" data-toggle="validator" class="wow fadeInUp" data-wow-delay="0.4s">
+                                    @csrf
+                                    <div class="row">
+                                        <div class="form-group col-md-12 mb-4">
+                                            <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
 
-                            <!-- CTA Info Item Start -->
-                            <div class="cta-info-item">
-                                <p>E-mail now</p>
-                                <h3>info@domainname.com</h3>
+                                        <div class="form-group col-md-12 mb-4">
+                                            <input type="text" class="form-control" id="contact" name="contact" placeholder="Phone" required>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+
+                                        <div class="form-group col-md-12 mb-4">
+                                            <input type="text" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <button type="submit" class="btn-default">send</button>
+                                            <div id="msgSubmit" class="h3 hidden"></div>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                             <!-- CTA Info Item End -->
                         </div>

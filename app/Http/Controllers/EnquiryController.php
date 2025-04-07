@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Enquiry;
+use App\Services\BrevoService;
 class EnquiryController extends Controller
 {
     public function enquiryLead()
@@ -13,7 +14,8 @@ class EnquiryController extends Controller
     {
         return view('frontend.enquiry-form');
     }
-    public function store(Request $request)
+
+    public function store(Request $request,  BrevoService $brevoService)
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -25,6 +27,12 @@ class EnquiryController extends Controller
             'enquiry_type' => 'string'
         ]);
         Enquiry::create($validated);
+        $brevoService->sendEnquiryEmail([
+            'name' => $request->name,
+            'email' => $request->email,
+            'contact' => $request->contact,
+            'message' => $request->message,
+        ]);
         return response()->json(['success' => true, 'message' => 'Enquiry submitted successfully!']);
     }
 }

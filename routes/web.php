@@ -13,6 +13,7 @@ use App\Http\Controllers\InsightsController;
 use App\Http\Controllers\InsightsCategoryController;
 use App\Http\Controllers\IndustriesCategoryController;
 use App\Http\Controllers\IndustriesController;
+use App\Http\Controllers\ContactController;
 
 
 Route::get('/', function () {
@@ -32,6 +33,8 @@ Route::get('/about', function () {
 Route::get('/contact', function () {
     return view('frontend.contact');
 });
+
+Route::post('/contact', [ContactController::class, 'handleContactForm'])->name('contact.submit');
 
 Route::get('/details', function () {
     return view('frontend.details');
@@ -214,4 +217,3 @@ Route::post('/industries-subcategories/store', [IndustriesCategoryController::cl
 Route::get('/industries-subcategories/edit/{id}', [IndustriesCategoryController::class, 'editSubcategory'])->name('industries.subcategories.edit');
 Route::post('/industries-subcategories/update/{id}', [IndustriesCategoryController::class, 'updateSubcategory'])->name('industries.subcategories.update');
 Route::get('/industriessubcategories/delete/{id}', [IndustriesCategoryController::class, 'deleteSubcategory'])->name('industries.subcategories.delete');
-

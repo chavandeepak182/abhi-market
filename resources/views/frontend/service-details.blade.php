@@ -56,21 +56,21 @@
                         <div class="cta-contact-info">
                             <!-- CTA Info Item Start -->
                             <div class="cta-info-item">
-                                <form id="enquiryctForm" action="#" method="POST" data-toggle="validator" class="wow fadeInUp" data-wow-delay="0.4s">
+                                <form id="enquiryctForm" action="{{ route('enquiry.store') }}" method="POST" data-toggle="validator" class="wow fadeInUp" data-wow-delay="0.4s">
                                     @csrf
                                     <div class="row">
                                         <div class="form-group col-md-12 mb-4">
-                                            <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required>
+                                            <input type="text" name="name" id="name" class="form-control" placeholder="Your Name" required data-error="Please Enter Your Name">
                                             <div class="help-block with-errors"></div>
                                         </div>
 
                                         <div class="form-group col-md-12 mb-4">
-                                            <input type="text" class="form-control" id="contact" name="contact" placeholder="Phone" required>
+                                            <input type="text" name="contact" id="contact" class="form-control" placeholder="Phone Number" required>
                                             <div class="help-block with-errors"></div>
                                         </div>
 
                                         <div class="form-group col-md-12 mb-4">
-                                            <input type="text" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                                            <input type="email" name="email" id="email" class="form-control" placeholder="Your Email" required>
                                             <div class="help-block with-errors"></div>
                                         </div>
 

@@ -306,9 +306,46 @@
         </div>
         {{-- end main content --}}
 
-        <a href="#" class="whatsapp-icon">
+        <a data-bs-toggle="modal" href="#addUserView" class="whatsapp-icon">
             <i class="fas fa-envelope"></i>
         </a>
+
+        <!-- Add User Modal -->
+        <div class="modal fade" id="addUserView" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">We're Here for You</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="user" id="addUser" method="post">
+                            @csrf   
+                            <div class="row">
+                                <div class="form-group col-lg-12">
+                                    <label for="recipient-name" class="col-form-label">Name:</label>
+                                    <input type="text" class="form-control" id="full_name" name="full_name" required>
+                                </div>
+
+                                <div class="form-group col-lg-12">
+                                    <label for="recipient-name" class="col-form-label">Mobile Number:</label>
+                                    <input type="tel" class="form-control" id="mobile_no" name="mobile_no" required>
+                                </div>
+
+                                <div class="form-group col-lg-12">
+                                    <label for="recipient-name" class="col-form-label">Email ID:</label>
+                                    <input type="email" class="form-control" id="email_id" name="email_id" required>
+                                </div>
+
+                                <div class="modal-footer mt-30">
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                </div>
+                            </div> 
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         @include('frontend.layouts.footer')
 

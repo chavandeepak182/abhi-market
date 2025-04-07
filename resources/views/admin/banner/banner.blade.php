@@ -2,6 +2,7 @@
 @section('title', "User Management")
 
 @section('content')
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <div class="dashboard-body">
     <div class="breadcrumb-with-buttons mb-24 flex-between flex-wrap gap-8">
         <!-- Breadcrumb Start -->
@@ -19,6 +20,7 @@
     <div class="card">
         <div class="card-body">
             <form action="{{ route('banners.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
                 <div class="row gy-20">
                     <div class="col-xxl-4 col-md-4 col-sm-5">
                         <div class="mb-20">

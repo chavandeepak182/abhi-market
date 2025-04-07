@@ -15,21 +15,25 @@ class BannerController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'title' => 'nullable|string|max:255'
-        ]);
+{
+    $request->validate([
+        'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'title' => 'nullable|string|max:255'
+    ]);
 
+    if ($request->hasFile('image')) {
         $imagePath = $request->file('image')->store('banners', 'public');
-
-        Banner::create([
-            'image' => $imagePath,
-            'title' => $request->title
-        ]);
-
-        return redirect()->route('banners.index')->with('success', 'Banner added successfully');
+    } else {
+        return back()->with('error', 'Image upload failed.');
     }
+
+    Banner::create([
+        'image' => $imagePath,
+        'title' => $request->title
+    ]);
+
+    return redirect()->route('banners.index')->with('success', 'Banner added successfully');
+}
     public function edit($id)
     {
         $banner = Banner::findOrFail($id);

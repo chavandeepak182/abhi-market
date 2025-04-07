@@ -28,167 +28,168 @@ class ServiceController extends Controller
         $subcategories = DB::table('property_subcategory')->where('pid', $categoryId)->get();
         return response()->json($subcategories);
     }
-    public function getCategories(Request $request)
-{
-    $limit = $request->input('limit', 5); // Default limit is 5
-    $categories = DB::table('property_category')->limit($limit)->get();
-
-    return response()->json($categories);
-}
-
-
-    public function storeService(Request $request)
-{
-    Log::info('storeService function called', ['request' => $request->all()]);
-
-    $request->validate([
-        'property_subcategory_id' => 'required|integer', 
-        'service_name' => 'required|string|max:255',
-        'description' => 'nullable|string',
-        'meta_title' => 'nullable|string|max:255',
-        'meta_keywords' => 'nullable|string',
-        'meta_description' => 'nullable|string',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-    ]);
-
-    $imagePath = null;
-
-    if ($request->hasFile('image')) {
-        Log::info('Image file detected');
-        
-        $image = $request->file('image');
-        $imageName = time() . '_' . $image->getClientOriginalName();
-        $destinationPath = public_path('uploads/services');
-        
-        if ($image->move($destinationPath, $imageName)) {
-            $imagePath = 'uploads/services/' . $imageName;
-            Log::info('Image successfully uploaded', ['path' => $imagePath]);
-        } else {
-            Log::error('Image upload failed');
-        }
-    } else {
-        Log::warning('No image file detected in request');
-    }
-
-    $data = [
-        'property_subcategory_id' => $request->property_subcategory_id,
-        'service_name' => $request->service_name,
-        'description' => $request->description,
-        'meta_title' => $request->meta_title,
-        'meta_keywords' => $request->meta_keywords,
-        'meta_description' => $request->meta_description,
-        'image' => $imagePath,
-        'created_at' => now(),
-        'updated_at' => now(),
-    ];
-
-    Log::info('Data to be inserted', ['data' => $data]);
-
-    try {
-        DB::table('services')->insert($data);
-        Log::info('Service successfully inserted into database');
-    } catch (\Exception $e) {
-        Log::error('Error inserting service', ['error' => $e->getMessage()]);
-        return redirect()->back()->with('error', 'Service could not be added. Please check logs.');
-    }
-
-    return redirect()->route('services.index')->with('success', 'Service added successfully.');
-}
-
-
-public function edit($id)
-{
-    $service = DB::table('services')->where('id', $id)->first();
-
-    if (!$service) {
-        return redirect()->route('services.index')->with('error', 'Service not found.');
-    }
-
-    // Get all categories
-    $categories = DB::table('property_category')->get();
-
-    // Get subcategory details
-    $subcategory = DB::table('property_subcategory')->where('property_subcategory_id', $service->property_subcategory_id)->first();
-
-    // Get all subcategories under the selected category
-    $subcategories = [];
-    if ($subcategory) {
-        $subcategories = DB::table('property_subcategory')
-            ->where('pid', $subcategory->pid) // Get subcategories for same category
-            ->get();
-    }
-
-    return view('services.edit', compact('service', 'categories', 'subcategories', 'subcategory'));
-}
-
-public function update(Request $request, $id)
-{
-    $request->validate([
-        'property_subcategory_id' => 'required|integer',
-        'service_name' => 'required|string|max:255',
-        'description' => 'nullable|string',
-        'meta_title' => 'nullable|string|max:255',
-        'meta_keywords' => 'nullable|string',
-        'meta_description' => 'nullable|string',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Include image validation
-    ]);
-
-    $service = DB::table('services')->where('id', $id)->first();
-
-    if (!$service) {
-        return redirect()->route('services.index')->with('error', 'Service not found.');
-    }
-
-    $imagePath = $service->image; // Default to old image
-
-    if ($request->hasFile('image')) {
-        // Delete old image if it exists
-        if ($service->image && File::exists(public_path($service->image))) {
-            File::delete(public_path($service->image));
-        }
-
-        // Store new image
-        $image = $request->file('image');
-        $imageName = time() . '_' . $image->getClientOriginalName();
-        $destinationPath = public_path('uploads/services');
-        $image->move($destinationPath, $imageName);
-        $imagePath = 'uploads/services/' . $imageName;
-    }
-
-    DB::table('services')->where('id', $id)->update([
-        'property_subcategory_id' => $request->property_subcategory_id,
-        'service_name' => $request->service_name,
-        'description' => $request->description,
-        'meta_title' => $request->meta_title,
-        'meta_keywords' => $request->meta_keywords,
-        'meta_description' => $request->meta_description,
-        'image' => $imagePath, // Save updated (or old) image
-        'updated_at' => now(),
-    ]);
-
-    return redirect()->route('services.index')->with('success', 'Service updated successfully.');
-}
-
-public function deleteService($id)
-{
-    $service = DB::table('services')->where('id', $id)->first();
-
-    if (!$service) {
-        return redirect()->route('services.index')->with('error', 'Service not found.');
-    }
-
-    DB::table('services')->where('id', $id)->delete();
     
-    return redirect()->route('services.index')->with('success', 'Service deleted.');
-}
+    public function getCategories(Request $request)
+    {
+        $limit = $request->input('limit', 5); // Default limit is 5
+        $categories = DB::table('property_category')->limit($limit)->get();
 
-public function show($id)
-{
-    $service = DB::table('services')->where('id', $id)->first();
-
-    if (!$service) {
-        return redirect()->route('services.index')->with('error', 'Service not found.');
+        return response()->json($categories);
     }
+
+
+        public function storeService(Request $request)
+    {
+        Log::info('storeService function called', ['request' => $request->all()]);
+
+        $request->validate([
+            'property_subcategory_id' => 'required|integer', 
+            'service_name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'meta_title' => 'nullable|string|max:255',
+            'meta_keywords' => 'nullable|string',
+            'meta_description' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $imagePath = null;
+
+        if ($request->hasFile('image')) {
+            Log::info('Image file detected');
+            
+            $image = $request->file('image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $destinationPath = public_path('uploads/services');
+            
+            if ($image->move($destinationPath, $imageName)) {
+                $imagePath = 'uploads/services/' . $imageName;
+                Log::info('Image successfully uploaded', ['path' => $imagePath]);
+            } else {
+                Log::error('Image upload failed');
+            }
+        } else {
+            Log::warning('No image file detected in request');
+        }
+
+        $data = [
+            'property_subcategory_id' => $request->property_subcategory_id,
+            'service_name' => $request->service_name,
+            'description' => $request->description,
+            'meta_title' => $request->meta_title,
+            'meta_keywords' => $request->meta_keywords,
+            'meta_description' => $request->meta_description,
+            'image' => $imagePath,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ];
+
+        Log::info('Data to be inserted', ['data' => $data]);
+
+        try {
+            DB::table('services')->insert($data);
+            Log::info('Service successfully inserted into database');
+        } catch (\Exception $e) {
+            Log::error('Error inserting service', ['error' => $e->getMessage()]);
+            return redirect()->back()->with('error', 'Service could not be added. Please check logs.');
+        }
+
+        return redirect()->route('services.index')->with('success', 'Service added successfully.');
+    }
+
+
+    public function edit($id)
+    {
+        $service = DB::table('services')->where('id', $id)->first();
+
+        if (!$service) {
+            return redirect()->route('services.index')->with('error', 'Service not found.');
+        }
+
+        // Get all categories
+        $categories = DB::table('property_category')->get();
+
+        // Get subcategory details
+        $subcategory = DB::table('property_subcategory')->where('property_subcategory_id', $service->property_subcategory_id)->first();
+
+        // Get all subcategories under the selected category
+        $subcategories = [];
+        if ($subcategory) {
+            $subcategories = DB::table('property_subcategory')
+                ->where('pid', $subcategory->pid) // Get subcategories for same category
+                ->get();
+        }
+
+        return view('services.edit', compact('service', 'categories', 'subcategories', 'subcategory'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'property_subcategory_id' => 'required|integer',
+            'service_name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'meta_title' => 'nullable|string|max:255',
+            'meta_keywords' => 'nullable|string',
+            'meta_description' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Include image validation
+        ]);
+
+        $service = DB::table('services')->where('id', $id)->first();
+
+        if (!$service) {
+            return redirect()->route('services.index')->with('error', 'Service not found.');
+        }
+
+        $imagePath = $service->image; // Default to old image
+
+        if ($request->hasFile('image')) {
+            // Delete old image if it exists
+            if ($service->image && File::exists(public_path($service->image))) {
+                File::delete(public_path($service->image));
+            }
+
+            // Store new image
+            $image = $request->file('image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $destinationPath = public_path('uploads/services');
+            $image->move($destinationPath, $imageName);
+            $imagePath = 'uploads/services/' . $imageName;
+        }
+
+        DB::table('services')->where('id', $id)->update([
+            'property_subcategory_id' => $request->property_subcategory_id,
+            'service_name' => $request->service_name,
+            'description' => $request->description,
+            'meta_title' => $request->meta_title,
+            'meta_keywords' => $request->meta_keywords,
+            'meta_description' => $request->meta_description,
+            'image' => $imagePath, // Save updated (or old) image
+            'updated_at' => now(),
+        ]);
+
+        return redirect()->route('services.index')->with('success', 'Service updated successfully.');
+    }
+
+    public function deleteService($id)
+    {
+        $service = DB::table('services')->where('id', $id)->first();
+
+        if (!$service) {
+            return redirect()->route('services.index')->with('error', 'Service not found.');
+        }
+
+        DB::table('services')->where('id', $id)->delete();
+        
+        return redirect()->route('services.index')->with('success', 'Service deleted.');
+    }
+
+    public function show($id)
+    {
+        $service = DB::table('services')->where('id', $id)->first();
+
+        if (!$service) {
+            return redirect()->route('services.index')->with('error', 'Service not found.');
+        }
 
     return view('frontend.service-details', compact('service'));
 }

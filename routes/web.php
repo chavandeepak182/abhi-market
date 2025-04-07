@@ -177,6 +177,7 @@ Route::put('/insights/update/{id}', [InsightsController::class, 'update'])->name
 Route::get('/insights/delete/{id}', [InsightsController::class, 'deleteService'])->name('insights.delete');
 Route::get('/insights/create', [InsightsController::class, 'create'])->name('insights.create');
 Route::get('/get-subcategories-insights/{categoryId}', [InsightsController::class, 'getSubcategories']);
+Route::get('/insights-details/{id}', [InsightsController::class, 'show'])->name('insights.details');
 
 //serivce category & subcategory
 Route::get('/insights-categories', [InsightsCategoryController::class, 'index'])->name('insights.categories.index');
@@ -198,6 +199,7 @@ Route::get('/industries/edit/{id}', [IndustriesController::class, 'edit'])->name
 Route::put('/industries/update/{id}', [IndustriesController::class, 'update'])->name('industries.update');
 Route::get('/industries/delete/{id}', [IndustriesController::class, 'deleteService'])->name('industries.delete');
 Route::get('/industries/create', [IndustriesController::class, 'create'])->name('industries.create');
+Route::get('/industries-details/{id}', [IndustriesController::class, 'show'])->name('industries.details');
 Route::get('/get-subcategories-industries/{categoryId}', [IndustriesCategoryController::class, 'getSubcategories']);
 
 //industries category & subcategory

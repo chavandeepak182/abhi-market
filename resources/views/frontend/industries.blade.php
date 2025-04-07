@@ -46,7 +46,7 @@
                             <div class="service-item-content">
                                 <h3>{{ $industryName }}</h3>
                                 <p>{{ $description }}</p>
-                                <a href="{{ url('industry-details/'.$industry->id) }}" class="service-btn">
+                                <a href="{{ url('industries-details/'.$industry->id) }}" class="service-btn">
                                     <img src="{{ asset('assets') }}/images/arrow-white.svg" alt="">
                                 </a>
                             </div>
@@ -87,7 +87,7 @@
 
                         <!-- What We Do Button Start -->
                         <div class="what-we-do-btn wow fadeInUp" data-wow-delay="0.6s">
-                            <a href="contact.html" class="btn-default">contact now</a>
+                            <a href="#" class="btn-default">contact now</a>
                         </div>
                         <!-- What We Do Button End -->
                     </div>

@@ -306,6 +306,10 @@
         </div>
         {{-- end main content --}}
 
+        <a href="#" class="whatsapp-icon">
+            <i class="fas fa-envelope"></i>
+        </a>
+
         @include('frontend.layouts.footer')
 
         <script>

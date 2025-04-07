@@ -107,12 +107,13 @@ Route::get('enquiry', [EnquiryController::class, 'showForm'])->name('enquiry.for
 Route::post('enquiry', [EnquiryController::class, 'store'])->name('enquiry.store');
 
 //banner
-Route::get('/admin/banners', [BannerController::class, 'index'])->name('banners.index');
-Route::post('/banners', [BannerController::class, 'store'])->name('banners.store');
-Route::get('/banners/{id}/edit', [BannerController::class, 'edit'])->name('banners.edit');
-Route::put('/banners/{id}', [BannerController::class, 'update'])->name('banners.update');
-Route::delete('/banners/{id}', [BannerController::class, 'destroy'])->name('banners.destroy');
-
+Route::middleware('isPartner')->group(function () {
+    Route::get('/admin/banners', [BannerController::class, 'index'])->name('banners.index');
+    Route::post('/banners', [BannerController::class, 'store'])->name('banners.store');
+    Route::get('/banners/{id}/edit', [BannerController::class, 'edit'])->name('banners.edit');
+    Route::put('/banners/{id}', [BannerController::class, 'update'])->name('banners.update');
+    Route::delete('/banners/{id}', [BannerController::class, 'destroy'])->name('banners.destroy');
+});
 //channel partner
 Route::middleware('isPartner')->group(function () {
     Route::get('partner/partnerDashboard', [PartnerController::class, 'partnerDashboard'])->name('partnerDashboard');
@@ -166,6 +167,7 @@ Route::get('/services/create', [ServiceController::class, 'create'])->name('serv
 Route::get('/get-subcategories/{categoryId}', [ServiceController::class, 'getSubcategories']);
 Route::get('/service-details/{id}', [ServiceController::class, 'show'])->name('service.details');
 Route::get('/get-categories', [ServiceController::class, 'getCategories']);
+Route::get('/get-services', [ServiceController::class, 'getServices']);
 
 //insights
 Route::get('admin/insights', [InsightsController::class, 'index'])->name('insights.index');

@@ -37,8 +37,8 @@
                     <!-- Service Category List Start -->
                     <div class="service-catagery-list wow fadeInUp">
                         <h3>Our Services</h3>
-                        <ul id="category-list" class="mb-3">
-                            {{-- Categories will be loaded here via AJAX --}}
+                        <ul id="service-list" class="mb-3">
+                            {{-- Services will be loaded here via AJAX --}}
                         </ul>
                         <button id="loadMore" class="btn btn-primary">Load More</button>
                     </div>
@@ -377,35 +377,32 @@
 </div>
 <!-- Page Service Single End -->
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-    let limit = 5; // Initial limit
+    document.addEventListener("DOMContentLoaded", function () {
+        let limit = 5;
 
-    function loadCategories() {
-        fetch(`/get-categories?limit=${limit}`)
-            .then(response => response.json())
-            .then(data => {
-                let categoryList = document.getElementById('category-list');
-                categoryList.innerHTML = ''; // Clear existing categories
+        function loadServices() {
+            fetch(`/get-services?limit=${limit}`)
+                .then(response => response.json())
+                .then(data => {
+                    const serviceList = document.getElementById('service-list');
+                    serviceList.innerHTML = '';
 
-                data.forEach(category => {
-                    categoryList.innerHTML += `<li><a href="#">${category.category_name}</a></li>`;
+                    data.forEach(service => {
+                        serviceList.innerHTML += `<li><a href="#">${service.service_name}</a></li>`;
+                    });
+
+                    if (data.length < limit) {
+                        document.getElementById('loadMore').style.display = 'none';
+                    }
                 });
+        }
 
-                // Hide "Load More" button if no more categories
-                if (data.length < limit) {
-                    document.getElementById('loadMore').style.display = 'none';
-                }
-            });
-    }
+        loadServices();
 
-    // Initial Load
-    loadCategories();
-
-    // Load More Button Click
-    document.getElementById('loadMore').addEventListener('click', function() {
-        limit += 5; // Increase limit by 5
-        loadCategories();
+        document.getElementById('loadMore').addEventListener('click', function () {
+            limit += 5;
+            loadServices();
+        });
     });
-});
 </script>
 @endsection

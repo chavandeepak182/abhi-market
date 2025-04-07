@@ -192,5 +192,16 @@ public function show($id)
 
     return view('frontend.service-details', compact('service'));
 }
+public function getServices(Request $request)
+{
+    $limit = $request->get('limit', 5);
+
+    $services = DB::table('services')
+        ->select('id', 'service_name')
+        ->limit($limit)
+        ->get();
+
+    return response()->json($services);
+}
 
 }

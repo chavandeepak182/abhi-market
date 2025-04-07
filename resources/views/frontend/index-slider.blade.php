@@ -31,7 +31,7 @@
                                                 <div class="section-title dark-section">
                                                     <h3 class="wow fadeInUp">Welcome to JFinMate</h3>
                                                     <h1 class="text-anime-style-2" data-cursor="-opaque">
-                                                        {{ $banner->title ?? '<span>Empowering</span> your financial success journey' }}
+                                                        {{ $banner->title ?? 'Empowering your Research success journey' }}
                                                     </h1>
                                                 </div>
                                                 <!-- Section Title End -->

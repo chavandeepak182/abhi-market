@@ -181,6 +181,7 @@ Route::get('/insights/delete/{id}', [InsightsController::class, 'deleteService']
 Route::get('/insights/create', [InsightsController::class, 'create'])->name('insights.create');
 Route::get('/get-subcategories-insights/{categoryId}', [InsightsController::class, 'getSubcategories']);
 Route::get('/insights-details/{id}', [InsightsController::class, 'show'])->name('insights.details');
+Route::get('/get-insights', [InsightsController::class, 'getInsights']);
 
 //serivce category & subcategory
 Route::get('/insights-categories', [InsightsCategoryController::class, 'index'])->name('insights.categories.index');

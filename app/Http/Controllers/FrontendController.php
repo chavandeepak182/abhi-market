@@ -113,6 +113,12 @@ class FrontendController extends Controller
             ->paginate(700);
 
         return view('frontend.services', $data);
+
+        $data['allServices'] = DB::table('services')
+            ->select('id', 'service_name')
+            ->get();
+
+        return view('frontend.layouts.footer', $data);
     }
 
     public function insights()

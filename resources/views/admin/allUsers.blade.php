@@ -166,10 +166,6 @@
         </div>
     </div>
 </div>
-@endsection
-
-@section('script')
-@parent
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>

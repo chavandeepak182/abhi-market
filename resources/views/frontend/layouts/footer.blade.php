@@ -1,7 +1,7 @@
 <footer class="main-footer">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-md-6">
                 <!-- Footer Newsletter Box Start -->
                 <div class="footer-newsletter-box">
                     <!-- Footer Newsletter Title Start -->
@@ -24,43 +24,51 @@
                 <!-- Footer Newsletter Box End -->
             </div>
             
-            <div class="col-lg-2 col-md-4 col-6">
+            <div class="col-md-2 col-6">
                 <!-- Footer Links Start -->
                 <div class="footer-links">
-                    <h3>company</h3>
+                    <h3 class="mb-3">Quick Links</h3>
                     <ul>
-                        <li><a href="index-2.html">home</a></li>
-                        <li><a href="about.html">about Us</a></li>
-                        <li><a href="services.html">services</a></li>
-                        <li><a href="blog.html">blog</a></li>
+                        <li><a href="{{ url('/') }}">home</a></li>
+                        <li><a href="{{ url('/insights') }}">insights</a></li>
+                        <li><a href="{{ url('/industries') }}">industries</a></li>
+                        <li><a href="{{ url('/services') }}">services</a></li>
+                        <li><a href="{{ url('/about') }}">about Us</a></li>
+                        <li><a href="{{ url('/contact') }}">contact</a></li>
                     </ul>
                 </div>
                 <!-- Footer Links End -->
             </div>
 
-            <div class="col-lg-2 col-md-4 col-6">
+            <div class="col-md-2 col-6">
                 <!-- Footer Links Start -->
-                <div class="footer-links">
-                    <h3>support</h3>
+                <div class="footer-links mb-5">
+                    <h3 class="mb-3">Insights</h3>
                     <ul>
-                        <li><a href="#">help</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Term & Condition</a></li>
-                        <li><a href="contact.html">Contact us</a></li>
+                        @foreach($allInsights as $insight)
+                            <li><a href="{{ url('insight-details/'.$insight->id) }}">{{ $insight->insights_name }}</a></li>
+                        @endforeach
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3 class="mb-3">Industries</h3>
+                    <ul>
+                        @foreach($allIndustries as $industry)
+                            <li>{{ $industry->industries_name }}</li>
+                        @endforeach
                     </ul>
                 </div>
                 <!-- Footer Links End -->
             </div>
 
-            <div class="col-lg-2  col-md-4">
+            <div class="col-md-2">
                 <!-- Footer Links Start -->
                 <div class="footer-links">
-                    <h3>service</h3>
+                    <h3 class="mb-3">service</h3>
                     <ul>
-                        <li><a href="service-single.html">Financial planning</a></li>
-                        <li><a href="service-single.html">Investment management</a></li>
-                        <li><a href="service-single.html">Retirement planning</a></li>
-                        <li><a href="service-single.html">Budgeting & forecasting</a></li>
+                        @foreach($allServices as $service)
+                            <li><a href="{{ url('service-details/'.$service->id) }}">{{ $service->service_name }}</a></li>
+                        @endforeach
                     </ul>
                 </div>
                 <!-- Footer Links End -->
@@ -71,7 +79,7 @@
                 <div class="footer-cta-box">
                     <!-- Footer Logo Start -->
                     <div class="footer-logo">
-                        <img src="{{ asset('assets') }}/images/footer-logo.svg" alt="">
+                        <img src="{{ asset('assets') }}/images/logo-g.png" alt="">
                     </div>
                     <!-- Footer Logo End -->
                 
@@ -80,14 +88,14 @@
                         <!-- Footer Contact Item Start -->
                         <div class="footer-contact-item">
                             <p>Need help!</p>
-                            <h3>+1 809 120 705</h3>
+                            <h3>+91 84212 16367</h3>
                         </div>
                         <!-- Footer Contact Item End -->
 
                         <!-- Footer Contact Item Start -->
                         <div class="footer-contact-item">
                             <p>E-mail now</p>
-                            <h3>info@domain.com</h3>
+                            <h3>info@jfinmate.com</h3>
                         </div>
                         <!-- Footer Contact Item End -->
                     </div>

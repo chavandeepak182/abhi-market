@@ -1,11 +1,7 @@
 @extends('admin.layouts.header')
-
-@section('title')
-All Enquiries
-@endsection
+@section('title', "All Enquiries")
 
 @section('content')
-
 <div class="dashboard-body">
     <div class="breadcrumb-with-buttons mb-24 flex-between flex-wrap gap-8">
         <!-- Breadcrumb Start -->
@@ -74,41 +70,56 @@ All Enquiries
                             <span class="h6 mb-0 fw-medium text-gray-300">{{ $enquiry->contact }}</span>
                         </td>
                         <td>
-                            <a class="btn btn-info btn-xs edit" title="View" href="#">
+                            <button class="btn btn-info btn-xs" data-bs-toggle="modal" href="#ViewEnquiry">
                                 <i class="far fa-eye"></i>
-                            </a>
+                            </button>
                         </td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
-        <div class="card-footer flex-between flex-wrap">
-            <span class="text-gray-900">Showing 1 to 10 of 12 entries</span>
-            <ul class="pagination flex-align flex-wrap">
-                <li class="page-item active">
-                    <a class="page-link h-44 w-44 flex-center text-15 rounded-8 fw-medium" href="#">1</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link h-44 w-44 flex-center text-15 rounded-8 fw-medium" href="#">2</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link h-44 w-44 flex-center text-15 rounded-8 fw-medium" href="#">3</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link h-44 w-44 flex-center text-15 rounded-8 fw-medium" href="#">...</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link h-44 w-44 flex-center text-15 rounded-8 fw-medium" href="#">8</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link h-44 w-44 flex-center text-15 rounded-8 fw-medium" href="#">9</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link h-44 w-44 flex-center text-15 rounded-8 fw-medium" href="#">10</a>
-                </li>
-            </ul>
-        </div>
     </div>    
+</div>
+
+<!-- Add User Modal -->
+<div class="modal fade" id="ViewEnquiry" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Enquiry Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="user" id="addUser" method="post">
+                    @csrf   
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            <label for="recipient-name" class="col-form-label">Name:</label>
+                            <input type="text" class="form-control" id="full_name" name="full_name" valus="{{ $enquiry->name }}" required>
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <label for="recipient-name" class="col-form-label">Email ID:</label>
+                            <input type="email" class="form-control" id="email_id" name="email_id" required>
+                        </div>
+
+                        <div class="form-group col-lg-6">
+                            <label for="recipient-name" class="col-form-label">Password:</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+
+                        <div class="form-group col-lg-6">
+                            <label for="recipient-name" class="col-form-label">Mobile Number:</label>
+                            <input type="tel" class="form-control" id="mobile_no" name="mobile_no" required>
+                        </div>
+                    </div> 
+
+                    <div class="modal-footer mt-30">
+                        <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection

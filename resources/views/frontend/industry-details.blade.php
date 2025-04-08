@@ -1,40 +1,48 @@
 @extends('frontend.layouts.header')
-@section('title', $service->meta_title)
-@section('description', $service->meta_description)
-@section('keywords', $service->meta_keywords)
+@section('title', $industries->meta_title)
+@section('description', $industries->meta_description)
+@section('keywords', $industries->meta_keywords)
 
 @section('content')
-<!-- Page Header Start -->
-<div class="page-header">
+<!-- Hero Section Start -->
+<div class="hero p-0">
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-lg-12">
-                <!-- Page Header Box Start -->
-                <div class="page-header-box">
-                    @php
-                        $words = explode(' ', $service->service_name);
-                    @endphp
-                    
-                    <h1 class="text-anime-style-2" data-cursor="-opaque">
-                        <span>{{ $words[0] }}</span>
-                        {{ implode(' ', array_slice($words, 1)) }}
-                    </h1>
-                    <!-- <nav class="wow fadeInUp">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">home</a></li>
-                            <li class="breadcrumb-item"><a href="services.html">services</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Investment management</li>
-                        </ol>
-                    </nav> -->
+            <div class="col-lg-7">
+                <!-- Hero Content Start -->
+                <div class="hero-content">
+                    <!-- Section Title Start -->
+                    <div class="section-title dark-section">
+                        <p class="wow fadeInUp text-white"><a href="{{ url('/') }}" class="text-white">Home</a> / <a href="#" class="text-white">{{ $industries->industries_name }}</a> / Service Type</p>
+                        @php
+                            $words = explode(' ', $industries->industries_name);
+                        @endphp
+                        <h1 class="text-anime-style-2" data-cursor="-opaque"><span>{{ $words[0] }}</span> {{ implode(' ', array_slice($words, 1)) }}</h1>
+                    </div>
+                    <!-- Section Title End -->
                 </div>
-                <!-- Page Header Box End -->
+                <!-- Hero Content End -->
+            </div>
+
+            <div class="col-lg-5">
+                <!-- Hero Image Start -->
+                <div class="hero-image">
+                    <!-- Hero Img Start -->
+                    <div class="hero-img">
+                        <figure>
+                            <img src="{{ asset('assets') }}/images/hero-img.png" alt="">
+                        </figure>
+                    </div>
+                    <!-- Hero Img End -->                      
+                </div>
+                <!-- Hero Image End -->
             </div>
         </div>
     </div>
 </div>
-<!-- Page Header End -->
+<!-- Hero Section End -->
 
-<!-- Page Service Single Start -->
+<!-- Overview Section Start -->
 <div class="page-service-single">
     <div class="container">
         <div class="row">
@@ -43,9 +51,9 @@
                 <div class="service-sidebar">
                     <!-- Service Category List Start -->
                     <div class="service-catagery-list wow fadeInUp">
-                        <h3>Our Services</h3>
-                        <ul id="service-list" class="mb-3">
-                            {{-- Services will be loaded here via AJAX --}}
+                        <h3>Our Insights</h3>
+                        <ul id="insight-list" class="mb-3">
+                            {{-- Insights will be loaded here via AJAX --}}
                         </ul>
                         <button id="loadMore" class="btn btn-primary">Load More</button>
                     </div>
@@ -100,19 +108,6 @@
             <div class="col-lg-8">
                 <!-- Case Study Single Content Start -->
                 <div class="service-single-content">
-                    <!-- Case Study Image Start -->
-                    <div class="service-featured-image">
-                        <figure class="image-anime reveal">
-                            @if($service->image)
-                                <img src="{{ asset($service->image) }}" alt="{{ $service->service_name }}">
-                            @else
-                                <img src="{{ asset('assets/images/default-service.jpg') }}" alt="Default Image">
-                            @endif
-                        </figure>
-                    </div>
-                    <!-- Case Study Image End -->
-
-                    <!-- Case Study Entry Start -->
                     <div class="service-entry">
                         <p class="wow fadeInUp">Investment Management involves strategically handling financial assets to achieve specific goals and maximize returns. It includes creating diversified portfolios, assessing market trends, and making informed decisions to grow wealth while managing risks. With expert guidance, management ensures alignment with your financial objectives, whether for individual growth, retirement planning, or institutional success. </p>
 
@@ -396,33 +391,206 @@
         </div>
     </div>
 </div>
-<!-- Page Service Single End -->
+<!-- Overview Section end -->
+
+<!-- Our Approach Section Start -->
+<div class="our-approach bg-white">
+    <div class="container">
+        <div class="row">
+            <div class="section-title">
+                <h2 class="wow fadeInUp" data-wow-delay="0.2s">Related <span>Insights</span></h2> 
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <!-- Mission Vision Item Start -->
+                <div class="reports-card wow fadeInUp">
+                    <!-- Mission Vision Image Start -->
+                    <div class="mission-vission-image">
+                        <figure class="image-anime">
+                            <img src="{{ asset('assets') }}/images/our-mission-img.jpg" alt="">
+                        </figure>
+                    </div>
+                    <!-- Mission Vision Image End -->
+                    <!-- Mission Vision Header Start -->
+                    <div class="mission-vission-header">
+                        <div class="mission-vission-content">
+                            <p class="mb-3">Category</p>
+                            <h3><a href="#">AI Integration in Education: Building a Future-Ready Curriculum</a></h3>
+                            <p><small>March 31, 2025</small></p>
+                        </div>
+                    </div>
+                    <!-- Mission Vision Header End -->
+                </div>
+                <!-- Mission Vision Item End -->
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <!-- Mission Vision Item Start -->
+                <div class="reports-card wow fadeInUp" data-wow-delay="0.2s">
+                    <!-- Mission Vision Image Start -->
+                    <div class="mission-vission-image">
+                        <figure class="image-anime">
+                            <img src="{{ asset('assets') }}/images/our-vision-img.jpg" alt="">
+                        </figure>
+                    </div>
+                    <!-- Mission Vision Image End -->
+                    <!-- Mission Vision Header Start -->
+                    <div class="mission-vission-header">
+                        <div class="mission-vission-content">
+                            <p class="mb-3">Category</p>
+                            <h3><a href="#">Global Manufacturing Footprint Rationalization for a Leading Biopharmaceutical Company</a></h3>
+                            <p><small>March 31, 2025</small></p>
+                        </div>
+                    </div>
+                    <!-- Mission Vision Header End -->
+                </div>
+                <!-- Mission Vision Item End -->
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <!-- Mission Vision Item Start -->
+                <div class="reports-card wow fadeInUp" data-wow-delay="0.4s">
+                    <!-- Mission Vision Image Start -->
+                    <div class="mission-vission-image">
+                        <figure class="image-anime">
+                            <img src="{{ asset('assets') }}/images/our-value-img.jpg" alt="">
+                        </figure>
+                    </div>
+                    <!-- Mission Vision Image End -->
+                    <!-- Mission Vision Header Start -->
+                    <div class="mission-vission-header">
+                        <div class="mission-vission-content">
+                            <p class="mb-3">Category</p>
+                            <h3><a href="#">The Future Role of Generative AI in SaaS Pricing</a></h3>
+                            <p><small>March 31, 2025</small></p>
+                        </div>
+                    </div>
+                    <!-- Mission Vision Header End -->
+                </div>
+                <!-- Mission Vision Item End -->
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <!-- Mission Vision Item Start -->
+                <div class="reports-card wow fadeInUp" data-wow-delay="0.4s">
+                    <!-- Mission Vision Image Start -->
+                    <div class="mission-vission-image">
+                        <figure class="image-anime">
+                            <img src="{{ asset('assets') }}/images/our-value-img.jpg" alt="">
+                        </figure>
+                    </div>
+                    <!-- Mission Vision Image End -->
+                    <!-- Mission Vision Header Start -->
+                    <div class="mission-vission-header">
+                        <div class="mission-vission-content">
+                            <p class="mb-3">Category</p>
+                            <h3><a href="#">The Future Role of Generative AI in SaaS Pricing</a></h3>
+                            <p><small>March 31, 2025</small></p>
+                        </div>
+                    </div>
+                    <!-- Mission Vision Header End -->
+                </div>
+                <!-- Mission Vision Item End -->
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <!-- Mission Vision Item Start -->
+                <div class="reports-card wow fadeInUp" data-wow-delay="0.2s">
+                    <!-- Mission Vision Image Start -->
+                    <div class="mission-vission-image">
+                        <figure class="image-anime">
+                            <img src="{{ asset('assets') }}/images/our-vision-img.jpg" alt="">
+                        </figure>
+                    </div>
+                    <!-- Mission Vision Image End -->
+                    <!-- Mission Vision Header Start -->
+                    <div class="mission-vission-header">
+                        <div class="mission-vission-content">
+                            <p class="mb-3">Category</p>
+                            <h3><a href="#">Global Manufacturing Footprint Rationalization for a Leading Biopharmaceutical Company</a></h3>
+                            <p><small>March 31, 2025</small></p>
+                        </div>
+                    </div>
+                    <!-- Mission Vision Header End -->
+                </div>
+                <!-- Mission Vision Item End -->
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <!-- Mission Vision Item Start -->
+                <div class="reports-card wow fadeInUp">
+                    <!-- Mission Vision Image Start -->
+                    <div class="mission-vission-image">
+                        <figure class="image-anime">
+                            <img src="{{ asset('assets') }}/images/our-mission-img.jpg" alt="">
+                        </figure>
+                    </div>
+                    <!-- Mission Vision Image End -->
+                    <!-- Mission Vision Header Start -->
+                    <div class="mission-vission-header">
+                        <div class="mission-vission-content">
+                            <p class="mb-3">Category</p>
+                            <h3><a href="#">AI Integration in Education: Building a Future-Ready Curriculum</a></h3>
+                            <p><small>March 31, 2025</small></p>
+                        </div>
+                    </div>
+                    <!-- Mission Vision Header End -->
+                </div>
+                <!-- Mission Vision Item End -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Our Approach Section End -->
+
+<!-- CTA-->
+<div class="our-pricing">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8 offset-2 text-center">
+                <!-- Section Title Start -->
+                <div class="section-title mb-0">
+                    <h2 class="text-anime-style-2" data-cursor="-opaque">How can we help you achieve high-impact results?</span></h2>
+                </div>
+                <!-- Section Title End -->
+                    <!-- Section Button Start -->
+                <div class="mt-5 wow fadeInUp" data-wow-delay="0.2s">
+                    <a href="{{ url('/contact') }}" class="btn-default">Let's Start</a>
+                </div>
+                <!-- Section Button End -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- CTA -->
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         let limit = 5;
 
-        function loadServices() {
-            fetch(`/get-services?limit=${limit}`)
+        function loadInsights() {
+            fetch(`/get-insights?limit=${limit}`)
                 .then(response => response.json())
                 .then(data => {
-                    const serviceList = document.getElementById('service-list');
-                    serviceList.innerHTML = '';
+                    const insightList = document.getElementById('insight-list');
+                    insightList.innerHTML = '';
 
-                    data.forEach(service => {
-                        serviceList.innerHTML += `<li><a href="#">${service.service_name}</a></li>`;
+                    data.forEach(insight => {
+                        insightList.innerHTML += `<li><a href="#">${insight.insights_name}</a></li>`;
                     });
 
                     if (data.length < limit) {
                         document.getElementById('loadMore').style.display = 'none';
+                    } else {
+                        document.getElementById('loadMore').style.display = 'inline-block';
                     }
                 });
         }
 
-        loadServices();
+        loadInsights();
 
         document.getElementById('loadMore').addEventListener('click', function () {
             limit += 5;
-            loadServices();
+            loadInsights();
         });
     });
 </script>

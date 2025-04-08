@@ -13,6 +13,7 @@ class Enquiry extends Model
         'email',
         'contact',
         'message',
-        'enquiry_type'
+        'enquiry_type',
+        'page_url'
     ];
 }

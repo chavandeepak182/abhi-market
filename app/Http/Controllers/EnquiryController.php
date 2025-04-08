@@ -24,7 +24,8 @@ class EnquiryController extends Controller
             'amount' => '|numeric',
             'address' => '|string',
             'message' => '|string',
-            'enquiry_type' => 'string'
+            'enquiry_type' => 'string',
+            'page_url' => 'nullable|url'
         ]);
         Enquiry::create($validated);
         $brevoService->sendEnquiryEmail([

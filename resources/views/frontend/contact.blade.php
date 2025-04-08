@@ -121,11 +121,12 @@
                         <p class="wow fadeInUp" data-wow-delay="0.2s">Have questions or need assistance? Reach out to us today! We're here to provide expert solutions and friendly support.</p>
                     </div>
                     <!-- Section Title End -->
-
                     <div class="contact-form">
                         <!-- Contact Form Start -->
                         <form action="{{ route('enquiry.store') }}" method="POST" class="wow fadeInUp" data-wow-delay="0.4s">
                             @csrf
+                            <input type="hidden" name="page_url" value="{{ url()->current() }}">
+                            <input type="hidden" name="page_name" value="{{ Route::currentRouteName() }}">
                             <div class="row">
                                 <div class="form-group col-md-6 mb-4">
                                     <input type="text" name="name" id="name" class="form-control" required data-error="Please Enter Your Name" placeholder="Name">

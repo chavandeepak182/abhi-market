@@ -39,62 +39,62 @@ class ServiceController extends Controller
 
 
         public function storeService(Request $request)
-    {
-        Log::info('storeService function called', ['request' => $request->all()]);
+        {
+            Log::info('storeService function called', ['request' => $request->all()]);
 
-        $request->validate([
-            'property_subcategory_id' => 'required|integer', 
-            'service_name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'meta_title' => 'nullable|string|max:255',
-            'meta_keywords' => 'nullable|string',
-            'meta_description' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+            $request->validate([
+                'property_subcategory_id' => 'required|integer', 
+                'service_name' => 'required|string|max:255',
+                'description' => 'nullable|string',
+                'meta_title' => 'nullable|string|max:255',
+                'meta_keywords' => 'nullable|string',
+                'meta_description' => 'nullable|string',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            ]);
 
-        $imagePath = null;
+            $imagePath = null;
 
-        if ($request->hasFile('image')) {
-            Log::info('Image file detected');
-            
-            $image = $request->file('image');
-            $imageName = time() . '_' . $image->getClientOriginalName();
-            $destinationPath = public_path('uploads/services');
-            
-            if ($image->move($destinationPath, $imageName)) {
-                $imagePath = 'uploads/services/' . $imageName;
-                Log::info('Image successfully uploaded', ['path' => $imagePath]);
+            if ($request->hasFile('image')) {
+                Log::info('Image file detected');
+                
+                $image = $request->file('image');
+                $imageName = time() . '_' . $image->getClientOriginalName();
+                $destinationPath = public_path('uploads/services');
+                
+                if ($image->move($destinationPath, $imageName)) {
+                    $imagePath = 'uploads/services/' . $imageName;
+                    Log::info('Image successfully uploaded', ['path' => $imagePath]);
+                } else {
+                    Log::error('Image upload failed');
+                }
             } else {
-                Log::error('Image upload failed');
+                Log::warning('No image file detected in request');
             }
-        } else {
-            Log::warning('No image file detected in request');
+
+            $data = [
+                'property_subcategory_id' => $request->property_subcategory_id,
+                'service_name' => $request->service_name,
+                'description' => $request->description,
+                'meta_title' => $request->meta_title,
+                'meta_keywords' => $request->meta_keywords,
+                'meta_description' => $request->meta_description,
+                'image' => $imagePath,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
+
+            Log::info('Data to be inserted', ['data' => $data]);
+
+            try {
+                DB::table('services')->insert($data);
+                Log::info('Service successfully inserted into database');
+            } catch (\Exception $e) {
+                Log::error('Error inserting service', ['error' => $e->getMessage()]);
+                return redirect()->back()->with('error', 'Service could not be added. Please check logs.');
+            }
+
+            return redirect()->route('services.index')->with('success', 'Service added successfully.');
         }
-
-        $data = [
-            'property_subcategory_id' => $request->property_subcategory_id,
-            'service_name' => $request->service_name,
-            'description' => $request->description,
-            'meta_title' => $request->meta_title,
-            'meta_keywords' => $request->meta_keywords,
-            'meta_description' => $request->meta_description,
-            'image' => $imagePath,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ];
-
-        Log::info('Data to be inserted', ['data' => $data]);
-
-        try {
-            DB::table('services')->insert($data);
-            Log::info('Service successfully inserted into database');
-        } catch (\Exception $e) {
-            Log::error('Error inserting service', ['error' => $e->getMessage()]);
-            return redirect()->back()->with('error', 'Service could not be added. Please check logs.');
-        }
-
-        return redirect()->route('services.index')->with('success', 'Service added successfully.');
-    }
 
 
     public function edit($id)
@@ -191,9 +191,8 @@ class ServiceController extends Controller
             return redirect()->route('services.index')->with('error', 'Service not found.');
         }
 
-        return view('frontend.service-details', compact('service'));
+    return view('frontend.service-details', compact('service'));
     }
-    
     public function getServices(Request $request)
     {
         $limit = $request->get('limit', 5);

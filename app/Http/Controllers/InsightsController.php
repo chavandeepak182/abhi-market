@@ -185,4 +185,16 @@ class InsightsController extends Controller
 
         return view('frontend.overview', compact('insights'));
     }
+
+    public function getInsights(Request $request)
+    {
+        $limit = $request->get('limit', 5);
+
+        $insights = DB::table('insights')
+            ->select('id', 'insights_name')
+            ->limit($limit)
+            ->get();
+
+        return response()->json($insights);
+    }
 }

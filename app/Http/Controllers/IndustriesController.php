@@ -182,6 +182,6 @@ class IndustriesController extends Controller
             return redirect()->route('industries.index')->with('error', 'industries not found.');
         }
 
-        return view('frontend.overview', compact('industries'));
+        return view('frontend.industry-details', compact('industries'));
     }
 }

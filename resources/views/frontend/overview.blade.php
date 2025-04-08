@@ -1,7 +1,7 @@
 @extends('frontend.layouts.header')
-@section('title', "Overview Page")
-@section('description', "")
-@section('keywords', "")
+@section('title', $insights->meta_title)
+@section('description', $insights->meta_description)
+@section('keywords', $insights->meta_keywords)
 
 @section('content')
 <!-- Hero Section Start -->
@@ -13,8 +13,15 @@
                 <div class="hero-content">
                     <!-- Section Title Start -->
                     <div class="section-title dark-section">
-                        <p class="wow fadeInUp text-white"><a href="{{ url('/') }}" class="text-white">Home</a> / <a href="#" class="text-white">Category</a> / Service Type</p>
-                        <h1 class="text-anime-style-2" data-cursor="-opaque"><span>Industrial</span> & Professional Services</h1>
+                        <p class="wow fadeInUp text-white"><a href="{{ url('/') }}" class="text-white">Home</a> / <a href="#" class="text-white">{{ $insights->insights_name}}</a> / Service Type</p>
+                        @php
+                            $insightWords = explode(' ', $insights->insights_name);
+                        @endphp
+
+                        <h1 class="text-anime-style-2" data-cursor="-opaque">
+                            <span>{{ $insightWords[0] }}</span>
+                            {{ implode(' ', array_slice($insightWords, 1)) }}
+                        </h1>
                     </div>
                     <!-- Section Title End -->
                 </div>

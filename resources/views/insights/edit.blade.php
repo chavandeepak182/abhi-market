@@ -27,7 +27,7 @@
 
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('insights.update', $insights->id) }}" method="POST">
+            <form action="{{ route('insights.update', $insights->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
                 <div class="row gy-20">

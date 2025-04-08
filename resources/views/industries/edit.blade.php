@@ -27,7 +27,7 @@
 
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('industries.update', $industries->id) }}" method="POST">
+            <form action="{{ route('industries.update', $industries->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 

@@ -82,7 +82,7 @@
                                         </div>
 
                                         <div class="col-md-12">
-                                            <button type="submit" class="btn-default">send</button>
+                                            <button type="submit" class="btn-default py-2">send</button>
                                             <div id="msgSubmit" class="h3 hidden"></div>
                                         </div>
                                     </div>

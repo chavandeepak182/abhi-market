@@ -15,8 +15,7 @@ class EnquiryController extends Controller
         return view('frontend.enquiry-form');
     }
 
-    public function store(Request $request,  BrevoService $brevoService)
-    {
+    public function store(Request $request,  BrevoService $brevoService){
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
@@ -34,6 +33,6 @@ class EnquiryController extends Controller
             'contact' => $request->contact,
             'message' => $request->message,
         ]);
-        return response()->json(['success' => true, 'message' => 'Enquiry submitted successfully!']);
+        return redirect()->back()->with('success', 'Enquiry Submitted Successfully!');
     }
 }

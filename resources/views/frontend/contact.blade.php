@@ -122,6 +122,13 @@
                     </div>
                     <!-- Section Title End -->
                     <div class="contact-form">
+                        @if (session('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ session('success') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif
+
                         <!-- Contact Form Start -->
                         <form action="{{ route('enquiry.store') }}" method="POST" class="wow fadeInUp" data-wow-delay="0.4s">
                             @csrf

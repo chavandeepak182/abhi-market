@@ -85,15 +85,22 @@ class AppServiceProvider extends ServiceProvider
                 ->get()
                 ->groupBy('pid');
 
-            $structuredServices = $serviceCategories->map(function ($items, $pid) {
-                return [
-                    'category_name' => $items->first()->category_name,
-                    'services' => $items->map(fn($s) => [
-                        'id' => $s->service_id,
-                        'name' => $s->service_name
-                    ])->filter(fn($s) => $s['name'] !== null)
-                ];
-            });
+            $structuredServices = $serviceCategories
+                ->map(function ($items, $pid) {
+                    $services = $items->map(fn($s) => [
+                            'id' => $s->service_id,
+                            'name' => $s->service_name
+                        ])
+                        ->filter(fn($s) => $s['name'] !== null)
+                        ->values(); // optional: reindex services array
+
+                    return [
+                        'category_name' => $items->first()->category_name,
+                        'services' => $services
+                    ];
+                })
+                ->filter(fn($category) => $category['services']->isNotEmpty()) // 🔥 filter out categories with no services
+                ->values();
     
             $view->with([
                 'insightMenuData' => $structuredInsights,

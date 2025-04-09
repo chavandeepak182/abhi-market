@@ -33,6 +33,9 @@
         <!-- Fontawesome -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
 
+        <!-- Summernote CSS -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-lite.min.css" rel="stylesheet">
+
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
     </head> 

@@ -192,8 +192,9 @@ class ServiceController extends Controller
             return redirect()->route('services.index')->with('error', 'Service not found.');
         }
 
-    return view('frontend.service-details', compact('service'));
+        return view('frontend.service-details', compact('service'));
     }
+
     public function getServices(Request $request)
     {
         $limit = $request->get('limit', 5);

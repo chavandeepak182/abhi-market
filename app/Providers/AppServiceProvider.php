@@ -38,69 +38,60 @@ class AppServiceProvider extends ServiceProvider
             // Insights
             $insightCategories = DB::table('insights_category as c')
                 ->leftJoin('insights_subcategory as s', 'c.pid', '=', 's.pid')
-                ->select('c.pid', 'c.category_name', 's.insights_subcategory_id', 's.name')
+                ->leftJoin('insights as i', 's.insights_subcategory_id', '=', 'i.insights_subcategory_id')
+                ->select('c.pid', 'c.category_name', 'i.id as insight_id', 'i.insights_name')
                 ->get()
                 ->groupBy('pid');
-    
+
             $structuredInsights = $insightCategories->map(function ($items, $pid) {
                 $categoryName = $items->first()->category_name;
-    
-                $subcategories = $items->map(function ($item) {
+
+                $insights = $items->map(function ($item) {
                     return [
-                        'id' => $item->insights_subcategory_id,
-                        'name' => $item->name,
+                        'id' => $item->insight_id,
+                        'name' => $item->insights_name,
                     ];
-                })->filter(fn($sub) => $sub['name'] !== null);
-    
+                })->filter(fn($insight) => $insight['name'] !== null);
+
                 return [
                     'category_name' => $categoryName,
-                    'subcategories' => $subcategories,
+                    'insights' => $insights,
                 ];
             });
     
             // Industries
             $industryCategories = DB::table('industries_category as c')
                 ->leftJoin('industries_subcategory as s', 'c.pid', '=', 's.pid')
-                ->select('c.pid', 'c.category_name', 's.industries_subcategory_id', 's.name')
+                ->leftJoin('industries as i', 's.industries_subcategory_id', '=', 'i.industries_subcategory_id')
+                ->select('c.pid', 'c.category_name', 'i.id as industry_id', 'i.industries_name')
                 ->get()
                 ->groupBy('pid');
-    
+
             $structuredIndustries = $industryCategories->map(function ($items, $pid) {
-                $categoryName = $items->first()->category_name;
-    
-                $subcategories = $items->map(function ($item) {
-                    return [
-                        'id' => $item->industries_subcategory_id,
-                        'name' => $item->name,
-                    ];
-                })->filter(fn($sub) => $sub['name'] !== null);
-    
                 return [
-                    'category_name' => $categoryName,
-                    'subcategories' => $subcategories,
+                    'category_name' => $items->first()->category_name,
+                    'industries' => $items->map(fn($i) => [
+                        'id' => $i->industry_id,
+                        'name' => $i->industries_name
+                    ])->filter(fn($i) => $i['name'] !== null)
                 ];
             });
-    
+
             // Services
             $serviceCategories = DB::table('property_category as c')
                 ->leftJoin('property_subcategory as s', 'c.pid', '=', 's.pid')
-                ->select('c.pid', 'c.category_name', 's.property_subcategory_id', 's.name')
+                ->leftJoin('services as sv', 's.property_subcategory_id', '=', 'sv.property_subcategory_id')
+                ->select('c.pid', 'c.category_name', 'sv.id as service_id', 'sv.service_name')
                 ->get()
                 ->groupBy('pid');
-    
+
             $structuredServices = $serviceCategories->map(function ($items, $pid) {
-                $categoryName = $items->first()->category_name;
-    
-                $subcategories = $items->map(function ($item) {
-                    return [
-                        'id' => $item->property_subcategory_id,
-                        'name' => $item->name,
-                    ];
-                })->filter(fn($sub) => $sub['name'] !== null);
-    
                 return [
-                    'category_name' => $categoryName,
-                    'subcategories' => $subcategories,
+                    'category_name' => $items->first()->category_name,
+                    'services' => $items->map(fn($s) => [
+                        'id' => $s->service_id,
+                        'name' => $s->service_name
+                    ])->filter(fn($s) => $s['name'] !== null)
                 ];
             });
     

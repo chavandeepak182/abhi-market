@@ -34,7 +34,7 @@
             @csrf
                 <div class="row gy-20">
                     <label class="h5 fw-semibold font-heading mt-15 mb-0">Add Industry <span class="text-13 text-gray-400 fw-medium"></span> </label>
-                    <div class="col-md-6 col-sm-5">
+                    <div class="col-md-8 col-sm-5">
                         <div class="position-relative pb-15 form-group">
                             <label for="category">Select Category</label>
                             <select id="category" name="category" class="form-control" required>
@@ -59,14 +59,10 @@
 
                         <div class="position-relative pb-15 form-group">
                             <label for="description">Description</label>
-                            <textarea name="description" class="form-control"></textarea>
-                        </div>
-
-                        <div class="position-relative flex-align">
-                            <button type="submit" class="btn btn-main rounded-pill py-9">Add Insight</button>
+                            <textarea name="description" id="summernote" class="form-control"></textarea>
                         </div>
                     </div>
-                    <div class="col-md-6 col-sm-7">
+                    <div class="col-md-4 col-sm-7">
                         <div class="position-relative pb-15 form-group">
                             <label for="image">Industry Image</label>
                             <input type="file" name="image" class="form-control">
@@ -85,6 +81,10 @@
                         <div class="position-relative pb-15 form-group">
                             <label for="meta_description">Meta Description</label>
                             <textarea name="meta_description" class="form-control"></textarea>
+                        </div>
+
+                        <div class="position-relative flex-align">
+                            <button type="submit" class="btn btn-main rounded-pill py-9">Add Insight</button>
                         </div>
                     </div>
                 </div>

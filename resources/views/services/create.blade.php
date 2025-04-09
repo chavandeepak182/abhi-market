@@ -35,7 +35,7 @@
             @csrf
                 <div class="row gy-20">
                     <label class="h5 fw-semibold font-heading mt-15 mb-0">Add Service <span class="text-13 text-gray-400 fw-medium"></span> </label>
-                    <div class="col-md-6 col-sm-5">
+                    <div class="col-md-8 col-sm-5">
                         <div class="position-relative pb-15">
                             <select id="category" class="form-control" required>
                                 <option value="">-- Select Category --</option>
@@ -55,14 +55,10 @@
                         </div>
 
                         <div class="position-relative pb-15">
-                            <textarea name="description" class="form-control" placeholder="Add Description" required></textarea>
-                        </div>
-
-                        <div class="flex-align mt-10">
-                            <button type="submit" class="btn btn-main rounded-pill py-9">Add Service</button>
+                            <textarea name="description" id="summernote" class="form-control" placeholder="Add Description" required></textarea>
                         </div>
                     </div>
-                    <div class="col-md-6 col-sm-7">
+                    <div class="col-md-4 col-sm-7">
                         <div class="position-relative pb-15">
                             <input type="file" name="image" class="form-control" placeholder="Service Banner">
                         </div>
@@ -77,6 +73,10 @@
 
                         <div class="position-relative pb-15">
                             <textarea name="meta_description" class="form-control" placeholder="Add Meta Description" required></textarea>
+                        </div>
+
+                        <div class="flex-align mt-10">
+                            <button type="submit" class="btn btn-main rounded-pill py-9">Add Service</button>
                         </div>
                     </div>
                 </div>

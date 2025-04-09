@@ -32,7 +32,7 @@
                 @method('PUT')
 
                 <div class="row gy-20">
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         <div class="mb-3">
                             <label for="category" class="form-label">Select Category:</label>
                             <select name="category" id="category" class="form-control" required>
@@ -65,14 +65,11 @@
 
                         <div class="mb-3">
                             <label for="description" class="form-label">Description:</label>
-                            <textarea name="description" class="form-control">{{ $industries->description }}</textarea>
-                        </div>
-                        <div class="flex-align mt-20">
-                            <button type="submit" class="btn btn-success rounded-pill py-9">Update Service</button>
+                            <textarea name="description" id="summernote" class="form-control">{{ $industries->description }}</textarea>
                         </div>
                     </div>
                     
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="image">Industries Image</label>
                             @if($industries->image)
@@ -96,6 +93,10 @@
                         <div class="mb-3">
                             <label for="meta_description" class="form-label">Meta Description:</label>
                             <textarea name="meta_description" class="form-control">{{ $industries->meta_description }}</textarea>
+                        </div>
+                        
+                        <div class="flex-align mt-20">
+                            <button type="submit" class="btn btn-success rounded-pill py-9">Update Service</button>
                         </div>
                     </div>
                 </div>

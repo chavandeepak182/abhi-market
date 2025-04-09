@@ -47,7 +47,7 @@
                         <td><span class="h6 mb-0 fw-medium text-gray-300">{{ $loop->iteration }}</span></td>
                         <td><span class="h6 mb-0 fw-medium text-gray-300">{{ $industries->industries_name }}</span></td>
                         <td><span class="h6 mb-0 fw-medium text-gray-300">{{ $industries->subcategory_name }}</span></td>
-                        <td><span class="h6 mb-0 fw-medium text-gray-300">{{ Str::limit($industries->description, 50) }}</span></td>
+                        <td><span class="h6 mb-0 fw-medium text-gray-300">{{ Str::limit(strip_tags($industries->description), 50) }}</span></td>
                         <td><span class="h6 mb-0 fw-medium text-gray-300">{{ $industries->meta_title }}</span></td>
                         <td><span class="h6 mb-0 fw-medium text-gray-300">{{ Str::limit($industries->meta_keywords, 30) }}</span></td>
                         <td><span class="h6 mb-0 fw-medium text-gray-300">{{ Str::limit($industries->meta_description, 50) }}</span></td>

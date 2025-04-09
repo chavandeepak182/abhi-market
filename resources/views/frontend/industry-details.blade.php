@@ -109,7 +109,7 @@
                 <!-- Case Study Single Content Start -->
                 <div class="service-single-content">
                     <div class="service-entry">
-                        <p class="wow fadeInUp">Investment Management involves strategically handling financial assets to achieve specific goals and maximize returns. It includes creating diversified portfolios, assessing market trends, and making informed decisions to grow wealth while managing risks. With expert guidance, management ensures alignment with your financial objectives, whether for individual growth, retirement planning, or institutional success. </p>
+                        <p class="wow fadeInUp">{!! $industries->description !!}</p>
 
                         <!-- Case Study List Video Start -->
                         <div class="service-list-video">

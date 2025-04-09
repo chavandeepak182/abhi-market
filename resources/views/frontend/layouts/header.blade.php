@@ -74,8 +74,8 @@
                                             <div class="list-item">
                                                 <h4 class="title"><a href="#">{{ $category['category_name'] }}</a></h4>
                                                 <ul>
-                                                    @foreach($category['subcategories'] as $subcategory)
-                                                        <li><a href="#">{{ $subcategory['name'] }}</a></li>
+                                                    @foreach($category['insights'] as $insight)
+                                                        <li><a href="{{ url('/insights-details/'.$insight['id']) }}">{{ $insight['name'] }}</a></li>
                                                     @endforeach
                                                 </ul>
                                             </div>
@@ -96,8 +96,8 @@
                                                 @foreach($chunk as $category)
                                                     <h4 class="title"><a href="#">{{ $category['category_name'] }}</a></h4>
                                                     <ul>
-                                                        @foreach($category['subcategories'] as $subcategory)
-                                                            <li><a href="#">{{ $subcategory['name'] }}</a></li>
+                                                        @foreach($category['industries'] as $industry)
+                                                            <li><a href="{{ url('/industries-details/'.$industry['id']) }}">{{ $industry['name'] }}</a></li>
                                                         @endforeach
                                                     </ul>
                                                 @endforeach
@@ -116,22 +116,13 @@
                                                     @foreach($chunk as $category)
                                                         <h4 class="title">{{ $category['category_name'] }}</h4>
                                                         <ul>
-                                                            @foreach($category['subcategories'] as $sub)
-                                                                <li>
-                                                                    <a href="{{ url('/services/subcategory/'.$sub['id']) }}">
-                                                                        {{ $sub['name'] }}
-                                                                    </a>
-                                                                </li>
+                                                            @foreach($category['services'] as $service)
+                                                                <li><a href="{{ url('/service-details/'.$service['id']) }}">{{ $service['name'] }}</a></li>
                                                             @endforeach
                                                         </ul>
                                                     @endforeach
                                                 </div>
                                             @endforeach
-
-                                            {{-- Optional static image column --}}
-                                            <div class="list-item">
-                                                <img src="https://images.unsplash.com/photo-1549497538-303791108f95?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=761&q=80" alt="Chair" />
-                                            </div>
                                         @endif
                                     </div>
                                 </li>

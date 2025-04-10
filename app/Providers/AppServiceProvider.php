@@ -33,49 +33,57 @@ class AppServiceProvider extends ServiceProvider
             ]);
         });
     
-         // Header Composer (for dynamic Insights & Industries menu)
-         View::composer('frontend.layouts.header', function ($view) {
+        // Header Composer (for dynamic Insights & Industries menu)
+        View::composer('frontend.layouts.header', function ($view) {
             // Insights
             $insightCategories = DB::table('insights_category as c')
-                ->leftJoin('insights_subcategory as s', 'c.pid', '=', 's.pid')
-                ->leftJoin('insights as i', 's.insights_subcategory_id', '=', 'i.insights_subcategory_id')
-                ->select('c.pid', 'c.category_name', 'i.id as insight_id', 'i.insights_name')
-                ->get()
-                ->groupBy('pid');
+            ->leftJoin('insights_subcategory as s', 'c.pid', '=', 's.pid')
+            ->leftJoin('insights as i', 's.insights_subcategory_id', '=', 'i.insights_subcategory_id')
+            ->select('c.pid', 'c.category_name', 'i.id as insight_id', 'i.insights_name')
+            ->get()
+            ->groupBy('pid');
 
-            $structuredInsights = $insightCategories->map(function ($items, $pid) {
-                $categoryName = $items->first()->category_name;
-
-                $insights = $items->map(function ($item) {
-                    return [
-                        'id' => $item->insight_id,
-                        'name' => $item->insights_name,
-                    ];
-                })->filter(fn($insight) => $insight['name'] !== null);
+            $structuredInsights = $insightCategories
+            ->map(function ($items, $pid) {
+                $insights = $items->map(fn($i) => [
+                        'id' => $i->insight_id,
+                        'name' => $i->insights_name
+                    ])
+                    ->filter(fn($i) => $i['name'] !== null)
+                    ->values(); // optional: reindex insights array
 
                 return [
-                    'category_name' => $categoryName,
-                    'insights' => $insights,
+                    'category_name' => $items->first()->category_name,
+                    'insights' => $insights
                 ];
-            });
+            })
+            ->filter(fn($category) => $category['insights']->isNotEmpty()) // 🔥 filter out categories with no insights
+            ->values();
     
             // Industries
             $industryCategories = DB::table('industries_category as c')
-                ->leftJoin('industries_subcategory as s', 'c.pid', '=', 's.pid')
-                ->leftJoin('industries as i', 's.industries_subcategory_id', '=', 'i.industries_subcategory_id')
-                ->select('c.pid', 'c.category_name', 'i.id as industry_id', 'i.industries_name')
-                ->get()
-                ->groupBy('pid');
+            ->leftJoin('industries_subcategory as s', 'c.pid', '=', 's.pid')
+            ->leftJoin('industries as i', 's.industries_subcategory_id', '=', 'i.industries_subcategory_id')
+            ->select('c.pid', 'c.category_name', 'i.id as industry_id', 'i.industries_name')
+            ->get()
+            ->groupBy('pid');
 
-            $structuredIndustries = $industryCategories->map(function ($items, $pid) {
-                return [
-                    'category_name' => $items->first()->category_name,
-                    'industries' => $items->map(fn($i) => [
+            $structuredIndustries = $industryCategories
+            ->map(function ($items, $pid) {
+                $industries = $items->map(fn($i) => [
                         'id' => $i->industry_id,
                         'name' => $i->industries_name
-                    ])->filter(fn($i) => $i['name'] !== null)
+                    ])
+                    ->filter(fn($i) => $i['name'] !== null)
+                    ->values(); // optional: reindex industries array
+
+                return [
+                    'category_name' => $items->first()->category_name,
+                    'industries' => $industries
                 ];
-            });
+            })
+            ->filter(fn($category) => $category['industries']->isNotEmpty()) // 🔥 filter out categories with no industries
+            ->values();
 
             // Services
             $serviceCategories = DB::table('property_category as c')

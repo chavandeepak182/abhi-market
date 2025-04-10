@@ -70,11 +70,16 @@
                         <div class="form-group">
                             <label for="image">Service Image</label>
                             @if($service->image)
-                                <div>
+                                <div class="mb-10">
                                     <img src="{{ asset($service->image) }}" width="100" alt="Current Image">
                                 </div>
                             @endif
                             <input type="file" name="image" class="form-control">
+                        </div>
+
+                        <div class="mt-10 mb-10">
+                            <label for="slug" class="form-label">Slug (URL):</label>
+                            <input type="text" name="slug" class="form-control" value="{{ $service->slug }}" required>
                         </div>
 
                         <div class="mb-3">

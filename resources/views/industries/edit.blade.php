@@ -80,6 +80,11 @@
                             <input type="file" name="image" class="form-control">
                         </div>
 
+                        <div class="position-relative pb-15 form-group">
+                            <label for="slug">Slug URL</label>
+                            <input type="text" name="slug" class="form-control" value="{{ $industries->slug }}" required>
+                        </div>
+
                         <div class="mb-3">
                             <label for="meta_title" class="form-label">Meta Title:</label>
                             <input type="text" name="meta_title" class="form-control" value="{{ $industries->meta_title }}">

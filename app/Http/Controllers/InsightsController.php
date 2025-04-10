@@ -40,6 +40,7 @@ class InsightsController extends Controller
             'insights_subcategory_id' => 'required|integer', 
             'insights_name' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'slug' => 'nullable|string|max:255',
             'meta_title' => 'nullable|string|max:255',
             'meta_keywords' => 'nullable|string',
             'meta_description' => 'nullable|string',
@@ -69,6 +70,7 @@ class InsightsController extends Controller
             'insights_subcategory_id' => $request->insights_subcategory_id,
             'insights_name' => $request->insights_name,
             'description' => $request->description,
+            'slug' => $request->slug,
             'meta_title' => $request->meta_title,
             'meta_keywords' => $request->meta_keywords,
             'meta_description' => $request->meta_description,
@@ -122,6 +124,7 @@ class InsightsController extends Controller
             'insights_subcategory_id' => 'required|integer',
             'insights_name' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'slug' => 'nullable|string|max:255',
             'meta_title' => 'nullable|string|max:255',
             'meta_keywords' => 'nullable|string',
             'meta_description' => 'nullable|string',
@@ -154,6 +157,7 @@ class InsightsController extends Controller
             'insights_subcategory_id' => $request->insights_subcategory_id,
             'insights_name' => $request->insights_name,
             'description' => $request->description,
+            'slug' => $request->slug,
             'meta_title' => $request->meta_title,
             'meta_keywords' => $request->meta_keywords,
             'meta_description' => $request->meta_description,
@@ -177,9 +181,9 @@ class InsightsController extends Controller
         return redirect()->route('insights.index')->with('success', 'Insights deleted.');
     }
 
-    public function show($id)
+    public function show($slug)
     {
-        $insights = DB::table('insights')->where('id', $id)->first();
+        $insights = DB::table('insights')->where('slug', $slug)->first();
 
         if (!$insights) {
             return redirect()->route('insights.index')->with('error', 'insights not found.');

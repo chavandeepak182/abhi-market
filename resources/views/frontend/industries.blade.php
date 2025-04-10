@@ -45,8 +45,8 @@
 
                             <div class="service-item-content">
                                 <h3>{{ $industryName }}</h3>
-                                <p>{{ $description }}</p>
-                                <a href="{{ url('industries-details/'.$industry->id) }}" class="service-btn">
+                                <p>{{ Str::limit(strip_tags($description), 150) }}</p>
+                                <a href="{{ route('industries.details', ['slug' => $industry->slug]) }}" class="service-btn">
                                     <img src="{{ asset('assets') }}/images/arrow-white.svg" alt="">
                                 </a>
                             </div>

@@ -69,6 +69,11 @@
                         </div>
 
                         <div class="position-relative pb-15 form-group">
+                            <label for="slug">Slug URL</label>
+                            <input type="text" name="slug" class="form-control" required>
+                        </div>
+
+                        <div class="position-relative pb-15 form-group">
                             <label for="meta_title">Meta Title</label>
                             <input type="text" name="meta_title" class="form-control">
                         </div>

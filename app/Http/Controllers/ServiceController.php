@@ -47,6 +47,7 @@ class ServiceController extends Controller
                 'property_subcategory_id' => 'required|integer', 
                 'service_name' => 'required|string|max:255',
                 'description' => 'nullable|string',
+                'slug' => 'nullable|string|max:255',
                 'meta_title' => 'nullable|string|max:255',
                 'meta_keywords' => 'nullable|string',
                 'meta_description' => 'nullable|string',
@@ -76,6 +77,7 @@ class ServiceController extends Controller
                 'property_subcategory_id' => $request->property_subcategory_id,
                 'service_name' => $request->service_name,
                 'description' => $request->description,
+                'slug' => $request->slug,
                 'meta_title' => $request->meta_title,
                 'meta_keywords' => $request->meta_keywords,
                 'meta_description' => $request->meta_description,
@@ -129,6 +131,7 @@ class ServiceController extends Controller
             'property_subcategory_id' => 'required|integer',
             'service_name' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'slug' => 'nullable|string|max:255',
             'meta_title' => 'nullable|string|max:255',
             'meta_keywords' => 'nullable|string',
             'meta_description' => 'nullable|string',
@@ -161,6 +164,7 @@ class ServiceController extends Controller
             'property_subcategory_id' => $request->property_subcategory_id,
             'service_name' => $request->service_name,
             'description' => $request->description,
+            'slug' => $request->slug,
             'meta_title' => $request->meta_title,
             'meta_keywords' => $request->meta_keywords,
             'meta_description' => $request->meta_description,
@@ -184,12 +188,12 @@ class ServiceController extends Controller
         return redirect()->route('services.index')->with('success', 'Service deleted.');
     }
 
-    public function show($id)
+    public function show($slug)
     {
-        $service = DB::table('services')->where('id', $id)->first();
+        $service = DB::table('services')->where('slug', $slug)->first();
 
         if (!$service) {
-            return redirect()->route('services.index')->with('error', 'Service not found.');
+            abort(404); // or redirect to a default page
         }
 
         return view('frontend.service-details', compact('service'));

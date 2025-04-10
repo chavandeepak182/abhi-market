@@ -62,6 +62,10 @@
                         <div class="position-relative pb-15">
                             <input type="file" name="image" class="form-control" placeholder="Service Banner">
                         </div>
+
+                        <div class="position-relative pb-15">
+                            <input type="text" name="slug" class="form-control" placeholder="Enter Slug URL" required>
+                        </div>
                         
                         <div class="position-relative pb-15">
                             <input type="text" name="meta_title" class="form-control" placeholder="Meta Title">

@@ -168,7 +168,9 @@ Route::put('/services/update/{id}', [ServiceController::class, 'update'])->name(
 Route::get('/services/delete/{id}', [ServiceController::class, 'deleteService'])->name('services.delete');
 Route::get('/services/create', [ServiceController::class, 'create'])->name('services.create');
 Route::get('/get-subcategories/{categoryId}', [ServiceController::class, 'getSubcategories']);
-Route::get('/service-details/{id}', [ServiceController::class, 'show'])->name('service.details');
+// Route::get('/service-details/{id}', [ServiceController::class, 'show'])->name('service.details');
+Route::get('/services/{slug}', [ServiceController::class, 'show'])->name('service.details');
+
 Route::get('/get-categories', [ServiceController::class, 'getCategories']);
 Route::get('/get-services', [ServiceController::class, 'getServices']);
 
@@ -180,7 +182,7 @@ Route::put('/insights/update/{id}', [InsightsController::class, 'update'])->name
 Route::get('/insights/delete/{id}', [InsightsController::class, 'deleteService'])->name('insights.delete');
 Route::get('/insights/create', [InsightsController::class, 'create'])->name('insights.create');
 Route::get('/get-subcategories-insights/{categoryId}', [InsightsController::class, 'getSubcategories']);
-Route::get('/insights-details/{id}', [InsightsController::class, 'show'])->name('insights.details');
+Route::get('/insights/{slug}', [InsightsController::class, 'show'])->name('insights.details');
 Route::get('/get-insights', [InsightsController::class, 'getInsights']);
 
 //serivce category & subcategory
@@ -203,7 +205,7 @@ Route::get('/industries/edit/{id}', [IndustriesController::class, 'edit'])->name
 Route::put('/industries/update/{id}', [IndustriesController::class, 'update'])->name('industries.update');
 Route::get('/industries/delete/{id}', [IndustriesController::class, 'deleteService'])->name('industries.delete');
 Route::get('/industries/create', [IndustriesController::class, 'create'])->name('industries.create');
-Route::get('/industries-details/{id}', [IndustriesController::class, 'show'])->name('industries.details');
+Route::get('/industries/{slug}', [IndustryController::class, 'show'])->name('industries.details');
 Route::get('/get-subcategories-industries/{categoryId}', [IndustriesCategoryController::class, 'getSubcategories']);
 
 //industries category & subcategory

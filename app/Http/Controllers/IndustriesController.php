@@ -39,6 +39,7 @@ class IndustriesController extends Controller
             'industries_subcategory_id' => 'required|integer', 
             'industries_name' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'slug' => 'nullable|string|max:255',
             'meta_title' => 'nullable|string|max:255',
             'meta_keywords' => 'nullable|string',
             'meta_description' => 'nullable|string',
@@ -68,6 +69,7 @@ class IndustriesController extends Controller
             'industries_subcategory_id' => $request->industries_subcategory_id,
             'industries_name' => $request->industries_name,
             'description' => $request->description,
+            'slug' => $request->slug,
             'meta_title' => $request->meta_title,
             'meta_keywords' => $request->meta_keywords,
             'meta_description' => $request->meta_description,
@@ -121,6 +123,7 @@ class IndustriesController extends Controller
             'industries_subcategory_id' => 'required|integer',
             'industries_name' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'slug' => 'nullable|string|max:255',
             'meta_title' => 'nullable|string|max:255',
             'meta_keywords' => 'nullable|string',
             'meta_description' => 'nullable|string',
@@ -153,6 +156,7 @@ class IndustriesController extends Controller
             'industries_subcategory_id' => $request->industries_subcategory_id,
             'industries_name' => $request->industries_name,
             'description' => $request->description,
+            'slug' => $request->slug,
             'meta_title' => $request->meta_title,
             'meta_keywords' => $request->meta_keywords,
             'meta_description' => $request->meta_description,
@@ -176,9 +180,10 @@ class IndustriesController extends Controller
         return redirect()->route('industries.index')->with('success', 'industries deleted.');
     }
 
-    public function show($id)
+    public function show($slug)
     {
-        $industries = DB::table('industries')->where('id', $id)->first();
+        $industries = DB::table('industries')->where('slug', $slug)->first();
+
 
         if (!$industries) {
             return redirect()->route('industries.index')->with('error', 'industries not found.');

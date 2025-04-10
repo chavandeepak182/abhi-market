@@ -104,6 +104,7 @@ class FrontendController extends Controller
                 'image',
                 'service_name',
                 'description',
+                'slug',
                 'meta_title',
                 'meta_keywords',
                 'meta_description',
@@ -129,6 +130,7 @@ class FrontendController extends Controller
                 'image',
                 'insights_name',
                 'description',
+                'slug',
                 'meta_title',
                 'meta_keywords',
                 'meta_description',
@@ -149,6 +151,7 @@ class FrontendController extends Controller
                 'image',
                 'industries_name',  // Fixed column name
                 'description',
+                'slug',
                 'meta_title',
                 'meta_keywords',
                 'meta_description',

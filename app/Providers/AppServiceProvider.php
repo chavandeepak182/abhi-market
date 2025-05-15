@@ -39,7 +39,7 @@ class AppServiceProvider extends ServiceProvider
             $insightCategories = DB::table('insights_category as c')
             ->leftJoin('insights_subcategory as s', 'c.pid', '=', 's.pid')
             ->leftJoin('insights as i', 's.insights_subcategory_id', '=', 'i.insights_subcategory_id')
-            ->select('c.pid', 'c.category_name', 'i.id as insight_id', 'i.insights_name')
+            ->select('c.pid', 'c.category_name', 'i.id as insight_id', 'i.insights_name', 'i.slug')
             ->get()
             ->groupBy('pid');
 
@@ -47,7 +47,8 @@ class AppServiceProvider extends ServiceProvider
             ->map(function ($items, $pid) {
                 $insights = $items->map(fn($i) => [
                         'id' => $i->insight_id,
-                        'name' => $i->insights_name
+                        'name' => $i->insights_name,
+                        'slug' => $i->slug
                     ])
                     ->filter(fn($i) => $i['name'] !== null)
                     ->values(); // optional: reindex insights array
@@ -64,7 +65,7 @@ class AppServiceProvider extends ServiceProvider
             $industryCategories = DB::table('industries_category as c')
             ->leftJoin('industries_subcategory as s', 'c.pid', '=', 's.pid')
             ->leftJoin('industries as i', 's.industries_subcategory_id', '=', 'i.industries_subcategory_id')
-            ->select('c.pid', 'c.category_name', 'i.id as industry_id', 'i.industries_name')
+            ->select('c.pid', 'c.category_name', 'i.id as industry_id', 'i.industries_name', 'i.slug')
             ->get()
             ->groupBy('pid');
 
@@ -72,7 +73,8 @@ class AppServiceProvider extends ServiceProvider
             ->map(function ($items, $pid) {
                 $industries = $items->map(fn($i) => [
                         'id' => $i->industry_id,
-                        'name' => $i->industries_name
+                        'name' => $i->industries_name,
+                        'slug' => $i->slug
                     ])
                     ->filter(fn($i) => $i['name'] !== null)
                     ->values(); // optional: reindex industries array
@@ -89,7 +91,7 @@ class AppServiceProvider extends ServiceProvider
             $serviceCategories = DB::table('property_category as c')
                 ->leftJoin('property_subcategory as s', 'c.pid', '=', 's.pid')
                 ->leftJoin('services as sv', 's.property_subcategory_id', '=', 'sv.property_subcategory_id')
-                ->select('c.pid', 'c.category_name', 'sv.id as service_id', 'sv.service_name')
+                ->select('c.pid', 'c.category_name', 'sv.id as service_id', 'sv.service_name', 'sv.slug')
                 ->get()
                 ->groupBy('pid');
 
@@ -97,7 +99,8 @@ class AppServiceProvider extends ServiceProvider
                 ->map(function ($items, $pid) {
                     $services = $items->map(fn($s) => [
                             'id' => $s->service_id,
-                            'name' => $s->service_name
+                            'name' => $s->service_name,
+                            'slug' => $s->slug
                         ])
                         ->filter(fn($s) => $s['name'] !== null)
                         ->values(); // optional: reindex services array

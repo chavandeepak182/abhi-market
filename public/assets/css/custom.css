@@ -5253,7 +5253,7 @@ footer.main-footer{
 	}
 
 	.hero.hero-bg-image.hero-slider-layout .hero-slide{
-		padding: 205px 0;
+		padding: 125px 0;
 	}
 
 	.hero.hero-bg-image.hero-slider-layout .hero-pagination{
@@ -6132,6 +6132,10 @@ footer.main-footer{
 }
 
 @media only screen and (max-width: 767px){
+
+	.header .item-left {
+		flex: 0 0 35%;
+	}
 
 	.section-row{
 		margin-bottom: 30px;

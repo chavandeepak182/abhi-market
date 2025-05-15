@@ -49,7 +49,7 @@
                 <div class="header-item item-left">
                     <div class="logo">
                         <a class="navbar-brand" href="{{ url('/') }}">
-                            <img alt="JFinMate" src="{{ asset('assets') }}/images/logo.png" width="150" height="25">
+                            <img alt="JFinMate" src="{{ asset('assets') }}/images/logo.png" width="150" height="auto">
                         </a>
                     </div>
                 </div>
@@ -68,24 +68,25 @@
                                 </li>
                                 
                                 <li class="menu-item-has-children">
-                                    <a href="{{ url('/insights') }}">Insights <i class="fas fa-plus"></i></a>
+                                    <a href="#">Insights <i class="fas fa-plus"></i></a>
                                     <div class="sub-menu mega-menu mega-menu-column-4">
                                         @foreach($insightMenuData as $category)
                                             <div class="list-item">
                                                 <h4 class="title"><a href="#">{{ $category['category_name'] }}</a></h4>
                                                 <ul>
                                                     @foreach($category['insights'] as $insight)
-                                                        <li><a href="{{ url('/insights-details/'.$insight['id']) }}">{{ $insight['name'] }}</a></li>
+                                                        <li><a href="{{ url('/insights/'.$insight['slug']) }}">{{ $insight['name'] }}</a></li>
                                                     @endforeach
                                                 </ul>
                                             </div>
                                         @endforeach
+                                        <a class="title" href="{{ url('/insights') }}">View All</a>
                                     </div>
                                 </li>
 
 
                                 <li class="menu-item-has-children">
-                                    <a href="{{ url('/industries') }}">Industries <i class="fas fa-plus"></i></a>
+                                    <a href="#">Industries <i class="fas fa-plus"></i></a>
                                     <div class="sub-menu mega-menu mega-menu-column-4">
                                         @php
                                             $chunks = $industriesMenuData->chunk(ceil($industriesMenuData->count() / 4));
@@ -97,18 +98,19 @@
                                                     <h4 class="title"><a href="#">{{ $category['category_name'] }}</a></h4>
                                                     <ul>
                                                         @foreach($category['industries'] as $industry)
-                                                            <li><a href="{{ url('/industries-details/'.$industry['id']) }}">{{ $industry['name'] }}</a></li>
+                                                            <li><a href="{{ url('/industries/'.$industry['slug']) }}">{{ $industry['name'] }}</a></li>
                                                         @endforeach
                                                     </ul>
                                                 @endforeach
                                             </div>
                                         @endforeach
+                                        <a class="title" href="{{ url('/industries') }}">View All</a>
                                     </div>
                                 </li>
 
 
                                 <li class="menu-item-has-children">
-                                    <a href="{{ url('/services') }}">Services <i class="fas fa-plus"></i></a>
+                                    <a href="#">Services <i class="fas fa-plus"></i></a>
                                     <div class="sub-menu mega-menu mega-menu-column-4">
                                         @if(isset($serviceMenuData) && count($serviceMenuData))
                                             @foreach($serviceMenuData->chunk(3) as $chunk)
@@ -117,13 +119,14 @@
                                                         <h4 class="title">{{ $category['category_name'] }}</h4>
                                                         <ul>
                                                             @foreach($category['services'] as $service)
-                                                                <li><a href="{{ url('/service-details/'.$service['id']) }}">{{ $service['name'] }}</a></li>
+                                                                <li><a href="{{ url('/services/'.$service['slug']) }}">{{ $service['name'] }}</a></li>
                                                             @endforeach
                                                         </ul>
                                                     @endforeach
                                                 </div>
                                             @endforeach
                                         @endif
+                                        <a class="title" href="{{ url('/services') }}">View All</a>
                                     </div>
                                 </li>
 

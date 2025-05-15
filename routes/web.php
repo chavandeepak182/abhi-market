@@ -205,7 +205,7 @@ Route::get('/industries/edit/{id}', [IndustriesController::class, 'edit'])->name
 Route::put('/industries/update/{id}', [IndustriesController::class, 'update'])->name('industries.update');
 Route::get('/industries/delete/{id}', [IndustriesController::class, 'deleteService'])->name('industries.delete');
 Route::get('/industries/create', [IndustriesController::class, 'create'])->name('industries.create');
-Route::get('/industries/{slug}', [IndustryController::class, 'show'])->name('industries.details');
+Route::get('/industries/{slug}', [IndustriesController::class, 'show'])->name('industries.details');
 Route::get('/get-subcategories-industries/{categoryId}', [IndustriesCategoryController::class, 'getSubcategories']);
 
 //industries category & subcategory

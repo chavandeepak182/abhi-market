@@ -108,7 +108,6 @@
                                     </div>
                                 </li>
 
-
                                 <li class="menu-item-has-children">
                                     <a href="#">Services <i class="fas fa-plus"></i></a>
                                     <div class="sub-menu mega-menu mega-menu-column-4">
@@ -130,6 +129,23 @@
                                     </div>
                                 </li>
 
+                                <li class="menu-item-has-children">
+                                    <a href="#">Reports <i class="fas fa-plus"></i></a>
+                                    <div class="sub-menu mega-menu mega-menu-column-4">
+                                        @if(isset($reportMenuData) && count($reportMenuData))
+                                            @foreach($reportMenuData as $chunk)
+                                                <div class="list-item">
+                                                    <ul>
+                                                        @foreach($chunk as $report)
+                                                            <li><a href="{{ url('/reports/' . $report['slug']) }}">{{ $report['name'] }}</a></li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            @endforeach
+                                        @endif
+                                        <a class="title" href="{{ url('/reports') }}">View All</a>
+                                    </div>
+                                </li>
 
                                 <li>
                                     <a href="{{ url('/about') }}">About Us</a>

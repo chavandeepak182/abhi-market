@@ -95,6 +95,31 @@ class FrontendController extends Controller
         ]);;
     }
 
+    public function reports(){
+        $data['allReports'] = DB::table('reports')
+            ->select(
+                'id',
+                'image',
+                'report_name',
+                'description',
+                'slug',
+                'meta_title',
+                'meta_keywords',
+                'meta_description',
+                'created_at',
+                'updated_at'
+            )
+            ->paginate(700);
+
+        return view('frontend.reports', $data);
+
+        $data['allReports'] = DB::table('reports')
+            ->select('id', 'report_name')
+            ->get();
+
+        return view('frontend.layouts.footer', $data);
+    }
+
     public function services()
     {
         $data['allServices'] = DB::table('services')

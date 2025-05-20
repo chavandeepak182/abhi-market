@@ -112,11 +112,27 @@ class AppServiceProvider extends ServiceProvider
                 })
                 ->filter(fn($category) => $category['services']->isNotEmpty()) // 🔥 filter out categories with no services
                 ->values();
-    
+
+            // Reports
+            $reports = DB::table('reports')
+                ->select('id', 'report_name', 'slug')
+                ->get()
+                ->chunk(3) // Optional: split into chunks of 3 like in the Blade
+                ->map(function ($chunk) {
+                    return $chunk->map(function ($report) {
+                        return [
+                            'id' => $report->id,
+                            'name' => $report->report_name,
+                            'slug' => $report->slug,
+                        ];
+                    });
+                });   
+
             $view->with([
                 'insightMenuData' => $structuredInsights,
                 'industriesMenuData' => $structuredIndustries,
                 'serviceMenuData' => $structuredServices,
+                'reportMenuData' => $reports,
             ]);
         });
 

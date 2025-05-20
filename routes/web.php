@@ -9,6 +9,7 @@ use App\Http\Controllers\BannerController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\PropertyCategoryController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\InsightsController;
 use App\Http\Controllers\InsightsCategoryController;
 use App\Http\Controllers\IndustriesCategoryController;
@@ -25,6 +26,8 @@ Route::get('/insights', [FrontendController::class, 'insights'])->name('insights
 Route::get('/industries', [FrontendController::class, 'industries'])->name('industries');
 
 Route::get('/services', [FrontendController::class, 'services'])->name('services');
+
+Route::get('/reports', [FrontendController::class, 'reports'])->name('reports');
 
 Route::get('/about', function () {
     return view('frontend.about');
@@ -159,6 +162,17 @@ Route::post('/subcategories/store', [PropertyCategoryController::class, 'storeSu
 Route::get('/subcategories/edit/{id}', [PropertyCategoryController::class, 'editSubcategory'])->name('subcategories.edit');
 Route::post('/subcategories/update/{id}', [PropertyCategoryController::class, 'updateSubcategory'])->name('subcategories.update');
 Route::get('/subcategories/delete/{id}', [PropertyCategoryController::class, 'deleteSubcategory'])->name('subcategories.delete');
+
+//Reports
+Route::get('admin/reports', [ReportController::class, 'index'])->name('reports.index');
+Route::get('/reports/create', [ReportController::class, 'create'])->name('reports.create');
+Route::post('/reports/store', [ReportController::class, 'storeReport'])->name('reports.store');
+Route::get('/reports/edit/{id}', [ReportController::class, 'edit'])->name('reports.edit');
+Route::put('/reports/update/{id}', [ReportController::class, 'update'])->name('reports.update');
+Route::get('/reports/delete/{id}', [ReportController::class, 'deleteReport'])->name('reports.delete');
+Route::get('/reports/{slug}', [ReportController::class, 'show'])->name('reports.details');
+Route::get('/get-reports', [ReportController::class, 'getReports']);
+
 
 //services
 Route::get('admin/services', [ServiceController::class, 'index'])->name('services.index');

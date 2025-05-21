@@ -191,4 +191,15 @@ class IndustriesController extends Controller
 
         return view('frontend.industry-details', compact('industries'));
     }
+
+    public function getIndustries(Request $request){
+        $limit = $request->get('limit', 5);
+
+        $industries = DB::table('industries') // Correct table name
+            ->select('id', 'industries_name', 'slug') // Remove stray characters
+            ->limit($limit)
+            ->get();
+
+        return response()->json($industries);
+    }
 }

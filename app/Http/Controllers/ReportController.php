@@ -165,16 +165,14 @@ class ReportController extends Controller
         return view('frontend.report-details', compact('report'));
     }
 
-    public function getReports(Request $request)
-    {
+    public function getReports(Request $request){
         $limit = $request->get('limit', 5);
 
         $reports = DB::table('reports')
-            ->select('id', 'report_name')
+            ->select('id', 'report_name', 'slug') // include slug
             ->limit($limit)
             ->get();
 
         return response()->json($reports);
     }
-
 }

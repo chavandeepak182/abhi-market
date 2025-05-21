@@ -409,7 +409,8 @@
                     reportList.innerHTML = '';
 
                     data.forEach(report => {
-                        reportList.innerHTML += `<li><a href="#">${report.report_name}</a></li>`;
+                        const reportUrl = `/reports/${report.slug}`;
+                        reportList.innerHTML += `<li><a href="${reportUrl}">${report.report_name}</a></li>`;
                     });
 
                     if (data.length < limit) {

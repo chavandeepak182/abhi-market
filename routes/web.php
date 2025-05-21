@@ -221,6 +221,7 @@ Route::get('/industries/delete/{id}', [IndustriesController::class, 'deleteServi
 Route::get('/industries/create', [IndustriesController::class, 'create'])->name('industries.create');
 Route::get('/industries/{slug}', [IndustriesController::class, 'show'])->name('industries.details');
 Route::get('/get-subcategories-industries/{categoryId}', [IndustriesCategoryController::class, 'getSubcategories']);
+Route::get('/get-industries', [IndustriesController::class, 'getIndustries']);
 
 //industries category & subcategory
 Route::get('/industries-categories', [IndustriesCategoryController::class, 'index'])->name('industries.categories.index');

@@ -409,7 +409,8 @@
                     serviceList.innerHTML = '';
 
                     data.forEach(service => {
-                        serviceList.innerHTML += `<li><a href="#">${service.service_name}</a></li>`;
+                        const serviceUrl = `/services/${service.slug}`;
+                        serviceList.innerHTML += `<li><a href="${serviceUrl}">${service.service_name}</a></li>`;
                     });
 
                     if (data.length < limit) {

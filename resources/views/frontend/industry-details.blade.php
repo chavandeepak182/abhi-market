@@ -51,8 +51,8 @@
                 <div class="service-sidebar">
                     <!-- Service Category List Start -->
                     <div class="service-catagery-list wow fadeInUp">
-                        <h3>Our Insights</h3>
-                        <ul id="insight-list" class="mb-3">
+                        <h3>Our Industries</h3>
+                        <ul id="ndustry-list" class="mb-3">
                             {{-- Insights will be loaded here via AJAX --}}
                         </ul>
                         <button id="loadMore" class="btn btn-primary">Load More</button>
@@ -567,15 +567,16 @@
     document.addEventListener("DOMContentLoaded", function () {
         let limit = 5;
 
-        function loadInsights() {
-            fetch(`/get-insights?limit=${limit}`)
+        function loadIndustries() {
+            fetch(`/get-industries?limit=${limit}`)
                 .then(response => response.json())
                 .then(data => {
-                    const insightList = document.getElementById('insight-list');
-                    insightList.innerHTML = '';
+                    const industryList = document.getElementById('industry-list');
+                    industryList.innerHTML = '';
 
-                    data.forEach(insight => {
-                        insightList.innerHTML += `<li><a href="#">${insight.insights_name}</a></li>`;
+                    data.forEach(industry => {
+                        const industryUrl = `/industries/${industry.slug}`;
+                        industryList.innerHTML += `<li><a href="${industryUrl}">${industry.industries_name}</a></li>`;
                     });
 
                     if (data.length < limit) {
@@ -586,11 +587,11 @@
                 });
         }
 
-        loadInsights();
+        loadIndustries(); // Call correct function
 
         document.getElementById('loadMore').addEventListener('click', function () {
             limit += 5;
-            loadInsights();
+            loadIndustries(); // Call correct function
         });
     });
 </script>

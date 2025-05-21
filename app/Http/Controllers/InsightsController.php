@@ -197,7 +197,7 @@ class InsightsController extends Controller
         $limit = $request->get('limit', 5);
 
         $insights = DB::table('insights')
-            ->select('id', 'insights_name')
+            ->select('id', 'insights_name', 'slug')
             ->limit($limit)
             ->get();
 

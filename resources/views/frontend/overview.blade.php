@@ -579,7 +579,8 @@
                     insightList.innerHTML = '';
 
                     data.forEach(insight => {
-                        insightList.innerHTML += `<li><a href="#">${insight.insights_name}</a></li>`;
+                        const insightUrl = `/insights/${insight.slug}`;
+                        insightList.innerHTML += `<li><a href="${insightUrl}">${insight.insights_name}</a></li>`;
                     });
 
                     if (data.length < limit) {

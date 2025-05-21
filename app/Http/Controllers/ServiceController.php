@@ -205,7 +205,7 @@ class ServiceController extends Controller
         $limit = $request->get('limit', 5);
 
         $services = DB::table('services')
-            ->select('id', 'service_name')
+            ->select('id', 'service_name', 'slug')
             ->limit($limit)
             ->get();
 

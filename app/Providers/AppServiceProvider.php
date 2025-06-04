@@ -84,7 +84,7 @@ class AppServiceProvider extends ServiceProvider
                     'industries' => $industries
                 ];
             })
-            ->filter(fn($category) => $category['industries']->isNotEmpty()) // 🔥 filter out categories with no industries
+             // 🔥 filter out categories with no industries
             ->values();
 
             // Services

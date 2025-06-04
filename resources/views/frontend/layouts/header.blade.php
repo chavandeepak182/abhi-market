@@ -72,18 +72,14 @@
                                     <div class="sub-menu mega-menu mega-menu-column-4">
                                         @foreach($insightMenuData as $category)
                                             <div class="list-item">
-                                                <h4 class="title"><a href="#">{{ $category['category_name'] }}</a></h4>
-                                                <ul>
-                                                    @foreach($category['insights'] as $insight)
-                                                        <li><a href="{{ url('/insights/'.$insight['slug']) }}">{{ $insight['name'] }}</a></li>
-                                                    @endforeach
-                                                </ul>
+                                                <h4 class="title">
+                                                    <a href="#">{{ $category['category_name'] }}</a>
+                                                </h4>
                                             </div>
                                         @endforeach
                                         <a class="title" href="{{ url('/insights') }}">View All</a>
                                     </div>
                                 </li>
-
 
                                 <li class="menu-item-has-children">
                                     <a href="#">Industries <i class="fas fa-plus"></i></a>
@@ -95,12 +91,9 @@
                                         @foreach($chunks as $chunk)
                                             <div class="list-item">
                                                 @foreach($chunk as $category)
-                                                    <h4 class="title"><a href="#">{{ $category['category_name'] }}</a></h4>
-                                                    <ul>
-                                                        @foreach($category['industries'] as $industry)
-                                                            <li><a href="{{ url('/industries/'.$industry['slug']) }}">{{ $industry['name'] }}</a></li>
-                                                        @endforeach
-                                                    </ul>
+                                                    <h4 class="title">
+                                                        <a href="#">{{ $category['category_name'] }}</a>
+                                                    </h4>
                                                 @endforeach
                                             </div>
                                         @endforeach

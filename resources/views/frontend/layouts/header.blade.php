@@ -82,7 +82,7 @@
                                 </li>
 
                                 <li class="menu-item-has-children">
-                                    <a href="#">Industries <i class="fas fa-plus"></i></a>
+                                    <a href="{{ url('/industries') }}">Industries <i class="fas fa-plus"></i></a>
                                     <div class="sub-menu mega-menu mega-menu-column-4">
                                         @php
                                             $chunks = $industriesMenuData->chunk(ceil($industriesMenuData->count() / 4));
@@ -92,7 +92,9 @@
                                             <div class="list-item">
                                                 @foreach($chunk as $category)
                                                     <h4 class="title">
-                                                        <a href="#">{{ $category['category_name'] }}</a>
+                                                        <a href="{{ route('industries.details', ['slug' => $category['industries'][0]['slug'] ?? '#']) }}">
+                                                            {{ $category['category_name'] }}
+                                                        </a>
                                                     </h4>
                                                 @endforeach
                                             </div>

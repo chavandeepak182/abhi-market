@@ -108,6 +108,17 @@
             <div class="col-lg-8">
                 <!-- Case Study Single Content Start -->
                 <div class="service-single-content">
+                    <!-- Case Study Image Start -->
+                    <div class="service-featured-image">
+                        <figure class="image-anime reveal">
+                            @if(!empty($industries->image) && file_exists(public_path($industries->image)))
+                                <img src="{{ asset($industries->image) }}" alt="{{ $industries->industries_name }}">
+                            @else
+                                <img src="{{ asset('assets/images/default-service.jpg') }}" alt="Default Image">
+                            @endif
+                        </figure>
+                    </div>
+                    <!-- Case Study Image End -->
                     <div class="service-entry">
                         <p class="wow fadeInUp">{!! $industries->description !!}</p>
 

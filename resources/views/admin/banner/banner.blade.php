@@ -63,7 +63,7 @@
                                             <!-- Delete Form -->
                                             <form action="{{ route('banners.destroy', $banner->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this banner?');">
                                                 @csrf
-                                                <!-- @method('DELETE') Laravel DELETE request -->
+                                                @method('DELETE')
                                                 <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                                             </form>
                                         </td>

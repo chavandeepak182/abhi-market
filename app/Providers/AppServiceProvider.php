@@ -22,16 +22,16 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         View::composer('frontend.layouts.footer', function ($view) {
-            $allServices = DB::table('services')->select('id', 'service_name')->get();
-            $allInsights = DB::table('insights')->select('id', 'insights_name')->get();
-            $allIndustries = DB::table('industries')->select('id', 'industries_name')->get();
-    
-            $view->with([
-                'allServices' => $allServices,
-                'allInsights' => $allInsights,
-                'allIndustries' => $allIndustries,
-            ]);
-        });
+    $allServices = DB::table('services')->select('id', 'service_name')->limit(4)->get();
+    // $allInsights = DB::table('insights')->select('id', 'insights_name')->limit(6)->get();
+    $allIndustries = DB::table('industries')->select('id', 'industries_name')->limit(4)->get();
+
+    $view->with([
+        'allServices' => $allServices,
+        // 'allInsights' => $allInsights,
+        'allIndustries' => $allIndustries,
+    ]);
+});
     
         // Header Composer (for dynamic Insights & Industries menu)
         View::composer('frontend.layouts.header', function ($view) {

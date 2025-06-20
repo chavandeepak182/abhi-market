@@ -59,118 +59,102 @@
         </div>        
     </div>
     <!-- Hero Section End -->
-
-    <!-- About Us Section Start -->
-    <div class="about-us">
+<!-- How It Work Section Start -->
+    <div class="how-it-work">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
-                    <!-- About Us Images Start -->
-                    <div class="about-us-images">
-                        <!-- About Image 1 Start -->
-                        <div class="about-img-1">
-                            <figure class="image-anime reveal">
-                                <img src="{{ asset('assets') }}/images/about-img-1.jpg" alt="">
-                            </figure>
-                        </div>
-                        <!-- About Image 1 End -->
-
-                        <!-- About Image 2 Start -->
-                        <div class="about-img-2">
-                            <figure class="image-anime reveal">
-                                <img src="{{ asset('assets') }}/images/about-img-2.jpg" alt="">
-                            </figure>
-                        </div>
-                        <!-- About Image 2 End -->
-
-                        <!-- Contact Circle Start -->
-                        <div class="contact-circle">
-                            <img src="{{ asset('assets') }}/images/contact-us-img.svg" alt="">
-                        </div>
-                        <!-- Contact Circle End -->
-                    </div>
-                    <!-- About Us Images End -->
-                </div>
-                
-                <div class="col-lg-6">
-                    <!-- About Us Content Start -->
-                    <div class="about-us-content">
+                    <!-- How It Work Content Start -->
+                    <div class="how-it-work-content">
                         <!-- Section Title Start -->
                         <div class="section-title">
-                            <h3 class="wow fadeInUp">about us</h3>
-                            <h2 class="text-anime-style-2" data-cursor="-opaque">Expert Insights for<span> Strategic Market Growth</span></h2>
-                            <p class="wow fadeInUp" data-wow-delay="0.2s">With deep expertise in market research and consulting, we deliver strategic insights tailored for sustainable growth. Our commitment is to guide you with integrity, data-driven solutions, and a personalized approach.</p>
+                            <!-- <h3 class="wow fadeInUp">how it work</h3> -->
+                            <h2 class="text-anime-style-2" data-cursor="-opaque">Who <span>We Are</span></h2>
+                            <p class="wow fadeInUp" data-wow-delay="0.2s">We are a purpose-driven market research and consulting company passionate about turning data into direction. Founded in 2023, we bring together researchers, strategists, and data scientists who believe that intelligence isn’t just about numbers, it’s about insight that sparks progress.
+</p>
                         </div>
                         <!-- Section Title End -->
 
-                        <!-- About Content body Start -->
-                        <div class="about-content-body">
-                            <div class="row align-items-center">
-                                <div class="col-md-6">
-                                    <!-- About Content Info Start -->
-                                    <div class="about-content-info">
-                                        <!-- About Goal Box Start -->
-                                        <div class="about-goal-box wow fadeInUp" data-wow-delay="0.4s">            
-                                            <div class="about-goal-box-content">
-                                                <h3>Tailored Strategies</h3>
-                                                <p>Strategic insights and tailored plans designed to drive your unique market growth and business goals.</p>
-                                            </div>
-                                        </div>
-                                        <!-- About Goal Box End -->
+                        <!-- How It Work Button Start -->
+                        <div class="how-it-work-btn wow fadeInUp" data-wow-delay="0.4s">
+                            <a href="contact.html" class="btn-default">learn more</a>
+                        </div>
+                        <!-- How It Work Button End -->
+                    </div>
+                    <!-- How It Work Content End -->
+                </div>
                 
-                                        <!-- About Contact Box Start -->
-                                        <div class="about-contact-box wow fadeInUp" data-wow-delay="0.6s">
-                                            <div class="icon-box">
-                                                <img src="{{ asset('assets') }}/images/icon-phone.svg" alt="">
-                                            </div>
-
-                                            <div class="about-contact-content">
-                                                <p><a href="tel:658456975">+(658) 456-975</a></p>
-                                            </div>
-                                        </div>
-                                        <!-- About Contact Box End -->
-                                    </div>
-                                    <!-- About Content Info End -->
-                                </div>
-
-                                <div class="col-md-6">
-                                    <!-- About Author Box Start -->
-                                    <div class="about-author-box wow fadeInUp" data-wow-delay="0.4s">
-                                        <!-- About Info Box Start -->
-                                        <div class="about-info-box">
-                                            <figure class="image-anime reveal">
-                                                <img src="{{ asset('assets') }}/images/author-1.jpg" alt="">
-                                            </figure>
-            
-                                            <div class="about-author-content">
-                                                <h3>Swapnil D.</h3>
-                                                <p>Vice Precident</p>
-                                            </div>
-                                        </div>
-                                        <!-- About Info Box End -->
-                                        
-                                        <!-- About Info List Start -->
-                                        <div class="about-info-list">
-                                            <ul>
-                                                <li>risk management</li>
-                                                <li>communication</li>
-                                                <li>24/7 support</li>
-                                            </ul>
-                                        </div>
-                                        <!-- About Info List End -->
-                                    </div>
-                                    <!-- About Author Box End -->
-                                </div>
+                <div class="col-lg-6">
+                    <!-- Work Steps Box Start -->
+                    <div class="work-steps-box">
+                        <!-- Work Steps Item Start -->
+                        <div class="work-step-item wow fadeInUp">
+                            <div class="work-step-item-content">
+                                <h3>Integrity</h3>
+                                <!-- <h2>Integrity</h2> -->
+                                <p>We act with honesty and transparency, upholding ethical standards in all our actions to build lasting trust.</p>
+                            </div>
+                            <div class="work-step-item-no">
+                                <h2>01</h2>
                             </div>
                         </div>
-                        <!-- About Content body End -->
+                        <!-- Work Steps Item End -->
+
+                        <!-- Work Steps Item Start -->
+                        <div class="work-step-item wow fadeInUp" data-wow-delay="0.2s">
+                            <div class="work-step-item-content">
+                                <h3>Innovation</h3>
+                                <!-- <h2>Innovation</h2> -->
+                                <p>We embrace emerging technologies to deliver sharper, faster, and smarter insights.</p>
+                            </div>
+                            <div class="work-step-item-no">
+                                <h2>02</h2>
+                            </div>
+                        </div>
+                        <!-- Work Steps Item End -->
+
+                        <!-- Work Steps Item Start -->
+                        <div class="work-step-item wow fadeInUp" data-wow-delay="0.4s">
+                            <div class="work-step-item-content">
+                                <h3>Collaboration</h3>
+                                <!-- <h2>Collaboration</h2> -->
+                                <p>We work hand-in-hand with clients and partners to co-create value.</p>
+                            </div>
+                            <div class="work-step-item-no">
+                                <h2>03</h2>
+                            </div>
+                        </div>
+                        <!-- Work Steps Item End -->
+                          <!-- Work Steps Item Start -->
+                        <div class="work-step-item wow fadeInUp" data-wow-delay="0.4s">
+                            <div class="work-step-item-content">
+                                <h3>Customer Focus</h3>
+                                <!-- <h2>Customer Focus</h2> -->
+                                <p>We deeply understand your needs, turning your challenges into opportunities for impactful solutions. Your success drives our purpose and priorities.</p>
+                            </div>
+                            <div class="work-step-item-no">
+                                <h2>04</h2>
+                            </div>
+                        </div>
+                        <!-- Work Steps Item End -->
+                          <!-- Work Steps Item Start -->
+                        <div class="work-step-item wow fadeInUp" data-wow-delay="0.4s">
+                            <div class="work-step-item-content">
+                                <h3>Quality</h3>
+                                <!-- <h2>Quality</h2> -->
+                                <p> We ensure every insight delivered is data-driven and decision-ready.</p>
+                            </div>
+                            <div class="work-step-item-no">
+                                <h2>05</h2>
+                            </div>
+                        </div>
+                        <!-- Work Steps Item End -->
                     </div>
-                    <!-- About Us Content End -->
+                    <!-- Work Steps Box End -->
                 </div>
             </div>
         </div>
     </div>
-    <!-- About Us Section End -->
 
     <!-- Our Services Section Start -->
     <div class="our-services">

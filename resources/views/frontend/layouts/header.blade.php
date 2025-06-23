@@ -67,7 +67,7 @@
                                     <a href="{{ url('/') }}">Home</a>
                                 </li>
                                 
-                                <li class="menu-item-has-children">
+                                <!-- <li class="menu-item-has-children">
                                     <a href="#">Insights <i class="fas fa-plus"></i></a>
                                     <div class="sub-menu mega-menu mega-menu-column-4">
                                         @foreach($insightMenuData as $category)
@@ -79,7 +79,7 @@
                                         @endforeach
                                         <a class="title" href="{{ url('/insights') }}">View All</a>
                                     </div>
-                                </li>
+                                </li> -->
 
                                 <li class="menu-item-has-children">
                                     <a href="{{ url('/industries') }}">Industries <i class="fas fa-plus"></i></a>
@@ -104,7 +104,7 @@
                                 </li>
 
                                 <li class="menu-item-has-children">
-                                    <a href="#">Services <i class="fas fa-plus"></i></a>
+                                    <a href="#">Capabilities <i class="fas fa-plus"></i></a>
                                     <div class="sub-menu mega-menu mega-menu-column-4">
                                         @if(isset($serviceMenuData) && count($serviceMenuData))
                                             @foreach($serviceMenuData->chunk(3) as $chunk)

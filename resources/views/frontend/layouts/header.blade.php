@@ -65,6 +65,7 @@
                             <ul class="menu-main mb-0">
                                 <li>
                                     <a href="{{ url('/') }}">Home</a>
+                                    
                                 </li>
                                 
                                 <!-- <li class="menu-item-has-children">
@@ -103,19 +104,22 @@
                                     </div>
                                 </li>
 
-                                <li class="menu-item-has-children">
-                                    <a href="#">Capabilities <i class="fas fa-plus"></i></a>
+                                 <li class="menu-item-has-children">
+                                    <a href="{{ url('/services') }}">Capabilities <i class="fas fa-plus"></i></a>
                                     <div class="sub-menu mega-menu mega-menu-column-4">
                                         @if(isset($serviceMenuData) && count($serviceMenuData))
-                                            @foreach($serviceMenuData->chunk(3) as $chunk)
+                                            @php
+                                                $chunks = $serviceMenuData->chunk(ceil($serviceMenuData->count() / 4));
+                                            @endphp
+
+                                            @foreach($chunks as $chunk)
                                                 <div class="list-item">
                                                     @foreach($chunk as $category)
-                                                        <h4 class="title">{{ $category['category_name'] }}</h4>
-                                                        <ul>
-                                                            @foreach($category['services'] as $service)
-                                                                <li><a href="{{ url('/services/'.$service['slug']) }}">{{ $service['name'] }}</a></li>
-                                                            @endforeach
-                                                        </ul>
+                                                        <h4 class="title">
+                                                            <a href="{{ route('service.details', ['slug' => $category['services'][0]['slug'] ?? '#']) }}" class="text-success">
+                                                                {{ $category['category_name'] }}
+                                                            </a>
+                                                        </h4>
                                                     @endforeach
                                                 </div>
                                             @endforeach

@@ -839,7 +839,7 @@ display: none;
 
 .hero.hero-bg-image.hero-slider-layout .hero-slide{
 	position: relative;
-    padding: 240px 0;
+    padding: 100px 0;
 }
 
 .hero.hero-bg-image.hero-slider-layout .hero-slide::before{

@@ -13,7 +13,7 @@
                 <div class="hero-content">
                     <!-- Section Title Start -->
                     <div class="section-title dark-section">
-                        <p class="wow fadeInUp text-white"><a href="{{ url('/') }}" class="text-white">Home</a> / <a href="#" class="text-white">{{ $industries->industries_name }}</a> / Service Type</p>
+                        <p class="wow fadeInUp text-white"><a href="{{ url('/') }}" class="text-white">Home</a> / <a href="#" class="text-white">{{ $industries->industries_name }}</a></p>
                         @php
                             $words = explode(' ', $industries->industries_name);
                         @endphp
@@ -22,20 +22,6 @@
                     <!-- Section Title End -->
                 </div>
                 <!-- Hero Content End -->
-            </div>
-
-            <div class="col-lg-5">
-                <!-- Hero Image Start -->
-                <div class="hero-image">
-                    <!-- Hero Img Start -->
-                    <div class="hero-img">
-                        <figure>
-                            <img src="{{ asset('assets') }}/images/hero-img.png" alt="">
-                        </figure>
-                    </div>
-                    <!-- Hero Img End -->                      
-                </div>
-                <!-- Hero Image End -->
             </div>
         </div>
     </div>
@@ -52,7 +38,7 @@
                     <!-- Service Category List Start -->
                     <div class="service-catagery-list wow fadeInUp">
                         <h3>Our Industries</h3>
-                        <ul id="ndustry-list" class="mb-3">
+                        <ul id="industry-list" class="mb-3">
                             {{-- Insights will be loaded here via AJAX --}}
                         </ul>
                         <button id="loadMore" class="btn btn-primary">Load More</button>

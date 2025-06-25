@@ -57,15 +57,13 @@
     <div class="container">
         <div class="row services-grid">
             @foreach($allServices as $index => $service)
-            
                 @php
                     $serviceName = $service->service_name;
                     $slug = $service->slug;
                     $iconImage = asset('assets/images/' . $slug . '.png');
                 @endphp
-                  <p>{{ $slug }}</p>
 
-                <div class="industry-column">
+                <div class="industry-column {{ $index >= 10 ? 'extra-industry d-none' : '' }}">
                     <a href="{{ route('service.details', ['slug' => $slug]) }}" class="industry-card">
                         <div class="icon-wrap">
                             <img src="{{ $iconImage }}" alt="{{ $serviceName }} icon" loading="lazy">
@@ -79,11 +77,28 @@
             @endforeach
         </div>
 
-        
+        @if(count($allServices) > 8)
+            <div class="what-we-do-btn wow fadeInUp" data-wow-delay="0.6s">
+                <a href="javascript:void(0);" class="btn-default" id="loadMoreBtn">Load More</a>
+            </div>
+        @endif
     </div>
 </div>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const loadMoreBtn = document.getElementById("loadMoreBtn");
+        const extraItems = document.querySelectorAll(".extra-industry");
 
+        loadMoreBtn.addEventListener("click", function () {
+            extraItems.forEach(function (item) {
+                item.classList.remove("d-none");
+            });
+
+            loadMoreBtn.classList.add("d-none"); // hide load more button
+        });
+    });
+</script>
 
     
 @endsection

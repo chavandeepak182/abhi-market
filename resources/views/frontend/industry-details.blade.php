@@ -14,10 +14,13 @@
                     <!-- Section Title Start -->
                     <div class="section-title dark-section">
                         <p class="wow fadeInUp text-white"><a href="{{ url('/') }}" class="text-white">Home</a> / <a href="#" class="text-white">{{ $industries->industries_name }}</a></p>
-                        @php
-                            $words = explode(' ', $industries->industries_name);
-                        @endphp
-                        <h1 class="text-anime-style-2" data-cursor="-opaque"><span>{{ $words[0] }}</span> {{ implode(' ', array_slice($words, 1)) }}</h1>
+                       @php
+    $words = explode(' ', $industries->industries_name);
+@endphp
+<h1 class="text-anime-style-2" data-cursor="-opaque" style="white-space: nowrap;">
+    <span>{{ $words[0] }}</span> {{ implode(' ', array_slice($words, 1)) }}
+</h1>
+
                     </div>
                     <!-- Section Title End -->
                 </div>

@@ -59,9 +59,9 @@
             @php
                 $industryName = $industry->industries_name;
                 $slug = $industry->slug;
-                $iconImage = asset('assets/images/' . $slug . '.png');
+                $iconImage = asset('assets/images/' . $slug . '.svg');
             @endphp
-
+                
             <div class="industry-column {{ $index >= 8 ? 'extra-industry d-none' : '' }}">
                 <a href="{{ route('industries.details', ['slug' => $slug]) }}" class="industry-card">
                     <div class="icon-wrap">

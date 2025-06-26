@@ -60,7 +60,7 @@
                 @php
                     $serviceName = $service->service_name;
                     $slug = $service->slug;
-                    $iconImage = asset('assets/images/' . $slug . '.png');
+                    $iconImage = asset('assets/images/' . $slug . '.svg');
                 @endphp
 
                 <div class="industry-column {{ $index >= 10 ? 'extra-industry d-none' : '' }}">

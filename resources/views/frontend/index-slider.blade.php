@@ -59,31 +59,108 @@
         </div>        
     </div>
     <!-- Hero Section End -->
-     <!-- What's New Section Start -->
-<div class="whats-new-section py-5">
-    <div class="container text-center">
-        <h3 class="section-title mb-5" style="font-weight: 600;">WHAT'S NEW</h3>
-
-        <div class="row justify-content-center">
-            @foreach($latestNews as $news)
-                <div class="col-md-6 col-lg-5 mb-4">
-                    <div class="news-box text-start p-3 border rounded h-100">
-                        @if($news->image)
-                            <div class="news-image mb-3">
-                                <img src="{{ asset('storage/' . $news->image) }}" class="img-fluid w-100" alt="{{ $news->title }}">
-                            </div>
-                        @endif
-
-                        <h5 class="news-title mb-3" style="font-weight: 500;">{{ $news->title }}</h5>
-
-                        <a href="#" class="btn btn-outline-dark px-4 py-2">View more</a>
+          
+   <!-- What's New Section Start -->
+<div class="how-it-work">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Section Title Start -->
+                <div class="how-it-work-content">
+                    <div class="section-title text-center mb-5">
+                        <h2 class="text-anime-style-2" data-cursor="-opaque">Latest <span>News</span></h2>
+                        <p class="wow fadeInUp" data-wow-delay="0.2s">
+                            We are a purpose-driven market research and consulting company passionate about turning data into direction.
+                            Founded in 2023, we bring together researchers, strategists, and data scientists who believe that intelligence isn’t just about numbers—it's about insight that sparks progress.
+                        </p>
                     </div>
+
+                    <div class="container py-5">
+                        <div class="row g-4 justify-content-center">
+                            @foreach($latestNews as $news)
+                                <div class="col-md-4">
+                                    <div class="webinar-card">
+                                        @if($news->image)
+                                            <img src="{{ asset('storage/' . $news->image) }}" alt="{{ $news->title }}">
+                                        @endif
+
+                                        <div class="webinar-content">
+                                            <span class="text-muted mb-2">{{ \Carbon\Carbon::parse($news->created_at)->format('d M Y') }}</span>
+                                            <h5>{{ $news->title }}</h5>
+                                            <p>{{ \Illuminate\Support\Str::limit(strip_tags($news->description), 100, '...') }}</p>
+                                            <div class="read-more">
+                                                <a href="#">Read More</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+
                 </div>
-            @endforeach
+            </div>
         </div>
     </div>
 </div>
 <!-- What's New Section End -->
+
+<!-- Growth staragy start -->
+ <!-- Section Title -->
+<div class="container section-title">
+  <h2 class="text-anime-style-2" data-cursor="-opaque">Growth <span>Staragy</span></h2>
+</div>
+
+<!-- Zig-Zag Insights Section -->
+<section class="top-reports-points">
+  <div class="container">
+    <div class="report-section">
+      <!-- Left Column -->
+      <div class="report-column">
+        <div class="report-block">
+          <img src="{{ asset('assets/images/consulting-services.png') }}" alt="Discover" class="icon">
+          <div>
+            <h5>Discover Growth Opportunities</h5>
+            <p>At Fortune Business Insights, we cover both niche and established markets. We identify growth opportunities across these markets, irrespective of their age.</p>
+          </div>
+        </div>
+        <div class="report-block">
+          <img src="{{ asset('assets/images/consulting-services.png') }}" alt="Discover" class="icon">
+          <div>
+            <h5>Discover Growth Opportunities</h5>
+            <p>At Fortune Business Insights, we cover both niche and established markets. We identify growth opportunities across these markets, irrespective of their age.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Zig-Zag SVG Line -->
+      <div class="zigzag-line">
+        <img src="{{ asset('assets/images/Zig-zag.svg') }}" alt="Zig Zag Line"  style="width: 1180px; height: 1189px;">
+      </div>
+
+      <!-- Right Column -->
+      <div class="report-column">
+        <div class="report-block">
+          <img src="{{ asset('assets/images/Growth Advisory.png') }}" alt="Business" class="icon" style="width: 80px; height: auto;">
+          <div>
+            <h5>Vigilant Business Decisions</h5>
+            <p>When operating in a dynamic environment, future-proofing business decisions is imperative to attain a sustainable growth.</p>
+          </div>
+        </div>
+        <div class="report-block">
+          <img src="{{ asset('assets/images/healthcare.png') }}" alt="Launch" class="icon" style="width: 80px; height: auto;">
+          <div>
+            <h5>Unhindered Entry and Launches</h5>
+            <p>Besides strengthening position in established markets, we offer exclusive insights, highlighting investment feasibility in niche markets.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Growth Staragy End -->
+
 <!-- How It Work Section Start -->
     <div class="how-it-work">
         <div class="container">

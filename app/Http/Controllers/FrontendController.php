@@ -16,7 +16,7 @@ class FrontendController extends Controller
 {
     public function index()
     {
-        $latestNews = News::where('status', 1)->latest()->take(2)->get();
+        $latestNews = News::where('status', 1)->latest()->take(3)->get();
         return view('frontend.index-slider', compact('latestNews'));
     }
     public function userLogin(Request $req)

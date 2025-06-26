@@ -59,6 +59,31 @@
         </div>        
     </div>
     <!-- Hero Section End -->
+     <!-- What's New Section Start -->
+<div class="whats-new-section py-5">
+    <div class="container text-center">
+        <h3 class="section-title mb-5" style="font-weight: 600;">WHAT'S NEW</h3>
+
+        <div class="row justify-content-center">
+            @foreach($latestNews as $news)
+                <div class="col-md-6 col-lg-5 mb-4">
+                    <div class="news-box text-start p-3 border rounded h-100">
+                        @if($news->image)
+                            <div class="news-image mb-3">
+                                <img src="{{ asset('storage/' . $news->image) }}" class="img-fluid w-100" alt="{{ $news->title }}">
+                            </div>
+                        @endif
+
+                        <h5 class="news-title mb-3" style="font-weight: 500;">{{ $news->title }}</h5>
+
+                        <a href="#" class="btn btn-outline-dark px-4 py-2">View more</a>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</div>
+<!-- What's New Section End -->
 <!-- How It Work Section Start -->
     <div class="how-it-work">
         <div class="container">

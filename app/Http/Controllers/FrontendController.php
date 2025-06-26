@@ -10,9 +10,15 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
 use App\Models\PasswordResets;
+use App\Models\News;
 
 class FrontendController extends Controller
 {
+    public function index()
+    {
+        $latestNews = News::where('status', 1)->latest()->take(2)->get();
+        return view('frontend.index-slider', compact('latestNews'));
+    }
     public function userLogin(Request $req)
     {
         // Validate the input

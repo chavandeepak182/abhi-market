@@ -15,11 +15,10 @@ use App\Http\Controllers\InsightsCategoryController;
 use App\Http\Controllers\IndustriesCategoryController;
 use App\Http\Controllers\IndustriesController;
 use App\Http\Controllers\ContactController;
+use App\http\Controllers\NewsController;
 
 
-Route::get('/', function () {
-    return view('frontend.index-slider');
-});
+Route::get('/', [FrontendController::class, 'index'])->name('home');
 
 Route::get('/insights', [FrontendController::class, 'insights'])->name('insights');
 
@@ -235,3 +234,15 @@ Route::post('/industries-subcategories/store', [IndustriesCategoryController::cl
 Route::get('/industries-subcategories/edit/{id}', [IndustriesCategoryController::class, 'editSubcategory'])->name('industries.subcategories.edit');
 Route::post('/industries-subcategories/update/{id}', [IndustriesCategoryController::class, 'updateSubcategory'])->name('industries.subcategories.update');
 Route::get('/industriessubcategories/delete/{id}', [IndustriesCategoryController::class, 'deleteSubcategory'])->name('industries.subcategories.delete');
+
+//news
+Route::middleware('isAdmin')->group(function () {
+    Route::prefix('admin/news')->name('admin.news.')->group(function () {
+        Route::get('/', [NewsController::class, 'index'])->name('index');
+        Route::get('/create', [NewsController::class, 'create'])->name('create');
+        Route::post('/store', [NewsController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [NewsController::class, 'edit'])->name('edit');
+        Route::post('/update/{id}', [NewsController::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [NewsController::class, 'destroy'])->name('destroy');
+    });
+});

@@ -2,7 +2,7 @@
 	--primary-color			: #040303;
 	--secondary-color		: #F4F4F4;
 	--text-color			: #808080;
-	--accent-color			: #00CC61;
+	--accent-color			: #00a8e8;
 	--dark-color			: #004050;
 	--white-color			: #FFFFFF;
 	--divider-color			: #F3F3F3;
@@ -1321,7 +1321,7 @@ display: none;
 /************************************/
 
 .our-services{
-	background: var(--secondary-color);
+	/* background: var(--secondary-color); */
 	padding: 100px 0;
 }
 
@@ -6994,7 +6994,7 @@ footer.main-footer{
 }
 
 .reports-card .mission-vission-header .mission-vission-content h3>a:hover {
-    color:#00CC61;
+    color:#00a8e8;
 }
 
 .details-head{
@@ -7155,7 +7155,7 @@ footer.main-footer{
     .read-more a {
       text-decoration: none;
       color: #dfe6ef;
-      background-color: #00cc61;
+      background-color:#00a8e8;
       border: 1px solid ;
       padding: 6px 12px;
       border-radius: 4px;
@@ -7166,16 +7166,22 @@ footer.main-footer{
     }
 
     .read-more a:hover {
-      background-color: #00cc61;
+      background-color:#00a8e8;
       color: #fff;
     }
 /* news end */
 
 /* Growth stargy start */
 
+	.container-section-title {
+    background-color: var(--secondary-color);
+    padding: 60px 0; /* optional spacing */
+}
+
+
     .top-reports-points {
       padding: 60px 0;
-      background: #fff;
+      /* background: #fff; */
       position: relative;
     }
 
@@ -7206,7 +7212,7 @@ footer.main-footer{
     .report-block h5 {
       font-weight: 600;
       font-size: 18px;
-      color: #00cc61; /* Updated color */
+      color:#00a8e8; /* Updated color */
       margin-bottom: 5px;
     }
 
@@ -7254,3 +7260,9 @@ footer.main-footer{
     }
 
 /* Growth stargy end */
+
+
+/* our feature service */
+
+
+/* end */

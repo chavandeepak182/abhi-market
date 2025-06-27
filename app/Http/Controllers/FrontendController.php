@@ -14,11 +14,26 @@ use App\Models\News;
 
 class FrontendController extends Controller
 {
-    public function index()
-    {
-        $latestNews = News::where('status', 1)->latest()->take(3)->get();
-        return view('frontend.index-slider', compact('latestNews'));
-    }
+   public function index()
+{
+    $data['latestNews'] = News::where('status', 1)->latest()->take(3)->get();
+
+    $data['allIndustries'] = DB::table('industries')
+        ->select('id', 'image', 'industries_name', 'description', 'slug', 'meta_title', 'meta_keywords', 'meta_description', 'created_at', 'updated_at', 'industries_subcategory_id')
+        ->take(4)
+        ->get(); 
+
+    $data['allServices'] = DB::table('services')
+        ->select('id', 'property_subcategory_id', 'image', 'service_name', 'description', 'slug', 'meta_title', 'meta_keywords', 'meta_description', 'created_at', 'updated_at')
+       
+        ->take(6)
+        ->get();
+
+    return view('frontend.index-slider', $data);
+}
+
+
+
     public function userLogin(Request $req)
     {
         // Validate the input

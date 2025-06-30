@@ -310,7 +310,7 @@ body{
     top: 50%;
     left: 0;
     transform: translateY(-50%);
-    background: url('../images/icon-sub-heading.svg');
+    /* background: url('../images/icon-sub-heading.svg'); */
     background-repeat: no-repeat;
     background-position: left center;
     background-size: cover;
@@ -355,7 +355,8 @@ body{
 }
 
 .section-title.dark-section p{
-	color: var(--white-color);
+	/* color: var(--white-color); */
+	color: #242121;
 	opacity: 80%;
 }
 
@@ -1164,7 +1165,7 @@ display: none;
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: var(--primary-color);
+    /* background-color: var(--primary-color); */
     border-radius: 5px;
     height: 100%;
     width: 100%;
@@ -1400,7 +1401,7 @@ display: none;
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: var(--primary-color);
+    background-color:#78b9d2;
     border-radius: 5px;
     height: 0;
     width: 100%;
@@ -1535,6 +1536,8 @@ display: none;
 
 .why-choose-us{
 	padding: 100px 0;
+	
+	background-color:var(--secondary-color);
 }
 
 .why-choose-content{
@@ -1676,7 +1679,7 @@ display: none;
 
 .our-feature{
 	padding: 100px 0;
-	background-color: var(--dark-color);
+	background-color:  var(--secondary-color);
 	background-image: url('../images/our-feature-bg.svg');
 	background-position: center center;
 	background-repeat: no-repeat;
@@ -1695,14 +1698,15 @@ display: none;
 }
 
 .our-feature-item:nth-child(odd){
-	background: var(--dark-divider-color);
+	/* background: var(--dark-divider-color); */
+	background:#00a8e8;
 }
 
 .our-feature-item .icon-box{
 	position: relative;
 	width: 50px;
 	height: 50px;
-	background: var(--dark-divider-color);
+	background: #78b9d2;
 	border-radius: 5px;
 	display: flex;
 	align-items: center;
@@ -1718,7 +1722,7 @@ display: none;
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: var(--primary-color);
+    background-color: #78b9d2;
     border-radius: 5px;
     height: 100%;
     width: 100%;
@@ -1732,7 +1736,7 @@ display: none;
 }
 
 .our-feature-item:nth-child(odd) .icon-box{
-	background: var(--dark-color);
+	background: #86afbe;
 }
 
 .our-feature-item .icon-box img{
@@ -1742,7 +1746,8 @@ display: none;
 }
 
 .feature-item-content h3{
-	color: var(--white-color);
+	/* color: var(--white-color); */
+	color: #242121;
 	font-size: 20px;
 	font-weight: 600;
 	text-transform: capitalize;
@@ -1750,7 +1755,8 @@ display: none;
 }
 
 .feature-item-content p{
-	color: var(--white-color);
+	/* color: var(--white-color); */
+	color:#242121;
 	opacity: 80%;
 	margin: 0;
 }
@@ -1768,6 +1774,7 @@ display: none;
 .our-feature-footer p span{
 	background-color: var(--accent-color);
 	color: var(--white-color);
+	
 	border-radius: 100px;
 	line-height: 1.1em;
 	padding: 2px 10px;
@@ -2391,7 +2398,8 @@ display: none;
 	width: 100%;
 	max-width: 210px;
 	text-align: center;
-	background-color: var(--dark-color);
+	/* background-color: var(--dark-color); */
+	background-color: #00a8e8;
 	border-radius: 10px;
 	padding: 20px;
 	animation: reviewbox 3s infinite linear alternate;
@@ -2495,7 +2503,8 @@ display: none;
 }
 
 .faq-accordion .accordion-button:not(.collapsed){
-   background-color: var(--dark-color);
+   /* background-color: var(--dark-color); */
+   background-color: #00a8e8;
    color: var(--white-color);
    border-bottom: 1px solid var(--dark-divider-color);
 }
@@ -2531,7 +2540,8 @@ display: none;
 }
 
 .faq-accordion .accordion-item .accordion-body{
-	background-color: var(--dark-color);
+	/* background-color: var(--dark-color); */
+	background-color:#00a8e8; 
 	padding: 16px 45px 16px 20px;
 }
 
@@ -2548,7 +2558,7 @@ display: none;
 .our-testimonial{
 	padding: 100px 0;
 	background: url(../images/testimonial-bg-img.svg) no-repeat;
-	background-color: var(--dark-color);
+	/* background-color: var(--dark-color); */
 	background-position: center center;
 	background-size: auto;
 }
@@ -2558,7 +2568,8 @@ display: none;
 }
 
 .testimonial-slider-box{
-	background-color: var(--dark-divider-color);
+	background-color:#00a8e8;
+	
 	backdrop-filter: blur(20px);
 	padding: 50px 40px;
 	border-radius: 20px;
@@ -7053,11 +7064,11 @@ footer.main-footer{
 }
 
 .industry-card:hover .industry-name span {
-    color: #009245; /* Your green */
+    color: #00a8e8; /* Your green */
 }
 
 .icon-wrap img {
-    height: 150px;
+    height: 130px;
     width: auto;
     margin-bottom: 10px;
 }
@@ -7076,7 +7087,7 @@ footer.main-footer{
 .industry-name .underline {
     width: 30px;
     height: 2px;
-    background-color: #009245;
+    background-color: #00a8e8;
     margin: 0 auto;
 }
 .whats-new-section .section-title {

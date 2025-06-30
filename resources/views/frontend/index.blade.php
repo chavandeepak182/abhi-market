@@ -1233,9 +1233,9 @@
                                                 <!-- Customer Logo End -->
 
                                                 <!-- Testimonial Quotes Start -->
-                                                <div class="testimonial-quotes">
+                                                <!-- <div class="testimonial-quotes">
                                                     <img src="{{ asset('assets') }}/images/testimonial-quotes.svg" alt="">
-                                                </div>
+                                                </div> -->
                                                 <!-- Testimonial Quotes End -->
                                             </div>
                                             <!-- Testimonial Header End -->
@@ -1281,9 +1281,9 @@
                                                 <!-- Customer Logo End -->
 
                                                 <!-- Testimonial Quotes Start -->
-                                                <div class="testimonial-quotes">
+                                                <!-- <div class="testimonial-quotes">
                                                     <img src="{{ asset('assets') }}/images/testimonial-quotes.svg" alt="">
-                                                </div>
+                                                </div> -->
                                                 <!-- Testimonial Quotes End -->
                                             </div>
                                             <!-- Testimonial Header End -->
@@ -1329,9 +1329,9 @@
                                                 <!-- Customer Logo End -->
 
                                                 <!-- Testimonial Quotes Start -->
-                                                <div class="testimonial-quotes">
+                                                <!-- <div class="testimonial-quotes">
                                                     <img src="{{ asset('assets') }}/images/testimonial-quotes.svg" alt="">
-                                                </div>
+                                                </div> -->
                                                 <!-- Testimonial Quotes End -->
                                             </div>
                                             <!-- Testimonial Header End -->

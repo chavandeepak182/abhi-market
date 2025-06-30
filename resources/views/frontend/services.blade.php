@@ -55,7 +55,7 @@
     <!-- Page Services Section Start -->
    <div class="page-services">
     <div class="container">
-        <div class="row services-grid">
+        <div class="row">
             @foreach($allServices as $index => $service)
                 @php
                     $serviceName = $service->service_name;
@@ -63,12 +63,12 @@
                     $iconImage = asset('assets/images/' . $slug . '.svg');
                 @endphp
 
-                <div class="industry-column {{ $index >= 10 ? 'extra-industry d-none' : '' }}">
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4 {{ $index >= 8 ? 'extra-industry d-none' : '' }}">
                     <a href="{{ route('service.details', ['slug' => $slug]) }}" class="industry-card">
-                        <div class="icon-wrap">
+                        <div class="icon-wrap text-center">
                             <img src="{{ $iconImage }}" alt="{{ $serviceName }} icon" loading="lazy">
                         </div>
-                        <div class="industry-name">
+                        <div class="industry-name text-center mt-2">
                             <span>{{ $serviceName }}</span>
                             <div class="underline"></div>
                         </div>
@@ -79,11 +79,14 @@
 
         @if(count($allServices) > 8)
             <div class="what-we-do-btn wow fadeInUp" data-wow-delay="0.6s">
-                <a href="javascript:void(0);" class="btn-default" id="loadMoreBtn">Load More</a>
-            </div>
+            <a href="javascript:void(0);" class="btn-default" id="loadMoreBtn">Load More</a>
+        </div>
         @endif
+        
     </div>
 </div>
+
+
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {

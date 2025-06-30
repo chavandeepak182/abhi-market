@@ -113,7 +113,11 @@
  <!-- Section Title -->
 <div class="container-section-title">
   <div class="container section-title">
-    <h2 class="text-anime-style-2" data-cursor="-opaque">Growth <span>Strategy</span></h2>
+    
+    <div class="section-title">
+       <h3 class="wow fadeInUp">Opportunities</h3>
+       <h2 class="text-anime-style-2" data-cursor="-opaque">Growth   <span>Opportunities</span></h2>                     
+    </div>
 
     <!-- Zig-Zag Insights Section -->
     <section class="top-reports-points">
@@ -250,12 +254,16 @@
             <div class="row section-row align-items-center">
                 <div class="col-lg-6">
                     <!-- Section Title Start -->
-                    <div class="section-title dark-section">
+                    
+                     <div class="section-title">
                         <h3 class="wow fadeInUp">Services</h3>
                         <h2 class="text-anime-style-2" data-cursor="-opaque">Our <span>Services</span></h2>
                     </div>
                     <!-- Section Title End -->
+                     
+
                 </div>
+
 
                 <div class="col-lg-6">
                     <!-- Section Button Start -->
@@ -311,7 +319,7 @@
                     <!-- Testimonial Content Start -->
                     <div class="testimonial-content">
                         <!-- Section Title Start -->
-                        <div class="section-title dark-section">
+                        <div class="section-title">
                             <h3 class="wow fadeInUp">our testimonial</h3>
                             <h2 class="text-anime-style-2" data-cursor="-opaque">What Customer Says <span>About JFinMate</span></h2>
                             <p class="wow fadeInUp" data-wow-delay="0.2s">With over 1,250 satisfied clients, our finance and consulting services have earned praise for reliability, personalized guidance, and impactful results.</p>
@@ -347,9 +355,9 @@
                                                 <!-- Customer Logo End -->
 
                                                 <!-- Testimonial Quotes Start -->
-                                                <div class="testimonial-quotes">
+                                                <!-- <div class="testimonial-quotes">
                                                     <img src="{{ asset('assets') }}/images/testimonial-quotes.svg" alt="">
-                                                </div>
+                                                </div> -->
                                                 <!-- Testimonial Quotes End -->
                                             </div>
                                             <!-- Testimonial Header End -->
@@ -395,9 +403,9 @@
                                                 <!-- Customer Logo End -->
 
                                                 <!-- Testimonial Quotes Start -->
-                                                <div class="testimonial-quotes">
+                                                <!-- <div class="testimonial-quotes">
                                                     <img src="{{ asset('assets') }}/images/testimonial-quotes.svg" alt="">
-                                                </div>
+                                                </div> -->
                                                 <!-- Testimonial Quotes End -->
                                             </div>
                                             <!-- Testimonial Header End -->
@@ -627,10 +635,10 @@
                        
 
                      
-                        <div class="why-choose-contact-circle">
+                        <!-- <div class="why-choose-contact-circle">
                             <img src="{{ asset('assets') }}/images/contact-us-img.svg" alt="">
                         </div>
-                       
+                        -->
                     </div>
                   >
                 </div>

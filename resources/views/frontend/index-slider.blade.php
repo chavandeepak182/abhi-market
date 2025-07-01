@@ -89,7 +89,7 @@
                                             <h5>{{ $news->title }}</h5>
                                             <p>{{ \Illuminate\Support\Str::limit(strip_tags($news->description), 100, '...') }}</p>
                                             <div class="read-more">
-                                                <a href="#">Read More</a>
+                                                <a href="{{ route('news.show', $news->id) }}">Read More</a>
                                             </div>
                                         </div>
                                     </div>

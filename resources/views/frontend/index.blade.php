@@ -1354,7 +1354,7 @@
 
                                                 <!-- Author Content Start -->
                                                 <div class="author-content">
-                                                    <h3>robert t. / <span>accounts manager</span></h3>
+                                                    <h3> t. / <span>accounts manager</span></h3>
                                                 </div>
                                                 <!-- Author Content End -->
                                             </div>

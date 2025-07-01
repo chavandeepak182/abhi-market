@@ -1,5 +1,5 @@
 @extends('frontend.layouts.header')
-@section('title', "Abhishek Market")
+@section('title', "M2 Square Consultancy")
 @section('description', "")
 @section('keywords', "")
 
@@ -115,8 +115,9 @@
   <div class="container section-title">
     
     <div class="section-title">
-       <h3 class="wow fadeInUp">Opportunities</h3>
-       <h2 class="text-anime-style-2" data-cursor="-opaque">Growth   <span>Opportunities</span></h2>                     
+       <h3 class="wow fadeInUp"> Market Insights</h3>
+       <h2 class="text-anime-style-2" data-cursor="-opaque">Success Delivered  <span>Through Market Insights  </span></h2>
+       <p>At our core, we don’t just analyze markets, we help shape success stories. Our insights are born from rigorous research, real-time trends, and an obsession with uncovering untapped potential. Here’s how we empower businesses to move with clarity and confidence:</p>                     
     </div>
 
     <!-- Zig-Zag Insights Section -->
@@ -128,15 +129,15 @@
                     <div class="report-block">
                         <img src="{{ asset('assets/images/Packaging Industry.svg') }}" alt="Discover" class="icon">
                         <div>
-                            <h5>Discover Growth Opportunities</h5>
-                            <p>At Fortune Business Insights, we cover both niche and established markets. We identify growth opportunities across these markets, irrespective of their age.</p>
+                            <h5>Unlock Growth Opportunities</h5>
+                            <p>From niche markets to global giants, we identify high-value spaces where your business can grow, innovate, and lead, no matter your starting point.</p>
                         </div>
                     </div>
                     <div class="report-block">
                         <img src="{{ asset('assets/images/consulting-services.svg') }}" alt="Discover" class="icon">
                         <div>
-                            <h5>Discover Growth Opportunities</h5>
-                            <p>At Fortune Business Insights, we cover both niche and established markets. We identify growth opportunities across these markets, irrespective of their age.</p>
+                            <h5>Insight-Led, Strategy-Focused</h5>
+                            <p>In a world full of data, we deliver direction. Our research-driven insights turn complexity into clarity, helping you shape strategies that drive real-world results.</p>
                         </div>
                     </div>
                 </div>
@@ -151,15 +152,15 @@
                     <div class="report-block">
                         <img src="{{ asset('assets/images/Growth Advisory.svg') }}" alt="Business" class="icon" style="width: 80px; height: auto;">
                         <div>
-                            <h5>Vigilant Business Decisions</h5>
-                            <p>When operating in a dynamic environment, future-proofing business decisions is imperative to attain a sustainable growth.</p>
+                            <h5>Smarter Market Entry & Expansion</h5>
+                            <p>Planning a launch or new market entry? We equip you with feasibility insights, competitor intelligence, and trend forecasts to ensure a smooth, informed move.</p>
                         </div>
                     </div>
                     <div class="report-block">
                         <img src="{{ asset('assets/images/healthcare.svg') }}" alt="Launch" class="icon" style="width: 80px; height: auto;">
                         <div>
-                            <h5>Unhindered Entry and Launches</h5>
-                            <p>Besides strengthening position in established markets, we offer exclusive insights, highlighting investment feasibility in niche markets.</p>
+                            <h5>Confident, Future-Ready Decisions</h5>
+                            <p>Our foresight-first approach ensures your strategies aren’t just reactive, they’re resilient. We help you anticipate market shifts and build long-term success.</p>
                         </div>
                     </div>
                 </div>
@@ -184,7 +185,7 @@
                     <div class="our-service-content">
                         <!-- Section Title Start -->
                         <div class="section-title">
-                            <h3 class="wow fadeInUp">Industries</h3>
+                            <h3 class="wow fadeInUp"> Our Industries</h3>
                             <h2 class="text-anime-style-2" data-cursor="-opaque">Our  <span>Industries</span></h2>
                         </div>
                         <!-- Section Title End -->
@@ -256,8 +257,8 @@
                     <!-- Section Title Start -->
                     
                      <div class="section-title">
-                        <h3 class="wow fadeInUp">Services</h3>
-                        <h2 class="text-anime-style-2" data-cursor="-opaque">Our <span>Services</span></h2>
+                        <h3 class="wow fadeInUp">Our Capabilities</h3>
+                        <h2 class="text-anime-style-2" data-cursor="-opaque">Our <span>Capabilities</span></h2>
                     </div>
                     <!-- Section Title End -->
                      
@@ -268,13 +269,13 @@
                 <div class="col-lg-6">
                     <!-- Section Button Start -->
                     <div class="section-btn wow fadeInUp" data-wow-delay="0.2s">
-                        <a href="{{ url('/contact') }}" class="btn-default">contact now</a>
+                        <a href="{{ url('/services') }}" class="btn-default"> All Capabilities </a>
                     </div>
                     <!-- Section Button End -->
                 </div>
             </div>
 
-          <div class="row">
+    <div class="row">
     <div class="col-lg-12">
         <!-- Our Feature List Start -->
         <div class="our-feature-list">
@@ -292,8 +293,18 @@
                         <img src="{{ $iconImage }}" alt="{{ $serviceName }}">
                     </div>
                     <div class="feature-item-content">
-                        <h3>{{ $serviceName }}</h3>
-                       <p>{{ $description }}</p>
+                        <h3 style="color: {{ $index % 2 == 0 ? 'var(--white-color)' : '#040303' }};">
+    {{ $serviceName }}
+</h3>
+
+<p style="color: {{ $index % 2 == 0 ? 'var(--white-color)' : '#040303' }};">
+    {{ $description }}
+</p>
+
+                       <p style="color: {{ $index % 2 == 0 ? 'var(--white-color)' : '#24212' }};">
+    {{ $description }}
+</p>
+
                             <a href="{{ route('service.details', ['slug' => $slug]) }}" class="service-btn">
                                 <img src="{{ asset('assets/images/arrow-white.svg') }}" alt="">
                             </a>
@@ -646,108 +657,99 @@
         </div>
     </div>
      <!-- Our FAQs Section Start-->
-    <div class="our-faqs">
+    <!-- <div class="our-faqs">
         <div class="container">
             <div class="row section-row align-items-center">
                 <div class="col-lg-6">
-                    <!-- Section Title Start -->
+                   
                     <div class="section-title">
                         <h3 class="wow fadeInUp">faqs</h3>
                         <h2 class="text-anime-style-2" data-cursor="-opaque">Your Most Frequently Asked <span>Questions Answered</span></h2>
                     </div>
-                    <!-- Section Title End -->
+                   
                 </div>
 
                 <div class="col-lg-6">
-                    <!-- Section Button Start -->
+                   
                     <div class="section-btn wow fadeInUp" data-wow-delay="0.2s">
                         <a href="faqs.html" class="btn-default">view all FAQs</a>
                     </div>
-                    <!-- Section Button End -->
+                  
                 </div>
             </div>
 
             <div class="row align-items-center">
                 <div class="col-lg-6">
-                    <!-- Our FAQs Image Start -->
+                   
                     <div class="our-faqs-image">
-                        <!-- Our FAQs Img Start -->
+                       
                         <div class="our-faqs-img">
                             <figure class="image-anime reveal">
                                 <img src="{{ asset('assets') }}/images/faqs-img.jpg" alt="">
                             </figure>
                         </div>
-                        <!-- Our FAQs Img End -->
-
-                        <!-- Client Review Box Start -->
+                       
+                        
                         <div class="client-review-box">
-                            <!-- Client Review Box Content Start -->
+                            
                             <div class="client-review-box-content">
                                 <p>100+ Client <span><i class="fa-solid fa-star"></i> 5.0 (250 Reviews)</span></p>
                             </div>
-                            <!-- Client Review Box Content End -->
+                            
 
-                            <!-- Client Review Images Start -->
+                            
                             <div class="client-review-images">
-                                <!-- Client Image Start -->
+                                
                                 <div class="client-image">
                                     <figure class="image-anime">
                                         <img src="{{ asset('assets') }}/images/satisfy-client-img-1.jpg" alt="">
                                     </figure>
                                 </div>
-                                <!-- Client Image End -->
+                                
 
-                                <!-- Client Image Start -->
+                                
                                 <div class="client-image">
                                     <figure class="image-anime">
                                         <img src="{{ asset('assets') }}/images/satisfy-client-img-2.jpg" alt="">
                                     </figure>
                                 </div>
-                                <!-- Client Image End -->
-
-                                <!-- Client Image Start -->
+                                
                                 <div class="client-image">
                                     <figure class="image-anime">
                                         <img src="{{ asset('assets') }}/images/satisfy-client-img-3.jpg" alt="">
                                     </figure>
                                 </div>
-                                <!-- Client Image End -->
-
-                                <!-- Client Image Start -->
+                                
                                 <div class="client-image">
                                     <figure class="image-anime">
                                         <img src="{{ asset('assets') }}/images/satisfy-client-img-4.jpg" alt="">
                                     </figure>
                                 </div>
-                                <!-- Client Image End -->
-
-                                <!-- Client Image Start -->
+                                
                                 <div class="client-image">
                                     <figure class="image-anime">
                                         <img src="{{ asset('assets') }}/images/satisfy-client-img-5.jpg" alt="">
                                     </figure>
                                 </div>
-                                <!-- Client Image End -->
-
-                                <!-- Add More Client Image Start -->
+                                
                                 <div class="client-image add-more">
                                     <p><span class="counter">30</span>+</p>
                                 </div>
-                                <!-- Add More Client Image End -->
+                               
                             </div>
-                            <!-- Client Review Images End -->
+                            
                         </div>
-                        <!-- Client Review Box End -->
+                       
                     </div>
-                    <!-- Our FAQs Image End -->
+                    
                 </div>
                 
                 <div class="col-lg-6">
-                    <!-- Our FAQ Section Start -->
+                    
                     <div class="our-faq-section">
-                        <!-- FAQ Accordion Start -->
+                        
                         <div class="faq-accordion" id="faqaccordion">
-                            <!-- Accordion Item Start -->
+                           
                             <div class="accordion-item wow fadeInUp">
                                 <h2 class="accordion-header" id="heading1">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
@@ -760,9 +762,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Accordion Item End -->
-
-                            <!-- Accordion Item Start -->
+                            
                             <div class="accordion-item wow fadeInUp" data-wow-delay="0.2s">
                                 <h2 class="accordion-header" id="heading2">
                                     <button class="accordion-button " type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
@@ -775,9 +775,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Accordion Item End -->
-
-                            <!-- Accordion Item Start -->
+                            
                             <div class="accordion-item wow fadeInUp" data-wow-delay="0.4s">
                                 <h2 class="accordion-header" id="heading3">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
@@ -790,9 +788,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Accordion Item End -->    
-
-                            <!-- Accordion Item Start -->
+                            
                             <div class="accordion-item wow fadeInUp" data-wow-delay="0.6s">
                                 <h2 class="accordion-header" id="heading4">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
@@ -805,9 +801,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Accordion Item End --> 
-                             
-                            <!-- Accordion Item Start -->
+                            
                             <div class="accordion-item wow fadeInUp" data-wow-delay="0.8s">
                                 <h2 class="accordion-header" id="heading5">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
@@ -820,15 +814,15 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Accordion Item End --> 
+                            
                         </div>
-                        <!-- FAQ Accordion End -->
+                        
                     </div>
-                    <!-- Our FAQ Section End -->
+                    
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- Our FAQs Section End-->
 
     

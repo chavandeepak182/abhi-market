@@ -49,7 +49,7 @@
                 <div class="header-item item-left">
                     <div class="logo">
                         <a class="navbar-brand" href="{{ url('/') }}">
-                            <img alt="JFinMate" src="{{ asset('assets') }}/images/logo.png" width="150" height="auto">
+                            <img alt="JFinMate" src="{{ asset('assets') }}/images/logo1.png" width="150" height="auto">
                         </a>
                     </div>
                 </div>

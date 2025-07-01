@@ -5,19 +5,13 @@
                 <!-- Footer Newsletter Box Start -->
                 <div class="footer-newsletter-box">
                     <!-- Footer Newsletter Title Start -->
-                    <div class="footer-newsletter-title">
-                        <h3>Don't missed subscribed!</h3>
-                    </div>
+                    <img src="{{ asset('assets/images/Logo_white.png') }}" alt="Logo" style="width: 320px; height: auto;">
+
                     <!-- Footer Newsletter Title End -->
 
                     <!-- Newsletter Form start -->
                     <div class="newsletter-form">
-                        <form id="newsletterForm" action="#" method="POST">
-                            <div class="form-group">
-                                <input type="email" name="email" class="form-control" id="mail" placeholder="Enter Your Email" required="">
-                                <button type="submit" class="newsletter-btn"><img src="{{ asset('assets') }}/images/arrow-white.svg" alt=""></button>
-                            </div>
-                        </form>
+                        <p>We cater to a wide range of industries by delivering customized solutions, strategic insights, and innovative support that help organizations grow, adapt, and lead in their respective sectors. Here’s a brief overview of key industries we work with</p>
                     </div>
                     <!-- Newsletter Form end -->
                 </div>
@@ -45,10 +39,15 @@
                 <div class="footer-links">
                     <h3 class="mb-3">Industries</h3>
                     <ul>
-                        @foreach($allIndustries as $industry)
-                            <li>{{ $industry->industries_name }}</li>
-                        @endforeach
-                    </ul>
+    @foreach($allIndustries as $industry)
+        <li>
+            <a href="{{ route('industries.details', ['slug' => Str::slug($industry->industries_name)]) }}">
+                {{ $industry->industries_name }}
+            </a>
+        </li>
+    @endforeach
+</ul>
+
                 </div>
                 <!-- Footer Links End -->
             </div>
@@ -57,44 +56,26 @@
                 <!-- Footer Links Start -->
                 <div class="footer-links">
                     <h3 class="mb-3">service</h3>
-                    <ul>
-                        @foreach($allServices as $service)
-                            <li><a href="{{ url('service-details/'.$service->id) }}">{{ $service->service_name }}</a></li>
-                        @endforeach
-                    </ul>
+                    @php
+    use Illuminate\Support\Str;
+@endphp
+
+<ul>
+    @foreach($allServices as $service)
+        <li>
+            <a href="{{ route('service.details', ['slug' => Str::slug($service->service_name)]) }}">
+                {{ $service->service_name }}
+            </a>
+        </li>
+    @endforeach
+</ul>
+
+
                 </div>
                 <!-- Footer Links End -->
             </div>
 
-            <div class="col-lg-12">
-                <!-- About Footer Start -->
-                <div class="footer-cta-box">
-                    <!-- Footer Logo Start -->
-                    <div class="footer-logo">
-                        <img src="{{ asset('assets') }}/images/logo-g.png" alt="">
-                    </div>
-                    <!-- Footer Logo End -->
-                
-                    <!-- Footer Contact Box Start -->
-                    <div class="footer-contact-box">
-                        <!-- Footer Contact Item Start -->
-                        <div class="footer-contact-item">
-                            <p>Need help!</p>
-                            <h3>+91 84212 16367</h3>
-                        </div>
-                        <!-- Footer Contact Item End -->
-
-                        <!-- Footer Contact Item Start -->
-                        <div class="footer-contact-item">
-                            <p>E-mail now</p>
-                            <h3>info@jfinmate.com</h3>
-                        </div>
-                        <!-- Footer Contact Item End -->
-                    </div>
-                    <!-- Footer Contact Box End -->
-                </div>
-                <!-- About Footer End -->
-            </div>
+            
         </div>
 
         <!-- Footer Copyright Section Start -->
@@ -103,21 +84,21 @@
                 <div class="col-md-5">
                     <!-- Footer Copyright Start -->
                     <div class="footer-copyright-text">
-                        <p>Copyright © 2024 All Rights Reserved.</p>
+                        <p>Copyright © 2025 All Rights Reserved.</p>
                     </div>
                     <!-- Footer Copyright End -->
                 </div>
 
                 <div class="col-md-7">
                     <!-- Footer Menu Start -->
-                    <div class="footer-menu">
+                    <!-- <div class="footer-menu">
                         <ul>                            
                             <li><a href="#">LinkedIn</a></li>
                             <li><a href="#">Facebook</a></li>
                             <li><a href="#">Instagram</a></li>
                             <li><a href="#">Twitter</a></li>
                         </ul>
-                    </div>
+                    </div> -->
                     <!-- Footer Menu End -->
                 </div>
             </div>

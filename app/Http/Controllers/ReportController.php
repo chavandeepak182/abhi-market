@@ -19,7 +19,7 @@ class ReportController extends Controller
 
     public function create()
     {
-        $categories = DB::table('property_category')->get();
+        $categories = DB::table('industries_category')->get();
         return view('reports.create', compact('categories'));
     }
 
@@ -35,6 +35,7 @@ class ReportController extends Controller
             'meta_keywords' => 'nullable|string',
             'meta_description' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'industry_category_id' => 'required|integer|exists:industries_category,pid',
         ]);
 
         $imagePath = null;
@@ -58,6 +59,7 @@ class ReportController extends Controller
 
         $data = [
             'report_name' => $request->report_name,
+            'industry_category_id' => $request->industry_category_id,
             'description' => $request->description,
             'slug' => $request->slug,
             'meta_title' => $request->meta_title,

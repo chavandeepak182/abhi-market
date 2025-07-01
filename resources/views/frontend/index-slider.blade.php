@@ -1,5 +1,15 @@
 @extends('frontend.layouts.header')
 @section('title', "M2 Square Consultancy")
+<head>
+    <meta charset="UTF-8">
+    <title>@yield('title')</title>
+
+    <!-- ✅ Add favicon here -->
+    <link rel="icon" href="{{ asset('assets/images/favicon.png') }}" type="image/png">
+    
+    <!-- बाकी CSS -->
+</head>
+
 @section('description', "")
 @section('keywords', "")
 
@@ -10,6 +20,8 @@
     @endphp
     <!-- Hero Section Start -->
     <div class="hero hero-bg-image hero-slider-layout">
+        
+
         <div class="swiper">
             @if ($banners->count())
                 <div class="swiper-wrapper">

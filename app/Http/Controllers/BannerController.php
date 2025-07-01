@@ -45,7 +45,7 @@ class BannerController extends Controller
         $banner = Banner::findOrFail($id);
     
         $request->validate([
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif|max:2048',
             'title' => 'nullable|string|max:255'
         ]);
     

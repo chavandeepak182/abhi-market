@@ -30,6 +30,7 @@ class ReportController extends Controller
         $request->validate([ 
             'report_name' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'toc' => 'nullable|string',
             'slug' => 'nullable|string|max:255',
             'meta_title' => 'nullable|string|max:255',
             'meta_keywords' => 'nullable|string',
@@ -61,6 +62,7 @@ class ReportController extends Controller
             'report_name' => $request->report_name,
             'industry_category_id' => $request->industry_category_id,
             'description' => $request->description,
+            'toc' => $request->toc,
             'slug' => $request->slug,
             'meta_title' => $request->meta_title,
             'meta_keywords' => $request->meta_keywords,
@@ -100,6 +102,7 @@ class ReportController extends Controller
         $request->validate([
             'report_name' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'toc' => 'nullable|string',
             'slug' => 'nullable|string|max:255',
             'meta_title' => 'nullable|string|max:255',
             'meta_keywords' => 'nullable|string',
@@ -132,6 +135,7 @@ class ReportController extends Controller
         DB::table('reports')->where('id', $id)->update([
             'report_name' => $request->report_name,
             'description' => $request->description,
+            'toc' => $request->toc,
             'slug' => $request->slug,
             'meta_title' => $request->meta_title,
             'meta_keywords' => $request->meta_keywords,

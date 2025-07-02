@@ -44,6 +44,7 @@
             <a href="{{ route('industries.details', ['slug' => Str::slug($industry->industries_name)]) }}">
                 {{ $industry->industries_name }}
             </a>
+            
         </li>
     @endforeach
 </ul>

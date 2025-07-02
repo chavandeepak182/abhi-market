@@ -34,9 +34,11 @@
                         <th>ID</th>
                         <th>Report Name</th>
                         <th>Description</th>
+                        <th>Table Of Content</th>
                         <th>Meta Title</th>
                         <th>Meta Keywords</th>
                         <th>Meta Description</th>
+                        
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -46,9 +48,11 @@
                         <td><span class="h6 mb-0 fw-medium text-gray-300">{{ $loop->iteration }}</span></td>
                         <td><span class="h6 mb-0 fw-medium text-gray-300">{{ $report->report_name }}</span></td>
                         <td><span class="h6 mb-0 fw-medium text-gray-300">{{ Str::limit(strip_tags($report->description), 50) }}</span></td>
+                        <td><span class="h6 mb-0 fw-medium text-gray-300">{{ Str::limit(strip_tags($report->toc), 50) }}</span></td>
                         <td><span class="h6 mb-0 fw-medium text-gray-300">{{ $report->meta_title }}</span></td>
                         <td><span class="h6 mb-0 fw-medium text-gray-300">{{ Str::limit($report->meta_keywords, 30) }}</span></td>
                         <td><span class="h6 mb-0 fw-medium text-gray-300">{{ Str::limit($report->meta_description, 50) }}</span></td>
+                        
                         <td>
                             <a href="{{ route('reports.edit', $report->id) }}" class="btn btn-warning btn-xs edit"><i class="far fa-edit"></i></a>
                             <a href="{{ route('reports.delete', $report->id) }}" class="btn btn-danger btn-xs delete" onclick="return confirm('Are you sure?');"><i class="far fa-trash-alt"></i></a>

@@ -29,7 +29,13 @@ class ReportController extends Controller
 
         $request->validate([ 
             'report_name' => 'required|string|max:255',
+             'report_title' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'schema_markup' => 'nullable|string',
+            'faq_que' => 'nullable|array',
+            'faq_que.*' => 'nullable|string|max:1000',
+            'faq_ans' => 'nullable|array',
+            'faq_ans.*' => 'nullable|string|max:1000',
             'toc' => 'nullable|string',
             'slug' => 'nullable|string|max:255',
             'meta_title' => 'nullable|string|max:255',
@@ -60,13 +66,17 @@ class ReportController extends Controller
 
         $data = [
             'report_name' => $request->report_name,
+            'report_title' => $request->report_title,
             'industry_category_id' => $request->industry_category_id,
             'description' => $request->description,
+            'schema_markup' => $request->schema_markup,
             'toc' => $request->toc,
             'slug' => $request->slug,
             'meta_title' => $request->meta_title,
             'meta_keywords' => $request->meta_keywords,
             'meta_description' => $request->meta_description,
+            'faq_que' => is_array($request->faq_que) ? implode('||', $request->faq_que) : '',
+            'faq_ans' => is_array($request->faq_ans) ? implode('||', $request->faq_ans) : '',
             'image' => $imagePath,
             'created_at' => now(),
             'updated_at' => now(),
@@ -98,54 +108,69 @@ class ReportController extends Controller
     }
 
     public function update(Request $request, $id)
-    {
-        $request->validate([
-            'report_name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'toc' => 'nullable|string',
-            'slug' => 'nullable|string|max:255',
-            'meta_title' => 'nullable|string|max:255',
-            'meta_keywords' => 'nullable|string',
-            'meta_description' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Include image validation
-        ]);
+{
+    $request->validate([
+        'report_name' => 'required|string|max:255',
+        'report_title' => 'required|string|max:255',
+        'schema_markup' => 'nullable|string',
+        'description' => 'nullable|string',
+        'toc' => 'nullable|string',
+        'slug' => 'nullable|string|max:255',
+        'meta_title' => 'nullable|string|max:255',
+        'meta_keywords' => 'nullable|string',
+        'meta_description' => 'nullable|string',
+        'faq_que' => 'nullable|array',
+        'faq_que.*' => 'nullable|string|max:1000',
+        'faq_ans' => 'nullable|array',
+        'faq_ans.*' => 'nullable|string|max:1000',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
 
-        $report = DB::table('reports')->where('id', $id)->first();
+    $report = DB::table('reports')->where('id', $id)->first();
 
-        if (!$report) {
-            return redirect()->route('reports.index')->with('error', 'Report not found.');
-        }
-
-        $imagePath = $report->image; // Default to old image
-
-        if ($request->hasFile('image')) {
-            // Delete old image if it exists
-            if ($report->image && File::exists(public_path($report->image))) {
-                File::delete(public_path($report->image));
-            }
-
-            // Store new image
-            $image = $request->file('image');
-            $imageName = time() . '_' . $image->getClientOriginalName();
-            $destinationPath = public_path('uploads/reports');
-            $image->move($destinationPath, $imageName);
-            $imagePath = 'uploads/reports/' . $imageName;
-        }
-
-        DB::table('reports')->where('id', $id)->update([
-            'report_name' => $request->report_name,
-            'description' => $request->description,
-            'toc' => $request->toc,
-            'slug' => $request->slug,
-            'meta_title' => $request->meta_title,
-            'meta_keywords' => $request->meta_keywords,
-            'meta_description' => $request->meta_description,
-            'image' => $imagePath, // Save updated (or old) image
-            'updated_at' => now(),
-        ]);
-
-        return redirect()->route('reports.index')->with('success', 'Report has been updated successfully.');
+    if (!$report) {
+        return redirect()->route('reports.index')->with('error', 'Report not found.');
     }
+
+    $imagePath = $report->image;
+
+    if ($request->hasFile('image')) {
+        if ($report->image && File::exists(public_path($report->image))) {
+            File::delete(public_path($report->image));
+        }
+
+        $image = $request->file('image');
+        $imageName = time() . '_' . $image->getClientOriginalName();
+        $destinationPath = public_path('uploads/reports');
+        $image->move($destinationPath, $imageName);
+        $imagePath = 'uploads/reports/' . $imageName;
+    }
+
+    // Handle optional FAQ fields
+    $faqQue = is_array($request->faq_que) ? implode('||', $request->faq_que) : null;
+    $faqAns = is_array($request->faq_ans) ? implode('||', $request->faq_ans) : null;
+
+    // If toc is required in DB but nullable in form, fallback default:
+    $tocContent = $request->filled('toc') ? $request->toc : 'N/A';
+
+    DB::table('reports')->where('id', $id)->update([
+        'report_name' => $request->report_name,
+        'report_title' => $request->report_title,
+        'description' => $request->description,
+        'schema_markup' => $request->schema_markup,
+        'toc' => $tocContent,
+        'slug' => $request->slug,
+        'meta_title' => $request->meta_title,
+        'meta_keywords' => $request->meta_keywords,
+        'meta_description' => $request->meta_description,
+        'faq_que' => $faqQue,
+        'faq_ans' => $faqAns,
+        'image' => $imagePath,
+        'updated_at' => now(),
+    ]);
+
+    return redirect()->route('reports.index')->with('success', 'Report has been updated successfully.');
+}
 
     public function deleteReport($id)
     {

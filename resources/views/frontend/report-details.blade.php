@@ -42,10 +42,21 @@
                 <!-- Service Sidebar Start -->
                 <div class="service-sidebar">
                     <!-- Service Category List Start -->
-                    <div class="service-catagery-list wow fadeInUp">
-                        <h3>Our Reports</h3>
+                  <div class="service-catagery-list wow fadeInUp">
+ 
+</head>
+<body>
+
+ <div class="report-card">
+  <h3>📊 Our Reports</h3>
+  <p>Explore industry insights and stay ahead in the market.</p>
+                       <button type="submit" class="btn-default py-2">Buy Now</button>
+                        <div id="msgSubmit" class="h3 hidden"></div> 
+                                            
+                                                          
+                      </div>  
                         
-                    </div>
+                  </div>
                     <!-- Service Category List End -->
 
                     <!-- Sidebar Cta Box Start -->
@@ -111,118 +122,77 @@
 
                     <!-- Case Study Entry Start -->
                     <div class="service-entry">
-                        <p class="wow fadeInUp">{!! $report->description !!}</p>
+                        <h1 class="wow fadeInUp">{!! $report->report_title !!}</h1>
+                        <br>
 
                         
-<div class="tabs">
-  @if(!empty($report->description))
-    <button class="tab-button active" data-tab="desc">Description</button>
-  @endif
+                <div class="tabs">
+                  @if(!empty($report->description))
+                    <button class="tab-button active" data-tab="desc">Description</button>
+                  @endif
 
-  @if(!empty($report->toc))
-    <button class="tab-button {{ empty($report->description) ? 'active' : '' }}" data-tab="toc">Table Of Contents</button>
-  @endif
+                  @if(!empty($report->toc))
+                    <button class="tab-button {{ empty($report->description) ? 'active' : '' }}" data-tab="toc">Table Of Contents</button>
+                  @endif
 
-  {{-- Static Tabs --}}
-  <button class="tab-button {{ empty($report->description) && empty($report->toc) ? 'active' : '' }}" data-tab="method">Research Methodology</button>
-  <button class="tab-button" data-tab="sample">Request Free Sample PDF</button>
-</div>
+                  {{-- Static Tabs --}}
+                  <button class="tab-button {{ empty($report->description) && empty($report->toc) ? 'active' : '' }}" data-tab="method">Research Methodology</button>
+                  <!-- <button class="tab-button" data-tab="sample">Request Free Sample PDF</button> -->
+                </div>
 
-<div class="tab-content-wrapper">
-  @if(!empty($report->description))
-    <div class="tab-content active" id="desc">
-      <h2>Description</h2>
-      <p class="wow fadeInUp">{!! $report->description !!}</p>
-    </div>
-  @endif
+                  <div class="tab-content-wrapper">
+                    @if(!empty($report->description))
+                      <div class="tab-content active" id="desc">
+                        <h2>Description</h2>
+                        <p class="wow fadeInUp">{!! $report->description !!}</p>
+                      </div>
+                    @endif
 
-  @if(!empty($report->toc))
-    <div class="tab-content {{ empty($report->description) ? 'active' : '' }}" id="toc">
-      <h2>Table Of Contents</h2>
-      <p class="wow fadeInUp">{!! $report->toc !!}</p>
-    </div>
-  @endif
-
-  {{-- Static Tab Contents --}}
-  <div class="tab-content {{ empty($report->description) && empty($report->toc) ? 'active' : '' }}" id="method">
-    <h2>Research Methodology</h2>
-    <p class="wow fadeInUp">This is the Research Methodology content.</p>
-  </div>
-
-  <div class="tab-content" id="sample">
-    <h2>Request Free Sample PDF</h2>
-    <p class="wow fadeInUp">This is the sample request section.</p>
-  </div>
-</div>
-
-</div><script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-  $(document).ready(function () {
-    $('.tab-button').click(function () {
-      var tabId = $(this).data('tab');
-
-      // Tabs Active class switch
-      $('.tab-button').removeClass('active');
-      $(this).addClass('active');
-
-      // Hide all tab contents
-      $('.tab-content').removeClass('active').hide();
-
-      // Show the clicked tab content with slide animation
-      $('#' + tabId).addClass('active').css({ position: 'relative', left: '-100%' }).show().animate({
-        left: '0'
-      }, 300);
-    });
-  });
-</script>
+                  @if(!empty($report->toc))
+                    <div class="tab-content {{ empty($report->description) ? 'active' : '' }}" id="toc">
+                      <!-- <h2>Table Of Contents</h2> -->
+                      <div class="wow fadeInUp">{!! $report->toc !!}</div>
+                    </div>
+                  @endif
 
 
-<style>
-    .tabs {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-}
 
-.tab-button {
-  padding: 10px 20px;
-  border: none;
-  background-color: #f1f1f1;
-  cursor: pointer;
-  font-weight: bold;
-  border-radius: 4px;
-}
+                    {{-- Static Tab Contents --}}
+                    <div class="tab-content {{ empty($report->description) && empty($report->toc) ? 'active' : '' }}" id="method">
+                      <h2>Research Methodology</h2>
+                      <p class="wow fadeInUp">This is the Research Methodology content.</p>
+                    </div>
 
-.tab-button.active {
-  background-color: #00a8e8;
-  color: white;
-}
+                    <!-- <div class="tab-content" id="sample">
+                      <h2>Request Free Sample PDF</h2>
+                      <p class="wow fadeInUp">This is the sample request section.</p>
+                    </div> -->
+                  </div>
 
-.tab-content-wrapper {
-  position: relative;
-  height: 200px;
-  overflow: hidden;
-}
+                </div><script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                <script>
+                  document.addEventListener("DOMContentLoaded", function () {
+                    const tabButtons = document.querySelectorAll(".tab-button");
+                    const tabContents = document.querySelectorAll(".tab-content");
 
-.tab-content {
-  position: absolute;
-  top: 0;
-  left: 100%;
-  width: 100%;
-  opacity: 0;
-  transition: all 0.5s ease;
-  padding: 20px;
-  background: #fff;
-  border: 1px solid #ddd;
-  box-sizing: border-box;
-}
+                    tabButtons.forEach((button) => {
+                      button.addEventListener("click", () => {
+                        const target = button.getAttribute("data-tab");
 
-.tab-content.active {
-  left: 0;
-  opacity: 1;
-}
+                        // Remove active class from all buttons and contents
+                        tabButtons.forEach((btn) => btn.classList.remove("active"));
+                        tabContents.forEach((content) => content.classList.remove("active"));
 
-</style>
+                        // Add active class to clicked button and corresponding content
+                        button.classList.add("active");
+                        document.getElementById(target).classList.add("active");
+                      });
+                    });
+                  });
+                </script>
+
+
+
 
 
    

@@ -11,7 +11,7 @@
                 <div class="col-lg-12">
                     <!-- Page Header Box Start -->
                     <div class="page-header-box">
-                        <h1 class="text-anime-style-2" data-cursor="-opaque">Industries</h1>
+                        <!-- <h1 class="text-anime-style-2" data-cursor="-opaque">Industries</h1> -->
                         <!-- <nav class="wow fadeInUp">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="index.html">home</a></li>

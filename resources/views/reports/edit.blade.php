@@ -37,11 +37,36 @@
                             <label for="report_name" class="form-label">Report Name:</label>
                             <input type="text" name="report_name" id="report_name" class="form-control" value="{{ $report->report_name }}" required>
                         </div>
+                        <div class="position-relative pb-15 form-group">
+                            <label for="report_name">Report title</label>
+                            <input type="text" name="report_title" id="report_name" class="form-control" required>
+                        </div>
 
                         <div class="mb-3">
                             <label for="summernote" class="form-label">Description:</label>
                             <textarea name="description" id="summernote" class="form-control">{{ $report->description }}</textarea>
                         </div>
+
+                        <div class="position-relative pb-15 form-group">
+                            <label for="summernote">Table Of Content</label>
+                            <textarea name="toc" id="mySummernote" class="form-control"></textarea>
+                        </div>
+                        <script>
+    $(document).ready(function() {
+        $('#mySummernote').summernote({
+            height: 250, // set editor height
+            toolbar: [
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['font', ['strikethrough', 'superscript', 'subscript']],
+                ['fontsize', ['fontsize']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['insert', ['link', 'picture', 'video']],
+                ['view', ['fullscreen', 'codeview']]
+            ]
+        });
+    });
+</script>
                     </div>
                     
                     <div class="col-md-4">
@@ -74,6 +99,49 @@
                             <label for="meta_description" class="form-label">Meta Description:</label>
                             <textarea name="meta_description" id="meta_description" class="form-control">{{ $report->meta_description }}</textarea>
                         </div>
+                        <div class="position-relative pb-15 form-group">
+                            <label for="meta_description">Schema Markup / Open Graph Meta / Twitter Card Meta</label>
+                            <textarea name="schema_markup" id="schema_markup" class="form-control" style="height:150px;"></textarea>
+                        </div>
+                         <!-- <div class="position-relative pb-15 form-group">
+                            <label for="slug">Graph Meta</label>
+                            <input type="text" name="open_graph_meta" id="open_graph_meta" class="form-control" required>
+                        </div>
+                        <div class="position-relative pb-15 form-group">
+                            <label for="slug">twitter Card </label>
+                            <input type="text" name="twitter_card_meta" id="twitter_card_meta" class="form-control" required>
+                        </div>
+                        <div class="position-relative pb-15 form-group">
+                            <label for="meta_description">FAQ</label>
+                            <textarea name="faq" id="faq" class="form-control"></textarea>
+                        </div> -->
+
+                            <div class="form-group">
+                                    <label>FAQs</label>
+                                    <div id="faq-wrapper">
+
+                                        <div class="faq-item border p-3 mb-3">
+                                            <div class="form-group">
+                                                <label>Question</label>
+                                                <input type="text" name="faq_que[]" class="form-control" placeholder="Enter FAQ Question" />
+                                            </div>
+                                            <div class="form-group mt-2">
+                                                <label>Answer</label>
+                                                <textarea name="faq_ans[]" class="form-control" rows="3" placeholder="Enter FAQ Answer"></textarea>
+                                            </div>
+                                            <br>
+                                            <!-- <button type="button" class="btn btn-danger mt-2 remove-faq">Remove</button> -->
+                                            <button type="button" class="btn btn-danger rounded-pill py-9">Remove</button>
+                                        </div>
+
+                                    </div>
+                                    <br>
+                                    
+
+                                    <!-- <button type="button" id="add-faq" class="btn mt-2" style="background-color: #3E80f9; color: white;">Add More FAQ</button> -->
+                                    <button type="submit" class="btn btn-main rounded-pill py-9" id="add-faq">Add FAQ</button>
+                            </div>
+                                <br><br>
                         
                         <div class="flex-align mt-20">
                             <button type="submit" class="btn btn-success rounded-pill py-9">Update Service</button>
@@ -97,6 +165,32 @@
                     subcategoryDropdown.innerHTML += `<option value="${sub.industries_subcategory_id}">${sub.name}</option>`;
                 });
             });
+    });
+</script>
+<script>
+    document.getElementById('add-faq').addEventListener('click', function () {
+        const wrapper = document.getElementById('faq-wrapper');
+
+        const html = `
+            <div class="faq-item border p-3 mb-3">
+                <div class="form-group">
+                    <label>Question</label>
+                    <input type="text" name="faq_que[]" class="form-control" placeholder="Enter FAQ Question" />
+                </div>
+                <div class="form-group mt-2">
+                    <label>Answer</label>
+                    <textarea name="faq_ans[]" class="form-control" rows="3" placeholder="Enter FAQ Answer"></textarea>
+                </div>
+                <button type="button" class="btn btn-danger mt-2 remove-faq">Remove</button>
+            </div>
+        `;
+        wrapper.insertAdjacentHTML('beforeend', html);
+    });
+
+    document.addEventListener('click', function (e) {
+        if (e.target.classList.contains('remove-faq')) {
+            e.target.closest('.faq-item').remove();
+        }
     });
 </script>
 @endsection

@@ -6,6 +6,7 @@
 
     <!-- ✅ Add favicon here -->
     <link rel="icon" href="{{ asset('assets/images/favicon.png') }}" type="image/png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
     
     <!-- बाकी CSS -->
 </head>
@@ -19,57 +20,27 @@
         $banners = App\Models\Banner::latest()->take(2)->get(); // Fetch latest 3 banners
     @endphp
     <!-- Hero Section Start -->
-    <div class="hero hero-bg-image hero-slider-layout">
-        
-
-        <div class="swiper">
-            @if ($banners->count())
-                <div class="swiper-wrapper">
-                    @foreach ($banners as $index => $banner)
-                        <div class="swiper-slide">
-                            <div class="hero-slide">
-                                <!-- Slider Image Start -->
-                                <div class="hero-slider-image">
-                                    <img src="{{ asset('storage/'.$banner->image) }}" alt="{{ $banner->title ?? 'Banner Image' }}">
-                                </div>
-                                <!-- Slider Image End -->
-
-                                <div class="container">
-                                    <div class="row align-items-center">
-                                        <div class="col-lg-12">
-                                            <!-- Hero Content Start -->
-                                            <div class="hero-content">
-                                                <!-- Section Title Start -->
-                                                <div class="section-title dark-section">
-                                                    <h3 class="wow fadeInUp">Welcome to JFinMate</h3>
-                                                    <h1 class="text-anime-style-2" data-cursor="-opaque">
-                                                        {{ $banner->title ?? 'Empowering your Research success journey' }}
-                                                    </h1>
-                                                </div>
-                                                <!-- Section Title End -->
-                            
-                                                <!-- Hero Content Body Start -->
-                                                <div class="hero-content-body wow fadeInUp" data-wow-delay="0.4s">
-                                                    <!-- Hero Button Start -->
-                                                    <div class="hero-btn">
-                                                        <a href="{{ url('/contact') }}" class="btn-default">Get Started</a>
-                                                    </div>
-                                                    <!-- Hero Button End -->
-                                                </div>
-                                                <!-- Hero Content Body End -->
-                                            </div>
-                                            <!-- Hero Content End -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+  <div class="jfin-hero-wrapper">
+    <div class="swiper jfin-swiper">
+        @if ($banners->count())
+            <div class="swiper-wrapper">
+                @foreach ($banners as $banner)
+                    <div class="swiper-slide">
+                        <div class="hero-slider-image">
+                            <img src="{{ asset('storage/'.$banner->image) }}" alt="{{ $banner->title }}">
                         </div>
-                    @endforeach
-                </div>
-            @endif
-            <div class="hero-pagination"></div>
-        </div>        
+                        <div class="jfin-hero-content">
+                            <!-- <h3>Welcome to JFinMate</h3> -->
+                            <h1>{{ $banner->title ?? 'Empowering Your Journey' }}</h1>
+                            <a href="{{ url('/contact') }}" class="jfin-hero-btn">Get Started</a>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        @endif
+        <div class="swiper-pagination jfin-hero-pagination"></div>
     </div>
+</div>
     <!-- Hero Section End -->
           
    <!-- What's New Section Start -->
@@ -663,7 +634,7 @@
                         </div>
                         -->
                     </div>
-                  >
+                  
                 </div>
             </div>
         </div>
@@ -1321,4 +1292,23 @@
 </div> -->
 
     <!-- Our Blog Section End  -->
+     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
+<script>
+    new Swiper('.jfin-swiper', {
+        loop: true,
+        autoplay: {
+            delay: 5000,
+            disableOnInteraction: false,
+        },
+        effect: 'fade',
+        fadeEffect: {
+            crossFade: true
+        },
+        pagination: {
+            el: '.jfin-hero-pagination',
+            clickable: true,
+        },
+    });
+</script>
 @endsection

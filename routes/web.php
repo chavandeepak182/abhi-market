@@ -15,7 +15,7 @@ use App\Http\Controllers\InsightsCategoryController;
 use App\Http\Controllers\IndustriesCategoryController;
 use App\Http\Controllers\IndustriesController;
 use App\Http\Controllers\ContactController;
-use App\http\Controllers\NewsController;
+use App\Http\Controllers\NewsController;
 
 
 Route::get('/', [FrontendController::class, 'index'])->name('home');

@@ -83,7 +83,7 @@
                                 </li> -->
 
                                 <li class="menu-item-has-children">
-                                    <a href="{{ url('/industries') }}">Industries <i class="fas fa-plus"></i></a>
+                                    <a href="#">Industries <i class="fas fa-plus"></i></a>
                                     <div class="sub-menu mega-menu mega-menu-column-4">
                                         @php
                                             $chunks = $industriesMenuData->chunk(ceil($industriesMenuData->count() / 4));
@@ -105,7 +105,7 @@
                                 </li>
 
                                  <li class="menu-item-has-children">
-                                    <a href="{{ url('/services') }}">Capabilities <i class="fas fa-plus"></i></a>
+                                    <a href="#">Capabilities <i class="fas fa-plus"></i></a>
                                     <div class="sub-menu mega-menu mega-menu-column-4">
                                         @if(isset($serviceMenuData) && count($serviceMenuData))
                                             @php
@@ -152,9 +152,10 @@
                                 
                                 <div class="header-item float-end">
                                     <!-- Header Btn Start -->
-                                    <div class="header-btn d-inline-flex">
-                                        <a href="{{ url('/contact') }}" class="btn-default btn-highlighted">contact us</a>
-                                    </div>
+                                    <div class="header-btn d-none d-lg-inline-flex">
+    <a href="{{ url('/contact') }}" class="btn-default btn-highlighted">contact us</a>
+</div>
+
                                     <!-- Header Btn End -->
                                 </div>
                             </ul>                            

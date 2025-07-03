@@ -136,7 +136,7 @@ class ServiceController extends Controller
             'meta_title' => 'nullable|string|max:255',
             'meta_keywords' => 'nullable|string',
             'meta_description' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Include image validation
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif|max:2048', // Include image validation
         ]);
 
         $service = DB::table('services')->where('id', $id)->first();

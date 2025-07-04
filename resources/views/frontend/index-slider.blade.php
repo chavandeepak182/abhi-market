@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>@yield('title')</title>
 
-    <!-- ✅ Add favicon here -->
+    
     <link rel="icon" href="{{ asset('assets/images/favicon.png') }}" type="image/png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
     
@@ -20,138 +20,134 @@
         $banners = App\Models\Banner::latest()->take(2)->get(); // Fetch latest 3 banners
     @endphp
     <!-- Hero Section Start -->
-  <div class="jfin-hero-wrapper">
-    <div class="swiper jfin-swiper">
-        @if ($banners->count())
-            <div class="swiper-wrapper">
-                @foreach ($banners as $banner)
-                    <div class="swiper-slide">
-                        <div class="hero-slider-image">
-                            <img src="{{ asset('storage/'.$banner->image) }}" alt="{{ $banner->title }}">
-                        </div>
-                        <div class="jfin-hero-content">
-                            <!-- <h3>Welcome to JFinMate</h3> -->
-                            <h1>{{ $banner->title ?? 'Empowering Your Journey' }}</h1>
-                            <a href="{{ url('/contact') }}" class="jfin-hero-btn">Get Started</a>
-                        </div>
+        <div class="jfin-hero-wrapper">
+            <div class="swiper jfin-swiper">
+                @if ($banners->count())
+                    <div class="swiper-wrapper">
+                        @foreach ($banners as $banner)
+                            <div class="swiper-slide">
+                                <div class="hero-slider-image">
+                                    <img src="{{ asset('storage/'.$banner->image) }}" alt="{{ $banner->title }}">
+                                </div>
+                                <div class="jfin-hero-content">
+                                    <!-- <h3>Welcome to JFinMate</h3> -->
+                                    <h1>{{ $banner->title ?? 'Empowering Your Journey' }}</h1>
+                                    <a href="{{ url('/contact') }}" class="jfin-hero-btn">Get Started</a>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
-                @endforeach
+                @endif
+                <div class="swiper-pagination jfin-hero-pagination"></div>
             </div>
-        @endif
-        <div class="swiper-pagination jfin-hero-pagination"></div>
-    </div>
-</div>
+        </div>
     <!-- Hero Section End -->
           
    <!-- What's New Section Start -->
-<div class="how-it-work">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <!-- Section Title Start -->
-                <div class="how-it-work-content">
-                    <div class="section-title text-center mb-5">
-                        <h2 class="text-anime-style-2" data-cursor="-opaque">Latest <span>News</span></h2>
-                        <p class="wow fadeInUp" data-wow-delay="0.2s">
-                            We are a purpose-driven market research and consulting company passionate about turning data into direction.
-                            Founded in 2023, we bring together researchers, strategists, and data scientists who believe that intelligence isn’t just about numbers—it's about insight that sparks progress.
-                        </p>
-                    </div>
+        <div class="how-it-work">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <!-- Section Title Start -->
+                        <div class="how-it-work-content">
+                            <div class="section-title text-center mb-5">
+                                <h2 class="text-anime-style-2" data-cursor="-opaque">Latest <span>News</span></h2>
+                                <p class="wow fadeInUp" data-wow-delay="0.2s">
+                                    We are a purpose-driven market research and consulting company passionate about turning data into direction.
+                                    Founded in 2023, we bring together researchers, strategists, and data scientists who believe that intelligence isn’t just about numbers—it's about insight that sparks progress.
+                                </p>
+                            </div>
 
-                    <div class="container py-5">
-                        <div class="row g-4 justify-content-center">
-                            @foreach($latestNews as $news)
-                                <div class="col-md-4">
-                                    <div class="webinar-card">
-                                        @if($news->image)
-                                            <img src="{{ asset('storage/' . $news->image) }}" alt="{{ $news->title }}">
-                                        @endif
+                            <div class="container py-5">
+                                <div class="row g-4 justify-content-center">
+                                    @foreach($latestNews as $news)
+                                        <div class="col-md-4">
+                                            <div class="webinar-card">
+                                                @if($news->image)
+                                                    <img src="{{ asset('storage/' . $news->image) }}" alt="{{ $news->title }}">
+                                                @endif
 
-                                        <div class="webinar-content">
-                                            <span class="text-muted mb-2">{{ \Carbon\Carbon::parse($news->created_at)->format('d M Y') }}</span>
-                                            <h5>{{ $news->title }}</h5>
-                                            <p>{{ \Illuminate\Support\Str::limit(strip_tags($news->description), 100, '...') }}</p>
-                                            <div class="read-more">
-                                                <a href="{{ route('news.show', $news->id) }}">Read More</a>
+                                                <div class="webinar-content">
+                                                    <span class="text-muted mb-2">{{ \Carbon\Carbon::parse($news->created_at)->format('d M Y') }}</span>
+                                                    <h5>{{ $news->title }}</h5>
+                                                    <p>{{ \Illuminate\Support\Str::limit(strip_tags($news->description), 100, '...') }}</p>
+                                                    <div class="read-more">
+                                                        <a href="{{ route('news.show', $news->id) }}">Read More</a>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    @endforeach
                                 </div>
-                            @endforeach
+                            </div>
+
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
-    </div>
-</div>
 <!-- What's New Section End -->
-<style>.container-section-title {
-    background-color: var(--secondary-color);
-    padding: 60px 0; /* optional spacing */
-}
-</style>
+
 <!-- Growth staragy start -->
  <!-- Section Title -->
-<div class="container-section-title">
-  <div class="container section-title">
-    
-    <div class="section-title">
-       <h3 class="wow fadeInUp"> Market Insights</h3>
-       <h2 class="text-anime-style-2" data-cursor="-opaque">Success Delivered  <span>Through Market Insights  </span></h2>
-       <p>At our core, we don’t just analyze markets, we help shape success stories. Our insights are born from rigorous research, real-time trends, and an obsession with uncovering untapped potential. Here’s how we empower businesses to move with clarity and confidence:</p>                     
-    </div>
+    <div class="container-section-title">
+    <div class="container section-title">
+        
+        <div class="section-title">
+        <h3 class="wow fadeInUp"> Market Insights</h3>
+        <h2 class="text-anime-style-2" data-cursor="-opaque">Success Delivered  <span>Through Market Insights  </span></h2>
+        <p>At our core, we don’t just analyze markets, we help shape success stories. Our insights are born from rigorous research, real-time trends, and an obsession with uncovering untapped potential. Here’s how we empower businesses to move with clarity and confidence:</p>                     
+        </div>
 
-    <!-- Zig-Zag Insights Section -->
-    <section class="top-reports-points">
-        <div class="container">
-            <div class="report-section">
-                <!-- Left Column -->
-                <div class="report-column">
-                    <div class="report-block">
-                        <img src="{{ asset('assets/images/Packaging Industry.svg') }}" alt="Discover" class="icon">
-                        <div>
-                            <h5>Unlock Growth Opportunities</h5>
-                            <p>From niche markets to global giants, we identify high-value spaces where your business can grow, innovate, and lead, no matter your starting point.</p>
+        <!-- Zig-Zag Insights Section -->
+        <section class="top-reports-points">
+            <div class="container">
+                <div class="report-section">
+                    <!-- Left Column -->
+                    <div class="report-column">
+                        <div class="report-block">
+                            <img src="{{ asset('assets/images/Packaging Industry.svg') }}" alt="Discover" class="icon">
+                            <div>
+                                <h5>Unlock Growth Opportunities</h5>
+                                <p>From niche markets to global giants, we identify high-value spaces where your business can grow, innovate, and lead, no matter your starting point.</p>
+                            </div>
+                        </div>
+                        <div class="report-block">
+                            <img src="{{ asset('assets/images/consulting-services.svg') }}" alt="Discover" class="icon">
+                            <div>
+                                <h5>Insight-Led, Strategy-Focused</h5>
+                                <p>In a world full of data, we deliver direction. Our research-driven insights turn complexity into clarity, helping you shape strategies that drive real-world results.</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="report-block">
-                        <img src="{{ asset('assets/images/consulting-services.svg') }}" alt="Discover" class="icon">
-                        <div>
-                            <h5>Insight-Led, Strategy-Focused</h5>
-                            <p>In a world full of data, we deliver direction. Our research-driven insights turn complexity into clarity, helping you shape strategies that drive real-world results.</p>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Zig-Zag SVG Line -->
-                <div class="zigzag-line">
-                    <img src="{{ asset('assets/images/Zig-zag.svg') }}" alt="Zig Zag Line" style="width: 1180px; height: 1189px;">
-                </div>
-
-                <!-- Right Column -->
-                <div class="report-column">
-                    <div class="report-block">
-                        <img src="{{ asset('assets/images/Growth Advisory.svg') }}" alt="Business" class="icon" style="width: 80px; height: auto;">
-                        <div>
-                            <h5>Smarter Market Entry & Expansion</h5>
-                            <p>Planning a launch or new market entry? We equip you with feasibility insights, competitor intelligence, and trend forecasts to ensure a smooth, informed move.</p>
-                        </div>
+                    <!-- Zig-Zag SVG Line -->
+                    <div class="zigzag-line">
+                        <img src="{{ asset('assets/images/Zig-zag.svg') }}" alt="Zig Zag Line" style="width: 1180px; height: 1189px;">
                     </div>
-                    <div class="report-block">
-                        <img src="{{ asset('assets/images/healthcare.svg') }}" alt="Launch" class="icon" style="width: 80px; height: auto;">
-                        <div>
-                            <h5>Confident, Future-Ready Decisions</h5>
-                            <p>Our foresight-first approach ensures your strategies aren’t just reactive, they’re resilient. We help you anticipate market shifts and build long-term success.</p>
+
+                    <!-- Right Column -->
+                    <div class="report-column">
+                        <div class="report-block">
+                            <img src="{{ asset('assets/images/Growth Advisory.svg') }}" alt="Business" class="icon" style="width: 80px; height: auto;">
+                            <div>
+                                <h5>Smarter Market Entry & Expansion</h5>
+                                <p>Planning a launch or new market entry? We equip you with feasibility insights, competitor intelligence, and trend forecasts to ensure a smooth, informed move.</p>
+                            </div>
+                        </div>
+                        <div class="report-block">
+                            <img src="{{ asset('assets/images/healthcare.svg') }}" alt="Launch" class="icon" style="width: 80px; height: auto;">
+                            <div>
+                                <h5>Confident, Future-Ready Decisions</h5>
+                                <p>Our foresight-first approach ensures your strategies aren’t just reactive, they’re resilient. We help you anticipate market shifts and build long-term success.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-  </div>
-</div>
+        </section>
+    </div>
+    </div>
 
 
 <!-- Growth Staragy End -->
@@ -183,47 +179,41 @@
                 </div>
 
                 <div class="col-lg-8">
-    <!-- Our Service List Start -->
-    <div class="our-service-list">
-            @foreach($allIndustries as $index => $industry)
-                @php
-                    $industryName = $industry->industries_name;
-                    $slug = $industry->slug;
-                    $description = Str::limit(strip_tags($industry->description), 120);
-                    $iconImage = asset('assets/images/' . $slug . '.svg');
-                @endphp
+   
+                    <div class="our-service-list">
+                            @foreach($allIndustries as $index => $industry)
+                                @php
+                                    $industryName = $industry->industries_name;
+                                    $slug = $industry->slug;
+                                    $description = Str::limit(strip_tags($industry->description), 120);
+                                    $iconImage = asset('assets/images/' . $slug . '.svg');
+                                @endphp
 
-                <!-- Service Item Start -->
-                <div class="service-item">
-                    <div class="service-no">
-                        <h2>{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</h2>
-                    </div>
-                    <div class="service-content-box">
-                        <div class="icon-box">
-                            <img src="{{ $iconImage }}" alt="{{ $industryName }} Icon">
-                        </div>
+                                <!-- Service Item Start -->
+                                <div class="service-item">
+                                    <div class="service-no">
+                                        <h2>{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</h2>
+                                    </div>
+                                    <div class="service-content-box">
+                                        <div class="icon-box">
+                                            <img src="{{ $iconImage }}" alt="{{ $industryName }} Icon">
+                                        </div>
 
-                        <div class="service-item-content">
-                            <h3>{{ $industryName }}</h3>
-                            <p>{{ $description }}</p>
-                            <a href="{{ route('industries.details', ['slug' => $slug]) }}" class="service-btn">
-                                <img src="{{ asset('assets/images/arrow-white.svg') }}" alt="">
-                            </a>
-                        </div>
-                    </div>
+                                        <div class="service-item-content">
+                                            <h3>{{ $industryName }}</h3>
+                                            <p>{{ $description }}</p>
+                                            <a href="{{ route('industries.details', ['slug' => $slug]) }}" class="service-btn">
+                                                <img src="{{ asset('assets/images/arrow-white.svg') }}" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Service Item End -->
+                            @endforeach
                 </div>
-                <!-- Service Item End -->
-            @endforeach
-   </div>
 
-    <!-- Our Service List End -->
-
-    <!-- Service Footer Start -->
-    <!-- <div class="service-footer wow fadeInUp" data-wow-delay="0.8s">
-        <p>Let's make something great work together. <a href="{{ url('/contact') }}">Discuss Now</a></p>
-    </div> -->
-    <!-- Service Footer End -->
-</div>
+    
+            </div>
 
             </div>
         </div>
@@ -258,49 +248,49 @@
                 </div>
             </div>
 
-    <div class="row">
-    <div class="col-lg-12">
-        <!-- Our Feature List Start -->
-        <div class="our-feature-list">
-            @foreach($allServices as $index => $service)
-                @php
-                    $serviceName = $service->service_name;
-                    $slug = $service->slug;
-                    $iconImage = asset('assets/images/' . $slug . '.svg');
-                    $delay = $index * 0.2;
-                @endphp
+                                <div class="row">
+                                <div class="col-lg-12">
+                                    <!-- Our Feature List Start -->
+                                    <div class="our-feature-list">
+                                        @foreach($allServices as $index => $service)
+                                            @php
+                                                $serviceName = $service->service_name;
+                                                $slug = $service->slug;
+                                                $iconImage = asset('assets/images/' . $slug . '.svg');
+                                                $delay = $index * 0.2;
+                                            @endphp
 
-                <!-- Feature Item Start -->
-                <div class="our-feature-item wow fadeInUp" data-wow-delay="{{ $delay }}s">
-                    <div class="icon-box">
-                        <img src="{{ $iconImage }}" alt="{{ $serviceName }}">
-                    </div>
-                    <div class="feature-item-content">
-                        <h3 style="color: {{ $index % 2 == 0 ? 'var(--white-color)' : '#040303' }};">
-    {{ $serviceName }}
-</h3>
+                                            <!-- Feature Item Start -->
+                                            <div class="our-feature-item wow fadeInUp" data-wow-delay="{{ $delay }}s">
+                                                <div class="icon-box">
+                                                    <img src="{{ $iconImage }}" alt="{{ $serviceName }}">
+                                                </div>
+                                                <div class="feature-item-content">
+                                                    <h3 style="color: {{ $index % 2 == 0 ? 'var(--white-color)' : '#040303' }};">
+                                {{ $serviceName }}
+                            </h3>
 
-<p style="color: {{ $index % 2 == 0 ? 'var(--white-color)' : '#040303' }};">
-    {{ $description }}
-</p>
+                            <p style="color: {{ $index % 2 == 0 ? 'var(--white-color)' : '#040303' }};">
+                                {{ $description }}
+                            </p>
 
-                       <p style="color: {{ $index % 2 == 0 ? 'var(--white-color)' : '#24212' }};">
-    {{ $description }}
-</p>
+                                                <p style="color: {{ $index % 2 == 0 ? 'var(--white-color)' : '#24212' }};">
+                                {{ $description }}
+                            </p>
 
-                            <a href="{{ route('service.details', ['slug' => $slug]) }}" class="service-btn">
-                                <img src="{{ asset('assets/images/arrow-white.svg') }}" alt="">
-                            </a>
-                    </div>
-                </div>
-                <!-- Feature Item End -->
-            @endforeach
-        </div>
-        <!-- Our Feature List End -->
-    </div>
+                                                        <a href="{{ route('service.details', ['slug' => $slug]) }}" class="service-btn">
+                                                            <img src="{{ asset('assets/images/arrow-white.svg') }}" alt="">
+                                                        </a>
+                                                </div>
+                                            </div>
+                                            <!-- Feature Item End -->
+                                        @endforeach
+                                    </div>
+                                    <!-- Our Feature List End -->
+                                </div>
 
-   
-</div>
+                            
+                            </div>
 
         </div>
     </div>
@@ -639,6 +629,95 @@
             </div>
         </div>
     </div>
+
+    
+  
+
+
+  <div class="container py-5">
+    <div class="text-center pricing-header">
+      <p>Compact Loader Market Size, Share & Industry Analysis, By Product Type (Wheel Loader and Track Loader), By Source Type (Diesel, Electric, and Hybrid), and By Application (Construction, Landscaping, Agriculture, Forestry, and Others), and Regional Forecast, 2025 – 2032</p>
+    </div>
+
+    <div class="step-nav">
+      <div class="arrow-step active">Select Licence Type</div>
+      <div class="arrow-step active">Billing Information and Payment</div>
+     <div class="arrow-step active">Order Confirmation</div>
+    </div>
+
+    <div class="card-deck">
+      <!-- Excel Only -->
+      <div class="plan-card">
+        <div class="plan-title">EXCEL ONLY</div>
+        <div class="price">$3450</div>
+        <button class="btn buy-btn">Buy Now</button>
+        <ul>
+          <li>Single User Access</li>
+          <li>No Free Customization</li>
+          <li>Free Analyst Support 2 months post purchase</li>
+          <li><strong>Deliverable Report Format:</strong> Excel</li>
+          <li>Quantitative Data Only</li>
+        </ul>
+      </div>
+
+      <!-- Single User -->
+      <div class="plan-card">
+        <div class="plan-title">SINGLE USER ACCESS</div>
+        <div class="price">$4850</div>
+        <button class="btn buy-btn">Buy Now</button>
+        <ul>
+          <li>Single User Access</li>
+          <li>20 hours Free Customization</li>
+          <li>Free Analyst Support 3 months post purchase</li>
+          <li>Direct Access to Analyst Team</li>
+          <li><strong>Deliverable Report Format:</strong> PDF</li>
+        </ul>
+      </div>
+
+      <!-- Multi User (Popular) -->
+      <div class="plan-card highlight">
+        <div class="badge-popular">Frequently Purchased</div>
+        <div class="plan-title">MULTI USER ACCESS</div>
+        <div class="price">$5850</div>
+        <button class="btn buy-btn">Buy Now</button>
+        <ul>
+          <li>Team Access (Up to 6 User)</li>
+          <li>40 hours Free Customization</li>
+          <li>Free Analyst Support 6 months post purchase</li>
+          <li>Direct Access to the Analyst Team</li>
+          <li>15% Discount on Next Purchase</li>
+          <li>Report Format: PDF + Excel</li>
+        </ul>
+      </div>
+
+      <!-- Enterprise -->
+      <div class="plan-card">
+        <div class="plan-title">ENTERPRISE ACCESS</div>
+        <div class="price">$6850</div>
+        <button class="btn buy-btn">Buy Now</button>
+        <ul>
+          <li>Unlimited User Access</li>
+          <li>60 hours Free Customization</li>
+          <li>Free Analyst Support 12 months post purchase</li>
+          <li>Direct Access to the Analyst Team</li>
+          <li>25% Discount on Next Purchase</li>
+          <li>Permission to Print Report</li>
+          <li>Report Format: PDF + Excel + PPT</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-logos mt-5">
+      <img src="{{ asset('assets') }}/images/20.webp" height="30">
+      <img src="{{ asset('assets') }}/images/21.webp" height="30">
+      <img src="{{ asset('assets') }}/images/22.webp" height="30">
+      <!-- <img src="{{ asset('assets') }}/images/23.webp" height="30"> -->
+      <!-- <img src="{{ asset('assets') }}/images/20.webp" height="30"> -->
+      <!-- <img src="25.png" height="30"> -->
+    </div>
+  </div>
+
+
      <!-- Our FAQs Section Start-->
     <!-- <div class="our-faqs">
         <div class="container">
@@ -1292,7 +1371,7 @@
 </div> -->
 
     <!-- Our Blog Section End  -->
-     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 
 <script>
     new Swiper('.jfin-swiper', {

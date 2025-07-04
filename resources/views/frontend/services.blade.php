@@ -53,7 +53,7 @@
     </div>
     <!-- What We Do Section End -->
     <!-- Page Services Section Start -->
-   <div class="page-services">
+<div class="page-services">
     <div class="container">
         <div class="row">
             @foreach($allServices as $index => $service)

@@ -5,7 +5,7 @@
                 <!-- Footer Newsletter Box Start -->
                 <div class="footer-newsletter-box">
                     <!-- Footer Newsletter Title Start -->
-                    <img src="{{ asset('assets/images/Logo_white.png') }}" alt="Logo" style="width: 320px; height: auto;">
+                    <img src="{{ asset('assets/images/Logo_white (1).png') }}" alt="Logo" style="width: 320px; height: auto;">
 
                     <!-- Footer Newsletter Title End -->
 
@@ -39,15 +39,15 @@
                 <div class="footer-links">
                     <h3 class="mb-3">Industries</h3>
                     <ul>
-    @foreach($allIndustries as $industry)
-        <li>
-            <a href="{{ route('industries.details', ['slug' => Str::slug($industry->industries_name)]) }}">
-                {{ $industry->industries_name }}
-            </a>
-            
-        </li>
-    @endforeach
-</ul>
+                                @foreach($allIndustries as $industry)
+                                <li>
+                                    <a href="{{ route('industries.details', ['slug' => Str::slug($industry->industries_name)]) }}">
+                                        {{ $industry->industries_name }}
+                                    </a>
+                                    
+                                </li>
+                                @endforeach
+                    </ul>
 
                 </div>
                 <!-- Footer Links End -->
@@ -57,19 +57,19 @@
                 <!-- Footer Links Start -->
                 <div class="footer-links">
                     <h3 class="mb-3">service</h3>
-                    @php
-    use Illuminate\Support\Str;
-@endphp
+                        @php
+                        use Illuminate\Support\Str;
+                        @endphp
 
-<ul>
-    @foreach($allServices as $service)
-        <li>
-            <a href="{{ route('service.details', ['slug' => Str::slug($service->service_name)]) }}">
-                {{ $service->service_name }}
-            </a>
-        </li>
-    @endforeach
-</ul>
+                    <ul>
+                        @foreach($allServices as $service)
+                            <li>
+                                <a href="{{ route('service.details', ['slug' => Str::slug($service->service_name)]) }}">
+                                    {{ $service->service_name }}
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
 
 
                 </div>

@@ -42,21 +42,19 @@
                 <!-- Service Sidebar Start -->
                 <div class="service-sidebar">
                     <!-- Service Category List Start -->
-                  <div class="service-catagery-list wow fadeInUp">
- 
-</head>
-<body>
+                        <div class="service-catagery-list wow fadeInUp">
+        
 
- <div class="report-card">
-  <h3>📊 Our Reports</h3>
-  <p>Explore industry insights and stay ahead in the market.</p>
-                       <button type="submit" class="btn-default py-2">Buy Now</button>
-                        <div id="msgSubmit" class="h3 hidden"></div> 
-                                            
-                                                          
-                      </div>  
-                        
-                  </div>
+                            <div class="report-card">
+                                <h3>📊 Our Reports</h3>
+                                <p>Explore industry insights and stay ahead in the market.</p>
+                                                    <button type="submit" class="btn-default py-2">Buy Now</button>
+                                                        <div id="msgSubmit" class="h3 hidden"></div> 
+                                                    
+                                                                
+                            </div>  
+                                
+                        </div>
                     <!-- Service Category List End -->
 
                     <!-- Sidebar Cta Box Start -->

@@ -68,83 +68,120 @@
                                     
                                 </li>
                                 
-                                <!-- <li class="menu-item-has-children">
-                                    <a href="#">Insights <i class="fas fa-plus"></i></a>
-                                    <div class="sub-menu mega-menu mega-menu-column-4">
-                                        @foreach($insightMenuData as $category)
-                                            <div class="list-item">
-                                                <h4 class="title">
-                                                    <a href="#">{{ $category['category_name'] }}</a>
-                                                </h4>
-                                            </div>
-                                        @endforeach
-                                        <a class="title" href="{{ url('/insights') }}">View All</a>
-                                    </div>
-                                </li> -->
+                                
 
                                 <li class="menu-item-has-children">
-                                    <a href="#">Industries <i class="fas fa-plus"></i></a>
-                                    <div class="sub-menu mega-menu mega-menu-column-4">
+                                    <a href="{{ url('/industries') }}">Industries <i class="fas fa-plus"></i></a>
+                                    <div class="sub-menu industries-two-column">
                                         @php
-                                            $chunks = $industriesMenuData->chunk(ceil($industriesMenuData->count() / 4));
+                                            $chunks = $industriesMenuData->chunk(ceil($industriesMenuData->count() / 2));
+                                            $leftItems = $chunks[0];
+                                            $rightItems = $chunks[1] ?? collect(); // in case only 1 chunk
                                         @endphp
 
-                                        @foreach($chunks as $chunk)
-                                            <div class="list-item">
-                                                @foreach($chunk as $category)
-                                                    <h4 class="title">
-                                                        <a href="{{ route('industries.details', ['slug' => $category['industries'][0]['slug'] ?? '#']) }}">
-                                                            {{ $category['category_name'] }}
-                                                        </a>
-                                                    </h4>
+                                        <div class="industries-column">
+                                            <div class="industry-list">
+                                                @foreach($leftItems as $category)
+                                                    <a href="{{ route('industries.details', ['slug' => $category['industries'][0]['slug'] ?? '#']) }}">
+                                                        {{ $category['category_name'] }}
+                                                    </a>
                                                 @endforeach
                                             </div>
-                                        @endforeach
-                                        <a class="title" href="{{ url('/industries') }}">View All</a>
+
+                                            <div class="divider-vertical"></div>
+
+                                            <div class="industry-list">
+                                                @foreach($rightItems as $category)
+                                                    <a href="{{ route('industries.details', ['slug' => $category['industries'][0]['slug'] ?? '#']) }}">
+                                                        {{ $category['category_name'] }}
+                                                    </a>
+                                                @endforeach
+                                            </div>
+                                        </div>
+
+                                        <div class="view-all-link">
+                                            <a href="{{ url('/industries') }}">View All</a>
+                                        </div>
                                     </div>
                                 </li>
 
-                                 <li class="menu-item-has-children">
+
+
+                                <li class="menu-item-has-children">
                                     <a href="#">Capabilities <i class="fas fa-plus"></i></a>
-                                    <div class="sub-menu mega-menu mega-menu-column-4">
+                                    <div class="sub-menu capabilities-two-column">
                                         @if(isset($serviceMenuData) && count($serviceMenuData))
                                             @php
-                                                $chunks = $serviceMenuData->chunk(ceil($serviceMenuData->count() / 4));
+                                                $chunks = $serviceMenuData->chunk(ceil($serviceMenuData->count() / 2));
+                                                $leftItems = $chunks[0];
+                                                $rightItems = $chunks[1] ?? collect();
                                             @endphp
 
-                                            @foreach($chunks as $chunk)
-                                                <div class="list-item">
-                                                    @foreach($chunk as $category)
-                                                        <h4 class="title">
-                                                            <a href="{{ route('service.details', ['slug' => $category['services'][0]['slug'] ?? '#']) }}" class="text-success">
-                                                                {{ $category['category_name'] }}
-                                                            </a>
-                                                        </h4>
+                                            <div class="capabilities-columns">
+                                                <div class="capability-list">
+                                                    @foreach($leftItems as $category)
+                                                        <a href="{{ route('service.details', ['slug' => $category['services'][0]['slug'] ?? '#']) }}">
+                                                            {{ $category['category_name'] }}
+                                                        </a>
                                                     @endforeach
                                                 </div>
-                                            @endforeach
+
+                                                <div class="divider-vertical"></div>
+
+                                                <div class="capability-list">
+                                                    @foreach($rightItems as $category)
+                                                        <a href="{{ route('service.details', ['slug' => $category['services'][0]['slug'] ?? '#']) }}">
+                                                            {{ $category['category_name'] }}
+                                                        </a>
+                                                    @endforeach
+                                                </div>
+                                            </div>
                                         @endif
-                                        <a class="title" href="{{ url('/services') }}">View All</a>
+
+                                        <div class="view-all-link">
+                                            <a href="{{ url('/services') }}">View All</a>
+                                        </div>
                                     </div>
                                 </li>
+
 
                                 <li class="menu-item-has-children">
                                     <a href="#">Reports <i class="fas fa-plus"></i></a>
-                                    <div class="sub-menu mega-menu mega-menu-column-4">
+                                    <div class="sub-menu reports-two-column">
                                         @if(isset($reportMenuData) && count($reportMenuData))
-                                            @foreach($reportMenuData as $chunk)
-                                                <div class="list-item">
+                                            @php
+                                                $chunks = $reportMenuData->collapse()->chunk(ceil($reportMenuData->collapse()->count() / 2));
+                                                $leftReports = $chunks[0];
+                                                $rightReports = $chunks[1] ?? collect();
+                                            @endphp
+
+                                            <div class="reports-columns">
+                                                <div class="report-list">
                                                     <ul>
-                                                        @foreach($chunk as $report)
+                                                        @foreach($leftReports as $report)
                                                             <li><a href="{{ url('/reports/' . $report['slug']) }}">{{ $report['name'] }}</a></li>
                                                         @endforeach
                                                     </ul>
                                                 </div>
-                                            @endforeach
+
+                                                <div class="divider-vertical"></div>
+
+                                                <div class="report-list">
+                                                    <ul>
+                                                        @foreach($rightReports as $report)
+                                                            <li><a href="{{ url('/reports/' . $report['slug']) }}">{{ $report['name'] }}</a></li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            </div>
                                         @endif
-                                        <a class="title" href="{{ url('/reports') }}">View All</a>
+
+                                        <div class="view-all-link">
+                                            <a href="{{ url('/reports') }}">View All</a>
+                                        </div>
                                     </div>
                                 </li>
+
 
                                 <li>
                                     <a href="{{ url('/about') }}">About Us</a>
@@ -153,8 +190,8 @@
                                 <div class="header-item float-end">
                                     <!-- Header Btn Start -->
                                     <div class="header-btn d-none d-lg-inline-flex">
-    <a href="{{ url('/contact') }}" class="btn-default btn-highlighted">contact us</a>
-</div>
+                                    <a href="{{ url('/contact') }}" class="btn-default btn-highlighted">contact us</a>
+                                </div>
 
                                     <!-- Header Btn End -->
                                 </div>

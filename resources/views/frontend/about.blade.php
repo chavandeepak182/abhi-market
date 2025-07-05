@@ -36,8 +36,7 @@
                         <div class="section-title">
                             <!-- <h3 class="wow fadeInUp">how it work</h3> -->
                             <h2 class="text-anime-style-2" data-cursor="-opaque">Who <span>We Are</span></h2>
-                            <p class="wow fadeInUp" data-wow-delay="0.2s">We are a purpose-driven market research and consulting company passionate about turning data into direction. Founded in 2023, we bring together researchers, strategists, and data scientists who believe that intelligence isn’t just about numbers, it’s about insight that sparks progress.
-</p>
+                            <p class="wow fadeInUp" data-wow-delay="0.2s">We are a purpose-driven market research and consulting company passionate about turning data into direction. Founded in 2023, we bring together researchers, strategists, and data scientists who believe that intelligence isn’t just about numbers, it’s about insight that sparks progress.</p>
                         </div>
                         <!-- Section Title End -->
 
@@ -151,10 +150,10 @@
                             </ul>
                         </div>
                         <p class="wow fadeInUp" data-wow-delay="0.2s">and more. Using a blend of qualitative expertise and data science, we deliver bespoke solutions that inform bold business moves.
-Whether you’re entering a new geography, launching a product, or restructuring a business model, we help you understand the landscape before you leap.
-What makes us different is our obsession with relevance. We don’t deliver static reports, we craft stories backed by evidence, customized for your strategic needs. Our advanced data visualization capabilities bring research to life, turning complexity into clarity.
-In less than two years, we’ve worked with over 150 organizations across sectors like healthcare, ICT, finance, energy, and consumer goods, proving our commitment to impact, not just insight.
-We don’t just inform; we empower.</p>
+            Whether you’re entering a new geography, launching a product, or restructuring a business model, we help you understand the landscape before you leap.
+            What makes us different is our obsession with relevance. We don’t deliver static reports, we craft stories backed by evidence, customized for your strategic needs. Our advanced data visualization capabilities bring research to life, turning complexity into clarity.
+            In less than two years, we’ve worked with over 150 organizations across sectors like healthcare, ICT, finance, energy, and consumer goods, proving our commitment to impact, not just insight.
+            We don’t just inform; we empower.</p>
                         <!-- What We Do List End -->
 
                         <!-- What We Do Button Start -->
@@ -332,15 +331,9 @@ We don’t just inform; we empower.</p>
                                 <img src="{{ asset('assets') }}/images/fact-counter-img.jpg" alt="">
                             </figure>
                         </div>
-                        <!-- Fact Counter img End -->
-
-                        <!-- Fact Counter Skillbar Start -->
-                        <!-- <div class="fact-counter-skillbar">
-                            <img src="{{ asset('assets') }}/images/fact-counter-skillbar-img.png" alt="">
-                        </div> -->
-                        <!-- Fact Counter Skillbar End -->
+                        
                     </div>
-                    <!-- Fact Counter Image End -->
+                    
                 </div>
 
                 <div class="col-lg-6">
@@ -352,9 +345,9 @@ We don’t just inform; we empower.</p>
                             <h2 class="text-anime-style-2" data-cursor="-opaque">Diversity & <span>Inclusion</span></h2>
                             <p class="wow fadeInUp" data-wow-delay="0.2s">At the heart of our culture is a simple belief: diversity powers insight. When people from different backgrounds, experiences, and identities come together, they bring perspectives that spark innovation.</p>
                             <p class="wow fadeInUp" data-wow-delay="0.2s">We are committed to fostering a workplace where everyone feels valued, heard, and empowered. Our approach to diversity is not a checklist; it’s a mindset that influences how we hire, how we collaborate, and how we deliver research.
-We promote equity through inclusive policies, mentorship programs, and a culture of openness. Our teams are encouraged to bring their whole selves to work, and our leadership is dedicated to continuous learning and progress.</p>
-<p class="wow fadeInUp" data-wow-delay="0.2s">Diversity also strengthens the work we do for our clients. It enables us to research complex, multicultural markets with authenticity and accuracy. It helps us understand behaviors, not just numbers.</p>
-<p class="wow fadeInUp" data-wow-delay="0.2s">Ultimately, inclusion isn’t just a value; it’s a strategy. It’s how we build stronger teams, develop better insights, and deliver impact that reflects the world we live in.</p>
+                            We promote equity through inclusive policies, mentorship programs, and a culture of openness. Our teams are encouraged to bring their whole selves to work, and our leadership is dedicated to continuous learning and progress.</p>
+                            <p class="wow fadeInUp" data-wow-delay="0.2s">Diversity also strengthens the work we do for our clients. It enables us to research complex, multicultural markets with authenticity and accuracy. It helps us understand behaviors, not just numbers.</p>
+                            <p class="wow fadeInUp" data-wow-delay="0.2s">Ultimately, inclusion isn’t just a value; it’s a strategy. It’s how we build stronger teams, develop better insights, and deliver impact that reflects the world we live in.</p>
                         </div>
                         <!-- Section Title End -->
 
@@ -414,7 +407,7 @@ We promote equity through inclusive policies, mentorship programs, and a culture
                 </div>
             </div>
         </div>
-     </div>
+    </div>
     <!-- Some Fact Section End -->
  <!-- Our Approach Section Start -->
     <div class="our-approach">
@@ -537,10 +530,9 @@ We promote equity through inclusive policies, mentorship programs, and a culture
                             <h2 class="text-anime-style-2" data-cursor="-opaque">Me<span>dia</span></h2>
                             <p class="wow fadeInUp" data-wow-delay="0.2s">Our media presence reflects not just what we do, but how we think. Through articles, thought leadership content, interviews, and curated reports, we aim to make meaningful contributions to global business conversations.</p>
                             <p class="wow fadeInUp" data-wow-delay="0.2s">This space is a window into our world, showcasing the voices of our analysts, spotlighting our partnerships, and highlighting real-world impact. From industry predictions and case studies to press features and whitepapers, we bring fresh ideas and data-backed opinions that matter.</p>
-<p class="wow fadeInUp" data-wow-delay="0.2s">You’ll find regular updates on major project outcomes, trend forecasts, and innovations in analytics, all designed to inform, engage, and inspire. Our team members also frequently participate in forums, webinars, and academic panels, contributing to the larger ecosystem of research and strategy.</p>
-<p class="wow fadeInUp" data-wow-delay="0.2s">We believe good insights are meant to be shared. That’s why we use our media platforms to amplify both our expertise and the voices of our clients, collaborators, and community.
-This is where knowledge meets momentum, and where ideas grow into action.
-</p>
+                            <p class="wow fadeInUp" data-wow-delay="0.2s">You’ll find regular updates on major project outcomes, trend forecasts, and innovations in analytics, all designed to inform, engage, and inspire. Our team members also frequently participate in forums, webinars, and academic panels, contributing to the larger ecosystem of research and strategy.</p>
+                            <p class="wow fadeInUp" data-wow-delay="0.2s">We believe good insights are meant to be shared. That’s why we use our media platforms to amplify both our expertise and the voices of our clients, collaborators, and community.
+                            This is where knowledge meets momentum, and where ideas grow into action.</p>
                         </div>
                         <!-- Section Title End -->
 
@@ -600,7 +592,7 @@ This is where knowledge meets momentum, and where ideas grow into action.
                 </div>
             </div>
         </div>
-     </div>
+    </div>
     <!-- Some Fact Section End -->
     
 

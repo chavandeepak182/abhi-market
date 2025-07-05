@@ -495,7 +495,7 @@ padding:0 15px;
 
 .header .menu > ul > li .sub-menu.mega-menu-column-4 > .list-item .title{
 	font-size: 16px;
-	color:var(--accent-color);
+	color:#6a7073;
 	font-weight: 500;
 	line-height: 1;
 	padding:10px 0;
@@ -537,7 +537,7 @@ display: none;
 }
 
 .mega-menu .list-item h4.title a{
-	color: var(--accent-color) !important;
+	color: #6a7073 !important;
 }
 
 /*responsive*/
@@ -7512,6 +7512,330 @@ footer.main-footer{
         font-size: 14px;
     }
 }
+
+/* Default (Desktop View) – तुमचं original जसंचं तसं ठेवा */
+.industries-two-column {
+    padding: 20px 30px;
+    background-color: #fff;
+}
+
+.industries-column {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.industry-list {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.industry-list a {
+    font-size: 16px;
+    color: #000;
+    text-decoration: none;
+    line-height: 1.5;
+}
+
+.industry-list a:hover {
+    color: #007BFF;
+}
+
+.divider-vertical {
+    width: 1px;
+    background-color: #ccc;
+    height: auto;
+    margin: 0 10px;
+}
+
+.view-all-link {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.view-all-link a {
+    font-weight: bold;
+    text-decoration: underline;
+    color: #000;
+}
+
+/* ✅ Mobile View (Single Column, Vertical List) */
+@media (max-width: 768px) {
+    .industries-column {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .industry-list {
+        width: 100%;
+        padding: 0;
+        gap: 6px;
+    }
+
+    .divider-vertical {
+        display: none;
+    }
+
+    .industry-list a {
+        display: block;
+        font-size: 15px;
+        padding: 8px 0;
+    }
+
+    .industries-two-column {
+        padding: 15px;
+    }
+
+    .view-all-link {
+        margin-top: 15px;
+    }
+}
+
+
+.view-all-link a {
+    font-weight: bold;
+    text-decoration: underline;
+    color: #000;
+}
+
+.reports-two-column {
+    padding: 20px 30px;
+    background-color: #fff;
+}
+
+.reports-columns {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.report-list {
+    flex: 1;
+}
+
+.report-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.report-list li {
+    margin-bottom: 10px;
+}
+
+.report-list a {
+    font-size: 16px;
+    color: #000;
+    text-decoration: none;
+    line-height: 1.5;
+}
+
+.report-list a:hover {
+    color: #007BFF;
+}
+
+.divider-vertical {
+    width: 1px;
+    background-color: #ccc;
+    height: auto;
+    margin: 0 10px;
+}
+
+.view-all-link {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.view-all-link a {
+    font-weight: bold;
+    text-decoration: underline;
+    color: #000;
+}
+
+   /* Existing Desktop Styles – असंच ठेवा */
+.capabilities-two-column {
+    padding: 20px 30px;
+    background-color: #fff;
+}
+
+.capabilities-columns {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.capability-list {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.capability-list a {
+    font-size: 16px;
+    color: #000;
+    text-decoration: none;
+    line-height: 1.5;
+}
+
+.capability-list a:hover {
+    color: #007BFF;
+}
+
+.divider-vertical {
+    width: 1px;
+    background-color: #ccc;
+    height: auto;
+    margin: 0 10px;
+}
+
+.view-all-link {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.view-all-link a {
+    font-weight: bold;
+    text-decoration: underline;
+    color: #000;
+}
+
+/* ✅ Mobile Responsive Layout */
+@media (max-width: 768px) {
+    .capabilities-columns {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .capability-list {
+        width: 100%;
+        padding: 0;
+        gap: 6px;
+    }
+
+    .capability-list a {
+        display: block;
+        font-size: 15px;
+        padding: 8px 0;
+    }
+
+    .capabilities-two-column {
+        padding: 15px;
+    }
+
+    .divider-vertical {
+        display: none;
+    }
+
+    .view-all-link {
+        margin-top: 15px;
+    }
+}
+/* pricing report  */
+
+    body {
+      background: url('your-background-image.png') no-repeat top right;
+      background-size: contain;
+      background-color: #f7fafd;
+      font-family: Arial, sans-serif;
+    }
+    .pricing-header {
+      font-size: 15px;
+      color: #003366;
+      font-weight: 600;
+      margin-bottom: 30px;
+    }
+    .step-nav {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .arrow-step {
+      position: relative;
+      background-color: #fff;
+      color: #007bff;
+      padding: 10px 30px;
+      border: 2px solid #007bff;
+      font-weight: 600;
+      clip-path: polygon(10px 0%, 100% 0%, 100% 50%, 100% 100%, 10px 100%, 0% 50%);
+    }
+    .arrow-step.active {
+      background-color: #0096d6;
+      color: white;
+      border: none;
+    }
+    .card-deck {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .plan-card {
+      background: white;
+      border: 1px solid #d1e4f3;
+      padding: 25px;
+      border-radius: 10px;
+      width: 260px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+    .plan-card.highlight {
+      border: 2px solid #00a3e0;
+    }
+    .plan-title {
+      font-weight: bold;
+      color: #005c8f;
+    }
+    .price {
+      font-size: 24px;
+      color: #0096d6;
+      margin: 10px 0;
+      font-weight: bold;
+    }
+    .buy-btn {
+      background: #0096d6;
+      color: white;
+      font-weight: 600;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    .plan-card ul {
+      list-style: none;
+      padding: 0;
+      text-align: left;
+      font-size: 14px;
+    }
+    .plan-card ul li::before {
+      content: '\2713';
+      color: #00a3e0;
+      font-weight: bold;
+      display: inline-block;
+      width: 1em;
+    }
+    .footer-logos {
+      margin-top: 40px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .badge-popular {
+      background-color: #00a3e0;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 10px;
+      font-size: 12px;
+      margin-bottom: 10px;
+      display: inline-block;
+    }
+  
+
 
 /* header */
 @media (max-width: 768px) {

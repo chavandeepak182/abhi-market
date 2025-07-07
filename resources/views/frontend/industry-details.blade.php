@@ -125,181 +125,42 @@
                 </div>
                 <!-- Case Study Single Content End -->
             </div>
+            @if($reports->count())
+                <div class="mt-5">
+                    <h3 class="mb-4">Related Reports</h3>
+
+                    @foreach($reports as $report)
+                        <div class="card mb-4 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title text-primary">
+                                    <a href="{{ route('reports.details', $report->slug) }}" class="text-decoration-none text-dark">
+                                        {{ $report->report_title }}
+                                    </a>
+                                </h5>
+
+                                <p class="card-text">
+                                    {!! Str::limit(strip_tags($report->description), 200) !!} 
+                                    <a href="{{ route('reports.details', $report->slug) }}" class="text-info">Read More <i class="fa fa-external-link-alt"></i></a>
+                                </p>
+
+                                <p class="small text-muted mb-3">
+                                    {{ \Carbon\Carbon::parse($report->publish_date)->format('F, Y') }} |
+                                    Base Year: {{ date('Y', strtotime($report->publish_date . ' -1 year')) }} 
+                                </p>
+
+                                <div class="d-flex gap-2">
+                                    <a href="#" class="btn btn-sm btn-info">Request Sample</a>
+                                    <a href="#" class="btn btn-sm btn-success"><i class="fa fa-shopping-cart me-1"></i> Buy Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
         </div>
     </div>
 </div>
 <!-- Overview Section end -->
-
-<!-- Our Approach Section Start -->
-<div class="our-approach bg-white">
-    <div class="container">
-        <div class="row">
-            <div class="section-title">
-                <h2 class="wow fadeInUp" data-wow-delay="0.2s">Related <span>Reports</span></h2> 
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <!-- Mission Vision Item Start -->
-                <div class="reports-card wow fadeInUp">
-                    <!-- Mission Vision Image Start -->
-                    <div class="mission-vission-image">
-                        <figure class="image-anime">
-                            <img src="{{ asset('assets') }}/images/our-mission-img.jpg" alt="">
-                        </figure>
-                    </div>
-                    <!-- Mission Vision Image End -->
-                    <!-- Mission Vision Header Start -->
-                    <div class="mission-vission-header">
-                        <div class="mission-vission-content">
-                            <p class="mb-3">Category</p>
-                            <h3><a href="#">AI Integration in Education: Building a Future-Ready Curriculum</a></h3>
-                            <p><small>March 31, 2025</small></p>
-                        </div>
-                    </div>
-                    <!-- Mission Vision Header End -->
-                </div>
-                <!-- Mission Vision Item End -->
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <!-- Mission Vision Item Start -->
-                <div class="reports-card wow fadeInUp" data-wow-delay="0.2s">
-                    <!-- Mission Vision Image Start -->
-                    <div class="mission-vission-image">
-                        <figure class="image-anime">
-                            <img src="{{ asset('assets') }}/images/our-vision-img.jpg" alt="">
-                        </figure>
-                    </div>
-                    <!-- Mission Vision Image End -->
-                    <!-- Mission Vision Header Start -->
-                    <div class="mission-vission-header">
-                        <div class="mission-vission-content">
-                            <p class="mb-3">Category</p>
-                            <h3><a href="#">Global Manufacturing Footprint Rationalization for a Leading Biopharmaceutical Company</a></h3>
-                            <p><small>March 31, 2025</small></p>
-                        </div>
-                    </div>
-                    <!-- Mission Vision Header End -->
-                </div>
-                <!-- Mission Vision Item End -->
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <!-- Mission Vision Item Start -->
-                <div class="reports-card wow fadeInUp" data-wow-delay="0.4s">
-                    <!-- Mission Vision Image Start -->
-                    <div class="mission-vission-image">
-                        <figure class="image-anime">
-                            <img src="{{ asset('assets') }}/images/our-value-img.jpg" alt="">
-                        </figure>
-                    </div>
-                    <!-- Mission Vision Image End -->
-                    <!-- Mission Vision Header Start -->
-                    <div class="mission-vission-header">
-                        <div class="mission-vission-content">
-                            <p class="mb-3">Category</p>
-                            <h3><a href="#">The Future Role of Generative AI in SaaS Pricing</a></h3>
-                            <p><small>March 31, 2025</small></p>
-                        </div>
-                    </div>
-                    <!-- Mission Vision Header End -->
-                </div>
-                <!-- Mission Vision Item End -->
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <!-- Mission Vision Item Start -->
-                <div class="reports-card wow fadeInUp" data-wow-delay="0.4s">
-                    <!-- Mission Vision Image Start -->
-                    <div class="mission-vission-image">
-                        <figure class="image-anime">
-                            <img src="{{ asset('assets') }}/images/our-value-img.jpg" alt="">
-                        </figure>
-                    </div>
-                    <!-- Mission Vision Image End -->
-                    <!-- Mission Vision Header Start -->
-                    <div class="mission-vission-header">
-                        <div class="mission-vission-content">
-                            <p class="mb-3">Category</p>
-                            <h3><a href="#">The Future Role of Generative AI in SaaS Pricing</a></h3>
-                            <p><small>March 31, 2025</small></p>
-                        </div>
-                    </div>
-                    <!-- Mission Vision Header End -->
-                </div>
-                <!-- Mission Vision Item End -->
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <!-- Mission Vision Item Start -->
-                <div class="reports-card wow fadeInUp" data-wow-delay="0.2s">
-                    <!-- Mission Vision Image Start -->
-                    <div class="mission-vission-image">
-                        <figure class="image-anime">
-                            <img src="{{ asset('assets') }}/images/our-vision-img.jpg" alt="">
-                        </figure>
-                    </div>
-                    <!-- Mission Vision Image End -->
-                    <!-- Mission Vision Header Start -->
-                    <div class="mission-vission-header">
-                        <div class="mission-vission-content">
-                            <p class="mb-3">Category</p>
-                            <h3><a href="#">Global Manufacturing Footprint Rationalization for a Leading Biopharmaceutical Company</a></h3>
-                            <p><small>March 31, 2025</small></p>
-                        </div>
-                    </div>
-                    <!-- Mission Vision Header End -->
-                </div>
-                <!-- Mission Vision Item End -->
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <!-- Mission Vision Item Start -->
-                <div class="reports-card wow fadeInUp">
-                    <!-- Mission Vision Image Start -->
-                    <div class="mission-vission-image">
-                        <figure class="image-anime">
-                            <img src="{{ asset('assets') }}/images/our-mission-img.jpg" alt="">
-                        </figure>
-                    </div>
-                    <!-- Mission Vision Image End -->
-                    <!-- Mission Vision Header Start -->
-                    <div class="mission-vission-header">
-                        <div class="mission-vission-content">
-                            <p class="mb-3">Category</p>
-                            <h3><a href="#">AI Integration in Education: Building a Future-Ready Curriculum</a></h3>
-                            <p><small>March 31, 2025</small></p>
-                        </div>
-                    </div>
-                    <!-- Mission Vision Header End -->
-                </div>
-                <!-- Mission Vision Item End -->
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Our Approach Section End -->
-
-<!-- CTA-->
-<div class="our-pricing">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-8 offset-2 text-center">
-                <!-- Section Title Start -->
-                <div class="section-title mb-0">
-                    <h2 class="text-anime-style-2" data-cursor="-opaque">How can we help you achieve high-impact results?</span></h2>
-                </div>
-                <!-- Section Title End -->
-                    <!-- Section Button Start -->
-                <div class="mt-5 wow fadeInUp" data-wow-delay="0.2s">
-                    <a href="{{ url('/contact') }}" class="btn-default">Let's Start</a>
-                </div>
-                <!-- Section Button End -->
-            </div>
-        </div>
-    </div>
-</div>
-<!-- CTA -->
-
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         let limit = 5;

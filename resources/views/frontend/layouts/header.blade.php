@@ -145,41 +145,8 @@
                                 </li>
 
 
-                                <li class="menu-item-has-children">
-                                    <a href="#">Reports <i class="fas fa-plus"></i></a>
-                                    <div class="sub-menu reports-two-column">
-                                        @if(isset($reportMenuData) && count($reportMenuData))
-                                            @php
-                                                $chunks = $reportMenuData->collapse()->chunk(ceil($reportMenuData->collapse()->count() / 2));
-                                                $leftReports = $chunks[0];
-                                                $rightReports = $chunks[1] ?? collect();
-                                            @endphp
-
-                                            <div class="reports-columns">
-                                                <div class="report-list">
-                                                    <ul>
-                                                        @foreach($leftReports as $report)
-                                                            <li><a href="{{ url('/reports/' . $report['slug']) }}">{{ $report['name'] }}</a></li>
-                                                        @endforeach
-                                                    </ul>
-                                                </div>
-
-                                                <div class="divider-vertical"></div>
-
-                                                <div class="report-list">
-                                                    <ul>
-                                                        @foreach($rightReports as $report)
-                                                            <li><a href="{{ url('/reports/' . $report['slug']) }}">{{ $report['name'] }}</a></li>
-                                                        @endforeach
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        @endif
-
-                                        <div class="view-all-link">
-                                            <a href="{{ url('/reports') }}">View All</a>
-                                        </div>
-                                    </div>
+                                <li>
+                                    <a href="{{ url('/get-reports') }}">Reports</a>
                                 </li>
 
 

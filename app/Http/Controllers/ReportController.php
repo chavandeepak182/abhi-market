@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\File;
 
 class ReportController extends Controller
 {
+    public function getReports()
+    {
+        $reports = DB::table('reports')->orderBy('created_at', 'desc')->get(); // LIFO
+        return view('frontend.reports.list', compact('reports'));
+    }
     public function index()
     {
         $reports = DB::table('reports')
@@ -199,15 +204,29 @@ class ReportController extends Controller
 
         return view('frontend.report-details', compact('report'));
     }
-
-    public function getReports(Request $request){
-        $limit = $request->get('limit', 5);
-
+    public function getReportsByIndustry($industryId)
+    {
         $reports = DB::table('reports')
-            ->select('id', 'report_name', 'slug') // include slug
-            ->limit($limit)
+            ->where('industry_category_id', $industryId)
+            ->orderBy('created_at', 'desc')
             ->get();
 
-        return response()->json($reports);
+        $html = '';
+
+        foreach ($reports as $report) {
+            $html .= view('frontend.reports.reports-card', compact('report'))->render();
+        }
+
+        return response($html);
     }
+public function showSampleForm($slug)
+{
+    $report = DB::table('reports')->where('slug', $slug)->first();
+
+    if (!$report) {
+        abort(404, 'Report not found');
+    }
+
+    return view('frontend.reports.sample-form', compact('report', 'slug'));
+}
 }

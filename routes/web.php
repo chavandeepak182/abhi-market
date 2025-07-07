@@ -111,6 +111,8 @@ Route::get('admin/enquiries', [EnquiryController::class, 'enquiryLead'])->name('
 Route::get('enquiry', [EnquiryController::class, 'showForm'])->name('enquiry.form');
 Route::post('enquiry', [EnquiryController::class, 'store'])->name('enquiry.store');
 
+Route::get('/request-sample/{slug}', [ReportController::class, 'showSampleForm'])->name('request.sample');
+
 //banner
 Route::middleware('isPartner')->group(function () {
     Route::get('/admin/banners', [BannerController::class, 'index'])->name('banners.index');
@@ -170,7 +172,8 @@ Route::get('/reports/edit/{id}', [ReportController::class, 'edit'])->name('repor
 Route::put('/reports/update/{id}', [ReportController::class, 'update'])->name('reports.update');
 Route::get('/reports/delete/{id}', [ReportController::class, 'deleteReport'])->name('reports.delete');
 Route::get('/reports/{slug}', [ReportController::class, 'show'])->name('reports.details');
-Route::get('/get-reports', [ReportController::class, 'getReports']);
+Route::get('/get-reports', [ReportController::class, 'getReports'])->name('reports.list');
+Route::get('/get-reports-by-industry/{id}', [ReportController::class, 'getReportsByIndustry']);
 
 
 //services

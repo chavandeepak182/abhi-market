@@ -48,7 +48,8 @@
                             <div class="report-card">
                                 <h3>📊 Our Reports</h3>
                                 <p>Explore industry insights and stay ahead in the market.</p>
-                                                    <button type="submit" class="btn-default py-2">Buy Now</button>
+                                                   <a href="{{ url('/purchase') }}" class="btn-default py-2">Buy Now</a>
+
                                                         <div id="msgSubmit" class="h3 hidden"></div> 
                                                     
                                                                 

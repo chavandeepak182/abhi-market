@@ -82,6 +82,8 @@
         </div>
     @endif
 </div>
+
+
 <!-- industry end -->
  <script>
     document.addEventListener("DOMContentLoaded", function () {

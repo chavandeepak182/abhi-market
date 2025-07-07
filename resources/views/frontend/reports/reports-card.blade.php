@@ -18,7 +18,7 @@
 
         <div class="d-flex gap-2">
             <a href="{{ route('request.sample', $report->slug) }}" class="btn btn-primary">Request Sample</a>
-            <a href="#" class="btn btn-success">
+            <a href="{{ url('/purchase') }}" class="btn btn-success">
                 <i class="fa fa-shopping-cart me-1"></i> Buy Now
             </a>
         </div>

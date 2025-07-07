@@ -180,16 +180,20 @@ class IndustriesController extends Controller
         return redirect()->route('industries.index')->with('success', 'industries deleted.');
     }
 
-    public function show($slug)
+   public function show($slug)
     {
         $industries = DB::table('industries')->where('slug', $slug)->first();
 
-
         if (!$industries) {
-            return redirect()->route('industries.index')->with('error', 'industries not found.');
+            return redirect()->route('industries.index')->with('error', 'Industry not found.');
         }
 
-        return view('frontend.industry-details', compact('industries'));
+        $reports = DB::table('reports')
+            ->where('industry_category_id', $industries->id)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('frontend.industry-details', compact('industries', 'reports'));
     }
 
     public function getIndustries(Request $request){

@@ -38,8 +38,14 @@
                             <input type="text" name="report_name" id="report_name" class="form-control" value="{{ $report->report_name }}" required>
                         </div>
                         <div class="position-relative pb-15 form-group">
-                            <label for="report_name">Report title</label>
-                            <input type="text" name="report_title" id="report_name" class="form-control" required>
+                            <label for="report_title">Report Title:</label>
+                            <input type="text" name="report_title" id="report_title" class="form-control" 
+                                value="{{ old('report_title', $report->report_title) }}" required>
+                        </div>
+                        <div class="position-relative pb-15 form-group">
+                            <label for="publish_date">Publish Date</label>
+                            <input type="date" name="publish_date" id="publish_date" class="form-control" 
+                                value="{{ old('publish_date', \Carbon\Carbon::parse($report->publish_date)->format('Y-m-d')) }}" required>
                         </div>
 
                         <div class="mb-3">
@@ -47,26 +53,11 @@
                             <textarea name="description" id="summernote" class="form-control">{{ $report->description }}</textarea>
                         </div>
 
-                        <div class="position-relative pb-15 form-group">
-                            <label for="summernote">Table Of Content</label>
-                            <textarea name="toc" id="mySummernote" class="form-control"></textarea>
+                        <div class="mb-3">
+                            <label for="mySummernote" class="form-label">Table Of Content:</label>
+                            <textarea name="toc" id="mySummernote" class="form-control">{{ old('toc', $report->toc) }}</textarea>
                         </div>
-                        <script>
-    $(document).ready(function() {
-        $('#mySummernote').summernote({
-            height: 250, // set editor height
-            toolbar: [
-                ['style', ['bold', 'italic', 'underline', 'clear']],
-                ['font', ['strikethrough', 'superscript', 'subscript']],
-                ['fontsize', ['fontsize']],
-                ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['insert', ['link', 'picture', 'video']],
-                ['view', ['fullscreen', 'codeview']]
-            ]
-        });
-    });
-</script>
+
                     </div>
                     
                     <div class="col-md-4">
@@ -99,9 +90,9 @@
                             <label for="meta_description" class="form-label">Meta Description:</label>
                             <textarea name="meta_description" id="meta_description" class="form-control">{{ $report->meta_description }}</textarea>
                         </div>
-                        <div class="position-relative pb-15 form-group">
-                            <label for="meta_description">Schema Markup / Open Graph Meta / Twitter Card Meta</label>
-                            <textarea name="schema_markup" id="schema_markup" class="form-control" style="height:150px;"></textarea>
+                        <div class="mb-3">
+                            <label for="schema_markup" class="form-label">Schema Markup / Open Graph Meta / Twitter Card Meta</label>
+                            <textarea name="schema_markup" id="schema_markup" class="form-control" style="height:150px;">{{ old('schema_markup', $report->schema_markup) }}</textarea>
                         </div>
                          <!-- <div class="position-relative pb-15 form-group">
                             <label for="slug">Graph Meta</label>
@@ -165,6 +156,22 @@
                     subcategoryDropdown.innerHTML += `<option value="${sub.industries_subcategory_id}">${sub.name}</option>`;
                 });
             });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $('#mySummernote').summernote({
+            height: 250, // set editor height
+            toolbar: [
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['font', ['strikethrough', 'superscript', 'subscript']],
+                ['fontsize', ['fontsize']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['insert', ['link', 'picture', 'video']],
+                ['view', ['fullscreen', 'codeview']]
+            ]
+        });
     });
 </script>
 <script>

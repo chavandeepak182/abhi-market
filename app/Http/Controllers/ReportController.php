@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\File;
 
 class ReportController extends Controller
 {
+    public function getReports()
+    {
+        $reports = DB::table('reports')->orderBy('created_at', 'desc')->get(); // LIFO
+        return view('frontend.reports.list', compact('reports'));
+    }
     public function index()
     {
         $reports = DB::table('reports')
@@ -43,6 +48,7 @@ class ReportController extends Controller
             'meta_description' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'industry_category_id' => 'required|integer|exists:industries_category,pid',
+            'publish_date' => 'required|date',
         ]);
 
         $imagePath = null;
@@ -68,6 +74,7 @@ class ReportController extends Controller
             'report_name' => $request->report_name,
             'report_title' => $request->report_title,
             'industry_category_id' => $request->industry_category_id,
+            'publish_date' => $request->publish_date,
             'description' => $request->description,
             'schema_markup' => $request->schema_markup,
             'toc' => $request->toc,
@@ -124,6 +131,7 @@ class ReportController extends Controller
         'faq_ans' => 'nullable|array',
         'faq_ans.*' => 'nullable|string|max:1000',
         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'publish_date' => 'required|date',
     ]);
 
     $report = DB::table('reports')->where('id', $id)->first();
@@ -157,6 +165,7 @@ class ReportController extends Controller
         'report_name' => $request->report_name,
         'report_title' => $request->report_title,
         'description' => $request->description,
+        'publish_date' => $request->publish_date,
         'schema_markup' => $request->schema_markup,
         'toc' => $tocContent,
         'slug' => $request->slug,
@@ -195,15 +204,29 @@ class ReportController extends Controller
 
         return view('frontend.report-details', compact('report'));
     }
-
-    public function getReports(Request $request){
-        $limit = $request->get('limit', 5);
-
+    public function getReportsByIndustry($industryId)
+    {
         $reports = DB::table('reports')
-            ->select('id', 'report_name', 'slug') // include slug
-            ->limit($limit)
+            ->where('industry_category_id', $industryId)
+            ->orderBy('created_at', 'desc')
             ->get();
 
-        return response()->json($reports);
+        $html = '';
+
+        foreach ($reports as $report) {
+            $html .= view('frontend.reports.reports-card', compact('report'))->render();
+        }
+
+        return response($html);
     }
+public function showSampleForm($slug)
+{
+    $report = DB::table('reports')->where('slug', $slug)->first();
+
+    if (!$report) {
+        abort(404, 'Report not found');
+    }
+
+    return view('frontend.reports.sample-form', compact('report', 'slug'));
+}
 }

@@ -14,9 +14,9 @@
                     <!-- Section Title Start -->
                     <div class="section-title dark-section">
                         <p class="wow fadeInUp text-white"><a href="{{ url('/') }}" class="text-white">Home</a> / <a href="#" class="text-white">{{ $industries->industries_name }}</a></p>
-                                                @php
-                                $words = explode(' ', $industries->industries_name);
-                                                    @endphp
+                       @php
+                            $words = explode(' ', $industries->industries_name);
+                        @endphp
                         <h1 class="text-anime-style-2" data-cursor="-opaque" style="white-space: nowrap;">
                             <span>{{ $words[0] }}</span> {{ implode(' ', array_slice($words, 1)) }}
                         </h1>
@@ -118,28 +118,10 @@
                                 
                             </div>
                             <!-- Case Study List End -->
-
-                          
                         </div>
                         <!-- Case Study List Video End -->
-
-                        <!-- Service Guidance Box Satrt -->
-                        
-                        <!-- Service Guidance Box End -->
-
-                        <!-- Service Steps Start -->
-                        
-                        <!-- Service Steps End -->
-
-                        <!-- Service Feature Start -->
-                        
-                        <!-- Service Feature End -->
                     </div>
                     <!-- Case Study Entry End -->
-
-                    <!-- Our FAQs section start -->
-                    
-                    <!-- Our FAQs section End -->
                 </div>
                 <!-- Case Study Single Content End -->
             </div>

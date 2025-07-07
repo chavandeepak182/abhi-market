@@ -43,6 +43,7 @@ class ReportController extends Controller
             'meta_description' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'industry_category_id' => 'required|integer|exists:industries_category,pid',
+            'publish_date' => 'required|date',
         ]);
 
         $imagePath = null;
@@ -68,6 +69,7 @@ class ReportController extends Controller
             'report_name' => $request->report_name,
             'report_title' => $request->report_title,
             'industry_category_id' => $request->industry_category_id,
+            'publish_date' => $request->publish_date,
             'description' => $request->description,
             'schema_markup' => $request->schema_markup,
             'toc' => $request->toc,
@@ -124,6 +126,7 @@ class ReportController extends Controller
         'faq_ans' => 'nullable|array',
         'faq_ans.*' => 'nullable|string|max:1000',
         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'publish_date' => 'required|date',
     ]);
 
     $report = DB::table('reports')->where('id', $id)->first();
@@ -157,6 +160,7 @@ class ReportController extends Controller
         'report_name' => $request->report_name,
         'report_title' => $request->report_title,
         'description' => $request->description,
+        'publish_date' => $request->publish_date,
         'schema_markup' => $request->schema_markup,
         'toc' => $tocContent,
         'slug' => $request->slug,

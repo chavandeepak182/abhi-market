@@ -35,14 +35,14 @@
                 <div class="row gy-20">
                     <label class="h5 fw-semibold font-heading mt-15 mb-0">Add Report <span class="text-13 text-gray-400 fw-medium"></span> </label>
                     <div class="form-group">
-    <label for="industry_category_id">Industry Category</label>
-    <select name="industry_category_id" id="industry_category_id" class="form-control" required>
-        <option value="">Select Industry Category</option>
-        @foreach ($categories as $category)
-            <option value="{{ $category->pid }}">{{ $category->category_name }}</option>
-        @endforeach
-    </select>
-</div>
+                        <label for="industry_category_id">Industry Category</label>
+                        <select name="industry_category_id" id="industry_category_id" class="form-control" required>
+                            <option value="">Select Industry Category</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->pid }}">{{ $category->category_name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="col-md-8 col-sm-5">
                          <div class="position-relative pb-15 form-group">
                             <label for="report_name">Report title</label>
@@ -51,6 +51,10 @@
                         <div class="position-relative pb-15 form-group">
                             <label for="report_name">Report Name</label>
                             <input type="text" name="report_name" id="report_name" class="form-control" required>
+                        </div>
+                        <div class="position-relative pb-15 form-group">
+                            <label for="publish_date">Publish Date</label>
+                            <input type="date" name="publish_date" id="publish_date" class="form-control" required>
                         </div>
 
                         <div class="position-relative pb-15 form-group">

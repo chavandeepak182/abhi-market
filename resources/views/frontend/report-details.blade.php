@@ -12,7 +12,7 @@
                 <!-- Page Header Box Start -->
                 <div class="page-header-box">
                     @php
-                        $words = explode(' ', $report->report_name);
+                        $words = explode(' ', $report->report_title);
                     @endphp
                     
                     <h1 class="text-anime-style-2" data-cursor="-opaque">
@@ -124,43 +124,48 @@
                         <h1 class="wow fadeInUp">{!! $report->report_title !!}</h1>
                         <br>
 
-                        
-                <div class="tabs">
-                  @if(!empty($report->description))
-                    <button class="tab-button active" data-tab="desc">Description</button>
-                  @endif
+                 <div class="sticky-tabs-wrapper">       
+                    <div class="tabs">
+                        @php
+                            $hasDesc = !empty($report->description);
+                            $hasToc = !empty($report->toc);
+                        @endphp
 
-                  @if(!empty($report->toc))
-                    <button class="tab-button {{ empty($report->description) ? 'active' : '' }}" data-tab="toc">Table Of Contents</button>
-                  @endif
+                        @if($hasDesc)
+                            <button class="tab-button active" data-tab="desc">Description</button>
+                        @endif
 
-                  {{-- Static Tabs --}}
-                  <button class="tab-button {{ empty($report->description) && empty($report->toc) ? 'active' : '' }}" data-tab="method">Research Methodology</button>
-                  <!-- <button class="tab-button" data-tab="sample">Request Free Sample PDF</button> -->
+                        @if($hasToc)
+                            <button class="tab-button {{ !$hasDesc ? 'active' : '' }}" data-tab="toc">Table Of Contents</button>
+                        @endif
+
+                        {{-- Static Tab --}}
+                        <button class="tab-button {{ !$hasDesc && !$hasToc ? 'active' : '' }}" data-tab="method">
+                            Research Methodology
+                        </button>
+                    </div>
+
+                    <div class="tab-content-wrapper">
+                        @if($hasDesc)
+                            <div class="tab-content active" id="desc">
+                                <h2>Description</h2>
+                                <p class="wow fadeInUp">{!! $report->description !!}</p>
+                            </div>
+                        @endif
+
+                        @if($hasToc)
+                            <div class="tab-content {{ !$hasDesc ? 'active' : '' }}" id="toc">
+                                <div class="wow fadeInUp">{!! $report->toc !!}</div>
+                            </div>
+                        @endif
+
+                    {{-- Static Content --}}
+                    <div class="tab-content {{ !$hasDesc && !$hasToc ? 'active' : '' }}" id="method">
+                        <h2>Research Methodology</h2>
+                        <p class="wow fadeInUp">This is the Research Methodology content.</p>
+                    </div>
                 </div>
-
-                  <div class="tab-content-wrapper">
-                    @if(!empty($report->description))
-                      <div class="tab-content active" id="desc">
-                        <h2>Description</h2>
-                        <p class="wow fadeInUp">{!! $report->description !!}</p>
-                      </div>
-                    @endif
-
-                  @if(!empty($report->toc))
-                    <div class="tab-content {{ empty($report->description) ? 'active' : '' }}" id="toc">
-                      <!-- <h2>Table Of Contents</h2> -->
-                      <div class="wow fadeInUp">{!! $report->toc !!}</div>
-                    </div>
-                  @endif
-
-
-
-                    {{-- Static Tab Contents --}}
-                    <div class="tab-content {{ empty($report->description) && empty($report->toc) ? 'active' : '' }}" id="method">
-                      <h2>Research Methodology</h2>
-                      <p class="wow fadeInUp">This is the Research Methodology content.</p>
-                    </div>
+</div>
 
                     <!-- <div class="tab-content" id="sample">
                       <h2>Request Free Sample PDF</h2>

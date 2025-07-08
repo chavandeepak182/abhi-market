@@ -46,7 +46,7 @@
                     @foreach($reports as $report)
                     <tr>
                         <td><span class="h6 mb-0 fw-medium text-gray-300">{{ $loop->iteration }}</span></td>
-                        <td><span class="h6 mb-0 fw-medium text-gray-300">{{ $report->report_name }}</span></td>
+                        <td><span class="h6 mb-0 fw-medium text-gray-300">{{ $report->report_title }}</span></td>
                         <td><span class="h6 mb-0 fw-medium text-gray-300">{{ Str::limit(strip_tags($report->description), 50) }}</span></td>
                         <td><span class="h6 mb-0 fw-medium text-gray-300">{{ Str::limit(strip_tags($report->toc), 50) }}</span></td>
                         <td><span class="h6 mb-0 fw-medium text-gray-300">{{ $report->meta_title }}</span></td>

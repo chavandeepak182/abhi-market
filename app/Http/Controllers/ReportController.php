@@ -28,13 +28,21 @@ class ReportController extends Controller
         return view('reports.create', compact('categories'));
     }
 
-    public function storeReport(Request $request)
-    {
-        Log::info('storeReport function called', ['request' => $request->all()]);
+public function storeReport(Request $request)
+{
+    // Log essential request details only
+    Log::info('storeReport function called', [
+        'report_title' => $request->report_title,
+        'industry_category_id' => $request->industry_category_id,
+        'has_image' => $request->hasFile('image'),
+        'publish_date' => $request->publish_date,
+    ]);
 
-        $request->validate([ 
-            'report_name' => 'required|string|max:255',
-             'report_title' => 'required|string|max:255',
+    // Validation with error logging
+    try {
+        $request->validate([
+            'report_name' => 'required|string',
+            'report_title' => 'required|string',
             'description' => 'nullable|string',
             'schema_markup' => 'nullable|string',
             'faq_que' => 'nullable|array',
@@ -51,56 +59,70 @@ class ReportController extends Controller
             'publish_date' => 'required|date',
         ]);
 
-        $imagePath = null;
-
-        if ($request->hasFile('image')) {
-            Log::info('Image file detected');
-            
-            $image = $request->file('image');
-            $imageName = time() . '_' . $image->getClientOriginalName();
-            $destinationPath = public_path('uploads/reports');
-            
-            if ($image->move($destinationPath, $imageName)) {
-                $imagePath = 'uploads/reports/' . $imageName;
-                Log::info('Image successfully uploaded', ['path' => $imagePath]);
-            } else {
-                Log::error('Image upload failed');
-            }
-        } else {
-            Log::warning('No image file detected in request');
-        }
-
-        $data = [
-            'report_name' => $request->report_name,
-            'report_title' => $request->report_title,
-            'industry_category_id' => $request->industry_category_id,
-            'publish_date' => $request->publish_date,
-            'description' => $request->description,
-            'schema_markup' => $request->schema_markup,
-            'toc' => $request->toc,
-            'slug' => $request->slug,
-            'meta_title' => $request->meta_title,
-            'meta_keywords' => $request->meta_keywords,
-            'meta_description' => $request->meta_description,
-            'faq_que' => is_array($request->faq_que) ? implode('||', $request->faq_que) : '',
-            'faq_ans' => is_array($request->faq_ans) ? implode('||', $request->faq_ans) : '',
-            'image' => $imagePath,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ];
-
-        Log::info('Data to be inserted', ['data' => $data]);
-
-        try {
-            DB::table('reports')->insert($data);
-            Log::info('Report has been successfully created');
-        } catch (\Exception $e) {
-            Log::error('Error inserting service', ['error' => $e->getMessage()]);
-            return redirect()->back()->with('error', 'Service could not be added. Please check logs.');
-        }
-
-        return redirect()->route('reports.index')->with('success', 'Report added successfully.');
+        Log::info('Validation passed');
+    } catch (\Illuminate\Validation\ValidationException $e) {
+        Log::error('Validation failed', ['errors' => $e->errors()]);
+        return redirect()->back()->withErrors($e->errors())->withInput();
     }
+
+    $imagePath = null;
+
+    // Image upload
+    if ($request->hasFile('image')) {
+        Log::info('Image file detected');
+
+        $image = $request->file('image');
+        $imageName = time() . '_' . $image->getClientOriginalName();
+        $destinationPath = public_path('uploads/reports');
+
+        if ($image->move($destinationPath, $imageName)) {
+            $imagePath = 'uploads/reports/' . $imageName;
+            Log::info('Image uploaded', ['path' => $imagePath]);
+        } else {
+            Log::error('Image upload failed');
+        }
+    } else {
+        Log::info('No image uploaded');
+    }
+
+    // Prepare data for insert
+    $data = [
+        'report_name' => $request->report_name,
+        'report_title' => $request->report_title,
+        'industry_category_id' => $request->industry_category_id,
+        'publish_date' => $request->publish_date,
+        'description' => $request->description,
+        'schema_markup' => $request->schema_markup,
+        'toc' => $request->toc,
+        'slug' => $request->slug,
+        'meta_title' => $request->meta_title,
+        'meta_keywords' => $request->meta_keywords,
+        'meta_description' => $request->meta_description,
+        'faq_que' => is_array($request->faq_que) ? implode('||', $request->faq_que) : '',
+        'faq_ans' => is_array($request->faq_ans) ? implode('||', $request->faq_ans) : '',
+        'image' => $imagePath,
+        'created_at' => now(),
+        'updated_at' => now(),
+    ];
+
+    // Log trimmed data for clarity
+    $logData = $data;
+    unset($logData['description'], $logData['toc'], $logData['faq_que'], $logData['faq_ans']);
+    Log::info('Prepared data for DB insert', $logData);
+
+    // Insert into DB with error handling
+    try {
+        DB::table('reports')->insert($data);
+        Log::info('Report inserted successfully');
+    } catch (\Exception $e) {
+        Log::error('Insert error', ['message' => $e->getMessage()]);
+        return redirect()->back()->with('error', 'Failed to save report. Check logs for error.');
+    }
+
+    return redirect()->route('reports.index')->with('success', 'Report added successfully.');
+}
+
+
 
 
     public function edit($id)
@@ -117,8 +139,8 @@ class ReportController extends Controller
     public function update(Request $request, $id)
 {
     $request->validate([
-        'report_name' => 'required|string|max:255',
-        'report_title' => 'required|string|max:255',
+        'report_name' => 'required|string',
+        'report_title' => 'required|string',
         'schema_markup' => 'nullable|string',
         'description' => 'nullable|string',
         'toc' => 'nullable|string',

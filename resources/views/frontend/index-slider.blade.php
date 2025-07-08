@@ -29,11 +29,7 @@
                                 <div class="hero-slider-image">
                                     <img src="{{ asset('storage/'.$banner->image) }}" alt="{{ $banner->title }}">
                                 </div>
-                                <div class="jfin-hero-content">
-                                    <!-- <h3>Welcome to JFinMate</h3> -->
-                                    <h1>{{ $banner->title ?? 'Empowering Your Journey' }}</h1>
-                                    <a href="{{ url('/contact') }}" class="jfin-hero-btn">Get Started</a>
-                                </div>
+                               
                             </div>
                         @endforeach
                     </div>

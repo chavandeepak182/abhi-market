@@ -48,6 +48,9 @@ Route::get('/overview', function () {
 Route::get('/purchase', function () {
     return view('frontend.purchase');
 });
+Route::get('/research', function () {
+    return view('frontend.research');
+});
 
 Route::middleware('isAdmin')->group(function () {
     Route::post('admin/insertUser',[UsersController::class,'insertUser'])->name('insertUser');

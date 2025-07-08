@@ -7426,7 +7426,7 @@ footer.main-footer{
     z-index: 2;
     color: #fff;
     padding: 30px;
-    background: rgba(0, 0, 0, 0.6);
+    /* background: rgba(0, 0, 0, 0.6); */
     border-radius: 10px;
     max-width: 700px;
     margin: 0 auto;
@@ -7473,11 +7473,11 @@ footer.main-footer{
 /* Mobile Responsive */
 @media (max-width: 768px) {
     .jfin-swiper {
-        height: 60vh;
+        height: 20vh;
     }
 
     .jfin-swiper .swiper-slide {
-        height: 60vh;
+        height: 20vh;
         align-items: flex-end;
     }
 
@@ -7729,6 +7729,94 @@ footer.main-footer{
         margin-top: 15px;
     }
 }
+
+ /* Card Styling  sample form*/
+.card {
+    background: #e6f4fb;
+    border-radius: 12px;
+    border: 1px solid #d1eaff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* Title */
+.card-body h3 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #004080;
+    margin-bottom: 10px;
+}
+
+.card-body h5 {
+    font-size: 18px;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.card-body p {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Form fields */
+.form-control {
+    border-radius: 6px;
+    border: 1px solid #b3d9ff;
+    box-shadow: none;
+    padding: 10px 15px;
+    font-size: 15px;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.form-control:focus {
+    border-color: #3399ff;
+    box-shadow: 0 0 6px rgba(51, 153, 255, 0.3);
+}
+
+/* Textarea */
+textarea.form-control {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* Submit Button */
+.btn.btn-primary {
+    background: linear-gradient(to bottom, #008dd2 0%, #005f9e 100%);
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    padding: 10px 25px;
+    border-radius: 8px;
+    width: 100%;
+    box-shadow: 0 4px 0 #003d66;
+    transition: background 0.3s;
+}
+
+.btn.btn-primary:hover {
+    background: linear-gradient(to bottom, #0072b1 0%, #004f84 100%);
+}
+/* Wrapper Container - Reduce Width */
+.col-lg-8.offset-lg-2 {
+    max-width: 500px; /* Limit total form width */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Button - Remove Full Width */
+.btn.btn-primary {
+    width: auto; /* No full width */
+    display: inline-block;
+    padding: 10px 30px;
+}
+
+
+/* Responsive Padding */
+@media (max-width: 576px) {
+    .card-body {
+        padding: 20px;
+    }
+}
+
 /* pricing report  */
 
     body {
@@ -7790,6 +7878,24 @@ footer.main-footer{
   animation: fadeInUp 0.6s ease forwards;
   transition: transform 0.4s ease, box-shadow 0.4s ease, border 0.3s ease;
 }
+.icon-right {
+  position: absolute;
+  top: 20px;
+  right: 14px;
+}
+
+.plan-icon {
+  width: 40px;
+  height: auto;
+}
+
+.plan-title {
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+
 
 .plan-card:nth-child(1) {
   animation-delay: 0.2s;
@@ -7888,14 +7994,18 @@ footer.main-footer{
 }
 
 .badge-popular {
-  background-color: #00a3e0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #00a3d7;
   color: white;
-  padding: 5px 10px;
-  border-radius: 10px;
   font-size: 12px;
-  margin-bottom: 10px;
-  display: inline-block;
+  padding: 6px 12px;
+  font-weight: 600;
+  border-top-left-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
+
 
 /* header */
 @media (max-width: 768px) {
@@ -7934,5 +8044,10 @@ footer.main-footer{
         max-width: 100%;
     }
 }
+
+
+
+
+
 }
 

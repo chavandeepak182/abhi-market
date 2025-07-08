@@ -5,11 +5,17 @@
 <div class="container py-5">
     <div class="row">
         <div class="col-lg-8 offset-lg-2">
+ <h2 style="text-align: center; color: #006186;">{{ $report->report_title }}</h2>
 
             <div class="card shadow">
                 <div class="card-body">
-                    <h3 class="mb-4">Request a Free Sample for:</h3>
-                    <h5 class="text-primary">{{ $report->report_title }}</h5>
+                    <h3 class="mb-4" style="color: #006186;">
+                        Request a Free Sample PDF 
+                        <i class="fas fa-file-pdf" style="font-size: 32px; color: #006186; margin-left: 5px;"></i>
+                    </h3>
+
+
+                   
                     <p><strong>Published:</strong> {{ \Carbon\Carbon::parse($report->publish_date)->format('F, Y') }}</p>
 
                     <form action="{{ route('enquiry.store') }}" method="POST">
@@ -38,4 +44,5 @@
         </div>
     </div>
 </div>
+
 @endsection

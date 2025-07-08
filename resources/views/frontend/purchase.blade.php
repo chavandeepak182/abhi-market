@@ -1,5 +1,5 @@
 @extends('frontend.layouts.header')
-@section('title', "Checkout")
+@section('title', "Checkout 1")
 @section('description', "")
 @section('keywords', "")
 
@@ -39,80 +39,115 @@
     <div class="card-deck">
       <!-- Excel Only -->
       <div class="plan-card">
-        <div class="plan-title">EXCEL ONLY</div>
-        <div class="price"></div>
-        <button class="btn buy-btn">Buy Now</button>
-        <ul>
-          <li>Single User Access</li>
-          <li>No Free Customization</li>
-          <li>2 Months Free Analyst Support</li>
-          <li><strong>Deliverable Report Format:-</strong> Excel</li>
-          <li>Quantitative Data Only</li>
-        </ul>
-      </div>
+  <div class="icon-right">
+    <img src="assets/images/excel_user.svg" alt="User Icon" class="plan-icon" />
+  </div>
+
+  <div class="plan-title">EXCEL ONLY</div>
+  <div class="price">$2000</div>
+  <button class="buy-btn">Buy Now</button>
+
+  <ul>
+    <li>Single User Access</li>
+    <li>No Free Customization</li>
+    <li>Free Analyst Support 2 months post purchase</li>
+    <li><strong>Deliverable Report Format:</strong> Excel</li>
+    <li>Quantitative Data Only</li>
+  </ul>
+
+  <!-- <button class="buy-btn">Buy Now</button> -->
+</div>
+
 
       <!-- Single User -->
-      <div class="plan-card">
-        <div class="plan-title">SINGLE USER ACCESS</div>
-        <div class="price">US$ 2000</div>
-        <button class="btn buy-btn">Buy Now</button>
-        <ul>
-          <li>Single User Access</li>
-          <li>10% Free Customization</li>
-          <li>3 Months Free Analyst Support</li>
-          <li>Deliverable Report Format</li>
-          <li>PDF</li>
-          <li>Qualitative Data & InsightsMarket dynamics</li>
-          <li>Market Trends</li>
-          <li>Key insights</li>
-          <li>Company profiles</li>
-          <li>Competitive landscape, etc</li>
-        </ul>
-      </div>
+<div class="plan-card">
+ <div class="icon-right">
+  
+    <img src="assets/images/single_user.svg" alt="User Icon" class="plan-icon" />
+  </div>
+
+  <div class="plan-title">SINGLE USER ACCESS</div>
+  <div class="price">US $5750</div>
+  <button class="btn buy-btn">Buy Now</button>
+
+      <ul>
+        <li>Single User Access</li>
+        <li>10% Free Customization</li>
+        <li>3 Months Free Analyst Support</li>
+        <li>Deliverable Report Format</li>
+        <li>PDF</li>
+        <li>Qualitative Data & InsightsMarket dynamics</li>
+        <li>Market Trends</li>
+        <li>Key insights</li>
+        <li>Company profiles</li>
+        <li>Competitive landscape, etc</li>
+      </ul>
+</div>
+
 
       <!-- Multi User (Popular) -->
       <div class="plan-card highlight">
-        <div class="badge-popular">Frequently Purchased</div>
-        <div class="plan-title">MULTI USER ACCESS</div>
-        <div class="price"> US$ 4500</div>
-        <button class="btn buy-btn">Buy Now</button>
-        <ul>
-          <li>Team Access (Up to 5 User)</li>
-          <li>15% Free Customization</li>
-          <li>4 Months Free Analyst Support</li>
-          <li>15% Discount on your Next Purchase of same licence type</li>
-          <li>Deliverable Report Format</li>
-           <li>PDF</li>
-          <li>Qualitative Data & InsightsMarket dynamics</li>
-          <li>Market Trends</li>
-          <li>Key insights</li>
-          <li>Company profiles</li>
-          <li>Competitive landscape, etc</li> 
-          <li>Excel</li>
-          <li>Quantitative Data</li>
-        </ul>
-      </div>
+  <!-- Badge -->
+  <div class="badge-popular">Frequently Purchased</div>
+
+  <!-- Top right icon -->
+  <div class="icon-right">
+    <img src="assets/images/compare_price_new.svg" alt="Multi User Icon" class="plan-icon" />
+  </div>
+
+  <!-- Centered title -->
+  <div class="plan-title">MULTI USER ACCESS</div>
+
+  <!-- Price and button -->
+  <div class="price">US$ 7000</div>
+  <button class="btn buy-btn">Buy Now</button>
+
+  <!-- Features list -->
+  <ul>
+    <li>Team Access (Up to 5 User)</li>
+    <li>15% Free Customization</li>
+    <li>4 Months Free Analyst Support</li>
+    <li>15% Discount on your Next Purchase of same licence type</li>
+    <li>Deliverable Report Format</li>
+    <li>PDF</li>
+    <li>Qualitative Data & InsightsMarket dynamics</li>
+    <li>Market Trends</li>
+    <li>Key insights</li>
+    <li>Company profiles</li>
+    <li>Competitive landscape, etc</li>
+    <li>Excel</li>
+    <li>Quantitative Data</li>
+  </ul>
+</div>
+
+
 
       <!-- Enterprise -->
       <div class="plan-card">
-        <div class="plan-title">CORPORATE ACCESS</div>
-        <div class="price">US$ 7000</div>
-        <button class="btn buy-btn">Buy Now</button>
-        <ul>
-          <li>Unlimited User Access</li>
-          <li>6 Months Free Analyst Support</li>
-          <li>25% Discount on your Next Purchase of same licence type</li>
-          <li>Deliverable Report Format</li>
-          <li>PDF</li>
-          <li>Qualitative Data & InsightsMarket dynamics</li>
-          <li>Market Trends</li>
-          <li>Key insights</li>
-          <li>Company profiles</li>
-          <li>Competitive landscape, etc</li> 
-          <li>Excel</li>
-          <li>Quantitative Data</li>
-        </ul>
-      </div>
+  <div class="icon-right">
+    <img src="assets/images/enterprise_user.svg" alt="Corporate Icon" class="plan-icon" />
+  </div>
+
+  <div class="plan-title">CORPORATE ACCESS</div>
+  <div class="price">US$ 7000</div>
+  <button class="btn buy-btn">Buy Now</button>
+
+  <ul>
+    <li>Unlimited User Access</li>
+    <li>6 Months Free Analyst Support</li>
+    <li>25% Discount on your Next Purchase of same licence type</li>
+    <li>Deliverable Report Format</li>
+    <li>PDF</li>
+    <li>Qualitative Data & InsightsMarket dynamics</li>
+    <li>Market Trends</li>
+    <li>Key insights</li>
+    <li>Company profiles</li>
+    <li>Competitive landscape, etc</li>
+    <li>Excel</li>
+    <li>Quantitative Data</li>
+  </ul>
+</div>
+
     </div>
 </div>
   

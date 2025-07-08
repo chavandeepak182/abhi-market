@@ -3139,7 +3139,7 @@ footer.main-footer{
 
 .page-header-box h1{
 	display: inline-block;
-    font-size: 70px;
+    font-size: 36px;
     font-weight: 700;
     line-height: 1.2em;
     letter-spacing: -0.02em;
@@ -5733,11 +5733,6 @@ footer.main-footer{
 	.footer-menu ul li::before{
 		right: -14px;
 	}
-	
-	.page-header{
-		background-size: contain;
-        padding: 80px 0;
-    }
 
 	.page-header-box h1{
         font-size: 55px;
@@ -6678,9 +6673,7 @@ footer.main-footer{
 		text-align: center;
 	}
 
-	.page-header{
-		padding: 60px 0;
-	}
+
 
 	.page-header-box h1{
 		font-size: 40px;
@@ -7366,14 +7359,14 @@ footer.main-footer{
 
 .tab-content-wrapper {
   position: relative;
-  height: 800px;
+  height: auto;
   overflow: hidden;
 }
 
 .tab-content {
   display: none;
   overflow: visible;
-  max-height: 500px;
+  max-height: auto;
 }
 
 
@@ -8057,3 +8050,4 @@ textarea.form-control {
 
 
 }
+

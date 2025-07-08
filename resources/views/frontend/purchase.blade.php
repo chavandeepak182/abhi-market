@@ -1,5 +1,5 @@
 @extends('frontend.layouts.header')
-@section('title', "Checkout")
+@section('title', "Checkout 1")
 @section('description', "")
 @section('keywords', "")
 

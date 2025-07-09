@@ -3566,13 +3566,16 @@ footer.main-footer{
 	text-align: center;
 	margin-top: 10px;
 }
+ .custom-title {
+  font-size: 20px !important; /* jari Bootstrap apply zal tari override hoil */
+}
 
 /************************************/
 /***    19. Service Single Css    ***/
 /************************************/
 
 .page-service-single{
-	padding: 100px 0;
+	padding: 50px 0;
 }
 
 .service-sidebar{
@@ -7375,6 +7378,39 @@ footer.main-footer{
   left: 0;
   opacity: 1;
 }
+.tabs {
+    position: sticky;
+      top: 0;
+     z-index: 999;
+    background-color: #fff;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+     }
+
+.sticky-tabs-wrapper {
+ position: sticky;
+ top: 0;
+z-index: 999;
+background: #fff;
+padding: 10px 0;
+border-bottom: 1px solid #ddd;
+}
+
+
+@media (max-width: 767px) {
+  .tabs {
+    display: block; /* 👉 vertical stack */
+  }
+
+  .tab-button {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
+                    
+
 
 /* our banner */
 /* Wrapper and Swiper */
@@ -7473,11 +7509,11 @@ footer.main-footer{
 /* Mobile Responsive */
 @media (max-width: 768px) {
     .jfin-swiper {
-        height: 20vh;
+        height: 60vh;
     }
 
     .jfin-swiper .swiper-slide {
-        height: 20vh;
+        height: 60vh;
         align-items: flex-end;
     }
 

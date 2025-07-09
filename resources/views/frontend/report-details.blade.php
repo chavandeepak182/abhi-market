@@ -121,57 +121,54 @@
 
                     <!-- Case Study Entry Start -->
                     <div class="service-entry">
-                        <h1 class="wow fadeInUp">{!! $report->report_title !!}</h1>
+                        <h1 class="wow fadeInUp custom-title">{!! $report->report_name !!}</h1>
+
                         <br>
 
-                 <div class="sticky-tabs-wrapper">       
-                    <div class="tabs">
-                        @php
-                            $hasDesc = !empty($report->description);
-                            $hasToc = !empty($report->toc);
-                        @endphp
+                            <div class="sticky-tabs-wrapper">       
+                                <div class="tabs">
+                                    @php
+                                        $hasDesc = !empty($report->description);
+                                        $hasToc = !empty($report->toc);
+                                    @endphp
 
-                        @if($hasDesc)
-                            <button class="tab-button active" data-tab="desc">Description</button>
-                        @endif
+                                    @if($hasDesc)
+                                        <button class="tab-button active" data-tab="desc">Description</button>
+                                    @endif
 
-                        @if($hasToc)
-                            <button class="tab-button {{ !$hasDesc ? 'active' : '' }}" data-tab="toc">Table Of Contents</button>
-                        @endif
+                                    @if($hasToc)
+                                        <button class="tab-button {{ !$hasDesc ? 'active' : '' }}" data-tab="toc">Table Of Contents</button>
+                                    @endif
 
-                        {{-- Static Tab --}}
-                        <button class="tab-button {{ !$hasDesc && !$hasToc ? 'active' : '' }}" data-tab="method">
-                            Research Methodology
-                        </button>
-                    </div>
+                                    {{-- Static Tab --}}
+                                    <button class="tab-button {{ !$hasDesc && !$hasToc ? 'active' : '' }}" data-tab="method">
+                                        Research Methodology
+                                    </button>
+                                </div>
 
-                    <div class="tab-content-wrapper">
-                        @if($hasDesc)
-                            <div class="tab-content active" id="desc">
-                                <h2>Description</h2>
-                                <p class="wow fadeInUp">{!! $report->description !!}</p>
+                                <div class="tab-content-wrapper">
+                                        @if($hasDesc)
+                                            <div class="tab-content active" id="desc">
+                                                <h2>Description</h2>
+                                                <p class="wow fadeInUp">{!! $report->description !!}</p>
+                                            </div>
+                                        @endif
+
+                                        @if($hasToc)
+                                            <div class="tab-content {{ !$hasDesc ? 'active' : '' }}" id="toc">
+                                                <div class="wow fadeInUp">{!! $report->toc !!}</div>
+                                            </div>
+                                        @endif
+
+                                    {{-- Static Content --}}
+                                    <div class="tab-content {{ !$hasDesc && !$hasToc ? 'active' : '' }}" id="method">
+                                        <h2>Research Methodology</h2>
+                                        <p class="wow fadeInUp">This is the Research Methodology content.</p>
+                                    </div>
+                                </div>
                             </div>
-                        @endif
-
-                        @if($hasToc)
-                            <div class="tab-content {{ !$hasDesc ? 'active' : '' }}" id="toc">
-                                <div class="wow fadeInUp">{!! $report->toc !!}</div>
-                            </div>
-                        @endif
-
-                    {{-- Static Content --}}
-                    <div class="tab-content {{ !$hasDesc && !$hasToc ? 'active' : '' }}" id="method">
-                        <h2>Research Methodology</h2>
-                        <p class="wow fadeInUp">This is the Research Methodology content.</p>
+          
                     </div>
-                </div>
-</div>
-
-                    <!-- <div class="tab-content" id="sample">
-                      <h2>Request Free Sample PDF</h2>
-                      <p class="wow fadeInUp">This is the sample request section.</p>
-                    </div> -->
-                  </div>
 
                 </div><script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                 <script>

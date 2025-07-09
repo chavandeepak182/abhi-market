@@ -148,7 +148,7 @@
                                     
 
                                     <!-- <button type="button" id="add-faq" class="btn mt-2" style="background-color: #3E80f9; color: white;">Add More FAQ</button> -->
-                                    <button type="submit" class="btn btn-main rounded-pill py-9" id="add-faq">Add FAQ</button>
+                                    <button type="button" class="btn btn-main rounded-pill py-9" id="add-faq">Add FAQ</button>
                             </div>
                                 <br><br>
 

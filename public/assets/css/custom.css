@@ -22,7 +22,7 @@ body{
 	font-weight: 400;
 	line-height: 1.7em;
 	background-color: var(--white-color);
-	color: var(--text-color);
+	color: var(--primary-color);
 }
 
 p{
@@ -7353,6 +7353,16 @@ footer.main-footer{
   font-weight: bold;
   border-radius: 4px;
 }
+.tab-content img {
+    float: none !important;
+    display: block;
+    margin: 0 auto;
+}
+
+.tab-content p {
+    clear: both;
+}
+
 
 .tab-button.active {
   background-color: #00a8e8;

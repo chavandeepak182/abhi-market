@@ -2374,186 +2374,7 @@ display: none;
 /***       13. Our FAQs Css       ***/
 /************************************/
 
-.our-faqs{
-	padding: 100px 0;
-}
 
-.our-faqs-image{
-	position: relative;
-	padding-right: 70px;
-}
-
-.our-faqs-img figure{
-	display: block;
-	border-radius: 20px;
-}
-
-.our-faqs-img img{
-	width: 100%;
-	aspect-ratio: 1 / 1.065;
-	object-fit: cover;
-	border-radius: 20px;
-}
-
-.client-review-box{
-	position: absolute;
-	bottom: 40px;
-	right: 0;
-	width: 100%;
-	max-width: 210px;
-	text-align: center;
-	/* background-color: var(--dark-color); */
-	background-color: #00a8e8;
-	border-radius: 10px;
-	padding: 20px;
-	animation: reviewbox 3s infinite linear alternate;
-}
-
-@keyframes reviewbox{
-	50%{
-		right: 50px;
-	}
-}
-
-.client-review-box-content{
-	margin-bottom: 15px;
-}
-
-.client-review-box-content p{
-	font-size: 18px;
-	font-weight: 500;
-	color: var(--white-color);
-	margin-bottom: 0;
-}
-
-.client-review-box-content p span{
-	font-size: 16px;
-	font-weight: 400;
-	display: block;
-}
-
-.client-review-images{
-	display: inline-flex;
-}
-
-.client-review-images .client-image{
-	position: relative;
-    display: inline-block;
-    margin-left: -10px;
-    border: 1px solid var(--dark-color);
-    border-radius: 50%;
-    overflow: hidden;
-    z-index: 1;
-}
-
-.client-review-images .client-image:first-child{
-    margin: 0;
-}
-
-.client-review-images .client-image figure{
-	display: block;
-}
-
-.client-review-images .client-image img{
-    max-width: 50px;
-}
-
-.client-image.add-more{
-	width: 32px;
-	height: 32px;
-	background-color: var(--white-color);
-	text-align: center;
-	display: inline-flex;
-    align-items: center;
-    justify-content: center;
-	transition: all 0.3s ease-in-out;
-}
-
-.client-image.add-more:hover{
-	background-color: var(--accent-color);
-}
-
-.client-image.add-more p{
-	font-size: 12px;
-	font-weight: 700;
-	color: var(--primary-color);
-	margin: 0;
-	transition: all 0.3s ease-in-out;
-}
-
-.client-image.add-more:hover p{
-	color: var(--white-color);
-}
-
-.faq-accordion .accordion-item{
-    border: 1px solid var(--divider-color);
-	border-radius: 10px;
-	margin-bottom: 30px;
-    padding: 0;
-	transition: all 0.3s ease-in-out;
-	overflow: hidden;
-}
-
-.faq-accordion .accordion-item:last-child{
-	margin-bottom: 0;
-}
-
-.faq-accordion .accordion-header .accordion-button{
-	font-size: 20px;
-	font-weight: 500;
-	line-height: 1.2em;
-	padding: 16px 45px 16px 20px;
-	transition: all 0.3s ease-in-out;
-}
-
-.faq-accordion .accordion-button:not(.collapsed){
-   /* background-color: var(--dark-color); */
-   background-color: #00a8e8;
-   color: var(--white-color);
-   border-bottom: 1px solid var(--dark-divider-color);
-}
-
-.faq-accordion .accordion-header .accordion-button.collapsed{
-	background-color: var(--white-color);
-	color: var(--primary-color);
-}
-
-.faq-accordion .accordion-item .accordion-button::after,
-.faq-accordion .accordion-item .accordion-button.collapsed::after{
-	content: '\f068';
-	font-family: "Font Awesome 6 Free";
-	font-size: 20px;
-	font-weight: 900;
-	color: var(--white-color);
-	position: absolute;
-	right: 16px;
-	top: 50%;
-	bottom: auto;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 20px;
-	height: 20px;
-	transform: translate(0px, -10px);
-	transition: all 0.3s ease-in-out;
-}
-
-.faq-accordion .accordion-item .accordion-button.collapsed::after{
-	content: '\f067';
-	color: var(--primary-color);
-}
-
-.faq-accordion .accordion-item .accordion-body{
-	/* background-color: var(--dark-color); */
-	background-color:#00a8e8; 
-	padding: 16px 45px 16px 20px;
-}
-
-.faq-accordion .accordion-item .accordion-body p{
-    color: var(--white-color);
-	opacity: 80%;
-	margin: 0;
-}
 
 /************************************/
 /***   14. Our Testimonial Css    ***/
@@ -8050,6 +7871,56 @@ textarea.form-control {
   font-weight: 600;
   border-top-left-radius: 8px;
   border-bottom-right-radius: 8px;
+}
+
+/* FAQ CSS */
+ .accordion {
+    width: 100%;
+}
+
+.accordion-item {
+    border: 1px solid #dcdcdc;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    overflow: hidden;
+    background-color: #ffffff;
+    transition: background 0.3s ease;
+}
+
+.accordion-header {
+    background-color: #f7f7f7;
+    color: #0f0f12;
+    font-weight: bold;
+    font-size: 17px;
+    padding: 15px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.accordion-body {
+    display: none;
+    padding: 15px 20px;
+    font-size: 17px;
+    color: #4a4a4a;
+    background-color: #ffffff;
+}
+
+.accordion-item.active .accordion-header {
+    background-color: #00a3e0;
+}
+
+.accordion-item.active .accordion-body {
+    display: block;
+    background-color: #f7f7f7;
+}
+
+.icon {
+    font-size: 18px;
 }
 
 

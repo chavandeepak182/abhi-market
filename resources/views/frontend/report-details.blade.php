@@ -146,28 +146,201 @@
                                     </button>
                                 </div>
 
-                            <div class="tab-content-wrapper">
-                                    @if($hasDesc)
+                                    <div class="tab-content-wrapper">
+                                     @if($hasDesc)
                                         <div class="tab-content active" id="desc">
                                             <h2>Description</h2>
                                             <p class="wow fadeInUp" style="color: #040303;">{!! $report->description !!}</p>
 
-                                        </div>
-                                    @endif
+                                                {{-- FAQ Section --}}
+                                                @php
+                                                    $faqQues = explode('||', $report->faq_que ?? '');
+                                                    $faqAns = explode('||', $report->faq_ans ?? '');
+                                                @endphp
 
-                                    @if($hasToc)
-                                        <div class="tab-content {{ !$hasDesc ? 'active' : '' }}" id="toc">
-                                            <div class="wow fadeInUp">{!! $report->toc !!}</div>
-                                        </div>
-                                    @endif
+                                                @if (!empty($faqQues[0]) && !empty($faqAns[0]))
+                                                    <div class="faq-section">
+                                                        <h2 class="faq-title" style="text-align: center;">Frequently Asked Questions</h2>
 
-                                {{-- Static Content --}}
-                                <div class="tab-content {{ !$hasDesc && !$hasToc ? 'active' : '' }}" id="method">
-                                    <h2>Research Methodology</h2>
-                                    <p class="wow fadeInUp">This is the Research Methodology content.</p>
-                                </div>
-                            </div>
-                    </div>
+                                                        <div class="accordion">
+                                                            @foreach ($faqQues as $index => $question)
+                                                                <div class="accordion-item" id="accordion-{{ $index }}">
+                                                                    <button class="accordion-header" onclick="toggleFAQ({{ $index }})">
+                                                                        {{ $question }}
+                                                                        <span class="icon" id="icon-{{ $index }}">+</span>
+                                                                    </button>
+                                                                    <div class="accordion-body" id="faq-body-{{ $index }}">
+                                                                        {{ $faqAns[$index] ?? '' }}
+                                                                    </div>
+                                                                </div>
+                                                            @endforeach
+
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                        </div>
+                                            @endif
+
+
+                                            @if($hasToc)
+                                                <div class="tab-content {{ !$hasDesc ? 'active' : '' }}" id="toc">
+                                                    <div class="wow fadeInUp">{!! $report->toc !!}</div>
+                                                </div>
+                                            @endif
+
+                                        {{-- Static Content --}}
+                                        <div class="tab-content {{ !$hasDesc && !$hasToc ? 'active' : '' }}" id="method">
+                                            <div class="container py-5">
+                                            <!-- Quality Assurance Process -->
+                                            <h2 class="mb-3">Our Research Methodology</h2>
+                                            <p> <strong>"Insight without rigor is just noise."</strong></p>
+                                            <p>We follow a comprehensive, multi-phase research framework designed to deliver accurate, strategic, and decision-ready intelligence. Our process integrates <strong>primary and secondary research </strong>, both  <strong>quantitative and qualitative </strong>, along with dual modeling techniques ( <strong>top-down</strong> and  <strong>bottom-up</strong>) and a final layer of validation through our  <strong>proprietary in-house repository.</strong></p>
+
+                                            <!-- <h4>Market Research Process</h4>
+                                            <img src="{{ asset('assets') }}/images/download.png" alt="Market Research Process" class="img-fluid mb-4"> -->
+
+                                            <p><strong>PRIMARY RESEARCH</strong></p>
+
+                                            <p>Primary research captures  <strong>real-time, firsthand insights</strong> from the market to understand behaviors, motivations, and emerging trends.</p>
+                                            <p> <strong>1. Quantitative Primary Research</strong></p>
+                                            <p>Objective: Generate statistically significant data directly from market participants.</p>
+                                             <strong>Approaches: </strong>
+                                            <ul>
+                                                <li>Structured surveys with customers, distributors, and field agents</li>
+                                                <li>Mobile-based data collection for point-of-sale audits and usage behavior</li>
+                                                <li>Phone-based interviews (CATI) for market sizing and product feedback</li>
+                                                <li>Online polling around industry events and digital campaigns</li>
+                                                
+                                            </ul>
+                                            <strong>Insights generated: </strong>
+                                            <ul>
+                                                <li>Purchase frequency by customer type</li>
+                                                <li>Channel performance across geographies</li>
+                                                <li>Feature demand by application or demographic</li>
+                                                
+                                                
+                                            </ul>
+                                            
+                                            <p> <strong>2. Qualitative Primary Research</strong></p>
+                                            <p>Objective: Explore decision-making drivers, pain points, and market readiness.</p>
+                                             <strong>Approaches: </strong>
+                                            <ul>
+                                                <li>In-depth interviews (IDIs) with executives, product managers, and key decision-makers</li>
+                                                <li>Focus groups among end users and early adopters</li>
+                                                <li>Site visits and observational research for consumer products</li>
+                                                <li>Informal field-level discussions for regional and cultural nuances</li>
+                                                
+                                            </ul>
+                                            <!-- secondary reaserch -->
+                                            <p><strong> SECONDARY RESEARCH</strong></p>
+
+                                            <p>This phase helps establish a <strong>macro-to-micro understanding</strong> of market trends, size, regulation, and competitive dynamics, sourced from credible and public domain information.</p>
+                                            <p> <strong>1. Quantitative Secondary  Research</strong></p>
+                                            <p>Objective: Model market value and segment-level forecasts based on published data.</p>
+                                             <strong>Sources include: </strong>
+                                            <ul>
+                                                <li>Financial reports and investor summaries</li>
+                                                <li>Government trade data, customs records, and regulatory statistics</li>
+                                                <li>Industry association publications and economic databases</li>
+                                                <li>Channel performance and pricing data from marketplace listings</li>
+                                                
+                                            </ul>
+                                            <strong>Key outputs: </strong>
+                                            <ul>
+                                                <li>Revenue splits, pricing trends, and CAGR estimates</li>
+                                                <li>Supply-side capacity and volume tracking</li>
+                                                <li>Investment analysis and funding benchmarks</li>
+                                                
+                                                
+                                            </ul>
+                                            
+                                            <p> <strong>2. Qualitative Secondary  Research</strong></p>
+                                            <p>Objective: Capture strategic direction, innovation signals, and behavioral trends.</p>
+                                             <strong>Sources include:</strong>
+                                            <ul>
+                                                
+                                                <li>Company announcements, roadmaps, and product pipelines</li>
+                                                <li>Publicly available whitepapers, conference abstracts, and academic research</li>
+                                                <li>Regulatory body publications and policy briefs</li>
+                                                <li>Social and media sentiment scanning for early-stage shifts</li>
+                                                
+                                            </ul>
+                                             <strong>Insights extracted:</strong>
+                                            <ul>
+                                                
+                                                <li>Strategic shifts in market positioning</li>
+                                                <li>Unmet needs and white spaces</li>
+                                                <li>Regulatory triggers and compliance impact</li>
+                                                
+                                                
+                                            </ul>
+                                            
+                                             <!-- <h4>Market Research Process</h4> -->
+                                            <img src="{{ asset('assets') }}/images/research_methodlogy.png" alt="Market Research Process" class="img-fluid mb-4">
+
+                                            <p><strong> DUAL MODELING: TOP-DOWN + BOTTOM-UP</strong></p>
+
+                                            <p>To ensure robust market estimation, we apply two complementary sizing approaches:</p>
+                                            
+                                             <strong>Top-Down Modeling:</strong>
+                                            <ul>
+                                                <li>Start with broader industry value (e.g., global or regional TAM)</li>
+                                                <li>Apply filters by segment, geography, end-user, or use case</li>
+                                                <li>Adjust with primary insights and validation benchmarks</li>
+                                                <li>Ideal for investor-grade market scans and opportunity mapping</li>
+                                                
+                                            </ul>
+                                            <strong>  Bottom-Up Modeling</strong>
+                                            <ul>
+                                                <li>Aggregate from the ground up using sales volumes, pricing, and unit economics</li>
+                                                <li>Use internal modeling templates aligned with stakeholder data</li>
+                                                <li>Incorporate distributor-level or region-specific inputs</li>
+                                                <li>Most accurate for emerging segments and granular sub-markets</li>
+                                                
+                                            </ul>
+                                            <p><strong> DATA VALIDATION: IN-HOUSE REPOSITORY</strong></p>
+
+                                            <p>We close the loop with <strong>proprietary data intelligence</strong> built from ongoing projects, industry monitoring, and historical benchmarking. This repository includes:</p>
+                                            
+                                            <ul>
+                                                <li>Multi-sector market and pricing models</li>
+                                                <li>Key trendlines from past interviews and forecasts</li>
+                                                <li>Benchmarked adoption rates, churn patterns, and ROI indicators</li>
+                                                <li>Industry-specific deviation flags and cross-check logic</li>
+                                                
+                                            </ul>
+                                             <strong>Benefits:</strong>
+                                            <ul>
+                                                
+                                                <li>Catches inconsistencies early</li>
+                                                <li>Aligns projections across studies</li>
+                                                <li>Enables consistent, high-trust deliverables</li>
+                                                
+                                                
+                                            </ul>
+
+
+
+
+
+
+                                            <!-- Case Study - Automotive Sector -->
+                                            
+                                            
+
+                                            <!-- Case Study - ICT Sector -->
+                                            
+                                        </div>
+                                                                                </div>
+                                                                                
+                                                                            </div>
+                                                                    </div>
+
+
+                            
+
+
+
           <!-- <div class="tab-content" id="sample">
                       <h2>Request Free Sample PDF</h2>
                       <p class="wow fadeInUp">This is the sample request section.</p>
@@ -241,4 +414,16 @@
         });
     });
 </script>
+<script>
+    function toggleFAQ(index) {
+        const item = document.getElementById('accordion-' + index);
+        const icon = document.getElementById('icon-' + index);
+
+        item.classList.toggle('active');
+
+        icon.innerText = item.classList.contains('active') ? '–' : '+';
+    }
+</script>
+
+
 @endsection

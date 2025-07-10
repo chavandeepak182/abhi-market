@@ -120,7 +120,7 @@
 
 
                                 <li class="menu-item-has-children">
-                                    <a href="#">Capabilities <i class="fas fa-plus"></i></a>
+                                    <a href="{{ url('/services') }}">Capabilities <i class="fas fa-plus"></i></a>
                                     <div class="sub-menu capabilities-two-column">
                                         @if(isset($serviceMenuData) && count($serviceMenuData))
                                             @php

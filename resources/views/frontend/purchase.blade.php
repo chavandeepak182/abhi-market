@@ -67,7 +67,7 @@
   </div>
 
   <div class="plan-title">SINGLE USER ACCESS</div>
-  <div class="price">US $5750</div>
+  <div class="price">US $4500</div>
   <button class="btn buy-btn">Buy Now</button>
 
       <ul>
@@ -99,7 +99,7 @@
   <div class="plan-title">MULTI USER ACCESS</div>
 
   <!-- Price and button -->
-  <div class="price">US$ 7000</div>
+  <div class="price">US$ 5750</div>
   <button class="btn buy-btn">Buy Now</button>
 
   <!-- Features list -->

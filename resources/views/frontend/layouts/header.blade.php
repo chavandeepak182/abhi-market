@@ -30,6 +30,18 @@
         <link rel="stylesheet" href="{{ asset('assets') }}/css/mousecursor.css">
         <!-- Main Custom Css -->
         <link href="{{ asset('assets') }}/css/custom.css" rel="stylesheet" media="screen">
+        <!-- Favicon -->
+    
+<head>
+    <meta charset="UTF-8">
+    <title>@yield('title')</title>
+
+    <link rel="icon" href="{{ asset('assets/images/favicon.png') }}" type="image/png">
+    
+    
+</head>
+
+    <!-- CSS / Other Links -->
     </head>
     
     <body>
@@ -108,7 +120,7 @@
 
 
                                 <li class="menu-item-has-children">
-                                    <a href="#">Capabilities <i class="fas fa-plus"></i></a>
+                                    <a href="{{ url('/services') }}">Capabilities <i class="fas fa-plus"></i></a>
                                     <div class="sub-menu capabilities-two-column">
                                         @if(isset($serviceMenuData) && count($serviceMenuData))
                                             @php

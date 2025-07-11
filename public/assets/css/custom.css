@@ -7242,6 +7242,29 @@ border-bottom: 1px solid #ddd;
   }
 }
 
+
+/* report title and publish date css */
+.report-summary {
+    background: #f7fafd;
+    border: 1px solid #f7fafd;
+    border-radius: 6px;
+    padding: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    max-width: 100%;
+    gap: 15px;
+}
+.report-details p {
+    font-size: 14px;
+    color: #333;
+}
+.report-details strong {
+    color: #0074a8;
+}
+.report-image img {
+    height: auto;
+    max-height: 150px;
+    border-radius: 3px;
+}
                     
 
 
@@ -7353,6 +7376,7 @@ border-bottom: 1px solid #ddd;
     .jfin-swiper .hero-slider-image img {
         object-fit: cover;
         object-position: top;
+		
     }
 
     .jfin-hero-content {

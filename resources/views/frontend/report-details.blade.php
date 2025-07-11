@@ -42,63 +42,85 @@
                 <!-- Service Sidebar Start -->
                 <div class="service-sidebar">
                     <!-- Service Category List Start -->
-                        <div class="service-catagery-list wow fadeInUp">
+                        <div class="report-summary d-flex align-items-center wow fadeInUp" data-wow-delay="0.2s">
+    <!-- Left: Book Image -->
+    <div class="report-image me-3">
+        <img src="{{ asset('assets/images/BOOK.png') }}" alt="Report Cover" style="max-width: 120px;">
+    </div>
+
+    <!-- Right: Report Details -->
+    <div class="report-details text-start">
+        <p class="mb-0 mt-1"><strong>PUBLISHED:</strong></p>
+        <p><span>{!! $report-> publish_date!!}</span></p>
+        <p class="mb-1"><strong>CATEGORY NAME:</strong> </p>
+        <p><span>{!! $report-> category_name!!}</span></p>
+        <!-- <p class="mb-1"><strong>HISTORICAL DATA:</strong> 2019–2023</p> -->
+        <!-- <p class="mb-0"><strong>NO OF PAGES:</strong> {{ $report->pages ?? 'N/A' }}</p> -->
         
+        
+    </div>
+</div>
+<style>.report-summary {
+    background: #f7fafd;
+    border: 1px solid #f7fafd;
+    border-radius: 6px;
+    padding: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    max-width: 70%;
+    gap: 15px;
+}
+.report-details p {
+    font-size: 14px;
+    color: #333;
+}
+.report-details strong {
+    color: #0074a8;
+}
+.report-image img {
+    height: auto;
+    max-height: 150px;
+    border-radius: 3px;
+}
+</style>
 
-                            <div class="report-card">
-                                <h3>📊 Our Reports</h3>
-                                <p>Explore industry insights and stay ahead in the market.</p>
-                                                   <a href="{{ url('/purchase') }}" class="btn-default py-2">Buy Now</a>
 
-                                                        <div id="msgSubmit" class="h3 hidden"></div> 
-                                                    
-                                                                
-                            </div>  
-                                
-                        </div>
+<BR></BR>
                     <!-- Service Category List End -->
 
                     <!-- Sidebar Cta Box Start -->
-                    <div class="sidebar-cta-box wow fadeInUp" data-wow-delay="0.25s">
-                        <!-- CTA Contact Content Start -->
-                        <div class="cta-box-content">
-                            <h3>Need Help? We Are Here To Help You</h3>
-                        </div>
-                        <!-- CTA Contact Content End -->
+                    <div class="card shadow">
+    <div class="card-body p-3"> <!-- reduce padding here -->
+        <h3 class="mb-3" style="color: #006186; font-size: 20px;">
+            Request a Free Sample PDF 
+            <i class="fas fa-file-pdf" style="font-size: 24px; color: #006186; margin-left: 5px;"></i>
+        </h3>
 
-                        <!-- CTA Contact Info Start -->
-                        <div class="cta-contact-info">
-                            <!-- CTA Info Item Start -->
-                            <div class="cta-info-item">
-                                <form id="enquiryctForm" action="{{ route('enquiry.store') }}" method="POST" data-toggle="validator" class="wow fadeInUp" data-wow-delay="0.4s">
-                                    @csrf
-                                    <div class="row">
-                                        <div class="form-group col-md-12 mb-4">
-                                            <input type="text" name="name" id="name" class="form-control" placeholder="Your Name" required data-error="Please Enter Your Name">
-                                            <div class="help-block with-errors"></div>
-                                        </div>
+        <p class="mb-2" style="font-size: 14px;"><strong>Published:</strong> {{ \Carbon\Carbon::parse($report->publish_date)->format('F, Y') }}</p>
 
-                                        <div class="form-group col-md-12 mb-4">
-                                            <input type="text" name="contact" id="contact" class="form-control" placeholder="Phone Number" required>
-                                            <div class="help-block with-errors"></div>
-                                        </div>
+        <form action="{{ route('enquiry.store') }}" method="POST">
+            @csrf
 
-                                        <div class="form-group col-md-12 mb-4">
-                                            <input type="email" name="email" id="email" class="form-control" placeholder="Your Email" required>
-                                            <div class="help-block with-errors"></div>
-                                        </div>
+            <input type="hidden" name="page_url" value="{{ url()->current() }}">
+            <input type="hidden" name="page_name" value="{{ $report->report_title }}">
 
-                                        <div class="col-md-12">
-                                            <button type="submit" class="btn-default py-2">send</button>
-                                            <div id="msgSubmit" class="h3 hidden"></div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <!-- CTA Info Item End -->
-                        </div>
-                        <!-- CTA Contact Info End -->
-                    </div>
+            <div class="form-group mb-2">
+                <input type="text" name="name" class="form-control form-control-sm" placeholder="Your Name" required>
+            </div>
+            <div class="form-group mb-2">
+                <input type="text" name="contact" class="form-control form-control-sm" placeholder="Phone Number" required>
+            </div>
+            <div class="form-group mb-2">
+                <input type="email" name="email" class="form-control form-control-sm" placeholder="Your Email" required>
+            </div>
+            <div class="form-group mb-2">
+                <textarea name="message" class="form-control form-control-sm" rows="2" placeholder="Message (Optional)"></textarea>
+            </div>
+            <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+
+
                     <!-- Sidebar Cta Box End -->
                 </div>
                 <!-- Service Sidebar End -->
@@ -122,6 +144,20 @@
                     <!-- Case Study Entry Start -->
                     <div class="service-entry">
                         <h1 class="wow fadeInUp custom-title">{!! $report->report_name !!}</h1>
+                        <br>
+                        
+                        <div class="d-flex justify-content-start text-center" style="gap: 40px;">
+                        <div>
+                            <strong>PUBLISHED ON</strong><br>
+                            <span>{!! $report->publish_date !!}</span>
+                        </div>
+                        <div>
+                            <strong>CATEGORY NAME</strong><br>
+                            <span>{!! $report->category_name !!}</span>
+                        </div>
+                        </div>
+
+
 
                         <br>
 

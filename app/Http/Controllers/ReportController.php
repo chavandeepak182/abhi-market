@@ -216,16 +216,21 @@ public function storeReport(Request $request)
         return redirect()->route('reports.index')->with('success', 'Report has been deleted.');
     }
 
-    public function show($slug)
-    {
-        $report = DB::table('reports')->where('slug', $slug)->first();
+   public function show($slug)
+{
+    $report = DB::table('reports')
+        ->join('industries_category', 'reports.industry_category_id', '=', 'industries_category.pid')
+        ->select('reports.*', 'industries_category.category_name as category_name') // this includes publish_date too
+        ->where('reports.slug', $slug)
+        ->first();
 
-        if (!$report) {
-            abort(404); // or redirect to a default page
-        }
-
-        return view('frontend.report-details', compact('report'));
+    if (!$report) {
+        abort(404);
     }
+
+    return view('frontend.report-details', compact('report'));
+}
+
     public function getReportsByIndustry($industryId)
     {
         $reports = DB::table('reports')

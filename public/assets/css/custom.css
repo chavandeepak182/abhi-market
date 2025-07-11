@@ -7208,6 +7208,8 @@ footer.main-footer{
   display: block; /* ✅ This is the missing line */
   left: 0;
   opacity: 1;
+  margin-left: 23px;
+  margin-right: 23px;
 }
 .tabs {
     position: sticky;

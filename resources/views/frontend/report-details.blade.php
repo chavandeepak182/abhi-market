@@ -45,7 +45,7 @@
                         <div class="report-summary d-flex align-items-center wow fadeInUp" data-wow-delay="0.2s">
     <!-- Left: Book Image -->
     <div class="report-image me-3">
-        <img src="{{ asset('assets/images/BOOK.png') }}" alt="Report Cover" style="max-width: 120px;">
+        <img src="{{ asset('assets/images/BOOKs.png') }}" alt="Report Cover" style="max-width: 120px;">
     </div>
 
     <!-- Right: Report Details -->
@@ -54,34 +54,18 @@
         <p><span>{!! $report-> publish_date!!}</span></p>
         <p class="mb-1"><strong>CATEGORY NAME:</strong> </p>
         <p><span>{!! $report-> category_name!!}</span></p>
+        <a href="{{ url('/purchase') }}" class="btn btn-sm btn-primary">
+  <i class="fas fa-shopping-cart me-1"></i> Buy Now
+</a>
+
+
         <!-- <p class="mb-1"><strong>HISTORICAL DATA:</strong> 2019–2023</p> -->
         <!-- <p class="mb-0"><strong>NO OF PAGES:</strong> {{ $report->pages ?? 'N/A' }}</p> -->
         
         
     </div>
 </div>
-<style>.report-summary {
-    background: #f7fafd;
-    border: 1px solid #f7fafd;
-    border-radius: 6px;
-    padding: 12px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    max-width: 70%;
-    gap: 15px;
-}
-.report-details p {
-    font-size: 14px;
-    color: #333;
-}
-.report-details strong {
-    color: #0074a8;
-}
-.report-image img {
-    height: auto;
-    max-height: 150px;
-    border-radius: 3px;
-}
-</style>
+
 
 
 <BR></BR>
@@ -89,36 +73,36 @@
 
                     <!-- Sidebar Cta Box Start -->
                     <div class="card shadow">
-    <div class="card-body p-3"> <!-- reduce padding here -->
-        <h3 class="mb-3" style="color: #006186; font-size: 20px;">
-            Request a Free Sample PDF 
-            <i class="fas fa-file-pdf" style="font-size: 24px; color: #006186; margin-left: 5px;"></i>
-        </h3>
+                        <div class="card-body p-3"> <!-- reduce padding here -->
+                            <h3 class="mb-3" style="color: #006186; font-size: 20px;">
+                                Request a Free Sample PDF 
+                                <i class="fas fa-file-pdf" style="font-size: 24px; color: #006186; margin-left: 5px;"></i>
+                            </h3>
 
-        <p class="mb-2" style="font-size: 14px;"><strong>Published:</strong> {{ \Carbon\Carbon::parse($report->publish_date)->format('F, Y') }}</p>
+                            <p class="mb-2" style="font-size: 14px;"><strong>Published:</strong> {{ \Carbon\Carbon::parse($report->publish_date)->format('F, Y') }}</p>
 
-        <form action="{{ route('enquiry.store') }}" method="POST">
-            @csrf
+                            <form action="{{ route('enquiry.store') }}" method="POST">
+                                @csrf
 
-            <input type="hidden" name="page_url" value="{{ url()->current() }}">
-            <input type="hidden" name="page_name" value="{{ $report->report_title }}">
+                                <input type="hidden" name="page_url" value="{{ url()->current() }}">
+                                <input type="hidden" name="page_name" value="{{ $report->report_title }}">
 
-            <div class="form-group mb-2">
-                <input type="text" name="name" class="form-control form-control-sm" placeholder="Your Name" required>
-            </div>
-            <div class="form-group mb-2">
-                <input type="text" name="contact" class="form-control form-control-sm" placeholder="Phone Number" required>
-            </div>
-            <div class="form-group mb-2">
-                <input type="email" name="email" class="form-control form-control-sm" placeholder="Your Email" required>
-            </div>
-            <div class="form-group mb-2">
-                <textarea name="message" class="form-control form-control-sm" rows="2" placeholder="Message (Optional)"></textarea>
-            </div>
-            <button type="submit" class="btn btn-sm btn-primary">Submit</button>
-        </form>
-    </div>
-</div>
+                                <div class="form-group mb-2">
+                                    <input type="text" name="name" class="form-control form-control-sm" placeholder="Your Name" required>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <input type="text" name="contact" class="form-control form-control-sm" placeholder="Phone Number" required>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <input type="email" name="email" class="form-control form-control-sm" placeholder="Your Email" required>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <textarea name="message" class="form-control form-control-sm" rows="2" placeholder="Message (Optional)"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                            </form>
+                        </div>
+                    </div>
 
 
                     <!-- Sidebar Cta Box End -->

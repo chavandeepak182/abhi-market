@@ -79,24 +79,28 @@
                                     <a href="{{ url('/') }}">Home</a>
                                     
                                 </li>
-                                
-                                
 
-                                <li class="menu-item-has-children">
+                                 <li class="menu-item-has-children">
                                     <a href="{{ url('/industries') }}">Industries <i class="fas fa-plus"></i></a>
                                     <div class="sub-menu industries-two-column">
                                         @php
                                             $chunks = $industriesMenuData->chunk(ceil($industriesMenuData->count() / 2));
-                                            $leftItems = $chunks[0];
+                                            $leftItems = $chunks[0] ?? collect();
                                             $rightItems = $chunks[1] ?? collect(); // in case only 1 chunk
                                         @endphp
 
                                         <div class="industries-column">
                                             <div class="industry-list">
                                                 @foreach($leftItems as $category)
-                                                    <a href="{{ route('industries.details', ['slug' => $category['industries'][0]['slug'] ?? '#']) }}">
-                                                        {{ $category['category_name'] }}
-                                                    </a>
+                                                    @if(!empty($category['industries']) && isset($category['industries'][0]['slug']))
+                                                        <a href="{{ route('industries.details', ['slug' => $category['industries'][0]['slug']]) }}">
+                                                            {{ $category['category_name'] }}
+                                                        </a>
+                                                    @else
+                                                        <a href="#">
+                                                            {{ $category['category_name'] }}
+                                                        </a>
+                                                    @endif
                                                 @endforeach
                                             </div>
 
@@ -104,9 +108,15 @@
 
                                             <div class="industry-list">
                                                 @foreach($rightItems as $category)
-                                                    <a href="{{ route('industries.details', ['slug' => $category['industries'][0]['slug'] ?? '#']) }}">
-                                                        {{ $category['category_name'] }}
-                                                    </a>
+                                                    @if(!empty($category['industries']) && isset($category['industries'][0]['slug']))
+                                                        <a href="{{ route('industries.details', ['slug' => $category['industries'][0]['slug']]) }}">
+                                                            {{ $category['category_name'] }}
+                                                        </a>
+                                                    @else
+                                                        <a href="#">
+                                                            {{ $category['category_name'] }}
+                                                        </a>
+                                                    @endif
                                                 @endforeach
                                             </div>
                                         </div>
@@ -116,8 +126,6 @@
                                         </div>
                                     </div>
                                 </li>
-
-
 
                                 <li class="menu-item-has-children">
                                     <a href="{{ url('/services') }}">Capabilities <i class="fas fa-plus"></i></a>

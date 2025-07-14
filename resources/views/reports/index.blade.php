@@ -55,7 +55,12 @@
                         
                         <td>
                             <a href="{{ route('reports.edit', $report->id) }}" class="btn btn-warning btn-xs edit"><i class="far fa-edit"></i></a>
-                            <a href="{{ route('reports.delete', $report->id) }}" class="btn btn-danger btn-xs delete" onclick="return confirm('Are you sure?');"><i class="far fa-trash-alt"></i></a>
+                            <form action="{{ route('reports.delete', $report->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure?');">
+                                @csrf
+                                <button type="submit" class="btn btn-danger btn-xs delete">
+                                    <i class="far fa-trash-alt"></i>
+                                </button>
+                            </form>
                         </td>
                     </tr>
                     @endforeach

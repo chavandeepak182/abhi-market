@@ -65,7 +65,12 @@
                                     <td>{{ $subcategory->category_name }}</td>
                                     <td>
                                         <a href="{{ route('industries.subcategories.edit', $subcategory->industries_subcategory_id) }}" class="btn btn-warning"><i class="far fa-edit"></i></a>
-                                        <a href="{{ route('industries.subcategories.delete', $subcategory->industries_subcategory_id) }}" class="btn btn-danger" onclick="return confirm('Are you sure?');"><i class="far fa-trash-alt"></i></a>
+                                        <form action="{{ route('industries.subcategories.delete', $subcategory->industries_subcategory_id) }}" method="POST" style="display:inline;">
+                                            @csrf
+                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?');">
+                                                <i class="far fa-trash-alt"></i>
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach

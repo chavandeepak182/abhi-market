@@ -8,7 +8,7 @@
             <ul class="flex-align gap-4">
                 <li><a href="{{ url('admin/dashboard') }}" class="text-gray-200 fw-normal text-15 hover-text-main-600">Dashboard</a></li>
                 <li> <span class="text-gray-500 fw-normal d-flex"><i class="ph ph-caret-right"></i></span> </li>
-                <li><span class="text-main-600 fw-normal text-15">Categories</span></li>
+                <li><span class="text-main-600 fw-normal text-15">Categories s</span></li>
             </ul>
         </div>
         <!-- Breadcrumb End -->
@@ -55,7 +55,12 @@
                                     <td>{{ $category->category_name }}</td>
                                     <td>
                                         <a href="{{ route('categories.edit', $category->pid) }}" class="btn btn-warning"><i class="far fa-edit"></i></a>
-                                        <a href="{{ route('categories.delete', $category->pid) }}" class="btn btn-danger" onclick="return confirm('Are you sure?');"><i class="far fa-trash-alt"></i></a>
+                                        <form action="{{ route('categories.delete', $category->pid) }}" method="POST" style="display:inline;">
+                                            @csrf
+                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?');">
+                                                <i class="far fa-trash-alt"></i>
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach

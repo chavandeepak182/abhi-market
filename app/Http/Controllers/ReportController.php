@@ -203,18 +203,18 @@ public function storeReport(Request $request)
     return redirect()->route('reports.index')->with('success', 'Report has been updated successfully.');
 }
 
-    public function deleteReport($id)
-    {
-        $report = DB::table('reports')->where('id', $id)->first();
+  public function deleteReport($id)
+{
+    $report = DB::table('reports')->where('id', $id)->first();
 
-        if (!$report) {
-            return redirect()->route('reports.index')->with('error', 'Report not found.');
-        }
-
-        DB::table('reports')->where('id', $id)->delete();
-        
-        return redirect()->route('reports.index')->with('success', 'Report has been deleted.');
+    if (!$report) {
+        return redirect()->route('reports.index')->with('error', 'Report not found.');
     }
+
+    DB::table('reports')->where('id', $id)->delete();
+
+    return redirect()->route('reports.index')->with('success', 'Report has been deleted.');
+}
 
    public function show($slug)
 {

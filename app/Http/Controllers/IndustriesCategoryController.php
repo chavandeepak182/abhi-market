@@ -58,7 +58,6 @@ class IndustriesCategoryController extends Controller
 
         return redirect()->route('industries.categories.index')->with('success', 'Category updated successfully.');
     }
-
     public function destroy($id)
     {
         DB::table('industries_category')->where('pid', $id)->delete();

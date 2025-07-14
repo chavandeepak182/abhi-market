@@ -44,13 +44,13 @@
   </div>
 
   <div class="plan-title">EXCEL ONLY</div>
-  <div class="price">$2000</div>
+  <div class="price"> US$2000</div>
   <button class="buy-btn">Buy Now</button>
 
   <ul>
     <li>Single User Access</li>
     <li>No Free Customization</li>
-    <li>Free Analyst Support 2 months post purchase</li>
+    <li>2 Month Free Analyst Support</li>
     <li><strong>Deliverable Report Format:</strong> Excel</li>
     <li>Quantitative Data Only</li>
   </ul>
@@ -107,7 +107,7 @@
     <li>Team Access (Up to 5 User)</li>
     <li>15% Free Customization</li>
     <li>4 Months Free Analyst Support</li>
-    <li>15% Discount on your Next Purchase of same licence type</li>
+    <li>15% Discount on your Next Purchase <strong>of same licence type</strong></li>
     <li>Deliverable Report Format</li>
     <li>PDF</li>
     <li>Qualitative Data & InsightsMarket dynamics</li>
@@ -134,8 +134,8 @@
 
   <ul>
     <li>Unlimited User Access</li>
+    <li>25% Discount on your Next Purchase <strong>of same licence type</strong></li>
     <li>6 Months Free Analyst Support</li>
-    <li>25% Discount on your Next Purchase of same licence type</li>
     <li>Deliverable Report Format</li>
     <li>PDF</li>
     <li>Qualitative Data & InsightsMarket dynamics</li>

@@ -19,22 +19,14 @@
                         <span>{{ $words[0] }}</span>
                         {{ implode(' ', array_slice($words, 1)) }}
                     </h1>
-                    <!-- <nav class="wow fadeInUp">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">home</a></li>
-                            <li class="breadcrumb-item"><a href="services.html">services</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Investment management</li>
-                        </ol>
-                    </nav> -->
+                    
                 </div>
-                <!-- Page Header Box End -->
+                
             </div>
         </div>
     </div>
 </div>
-<!-- Page Header End -->
 
-<!-- Page Service Single Start -->
 <div class="page-service-single">
     <div class="container">
         <div class="row">
@@ -54,9 +46,11 @@
         <p><span>{!! $report-> publish_date!!}</span></p>
         <p class="mb-1"><strong>CATEGORY NAME:</strong> </p>
         <p><span>{!! $report-> category_name!!}</span></p>
-        <a href="{{ url('/purchase') }}" class="btn btn-sm btn-primary">
-  <i class="fas fa-shopping-cart me-1"></i> Buy Now
-</a>
+        <a href="{{ url('/purchase') }}" class="custom-buy-btn">
+        <i class="fas fa-shopping-cart me-1"></i> Buy Now
+        </a>
+
+
 
 
         <!-- <p class="mb-1"><strong>HISTORICAL DATA:</strong> 2019–2023</p> -->
@@ -115,13 +109,7 @@
                 <div class="service-single-content">
                     <!-- Case Study Image Start -->
                     <div class="service-featured-image">
-                        <!-- <figure class="image-anime reveal">
-                            @if($report->image)
-                                <img src="{{ asset($report->image) }}" alt="{{ $report->report_name }}">
-                            @else
-                                <img src="{{ asset('assets/images/default-service.jpg') }}" alt="Default Image">
-                            @endif
-                        </figure> -->
+                       
                     </div>
                     <!-- Case Study Image End -->
 
@@ -361,34 +349,11 @@
 
 
 
-          <!-- <div class="tab-content" id="sample">
-                      <h2>Request Free Sample PDF</h2>
-                      <p class="wow fadeInUp">This is the sample request section.</p>
-                    </div> -->
-                  </div>
+          
+                            </div>
 
-                </div><script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                <script>
-                  document.addEventListener("DOMContentLoaded", function () {
-                    const tabButtons = document.querySelectorAll(".tab-button");
-                    const tabContents = document.querySelectorAll(".tab-content");
-
-                    tabButtons.forEach((button) => {
-                      button.addEventListener("click", () => {
-                        const target = button.getAttribute("data-tab");
-
-                        // Remove active class from all buttons and contents
-                        tabButtons.forEach((btn) => btn.classList.remove("active"));
-                        tabContents.forEach((content) => content.classList.remove("active"));
-
-                        // Add active class to clicked button and corresponding content
-                        button.classList.add("active");
-                        document.getElementById(target).classList.add("active");
-                      });
-                    });
-                  });
-                </script>
-
+                </div>
+                
 
 
 
@@ -444,6 +409,44 @@
         icon.innerText = item.classList.contains('active') ? '–' : '+';
     }
 </script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+                  document.addEventListener("DOMContentLoaded", function () {
+                    const tabButtons = document.querySelectorAll(".tab-button");
+                    const tabContents = document.querySelectorAll(".tab-content");
+
+                    tabButtons.forEach((button) => {
+                      button.addEventListener("click", () => {
+                        const target = button.getAttribute("data-tab");
+
+                        // Remove active class from all buttons and contents
+                        tabButtons.forEach((btn) => btn.classList.remove("active"));
+                        tabContents.forEach((content) => content.classList.remove("active"));
+
+                        // Add active class to clicked button and corresponding content
+                        button.classList.add("active");
+                        document.getElementById(target).classList.add("active");
+                      });
+                    });
+                  });
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const tabContents = document.querySelectorAll(".tab-content");
+  tabContents.forEach(tab => {
+    const tables = tab.querySelectorAll("table");
+    tables.forEach(table => {
+      const wrapper = document.createElement("div");
+      wrapper.style.overflowX = "auto";
+      wrapper.style.width = "100%";
+      wrapper.appendChild(table.cloneNode(true));
+      table.replaceWith(wrapper);
+    });
+  });
+});
+</script>
+
+
 
 
 @endsection

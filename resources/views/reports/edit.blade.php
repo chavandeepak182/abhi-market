@@ -94,45 +94,52 @@
                             <label for="schema_markup" class="form-label">Schema Markup / Open Graph Meta / Twitter Card Meta</label>
                             <textarea name="schema_markup" id="schema_markup" class="form-control" style="height:150px;">{{ old('schema_markup', $report->schema_markup) }}</textarea>
                         </div>
-                         <!-- <div class="position-relative pb-15 form-group">
-                            <label for="slug">Graph Meta</label>
-                            <input type="text" name="open_graph_meta" id="open_graph_meta" class="form-control" required>
-                        </div>
-                        <div class="position-relative pb-15 form-group">
-                            <label for="slug">twitter Card </label>
-                            <input type="text" name="twitter_card_meta" id="twitter_card_meta" class="form-control" required>
-                        </div>
-                        <div class="position-relative pb-15 form-group">
-                            <label for="meta_description">FAQ</label>
-                            <textarea name="faq" id="faq" class="form-control"></textarea>
-                        </div> -->
+                       <div class="form-group">
+                            <label>FAQs</label>
+                            <div id="faq-wrapper">
+                                @php
+                                    $questions = explode('||', $report->faq_que ?? '');
+                                    $answers = explode('||', $report->faq_ans ?? '');
+                                @endphp
 
-                            <div class="form-group">
-                                    <label>FAQs</label>
-                                    <div id="faq-wrapper">
-
+                                @if(!empty($questions[0]))
+                                    @foreach($questions as $index => $question)
                                         <div class="faq-item border p-3 mb-3">
                                             <div class="form-group">
                                                 <label>Question</label>
-                                                <input type="text" name="faq_que[]" class="form-control" placeholder="Enter FAQ Question" />
+                                                <input type="text" name="faq_que[]" class="form-control" value="{{ $question }}" placeholder="Enter FAQ Question" />
                                             </div>
                                             <div class="form-group mt-2">
                                                 <label>Answer</label>
-                                                <textarea name="faq_ans[]" class="form-control" rows="3" placeholder="Enter FAQ Answer"></textarea>
+                                                <textarea name="faq_ans[]" class="form-control" rows="3" placeholder="Enter FAQ Answer">{{ $answers[$index] ?? '' }}</textarea>
                                             </div>
                                             <br>
-                                            <!-- <button type="button" class="btn btn-danger mt-2 remove-faq">Remove</button> -->
-                                            <button type="button" class="btn btn-danger rounded-pill py-9">Remove</button>
+                                            <button type="button" class="btn btn-danger rounded-pill py-9 remove-faq">Remove</button>
                                         </div>
-
+                                    @endforeach
+                                @else
+                                    <!-- Default single blank FAQ if none exist -->
+                                    <div class="faq-item border p-3 mb-3">
+                                        <div class="form-group">
+                                            <label>Question</label>
+                                            <input type="text" name="faq_que[]" class="form-control" placeholder="Enter FAQ Question" />
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            <label>Answer</label>
+                                            <textarea name="faq_ans[]" class="form-control" rows="3" placeholder="Enter FAQ Answer"></textarea>
+                                        </div>
+                                        <br>
+                                        <button type="button" class="btn btn-danger rounded-pill py-9 remove-faq">Remove</button>
                                     </div>
-                                    <br>
-                                    
-
-                                    <!-- <button type="button" id="add-faq" class="btn mt-2" style="background-color: #3E80f9; color: white;">Add More FAQ</button> -->
-                                    <button type="button" class="btn btn-main rounded-pill py-9" id="add-faq">Add FAQ</button>
+                                @endif
                             </div>
-                                <br><br>
+
+                            <br>
+
+                            <!-- ✅ Add FAQ Button -->
+                            <button type="button" class="btn btn-main rounded-pill py-9" id="add-faq">Add FAQ</button>
+                        </div>
+                        <br><br>
                         
                         <div class="flex-align mt-20">
                             <button type="submit" class="btn btn-success rounded-pill py-9">Update Service</button>

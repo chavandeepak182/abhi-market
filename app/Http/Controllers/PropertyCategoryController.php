@@ -95,10 +95,9 @@ class PropertyCategoryController extends Controller
 
         return redirect()->route('subcategories.index')->with('success', 'Subcategory updated successfully.');
     }
-
-    public function deleteSubcategory($id)
-    {
-        DB::table('property_subcategory')->where('property_subcategory_id', $id)->delete();
-        return redirect()->route('subcategories.index')->with('success', 'Subcategory deleted successfully.');
-    }
+public function deleteSubcategory($id)
+{
+    DB::table('property_subcategory')->where('property_subcategory_id', $id)->delete();
+    return redirect()->route('subcategories.index')->with('success', 'Subcategory deleted successfully.');
+}
 }

@@ -176,7 +176,7 @@ class ServiceController extends Controller
         return redirect()->route('services.index')->with('success', 'Service updated successfully.');
     }
 
-    public function deleteService($id)
+   public function delete($id)
     {
         $service = DB::table('services')->where('id', $id)->first();
 
@@ -186,7 +186,7 @@ class ServiceController extends Controller
 
         DB::table('services')->where('id', $id)->delete();
         
-        return redirect()->route('services.index')->with('success', 'Service deleted.');
+        return redirect()->route('services.index')->with('success', 'Service has been deleted.');
     }
 
     public function show($slug)

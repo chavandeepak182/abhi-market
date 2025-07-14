@@ -53,7 +53,12 @@
                         <td><span class="h6 mb-0 fw-medium text-gray-300">{{ Str::limit($industries->meta_description, 50) }}</span></td>
                         <td>
                             <a href="{{ route('industries.edit', $industries->id) }}" class="btn btn-warning btn-xs edit"><i class="far fa-edit"></i></a>
-                            <a href="{{ route('industries.delete', $industries->id) }}" class="btn btn-danger btn-xs delete" onclick="return confirm('Are you sure?');"><i class="far fa-trash-alt"></i></a>
+                            <form action="{{ route('industries.delete', $industries->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                <button type="submit" class="btn btn-danger btn-xs delete" onclick="return confirm('Are you sure?');">
+                                    <i class="far fa-trash-alt"></i>
+                                </button>
+                            </form>
                         </td>
                     </tr>
                     @endforeach

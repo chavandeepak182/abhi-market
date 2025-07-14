@@ -167,18 +167,18 @@ class IndustriesController extends Controller
         return redirect()->route('industries.index')->with('success', 'industries updated successfully.');
     }
 
-    public function deleteService($id)
-    {
-        $industries = DB::table('industries')->where('id', $id)->first();
+   public function deleteService($id)
+{
+    $industries = DB::table('industries')->where('id', $id)->first();
 
-        if (!$industries) {
-            return redirect()->route('industries.index')->with('error', 'industries not found.');
-        }
-
-        DB::table('industries')->where('id', $id)->delete();
-        
-        return redirect()->route('industries.index')->with('success', 'industries deleted.');
+    if (!$industries) {
+        return redirect()->route('industries.index')->with('error', 'Industry not found.');
     }
+
+    DB::table('industries')->where('id', $id)->delete();
+
+    return redirect()->route('industries.index')->with('success', 'Industry deleted.');
+}
 
    public function show($slug)
     {

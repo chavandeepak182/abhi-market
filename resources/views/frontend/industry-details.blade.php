@@ -193,4 +193,13 @@
         });
     });
 </script>
+
+
+  <div class="custom-pagination-wrapper mt-4">
+    {{ $reports->links('vendor.pagination.custom') }}
+   </div>
+
+    
+
+
 @endsection

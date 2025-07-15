@@ -158,7 +158,7 @@
                                      @if($hasDesc)
                                         <div class="tab-content active" id="desc">
                                             <h2>Description</h2>
-                                            <p class="wow fadeInUp" style="color: #040303;">{!! $report->description !!}</p>
+                                           <div class="summernote-output">{!! $report->description !!}</div>
 
                                                 {{-- FAQ Section --}}
                                                 @php
@@ -431,22 +431,50 @@
                   });
 </script>
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-  const tabContents = document.querySelectorAll(".tab-content");
-  tabContents.forEach(tab => {
-    const tables = tab.querySelectorAll("table");
-    tables.forEach(table => {
-      const wrapper = document.createElement("div");
-      wrapper.style.overflowX = "auto";
-      wrapper.style.width = "100%";
-      wrapper.appendChild(table.cloneNode(true));
-      table.replaceWith(wrapper);
-    });
-  });
-});
+        document.addEventListener("DOMContentLoaded", function() {
+        const tabContents = document.querySelectorAll(".tab-content");
+        tabContents.forEach(tab => {
+            const tables = tab.querySelectorAll("table");
+            tables.forEach(table => {
+            const wrapper = document.createElement("div");
+            wrapper.style.overflowX = "auto";
+            wrapper.style.width = "100%";
+            wrapper.appendChild(table.cloneNode(true));
+            table.replaceWith(wrapper);
+            });
+        });
+        });
 </script>
+<script>
+                                        document.addEventListener("DOMContentLoaded", function () {
+                    const container = document.querySelectorAll(".summernote-output");
+
+                    const phrases = [
+                        "Fuzes & Primers",
+                        "Projectiles and warheads",
+                        "By Application",
+                        "By Components",
+                        "By Products",
+                        "North America",
+                        "Latin America",
+                        "Middle East and Africa"
+                    ];
+
+                    container.forEach(area => {
+                        let html = area.innerHTML;
+                        phrases.forEach(phrase => {
+                        const regex = new RegExp(phrase, 'g');
+                        html = html.replace(
+                            regex,
+                            `<span class="nowrap">${phrase}</span>`
+                        );
+                        });
+                        area.innerHTML = html;
+                    });
+                    });
 
 
+</script>
 
 
 @endsection

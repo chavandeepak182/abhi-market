@@ -7228,7 +7228,119 @@ background: #fff;
 padding: 10px 0;
 border-bottom: 1px solid #ddd;
 }
-/* Wrap all tables for responsiveness */
+@media (max-width: 768px) {
+
+  /* Tabs - stack vertically */
+  .tabs {
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 15px;
+  }
+
+  .tab-button {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .tab-button.active {
+    background-color: #00a8e8;
+    color: white;
+    display: block;
+  }
+
+  /* Sticky tabs wrapper */
+  .sticky-tabs-wrapper {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background: #fff;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+  }
+
+  /* Content area */
+  .tab-content-wrapper {
+    position: relative;
+    height: auto;
+    overflow: hidden;
+    padding: 0 10px;
+  }
+
+  .tab-content {
+    overflow-x: auto;
+  }
+
+  /* Table styles */
+  .tab-content table {
+    width: 100%;
+    table-layout: auto;
+    border-collapse: collapse;
+  }
+
+  .tab-content table td,
+  .tab-content table th {
+    word-break: nowrap;
+    white-space: normal;  /* allow wrapping */
+    font-size: 14px;
+    padding: 8px;
+    vertical-align: top;
+  }
+  
+
+  /* Optional: No splitting of phrases like "By Components" */
+  .tab-content table td span.nowrap {
+    white-space: nowrap;
+  }
+}
+
+
+/* pagination */
+.custom-pagination {
+    display: flex;
+    gap: 14px; /* ✅ Space between items */
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+}
+
+.custom-pagination li a,
+.custom-pagination li span {
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 50%;
+    text-decoration: none;
+    color: #2c3e50;
+    background-color: #f1f1f1;
+    transition: 0.3s;
+}
+
+/* ✅ PREV / NEXT Hover */
+.custom-pagination li a:hover {
+    background-color: #444;
+    color: #fff;
+}
+
+/* ✅ PREV color dark by default */
+.custom-pagination li:first-child a {
+    color: #1a1a1a;
+    font-weight: bold;
+}
+
+/* ✅ Active page */
+.custom-pagination li.active span {
+    background-color: #00a8e8; /* custom blue */
+    color: #fff;
+    font-weight: bold;
+}
+
+/* ✅ Disabled NEXT */
+.custom-pagination li.disabled span {
+    color: #bbb;
+    pointer-events: none;
+}
+
 
 
 

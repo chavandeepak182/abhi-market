@@ -28,16 +28,13 @@
             @if(session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
             @endif
-            <table id="studentTable" class="table table-striped">
+            <table class="table table-striped">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Report Name</th>
-                        <th>Description</th>
-                        <th>Table Of Content</th>
-                        <th>Meta Title</th>
-                        <th>Meta Keywords</th>
-                        <th>Meta Description</th>
+                        <th>Category</th>
+                        
                         
                         <th>Actions</th>
                     </tr>
@@ -47,11 +44,7 @@
                     <tr>
                         <td><span class="h6 mb-0 fw-medium text-gray-300">{{ $loop->iteration }}</span></td>
                         <td><span class="h6 mb-0 fw-medium text-gray-300">{{ $report->report_title }}</span></td>
-                        <td><span class="h6 mb-0 fw-medium text-gray-300">{{ Str::limit(strip_tags($report->description), 50) }}</span></td>
-                        <td><span class="h6 mb-0 fw-medium text-gray-300">{{ Str::limit(strip_tags($report->toc), 50) }}</span></td>
-                        <td><span class="h6 mb-0 fw-medium text-gray-300">{{ $report->meta_title }}</span></td>
-                        <td><span class="h6 mb-0 fw-medium text-gray-300">{{ Str::limit($report->meta_keywords, 30) }}</span></td>
-                        <td><span class="h6 mb-0 fw-medium text-gray-300">{{ Str::limit($report->meta_description, 50) }}</span></td>
+                        <td><span class="h6 mb-0 fw-medium text-gray-300">{{ $report->category_name }}</span></td>
                         
                         <td>
                             <a href="{{ route('reports.edit', $report->id) }}" class="btn btn-warning btn-xs edit"><i class="far fa-edit"></i></a>

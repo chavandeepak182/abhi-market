@@ -24,6 +24,11 @@
     </div>
 </div>
 <!-- Hero Section End -->
+          <div class="custom-pagination-wrapper mt-4" style="display: flex; justify-content: flex-end; padding-right: 20px;">
+    {{ $reports->links('vendor.pagination.custom') }}
+</div>
+
+
 
 <!-- Reports Section Start -->
 <div class="page-service-single">
@@ -71,16 +76,23 @@
                 </div>
             </div>
             <!-- Sidebar End -->
-
+           
             <!-- Reports List Start -->
             <div class="col-lg-8">
-                <h3 class="mb-4">All Reports</h3>
+                 <h3 class="mb-4">
+                    @if(isset($query) && $query)
+                        Search Results for: <em>"{{ $query }}"</em>
+                    @else
+                        All Reports
+                    @endif
+                </h3>
                 <div id="reports-container">
                     @foreach($reports as $report)
                         @include('frontend.reports.reports-card', ['report' => $report])
                     @endforeach
                 </div>
             </div>
+           
             <!-- Reports List End -->
 
         </div>

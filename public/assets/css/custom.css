@@ -6793,36 +6793,68 @@ footer.main-footer{
         height: 350px;
     }
 }
-
-.search-container {
+.search-form {
     display: flex;
     align-items: center;
-    border-bottom: 1px solid #333; /* Adjust color as needed */
-    width: 100%;
-    max-width: 400px; /* Adjust width */
-    padding: 5px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 999px;
+    overflow: hidden;
+    width: 220px;
+    height: 38px;
+    transition: width 0.3s ease, border-color 0.3s ease;
+}
+
+.search-form:focus-within {
+    width: 280px;
+    border-color: #004e92;
 }
 
 .search-input {
-    flex-grow: 1;
+    flex: 1;
+    padding: 8px 14px;
     border: none;
     outline: none;
-    font-size: 16px;
-    color: #666;
-    background: transparent;
+    font-size: 13.5px;
+    background-color: transparent;
+    color: #333;
 }
 
 .search-btn {
-    background: none;
+    background-color: #004e92;
     border: none;
+    color: white;
+    width: 40px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
+    padding: 0; /* Ensure no default padding */
+    transition: background-color 0.3s ease;
 }
 
-.search-btn img {
-    width: 20px; /* Adjust size */
-    height: 20px;
-    color: green; /* Match the icon color */
+.search-btn:hover {
+    background-color: #003b73;
 }
+
+.search-btn i {
+    font-size: 16px; /* Adjust icon size */
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+/* Responsive layout */
+@media (max-width: 768px) {
+    .search-form {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
 
 .reports-card .mission-vission-header {
     padding: 40px 10px;
@@ -8128,10 +8160,5 @@ textarea.form-control {
         max-width: 100%;
     }
 }
-
-
-
-
-
 }
 

@@ -60,37 +60,15 @@ Route::middleware('isAdmin')->group(function () {
         Route::get('updateProfile', [UsersController::class, 'updateProfile'])->name('updateProfile');
         Route::get('admin/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
         Route::get('admin/allUsers', [UsersController::class, 'allUsers'])->name('allUsers');
-        Route::post('update-user-status/{id}', [UserController::class, 'updateStatus']);
-        Route::post('admin/assignAgent', [LoanApplicationController::class, 'assignAgent'])->name('assignAgent');
+        Route::post('update-user-status/{id}', [UsersController::class, 'updateStatus']);
     });
 
 //admin user profile
 
-Route::get('admin/profile/edit', [ProfileController::class, 'editProfile'])->name('admin.profile.edit');
-Route::post('admin/profile/update', [ProfileController::class, 'updateProfile'])->name('admin.profile.update');
-Route::get('admin/profile', [ProfileController::class, 'showProfile'])->name('admin.profile');
-//customer register
 Route::post('/register', [UsersController::class, 'registerUser'])->name('registerUser');
 
-Route::middleware('isAgent')->group(function () {
-    Route::get('agent/agentDashboard', [AgentController::class, 'agentDashboard'])->name('agentDashboard');
-    Route::get('agent/allAgents', [AgentController::class, 'allAgents'])->name('allAgents');
-    Route::post('agent/insertAgent',[AgentController::class,'insertAgent'])->name('insertAgent');
-    Route::get('/editAgent/{user_id}', [AgentController::class, 'editAgent'])->name('editAgent');
-    Route::post('/updateAgent', [AgentController::class, 'updateAgent'])->name('updateAgent');
-    Route::post('/deleteAgent', [AgentController::class, 'deleteAgent'])->name('deleteAgent');
-    Route::get('agent/assigned-loans', [LoanApplicationController::class, 'assignedLoans'])->name('agent.assignedLoans');
-    Route::get('loan/details/{id}', [LoanApplicationController::class, 'loanShow'])->name('loan.details');
-    Route::post('agent/accept-loan', [LoanApplicationController::class, 'acceptLoan'])->name('agent.acceptLoan');
-    Route::post('agent/reject-loan', [LoanApplicationController::class, 'rejectLoan'])->name('agent.rejectLoan');
-    Route::get('agent/referral_earnings', [ReferralController::class, 'referral_earnings'])->name('referral_earnings');
-    Route::get('agent/walletbalance', [ReferralController::class, 'walletbalance'])->name('walletbalance');
 
-});
-Route::middleware('isAdmin')->group(function () {
-    Route::get('admin/profile/edit', [ProfileController::class, 'editProfile'])->name('admin.profile.edit');
-    Route::post('admin/profile/update', [ProfileController::class, 'updateProfile'])->name('admin.profile.update');
-});
+
 
 Route::get('login', [AdminController::class, 'loginView'])->name('login');
 Route::post('userLogin', [FrontendController::class, 'userLogin'])->name('userLogin');
@@ -128,34 +106,6 @@ Route::middleware('isPartner')->group(function () {
     Route::delete('/banners/{id}', [BannerController::class, 'destroy'])->name('banners.destroy');
 });
 //channel partner
-Route::middleware('isPartner')->group(function () {
-    Route::get('partner/partnerDashboard', [PartnerController::class, 'partnerDashboard'])->name('partnerDashboard');
-    Route::get('partner/allPartners', [PartnerController::class, 'allPartners'])->name('allPartners');
-    Route::post('partner/insertPartner',[PartnerController::class,'insertPartner'])->name('insertPartner');
-    Route::get('/editPartner/{user_id}', [PartnerController::class, 'editPartner'])->name('editPartner');
-    Route::post('/updatePartner', [PartnerController::class, 'updatePartner'])->name('updatePartner');
-    Route::post('/deletePartner', [PartnerController::class, 'deletePartner'])->name('deletePartner');
-
-    //property
-    Route::get('partner/pendingProperties', [PropertyController::class, 'pendingProperties'])->name('pendingProperties');
-    Route::get('partner/addProperty', [PropertyController::class, 'addProperty'])->name('addProperty');
-    Route::post('partner/insertProperty',[PropertyController::class,'insertProperty'])->name('insertProperty');
-    Route::get('partner/allProperties', [PropertyController::class, 'allProperties'])->name('allProperties');
-    Route::get('/viewDetails/{property_id}', [PropertyController::class, 'viewDetails'])->name('viewDetails');
-    Route::get('/editProperty/{property_id}', [PropertyController::class, 'editProperty'])->name('editProperty');
-    Route::post('/updatePropertie', [PropertyController::class, 'updatePropertie'])->name('updatePropertie');
-    Route::post('/deletePropertie', [PropertyController::class, 'deletePropertie'])->name('deletePropertie');
-    Route::post('/activate', [PropertyController::class, 'activate'])->name('activate');
-    //profile
-    Route::get('/partner/profile', [ProfileController::class, 'showPartnerProfile'])->name('partner.profile');
-    Route::post('/partner/profile/update', [ProfileController::class, 'updatePartnerProfile'])->name('partner.updateProfile');
-    Route::post('/tinymce/upload', [PropertyController::class, 'uploadTinyMCEImage'])->name('tinymce.upload');
-});
-Route::post('/toggle-featured', [PropertyController::class, 'toggleFeatured'])->name('toggleFeatured');    
-/// Show the locality selection form for a specific property (GET)
-Route::get('/admin/localities', [PropertyController::class, 'getLocalities'])->name('admin.localities');
-Route::post('/admin/localities', [PropertyController::class, 'storeLocalities'])->name('admin.localities.store');
-Route::get('property-details/{property_id}', [FrontendController::class, 'PropDetailsView'])->name('property.details');
 
 //serivce category & subcategory
 Route::get('/categories', [PropertyCategoryController::class, 'index'])->name('categories.index');
@@ -172,6 +122,8 @@ Route::post('/subcategories/update/{id}', [PropertyCategoryController::class, 'u
 Route::middleware('isAdmin')->group(function () {
     Route::post('/subcategories/delete/{id}', [PropertyCategoryController::class, 'deleteSubcategory'])->name('subcategories.delete');
 });
+Route::get('/reports/search', [FrontendController::class, 'search'])->name('reports.search');
+
 
 //Reports
 Route::get('admin/reports', [ReportController::class, 'index'])->name('reports.index');
@@ -196,7 +148,7 @@ Route::get('/services/create', [ServiceController::class, 'create'])->name('serv
 Route::get('/get-subcategories/{categoryId}', [ServiceController::class, 'getSubcategories']);
 Route::get('/services/{slug}', [ServiceController::class, 'show'])->name('service.details');
 Route::middleware('isAdmin')->group(function () {
-    Route::post('/services/delete/{id}', [ServicesController::class, 'delete'])->name('services.delete');
+    Route::post('/services/delete/{id}', [ServiceController::class, 'delete'])->name('services.delete');
 });
 
 Route::get('/get-categories', [ServiceController::class, 'getCategories']);

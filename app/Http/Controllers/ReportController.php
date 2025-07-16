@@ -15,9 +15,10 @@ class ReportController extends Controller
     }
     public function index()
     {
-        $reports = DB::table('reports')
-            ->select('reports.*')
-            ->get();
+         $reports = DB::table('reports')
+        ->join('industries_category', 'reports.industry_category_id', '=', 'industries_category.pid')
+        ->select('reports.*', 'industries_category.category_name as category_name')
+        ->get();
 
         return view('reports.index', compact('reports'));
     }

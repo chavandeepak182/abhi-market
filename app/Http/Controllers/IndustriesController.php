@@ -191,7 +191,7 @@ class IndustriesController extends Controller
         $reports = DB::table('reports')
             ->where('industry_category_id', $industries->id)
             ->orderBy('created_at', 'desc')
-            ->paginate(1);
+            ->paginate(10);
 
         return view('frontend.industry-details', compact('industries', 'reports'));
     }

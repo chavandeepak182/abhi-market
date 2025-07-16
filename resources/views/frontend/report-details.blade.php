@@ -37,7 +37,7 @@
                         <div class="report-summary d-flex align-items-center wow fadeInUp" data-wow-delay="0.2s">
     <!-- Left: Book Image -->
     <div class="report-image me-3">
-        <img src="{{ asset('assets/images/BOOKs.png') }}" alt="Report Cover" style="max-width: 120px;">
+        <img src="{{ asset('assets/images/books.png') }}" alt="Report Cover" style="max-width: 120px;">
     </div>
 
     <!-- Right: Report Details -->

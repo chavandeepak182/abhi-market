@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
 use App\Models\PasswordResets;
 use App\Models\News;
+use Illuminate\Support\Facades\Log;
 
 class FrontendController extends Controller
 {
@@ -209,5 +210,19 @@ class FrontendController extends Controller
 
         return view('frontend.industries', $data);
     }
-    
+public function search(Request $request)
+{
+    $query = $request->input('query');
+    Log::info('Search method hit with query:', ['query' => $query]);
+
+    $reports = DB::table('reports')
+        ->where('report_title', 'like', '%' . $query . '%')
+        ->orWhere('report_name', 'like', '%' . $query . '%')
+        ->orderBy('publish_date', 'desc')
+        ->paginate(10);
+
+    Log::info('Reports fetched:', ['count' => $reports->total()]);
+
+    return view('frontend.reports.list', compact('reports', 'query'));
+}
 }

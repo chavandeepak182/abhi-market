@@ -31,6 +31,8 @@
         <!-- Main Custom Css -->
         <link href="{{ asset('assets') }}/css/custom.css" rel="stylesheet" media="screen">
         <!-- Favicon -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
     
 <head>
     <meta charset="UTF-8">
@@ -75,6 +77,7 @@
                                 <div class="mobile-menu-close">&times;</div>
                             </div>
                             <ul class="menu-main mb-0">
+                                
                                 <li>
                                     <a href="{{ url('/') }}">Home</a>
                                     
@@ -173,12 +176,28 @@
                                 <li>
                                     <a href="{{ url('/about') }}">About Us</a>
                                 </li>
+                                <li class="nav-item search-item">
+                                    <form action="{{ route('reports.search') }}" method="GET" class="search-form">
+                                        <input 
+                                            type="text" 
+                                            name="query" 
+                                            class="search-input" 
+                                            placeholder="Search Reports" 
+                                            value="{{ request('query') }}"
+                                            required
+                                        >
+                                        <button type="submit" class="search-btn">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </form>
+                                </li>
                                 
                                 <div class="header-item float-end">
                                     <!-- Header Btn Start -->
                                     <div class="header-btn d-none d-lg-inline-flex">
                                     <a href="{{ url('/contact') }}" class="btn-default btn-highlighted">contact us</a>
                                 </div>
+                                
 
                                     <!-- Header Btn End -->
                                 </div>

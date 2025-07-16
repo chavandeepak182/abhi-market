@@ -3445,6 +3445,17 @@ footer.main-footer{
     transition: all 0.4s ease-in-out;
 }
 
+    .industry-link.active {
+    font-weight: bold;
+    color: white;
+    background-color: #006186;
+    padding: 14px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+
+
 .service-catagery-list ul li:hover a{
 	color: var(--white-color);
     background-color: var(--dark-color);

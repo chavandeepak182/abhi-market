@@ -108,14 +108,14 @@
                     <!-- Left Column -->
                     <div class="report-column">
                         <div class="report-block">
-                            <img src="{{ asset('assets/images/Packaging Industry.svg') }}" alt="Discover" class="icon">
+                            <img src="{{ asset('assets/images/Unlock-Growth-Opportunities.png') }}" alt="Discover" class="icon">
                             <div>
                                 <h5>Unlock Growth Opportunities</h5>
                                 <p>From niche markets to global giants, we identify high-value spaces where your business can grow, innovate, and lead, no matter your starting point.</p>
                             </div>
                         </div>
                         <div class="report-block">
-                            <img src="{{ asset('assets/images/consulting-services.svg') }}" alt="Discover" class="icon">
+                            <img src="{{ asset('assets/images/Strategy-Focused.png') }}" alt="Discover" class="icon">
                             <div>
                                 <h5>Insight-Led, Strategy-Focused</h5>
                                 <p>In a world full of data, we deliver direction. Our research-driven insights turn complexity into clarity, helping you shape strategies that drive real-world results.</p>
@@ -131,14 +131,14 @@
                     <!-- Right Column -->
                     <div class="report-column">
                         <div class="report-block">
-                            <img src="{{ asset('assets/images/Growth Advisory.svg') }}" alt="Business" class="icon" style="width: 80px; height: auto;">
+                            <img src="{{ asset('assets/images/Market-Entry-&-Expansion.png') }}" alt="Business" class="icon" style="width: 50px; height: auto;">
                             <div>
                                 <h5>Smarter Market Entry & Expansion</h5>
                                 <p>Planning a launch or new market entry? We equip you with feasibility insights, competitor intelligence, and trend forecasts to ensure a smooth, informed move.</p>
                             </div>
                         </div>
                         <div class="report-block">
-                            <img src="{{ asset('assets/images/healthcare.svg') }}" alt="Launch" class="icon" style="width: 80px; height: auto;">
+                            <img src="{{ asset('assets/images/Confident,-Future-Ready-Decisions.png') }}" alt="Launch" class="icon" style="width: 50px; height: auto;">
                             <div>
                                 <h5>Confident, Future-Ready Decisions</h5>
                                 <p>Our foresight-first approach ensures your strategies aren’t just reactive, they’re resilient. We help you anticipate market shifts and build long-term success.</p>

@@ -101,8 +101,9 @@
 
 <!-- Industries AJAX Script -->
 <script>
-document.addEventListener("DOMContentLoaded", function () {
+            document.addEventListener("DOMContentLoaded", function () {
     let limit = 5;
+    let activeIndustryId = 'all'; // Default selected industry
 
     function loadIndustries() {
         fetch(`/get-industries?limit=${limit}`)
@@ -111,36 +112,56 @@ document.addEventListener("DOMContentLoaded", function () {
                 const industryList = document.getElementById('industry-list');
                 industryList.innerHTML = '';
 
+                // Add "All" link
+                industryList.innerHTML += `<li><a href="#" class="industry-link ${activeIndustryId === 'all' ? 'active' : ''}" data-id="all">All</a></li>`;
+
                 data.forEach(industry => {
-                    const industryUrl = `/industries/${industry.slug}`;
-                    industryList.innerHTML += `<li><a href="#" class="industry-link" data-id="${industry.id}">${industry.industries_name}</a></li>`;
+                    const isActive = (activeIndustryId == industry.id) ? 'active' : '';
+                    industryList.innerHTML += `<li><a href="#" class="industry-link ${isActive}" data-id="${industry.id}">${industry.industries_name}</a></li>`;
                 });
 
                 document.getElementById('loadMore').style.display = (data.length < limit) ? 'none' : 'inline-block';
             });
     }
 
+    // Initial load
     loadIndustries();
 
+    // Load more button
     document.getElementById('loadMore').addEventListener('click', function () {
         limit += 5;
         loadIndustries();
     });
+
+    // Handle industry click
+    document.addEventListener('click', function (e) {
+        if (e.target.classList.contains('industry-link')) {
+            e.preventDefault();
+
+            // Update active state
+            activeIndustryId = e.target.dataset.id;
+            loadIndustries();
+
+            // TODO: Load reports based on selected industry here...
+        }
+    });
 });
+
 </script>
 <script>
-document.addEventListener("click", function (e) {
-    if (e.target.classList.contains("industry-link")) {
-        e.preventDefault();
-        const industryId = e.target.dataset.id;
+            document.addEventListener("click", function (e) {
+                if (e.target.classList.contains("industry-link")) {
+                    e.preventDefault();
+                    const industryId = e.target.dataset.id;
 
-        fetch(`/get-reports-by-industry/${industryId}`)
-            .then(res => res.text())
-            .then(html => {
-                document.getElementById("reports-container").innerHTML = html;
+                    fetch(`/get-reports-by-industry/${industryId}`)
+                        .then(res => res.text())
+                        .then(html => {
+                            document.getElementById("reports-container").innerHTML = html;
+                        });
+                }
             });
-    }
-});
 </script>
+
 
 @endsection

@@ -24,9 +24,9 @@
     </div>
 </div>
 <!-- Hero Section End -->
-          <div class="custom-pagination-wrapper mt-4" style="display: flex; justify-content: flex-end; padding-right: 20px;">
-    {{ $reports->links('vendor.pagination.custom') }}
-</div>
+        <div class="custom-pagination-wrapper mt-4" style="display: flex; justify-content: flex-end; padding-right: 20px;">
+             {{ $reports->links('vendor.pagination.custom') }}
+       </div>
 
 
 
@@ -101,7 +101,7 @@
 
 <!-- Industries AJAX Script -->
 <script>
-            document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
     let limit = 5;
     let activeIndustryId = 'all'; // Default selected industry
 
@@ -124,44 +124,37 @@
             });
     }
 
+    function loadReportsByIndustry(industryId) {
+        fetch(`/get-reports-by-industry/${industryId}`)
+            .then(res => res.text())
+            .then(html => {
+                document.getElementById("reports-container").innerHTML = html;
+            });
+    }
+
     // Initial load
     loadIndustries();
+    loadReportsByIndustry(activeIndustryId); // Load default "all" reports
 
-    // Load more button
+    // Load more industries
     document.getElementById('loadMore').addEventListener('click', function () {
         limit += 5;
         loadIndustries();
     });
 
-    // Handle industry click
+    // Handle industry tab click (load industries + reports)
     document.addEventListener('click', function (e) {
         if (e.target.classList.contains('industry-link')) {
             e.preventDefault();
-
-            // Update active state
             activeIndustryId = e.target.dataset.id;
-            loadIndustries();
-
-            // TODO: Load reports based on selected industry here...
+            loadIndustries(); // Re-render the industry list with correct active class
+            loadReportsByIndustry(activeIndustryId); // Load the reports
         }
     });
 });
-
 </script>
-<script>
-            document.addEventListener("click", function (e) {
-                if (e.target.classList.contains("industry-link")) {
-                    e.preventDefault();
-                    const industryId = e.target.dataset.id;
-
-                    fetch(`/get-reports-by-industry/${industryId}`)
-                        .then(res => res.text())
-                        .then(html => {
-                            document.getElementById("reports-container").innerHTML = html;
-                        });
-                }
-            });
-</script>
-
+ <div class="custom-pagination-wrapper mt-4" style="padding-bottom: 20px;">
+             {{ $reports->links('vendor.pagination.custom') }}
+       </div>
 
 @endsection

@@ -232,21 +232,29 @@ public function storeReport(Request $request)
     return view('frontend.report-details', compact('report'));
 }
 
-    public function getReportsByIndustry($industryId)
-    {
+   public function getReportsByIndustry($industryId)
+{
+    if ($industryId === 'all') {
+        // Get all reports
+        $reports = DB::table('reports')
+            ->orderBy('created_at', 'desc')
+            ->get();
+    } else {
+        // Get filtered reports
         $reports = DB::table('reports')
             ->where('industry_category_id', $industryId)
             ->orderBy('created_at', 'desc')
             ->get();
-
-        $html = '';
-
-        foreach ($reports as $report) {
-            $html .= view('frontend.reports.reports-card', compact('report'))->render();
-        }
-
-        return response($html);
     }
+
+    $html = '';
+    foreach ($reports as $report) {
+        $html .= view('frontend.reports.reports-card', compact('report'))->render();
+    }
+
+    return response($html);
+}
+
 public function showSampleForm($slug)
 {
     $report = DB::table('reports')->where('slug', $slug)->first();

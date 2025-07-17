@@ -1,21 +1,20 @@
 @if ($paginator->hasPages())
-    <nav>
-        <ul class="custom-pagination">
-            {{-- Previous Page Link --}}
+    <nav class="modern-pagination">
+        <ul class="pagination-list">
+
+            {{-- Previous Page --}}
             @if ($paginator->onFirstPage())
-                <li class="disabled"><span>PREV</span></li>
+                <li class="disabled"><span>&lsaquo; Back</span></li>
             @else
-                <li><a href="{{ $paginator->previousPageUrl() }}" rel="prev">PREV</a></li>
+                <li><a href="{{ $paginator->previousPageUrl() }}" rel="prev">&lsaquo; Back</a></li>
             @endif
 
-            {{-- Pagination Elements --}}
+            {{-- Page Links --}}
             @foreach ($elements as $element)
-                {{-- "Three Dots" Separator --}}
                 @if (is_string($element))
                     <li class="disabled"><span>{{ $element }}</span></li>
                 @endif
 
-                {{-- Array of Links --}}
                 @if (is_array($element))
                     @foreach ($element as $page => $url)
                         @if ($page == $paginator->currentPage())
@@ -27,12 +26,13 @@
                 @endif
             @endforeach
 
-            {{-- Next Page Link --}}
+            {{-- Next Page --}}
             @if ($paginator->hasMorePages())
-                <li><a href="{{ $paginator->nextPageUrl() }}" rel="next">NEXT</a></li>
+                <li><a href="{{ $paginator->nextPageUrl() }}" rel="next">Next &rsaquo;</a></li>
             @else
-                <li class="disabled"><span>NEXT</span></li>
+                <li class="disabled"><span>Next &rsaquo;</span></li>
             @endif
+
         </ul>
     </nav>
 @endif

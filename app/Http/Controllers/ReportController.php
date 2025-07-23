@@ -10,7 +10,7 @@ class ReportController extends Controller
 {
     public function getReports()
     {
-        $reports = DB::table('reports')->orderBy('created_at', 'desc')->paginate(10); // LIFO
+        $reports = DB::table('reports')->orderBy('created_at', 'desc')->paginate(1); // LIFO
         return view('frontend.reports.list', compact('reports'));
     }
     public function index()

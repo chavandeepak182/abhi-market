@@ -64,11 +64,12 @@ a:focus{
 	outline: 0;
 }
 
-html,
-body{
+body, html {
 	width: 100%;
-	overflow-x: clip;
+	overflow-x: hidden;  /* Safer and more browser-friendly than `clip` */
+	overflow-y: auto;
 }
+
 
 .container{
 	max-width: 1300px;
@@ -212,9 +213,9 @@ body{
 	display: none;
 }
 
-.cb-cursor:before{
+/* .cb-cursor:before{
 	background: var(--accent-color);
-}
+} */
 
 .preloader{
 	position: fixed;

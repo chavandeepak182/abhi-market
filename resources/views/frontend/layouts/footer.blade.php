@@ -12,6 +12,12 @@
                     <!-- Newsletter Form start -->
                     <div class="newsletter-form">
                         <p>We cater to a wide range of industries by delivering customized solutions, strategic insights, and innovative support that help organizations grow, adapt, and lead in their respective sectors. Here’s a brief overview of key industries we work with</p>
+
+                        <p class="mt-3">
+                            <strong>Email:</strong> <a href="mailto:sales@m2squareconsultancy.com">sales@m2squareconsultancy.com</a><br>
+                            <strong>Phone (IN):</strong> <a href="tel:+918097874280">+91 80978 74280</a><br>
+                            <strong>Phone (US):</strong> <a href="tel:+19294470100">+1 929 447 0100</a>
+                        </p>
                     </div>
                     <!-- Newsletter Form end -->
                 </div>
@@ -80,27 +86,16 @@
         </div>
 
         <!-- Footer Copyright Section Start -->
-        <div class="footer-copyright">
+        <div class="footer-copyright mt-4 pt-4 border-top" style="border-color: rgba(255,255,255,0.2);">
             <div class="row align-items-center">
-                <div class="col-md-5">
-                    <!-- Footer Copyright Start -->
-                    <div class="footer-copyright-text">
-                        <p>Copyright © 2025 All Rights Reserved.</p>
-                    </div>
-                    <!-- Footer Copyright End -->
+                <div class="col-md-6 text-white small">
+                    <p class="mb-1">Copyright © 2025 All Rights Reserved.</p>
+                    <p class="mb-0">A part of JFS group of companies</p>
                 </div>
-
-                <div class="col-md-7">
-                    <!-- Footer Menu Start -->
-                    <!-- <div class="footer-menu">
-                        <ul>                            
-                            <li><a href="#">LinkedIn</a></li>
-                            <li><a href="#">Facebook</a></li>
-                            <li><a href="#">Instagram</a></li>
-                            <li><a href="#">Twitter</a></li>
-                        </ul>
-                    </div> -->
-                    <!-- Footer Menu End -->
+                <div class="col-md-6 text-md-end text-white small">
+                    <p class="mb-0">
+                        Developed by <a href="https://jfstechnologies.com/" target="_blank" style="color: #fff; text-decoration: underline;">JFS Technologies</a>
+                    </p>
                 </div>
             </div>
         </div>

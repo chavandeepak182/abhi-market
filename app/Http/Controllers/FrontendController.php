@@ -216,8 +216,7 @@ public function search(Request $request)
     Log::info('Search method hit with query:', ['query' => $query]);
 
     $reports = DB::table('reports')
-        ->where('report_title', 'like', '%' . $query . '%')
-        ->orWhere('report_name', 'like', '%' . $query . '%')
+        ->where('report_name', 'like', '%' . $query . '%') // Only searching by report_name
         ->orderBy('publish_date', 'desc')
         ->paginate(10);
 

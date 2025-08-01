@@ -42,10 +42,11 @@
                     <!-- Industry AJAX List -->
                     <div class="service-catagery-list wow fadeInUp">
                         <h3>Our Industries</h3>
-                        <ul id="industry-list" class="mb-3">
-                            {{-- Industries will load here via AJAX --}}
-                        </ul>
-                        <button id="loadMore" class="btn btn-primary">Load More</button>
+                        <ul id="industry-list" class="mb-3" @if(isset($query) && $query) style="pointer-events: none; opacity: 0.5;" @endif>
+
+                        @if(!isset($query) || !$query)
+                            <button id="loadMore" class="btn btn-primary">Load More</button>
+                        @endif
                     </div>
 
 
@@ -134,7 +135,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Initial load
     loadIndustries();
-    loadReportsByIndustry(activeIndustryId); // Load default "all" reports
+
+    @if(!isset($query) || !$query)
+        loadReportsByIndustry(activeIndustryId); // Load default "all" reports only if not a search
+    @endif
 
     // Load more industries
     document.getElementById('loadMore').addEventListener('click', function () {

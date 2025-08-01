@@ -91,6 +91,10 @@
                     @foreach($reports as $report)
                         @include('frontend.reports.reports-card', ['report' => $report])
                     @endforeach
+
+                    <div class="custom-pagination-wrapper mt-4">
+                        {{ $reports->appends(['query' => request('query')])->links('vendor.pagination.custom') }}
+                    </div>
                 </div>
             </div>
            
@@ -157,8 +161,5 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 </script>
- <div class="custom-pagination-wrapper mt-4" style="padding-bottom: 20px;">
-             {{ $reports->links('vendor.pagination.custom') }}
-       </div>
 
 @endsection

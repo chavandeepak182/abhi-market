@@ -1,5 +1,5 @@
 @extends('admin.layouts.header')
-@section('title', "Welcome to JFinMate")
+@section('title', "Welcome to M2Square")
 
 @section('content')
 <div class="dashboard-body">

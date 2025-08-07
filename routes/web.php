@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\FrontendController;
@@ -16,7 +16,8 @@ use App\Http\Controllers\IndustriesCategoryController;
 use App\Http\Controllers\IndustriesController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\NewsController;
-
+use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\PayPalController;
 
 Route::get('/', [FrontendController::class, 'index'])->name('home');
 
@@ -45,9 +46,12 @@ Route::get('/details', function () {
 Route::get('/overview', function () {
     return view('frontend.overview');
 });
-Route::get('/purchase', function () {
-    return view('frontend.purchase');
-});
+Route::get('/purchase/{id}', [PurchaseController::class, 'showById'])->name('purchase.page');
+Route::post('/pay', [PayPalController::class, 'pay'])->name('pay');
+Route::post('/paypal/payment', [PayPalController::class, 'handlePayment'])->name('paypal.payment');
+Route::get('/paypal/success', [PayPalController::class, 'paymentSuccess'])->name('paypal.success');
+Route::get('/paypal/cancel', [PayPalController::class, 'paymentCancel'])->name('paypal.cancel');
+
 Route::get('/research', function () {
     return view('frontend.research');
 });

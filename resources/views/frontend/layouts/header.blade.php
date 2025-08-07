@@ -9,7 +9,6 @@
         <meta name="description" content="@yield('description')">
         <meta name="Keywords" content="@yield('keywords')">
         <!-- Favicon Icon -->
-        <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
         <!-- Google Fonts Css-->
         <link rel="preconnect" href="https://fonts.googleapis.com/">
         <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
@@ -48,12 +47,12 @@
     
     <body>
         <!-- Preloader Start -->
-        <div class="preloader">
+        <!-- <div class="preloader">
             <div class="loading-container">
                 <div class="loading"></div>
                 <div id="loading-icon"><img src="{{ asset('assets') }}/images/loader.svg" alt=""></div>
             </div>
-        </div>
+        </div> -->
         <!-- Preloader End -->
 
         <!-- Header Start -->
@@ -63,7 +62,7 @@
                 <div class="header-item item-left">
                     <div class="logo">
                         <a class="navbar-brand" href="{{ url('/') }}">
-                            <img alt="JFinMate" src="{{ asset('assets') }}/images/logo1.png" width="150" height="auto">
+                            <img alt="m2square" src="{{ asset('assets') }}/images/logo1.png" width="150" height="auto">
                         </a>
                     </div>
                 </div>

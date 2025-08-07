@@ -32,7 +32,6 @@
                                     <img src="{{ asset('storage/'.$banner->image) }}" alt="{{ $banner->title }}">
                                 </div>
                                 <div class="jfin-hero-content">
-                                    <!-- <h3>Welcome to JFinMate</h3> -->
                                     <!-- <h1>{{ $banner->title}}</h1> -->
                                     <!-- <a href="{{ url('/contact') }}" class="jfin-hero-btn">Get Started</a> -->
                                 </div>
@@ -53,7 +52,7 @@
                         <!-- Section Title Start -->
                         <div class="how-it-work-content">
                             <div class="section-title text-center mb-5">
-                                <h2 class="text-anime-style-2" data-cursor="-opaque">Latest <span>News</span></h2>
+                                <h1 class="text-anime-style-2" data-cursor="-opaque">Latest <span>News</span></h1>
                                 <p class="wow fadeInUp" data-wow-delay="0.2s">
                                     We are a purpose-driven market research and consulting company passionate about turning data into direction.
                                     Founded in 2023, we bring together researchers, strategists, and data scientists who believe that intelligence isn’t just about numbers—it's about insight that sparks progress.
@@ -124,9 +123,9 @@
                     </div>
 
                     <!-- Zig-Zag SVG Line -->
-                    <div class="zigzag-line">
+                    <!-- <div class="zigzag-line">
                         <img src="{{ asset('assets/images/Zig-zag.svg') }}" alt="Zig Zag Line" style="width: 1180px; height: 1189px;">
-                    </div>
+                    </div> -->
 
                     <!-- Right Column -->
                     <div class="report-column">
@@ -302,7 +301,7 @@
                         <!-- Section Title Start -->
                         <div class="section-title">
                             <h3 class="wow fadeInUp">our testimonial</h3>
-                            <h2 class="text-anime-style-2" data-cursor="-opaque">What Customer Says <span>About JFinMate</span></h2>
+                            <h2 class="text-anime-style-2" data-cursor="-opaque">What Customer Says <span>About M2square</span></h2>
                             <p class="wow fadeInUp" data-wow-delay="0.2s">With over 1,250 satisfied clients, our finance and consulting services have earned praise for reliability, personalized guidance, and impactful results.</p>
                         </div>
                         <!-- Section Title End -->

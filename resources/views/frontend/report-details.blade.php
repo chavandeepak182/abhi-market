@@ -26,6 +26,13 @@
         </div>
     </div>
 </div>
+<style>
+  .service-sidebar {
+    position: sticky;
+    top: 100px; /* adjust as needed (space from top) */
+    z-index: 10;
+  }
+</style>
 
 <div class="page-service-single">
     <div class="container">
@@ -62,7 +69,11 @@
 
 <BR></BR>
                     <!-- Service Category List End -->
-<a href="{{ route('request.sample', $report->slug) }}" class="btn btn-sm btn-info">Request Sample</a>
+<!-- <a href="{{ route('request.sample', $report->slug) }}" class="btn btn-sm btn-info">Request Sample</a> -->
+<div style="text-align: center;">
+  <a href="{{ route('request.sample', $report->slug) }}" class="btn btn-primary">Request Sample</a>
+</div>
+
                 </div>
                 <!-- Service Sidebar End -->
             </div>

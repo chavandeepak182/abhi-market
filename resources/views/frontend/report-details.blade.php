@@ -46,9 +46,7 @@
         <p><span>{!! $report-> publish_date!!}</span></p>
         <p class="mb-1"><strong>CATEGORY NAME:</strong> </p>
         <p><span>{!! $report-> category_name!!}</span></p>
-        <a href="{{ url('/purchase') }}" class="custom-buy-btn">
-        <i class="fas fa-shopping-cart me-1"></i> Buy Now
-        </a>
+        <a href="{{ route('purchase.page', $report->id) }}" class="btn btn-primary">Buy Now</a>
 
 
 
@@ -64,42 +62,7 @@
 
 <BR></BR>
                     <!-- Service Category List End -->
-
-                    <!-- Sidebar Cta Box Start -->
-                    <div class="card shadow">
-                        <div class="card-body p-3"> <!-- reduce padding here -->
-                            <h3 class="mb-3" style="color: #006186; font-size: 20px;">
-                                Request a Free Sample PDF 
-                                <i class="fas fa-file-pdf" style="font-size: 24px; color: #006186; margin-left: 5px;"></i>
-                            </h3>
-
-                            <p class="mb-2" style="font-size: 14px;"><strong>Published:</strong> {{ \Carbon\Carbon::parse($report->publish_date)->format('F, Y') }}</p>
-
-                            <form action="{{ route('enquiry.store') }}" method="POST">
-                                @csrf
-
-                                <input type="hidden" name="page_url" value="{{ url()->current() }}">
-                                <input type="hidden" name="page_name" value="{{ $report->report_title }}">
-
-                                <div class="form-group mb-2">
-                                    <input type="text" name="name" class="form-control form-control-sm" placeholder="Your Name" required>
-                                </div>
-                                <div class="form-group mb-2">
-                                    <input type="text" name="contact" class="form-control form-control-sm" placeholder="Phone Number" required>
-                                </div>
-                                <div class="form-group mb-2">
-                                    <input type="email" name="email" class="form-control form-control-sm" placeholder="Your Email" required>
-                                </div>
-                                <div class="form-group mb-2">
-                                    <textarea name="message" class="form-control form-control-sm" rows="2" placeholder="Message (Optional)"></textarea>
-                                </div>
-                                <button type="submit" class="btn btn-sm btn-primary">Submit</button>
-                            </form>
-                        </div>
-                    </div>
-
-
-                    <!-- Sidebar Cta Box End -->
+<a href="{{ route('request.sample', $report->slug) }}" class="btn btn-sm btn-info">Request Sample</a>
                 </div>
                 <!-- Service Sidebar End -->
             </div>

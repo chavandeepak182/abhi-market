@@ -26,59 +26,72 @@
         </div>
     </div>
 </div>
-<style>
-  .service-sidebar {
-    position: sticky;
-    top: 100px; /* adjust as needed (space from top) */
-    z-index: 10;
-  }
-</style>
+
+
 
 <div class="page-service-single">
     <div class="container">
         <div class="row">
-            <div class="col-lg-4">
-                <!-- Service Sidebar Start -->
-                <div class="service-sidebar">
-                    <!-- Service Category List Start -->
-                        <div class="report-summary d-flex align-items-center wow fadeInUp" data-wow-delay="0.2s">
-    <!-- Left: Book Image -->
-    <div class="report-image me-3">
-        <img src="{{ asset('assets/images/books.png') }}" alt="Report Cover" style="max-width: 120px;">
+           <!-- Make sure the parent col has no overflow issues -->
+<div class="col-lg-4">
+  <div id="stickySidebar" style="padding: 20px 10px;margin-left:-68px;">
+
+    <div style="
+      background: #ffffff;
+      border: 1px solid #e0e0e0;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    ">
+
+      <!-- Image & Info Row -->
+      <div style="display: flex; gap: 15px; align-items: flex-start;">
+        <!-- Image -->
+        <div style="flex-shrink: 0;">
+          <img src="{{ asset('assets/images/books.png') }}" alt="Report Cover"
+               style="width: 110px; border-radius: 10px;">
+        </div>
+
+        <!-- Info -->
+        <div style="flex-grow: 1;">
+          <p class="mb-1" style="font-size: 14px; color: #555;">
+            <strong style="color: #0056b3;">PUBLISHED:</strong>
+          </p>
+          <p class="mb-2" style="font-size: 15px;">{!! $report->publish_date !!}</p>
+
+          <p class="mb-1" style="font-size: 14px; color: #555;">
+            <strong style="color: #0056b3;">CATEGORY NAME:</strong>
+          </p>
+          <p class="mb-0" style="font-size: 15px;">{!! $report->category_name !!}</p>
+        </div>
+      </div>
+
+      <!-- Buttons Row -->
+      <div style="display: flex; gap: 12px;">
+        <a href="{{ route('purchase.page', $report->id) }}" class="btn w-100"
+           style="background-color: #006186; color: white; font-size: 14px; padding: 10px 12px; border-radius: 8px; text-align: center;">
+          Buy Now
+        </a>
+
+        <a href="{{ route('request.sample', $report->slug) }}" class="btn w-100"
+           style="background-color: #8BC34A; color: white; font-size: 14px; padding: 10px 12px; border-radius: 8px; text-align: center;">
+          Request Sample
+        </a>
+      </div>
+
     </div>
 
-    <!-- Right: Report Details -->
-    <div class="report-details text-start">
-        <p class="mb-0 mt-1"><strong>PUBLISHED:</strong></p>
-        <p><span>{!! $report-> publish_date!!}</span></p>
-        <p class="mb-1"><strong>CATEGORY NAME:</strong> </p>
-        <p><span>{!! $report-> category_name!!}</span></p>
-        <a href="{{ route('purchase.page', $report->id) }}" class="btn btn-primary">Buy Now</a>
-
-
-
-
-        <!-- <p class="mb-1"><strong>HISTORICAL DATA:</strong> 2019–2023</p> -->
-        <!-- <p class="mb-0"><strong>NO OF PAGES:</strong> {{ $report->pages ?? 'N/A' }}</p> -->
-        
-        
-    </div>
+  </div>
 </div>
 
 
 
-<BR></BR>
-                    <!-- Service Category List End -->
-<!-- <a href="{{ route('request.sample', $report->slug) }}" class="btn btn-sm btn-info">Request Sample</a> -->
-<div style="text-align: center;">
-  <a href="{{ route('request.sample', $report->slug) }}" class="btn btn-primary">Request Sample</a>
-</div>
 
-                </div>
-                <!-- Service Sidebar End -->
-            </div>
 
-            <div class="col-lg-8">
+           <div class="col-lg-8" id="mainContent">
                 <!-- Case Study Single Content Start -->
                 <div class="service-single-content">
                     <!-- Case Study Image Start -->
@@ -449,6 +462,41 @@
 
 
 </script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const sidebar = document.getElementById('stickySidebar');
+    const content = document.getElementById('mainContent');
+    const offsetTop = 100; // Space from top when sticky
+    const spacing = 20; // Space from bottom of content
+
+    function updateSidebar() {
+      const contentRect = content.getBoundingClientRect();
+      const sidebarHeight = sidebar.offsetHeight;
+      const maxScroll = content.offsetTop + content.offsetHeight - sidebarHeight - spacing;
+
+      if (window.scrollY > content.offsetTop - offsetTop && window.scrollY < maxScroll) {
+        sidebar.style.position = 'fixed';
+        sidebar.style.top = offsetTop + 'px';
+        sidebar.style.bottom = 'auto';
+        sidebar.style.width = sidebar.parentElement.offsetWidth + 'px';
+      } else if (window.scrollY >= maxScroll) {
+        sidebar.style.position = 'absolute';
+        sidebar.style.top = (content.offsetHeight - sidebarHeight) + 'px';
+        sidebar.style.bottom = 'auto';
+        sidebar.style.width = '100%';
+      } else {
+        sidebar.style.position = 'static';
+        sidebar.style.top = 'auto';
+        sidebar.style.width = 'auto';
+      }
+    }
+
+    window.addEventListener('scroll', updateSidebar);
+    window.addEventListener('resize', updateSidebar);
+    updateSidebar(); // Run once on load
+  });
+</script>
+
 
 
 @endsection

@@ -26,100 +26,60 @@
     </div>
     <!-- Page Header End -->
  <!-- How It Work Section Start -->
-    <div class="how-it-work">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <!-- How It Work Content Start -->
-                    <div class="how-it-work-content">
-                        <!-- Section Title Start -->
-                        <div class="section-title">
-                            <!-- <h3 class="wow fadeInUp">how it work</h3> -->
-                            <h2 class="text-anime-style-2" data-cursor="-opaque">Who <span>We Are</span></h2>
-                            <p class="wow fadeInUp" data-wow-delay="0.2s">We are a purpose-driven market research and consulting company passionate about turning data into direction. Founded in 2023, we bring together researchers, strategists, and data scientists who believe that intelligence isn’t just about numbers, it’s about insight that sparks progress.</p>
-                        </div>
-                        <!-- Section Title End -->
-
-                        <!-- How It Work Button Start -->
-                        <div class="how-it-work-btn wow fadeInUp" data-wow-delay="0.4s">
-                            <a href="contact.html" class="btn-default">learn more</a>
-                        </div>
-                        <!-- How It Work Button End -->
-                    </div>
-                    <!-- How It Work Content End -->
-                </div>
-                
-                <div class="col-lg-6">
-                    <!-- Work Steps Box Start -->
-                    <div class="work-steps-box">
-                        <!-- Work Steps Item Start -->
-                        <div class="work-step-item wow fadeInUp">
-                            <div class="work-step-item-content">
-                                <h3>Integrity</h3>
-                                <!-- <h2>Integrity</h2> -->
-                                <p>We act with honesty and transparency, upholding ethical standards in all our actions to build lasting trust.</p>
-                            </div>
-                            <div class="work-step-item-no">
-                                <h2>01</h2>
-                            </div>
-                        </div>
-                        <!-- Work Steps Item End -->
-
-                        <!-- Work Steps Item Start -->
-                        <div class="work-step-item wow fadeInUp" data-wow-delay="0.2s">
-                            <div class="work-step-item-content">
-                                <h3>Innovation</h3>
-                                <!-- <h2>Innovation</h2> -->
-                                <p>We embrace emerging technologies to deliver sharper, faster, and smarter insights.</p>
-                            </div>
-                            <div class="work-step-item-no">
-                                <h2>02</h2>
-                            </div>
-                        </div>
-                        <!-- Work Steps Item End -->
-
-                        <!-- Work Steps Item Start -->
-                        <div class="work-step-item wow fadeInUp" data-wow-delay="0.4s">
-                            <div class="work-step-item-content">
-                                <h3>Collaboration</h3>
-                                <!-- <h2>Collaboration</h2> -->
-                                <p>We work hand-in-hand with clients and partners to co-create value.</p>
-                            </div>
-                            <div class="work-step-item-no">
-                                <h2>03</h2>
-                            </div>
-                        </div>
-                        <!-- Work Steps Item End -->
-                          <!-- Work Steps Item Start -->
-                        <div class="work-step-item wow fadeInUp" data-wow-delay="0.4s">
-                            <div class="work-step-item-content">
-                                <h3>Customer Focus</h3>
-                                <!-- <h2>Customer Focus</h2> -->
-                                <p>We deeply understand your needs, turning your challenges into opportunities for impactful solutions. Your success drives our purpose and priorities.</p>
-                            </div>
-                            <div class="work-step-item-no">
-                                <h2>04</h2>
-                            </div>
-                        </div>
-                        <!-- Work Steps Item End -->
-                          <!-- Work Steps Item Start -->
-                        <div class="work-step-item wow fadeInUp" data-wow-delay="0.4s">
-                            <div class="work-step-item-content">
-                                <h3>Quality</h3>
-                                <!-- <h2>Quality</h2> -->
-                                <p> We ensure every insight delivered is data-driven and decision-ready.</p>
-                            </div>
-                            <div class="work-step-item-no">
-                                <h2>05</h2>
-                            </div>
-                        </div>
-                        <!-- Work Steps Item End -->
-                    </div>
-                    <!-- Work Steps Box End -->
-                </div>
-            </div>
-        </div>
+       <section class="who-we-are-carousel">
+  <div class="container">
+    <div class="section-title">
+      <h2>Who <span>We Are</span></h2>
+      <p>We’re a purpose-driven market research company that transforms data into actionable insights.</p>
     </div>
+
+    <div class="swiper">
+      <div class="swiper-wrapper">
+
+        <!-- Slide 1 -->
+        <div class="swiper-slide value-card">
+          <span class="value-number">01</span>
+          <h3>Integrity</h3>
+          <p>We act with honesty and uphold ethical standards to build lasting trust.</p>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="swiper-slide value-card">
+          <span class="value-number">02</span>
+          <h3>Innovation</h3>
+          <p>We embrace emerging tech to deliver sharper and faster insights.</p>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="swiper-slide value-card">
+          <span class="value-number">03</span>
+          <h3>Collaboration</h3>
+          <p>We work closely with clients and partners to co-create value.</p>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="swiper-slide value-card">
+          <span class="value-number">04</span>
+          <h3>Customer Focus</h3>
+          <p>We understand client needs deeply and transform challenges into solutions.</p>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="swiper-slide value-card">
+          <span class="value-number">05</span>
+          <h3>Quality</h3>
+          <p>We ensure every insight delivered is data-driven and decision-ready.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- BEFORE </body> -->
+
     <!-- What We Do Section Start -->
     <div class="what-we-do">
         <div class="container">
@@ -594,6 +554,28 @@
         </div>
     </div>
     <!-- Some Fact Section End -->
+     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+  const swiper = new Swiper('.swiper', {
+    slidesPerView: 1.2,
+    spaceBetween: 20,
+    loop: true, // ✅ looping enabled
+    grabCursor: true,
+    autoplay: {
+      delay: 3000, // ✅ 3 seconds between slides
+      disableOnInteraction: false, // autoplay won't stop after interaction
+    },
+    speed: 800, // ✅ 0.8 sec transition animation
+    breakpoints: {
+      768: {
+        slidesPerView: 2.2,
+      },
+      1024: {
+        slidesPerView: 3,
+      },
+    },
+  });
+</script>
     
 
 @endsection

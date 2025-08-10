@@ -7917,6 +7917,90 @@ textarea.form-control {
     }
 }
 
+/* sticy report detail box css  */
+.btn-primary {
+  background: linear-gradient(to bottom, #006186, #006186);
+  border: none;
+}
+.btn-primary:hover {
+  background: linear-gradient(to bottom, #006186,#006186);
+}
+
+.btn-request-green {
+  background-color: #28a745;
+  color: white;
+}
+.btn-request-green:hover {
+  background-color: #218838;
+  color: white;
+}
+#stickySidebar {
+  position: sticky;
+  top: 200px; /* 🔽 reduced from 80px */
+}
+
+/* latest about us css */
+.who-we-are-carousel {
+  padding: 100px 20px;
+  background: #f5f6fa;
+  font-family: 'Poppins', sans-serif;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-title h2 {
+  font-size: 38px;
+  margin-bottom: 15px;
+}
+
+/* .section-title h2 span {
+  color: #006186;
+} */
+
+.section-title p {
+  font-size: 16px;
+  color: #555;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.value-card {
+  background: white;
+  border-radius: 16px;
+  padding: 30px 20px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+  transition: 0.1s ease;
+  text-align: left;
+}
+
+.value-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 25px rgba(0,0,0,0.08);
+  background-color: #9ec1cfff;
+}
+
+.value-number {
+  font-size: 32px;
+  font-weight: bold;
+  color: #006186;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+.value-card h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.value-card p {
+  font-size: 15px;
+  color: #333;
+  line-height: 1.6;
+}
+
 /* pricing report  */
 
     body {

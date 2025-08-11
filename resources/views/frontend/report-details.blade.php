@@ -466,7 +466,7 @@
   document.addEventListener('DOMContentLoaded', function () {
     const sidebar = document.getElementById('stickySidebar');
     const content = document.getElementById('mainContent');
-    const offsetTop = 100; // Space from top when sticky
+    const offsetTop = 40; // Top space kami kelay
     const spacing = 20; // Space from bottom of content
 
     function updateSidebar() {
@@ -493,9 +493,10 @@
 
     window.addEventListener('scroll', updateSidebar);
     window.addEventListener('resize', updateSidebar);
-    updateSidebar(); // Run once on load
+    updateSidebar();
   });
 </script>
+
 
 
 

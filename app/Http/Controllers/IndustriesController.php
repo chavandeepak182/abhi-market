@@ -180,21 +180,42 @@ class IndustriesController extends Controller
     return redirect()->route('industries.index')->with('success', 'Industry deleted.');
 }
 
-   public function show($slug)
-    {
-        $industries = DB::table('industries')->where('slug', $slug)->first();
+  public function show($slug)
+{
+    // 1️⃣ Industry details page
+    $industries = DB::table('industries')->where('slug', $slug)->first();
 
-        if (!$industries) {
-            return redirect()->route('industries.index')->with('error', 'Industry not found.');
-        }
-
+    if ($industries) {
         $reports = DB::table('reports')
-            ->where('industry_category_id', $industries->id)
+            ->where('industry_category_id', $industries->industries_subcategory_id) // ✅ match subcategory ID
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
         return view('frontend.industry-details', compact('industries', 'reports'));
     }
+
+    // 2️⃣ Report details page
+    $currentReport = DB::table('reports')->where('slug', $slug)->first();
+
+    if ($currentReport) {
+        // Find the industry for this report based on subcategory mapping
+        $industries = DB::table('industries')
+            ->where('industries_subcategory_id', $currentReport->industry_category_id) // ✅ match here too
+            ->first();
+
+        // Related reports from same subcategory
+        $reports = DB::table('reports')
+            ->where('industry_category_id', $currentReport->industry_category_id) // ✅ match subcategory ID
+            ->where('id', '!=', $currentReport->id) // exclude current
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+        return view('frontend.report-details', compact('industries', 'reports', 'currentReport'));
+    }
+
+    // 3️⃣ Nothing found
+    abort(404);
+}
 
     public function getIndustries(Request $request){
         $limit = $request->get('limit', 5);

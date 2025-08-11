@@ -38,12 +38,12 @@
                 <img src="{{ asset('assets/images/excel_user.svg') }}" alt="User Icon" class="plan-icon" />
             </div>
             <div class="plan-title">EXCEL ONLY</div>
-            <div class="price">US$ 20</div>
+            <div class="price">US$ 2000</div>
             <form action="{{ route('paypal.payment') }}" method="POST">
                 @csrf
                 <input type="hidden" name="report_name" value="{{ $report->report_name }}">
                 <input type="hidden" name="license_type" value="Excel Only">
-                <input type="hidden" name="price" value="20">
+                <input type="hidden" name="price" value="2000">
                 <button type="submit" class="buy-btn">Buy Now</button>
             </form>
             <ul>

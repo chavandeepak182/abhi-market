@@ -44,7 +44,7 @@
             <div class="auth-right py-40 px-24 flex-center flex-column">
                 <div class="auth-right__inner mx-auto w-100">
                     <a href="index.html" class="mb-32">
-                        <img src="{{ asset('assets') }}/images/logo.png" alt="">
+                        <img src="{{ asset('assets') }}/images/logo1.png" alt="">
                     </a>
                     <h2 class="mb-8">Sign Up</h2>
                     <p class="text-gray-600 text-15 mb-32">Please sign up to your account and start the adventure</p>

@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,17 +22,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Paginator::useBootstrap();
         View::composer('frontend.layouts.footer', function ($view) {
-    $allServices = DB::table('services')->select('id', 'service_name')->limit(4)->get();
-    // $allInsights = DB::table('insights')->select('id', 'insights_name')->limit(6)->get();
-    $allIndustries = DB::table('industries')->select('id', 'industries_name')->limit(4)->get();
+            $allServices = DB::table('services')->select('id', 'service_name')->limit(4)->get();
+            // $allInsights = DB::table('insights')->select('id', 'insights_name')->limit(6)->get();
+            $allIndustries = DB::table('industries')->select('id', 'industries_name')->limit(4)->get();
 
-    $view->with([
-        'allServices' => $allServices,
-        // 'allInsights' => $allInsights,
-        'allIndustries' => $allIndustries,
-    ]);
-});
+            $view->with([
+                'allServices' => $allServices,
+                // 'allInsights' => $allInsights,
+                'allIndustries' => $allIndustries,
+            ]);
+        });
     
         // Header Composer (for dynamic Insights & Industries menu)
         View::composer('frontend.layouts.header', function ($view) {

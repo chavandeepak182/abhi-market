@@ -13,12 +13,12 @@ class ReportController extends Controller
         $reports = DB::table('reports')->orderBy('created_at', 'desc')->paginate(1); // LIFO
         return view('frontend.reports.list', compact('reports'));
     }
-    public function index()
+   public function index()
     {
-         $reports = DB::table('reports')
-        ->join('industries_category', 'reports.industry_category_id', '=', 'industries_category.pid')
-        ->select('reports.*', 'industries_category.category_name as category_name')
-        ->get();
+        $reports = DB::table('reports')
+            ->join('industries_category', 'reports.industry_category_id', '=', 'industries_category.pid')
+            ->select('reports.*', 'industries_category.category_name as category_name')
+            ->paginate(25); // Show 10 per page
 
         return view('reports.index', compact('reports'));
     }

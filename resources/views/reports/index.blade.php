@@ -1,7 +1,17 @@
 @extends('admin.layouts.header')
-@section('title', "Manage Insights")
-
+@section('title', "Manage reports")
 @section('content')
+<style>
+    .pagination-wrapper nav {
+    display: flex;
+    gap: 4px; /* space between page numbers */
+}
+
+.pagination .page-item .page-link {
+    padding: 6px 12px;
+    border-radius: 6px;
+}
+</style>
 <div class="dashboard-body">
     <div class="breadcrumb-with-buttons mb-24 flex-between flex-wrap gap-8">
         <!-- Breadcrumb Start -->
@@ -28,24 +38,23 @@
             @if(session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
             @endif
+
+           
             <table class="table table-striped">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Report Name</th>
                         <th>Category</th>
-                        
-                        
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($reports as $report)
+                    @foreach($reports as $index => $report)
                     <tr>
-                        <td><span class="h6 mb-0 fw-medium text-gray-300">{{ $loop->iteration }}</span></td>
+                        <td>{{ $reports->firstItem() + $index }}</td>
                         <td><span class="h6 mb-0 fw-medium text-gray-300">{{ $report->report_title }}</span></td>
                         <td><span class="h6 mb-0 fw-medium text-gray-300">{{ $report->category_name }}</span></td>
-                        
                         <td>
                             <a href="{{ route('reports.edit', $report->id) }}" class="btn btn-warning btn-xs edit"><i class="far fa-edit"></i></a>
                             <form action="{{ route('reports.delete', $report->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure?');">
@@ -59,6 +68,15 @@
                     @endforeach
                 </tbody>
             </table>
+
+            <div class="d-flex justify-content-between align-items-center mt-4">
+                <div class="text-muted small">
+                    Showing {{ $reports->firstItem() }} to {{ $reports->lastItem() }} of {{ $reports->total() }} results
+                </div>
+                <div class="pagination-wrapper">
+                    {{ $reports->links('pagination::bootstrap-4') }}
+                </div>
+            </div>
         </div>
     </div>
 </div>

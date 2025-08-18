@@ -58,7 +58,7 @@
             <!-- sidebar close btn -->
             
             <a href="{{ url('/') }}" class="sidebar__logo text-center p-20 position-sticky inset-block-start-0 bg-white w-100 z-1 pb-10">
-                <img src="{{ asset('assets') }}/images/logo.png" alt="Logo" width="120" height="20">
+                <img src="{{ asset('assets') }}/images/logo1.png" alt="Logo" width="120" height="20">
             </a>
 
             <div class="sidebar-menu-wrapper overflow-y-auto scroll-sm">

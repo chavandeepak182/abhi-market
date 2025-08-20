@@ -88,11 +88,13 @@
                     @endif
                 </h3>
                 <div id="reports-container">
-                    @foreach($reports as $report)
-                        @include('frontend.reports.reports-card', ['report' => $report])
-                    @endforeach
+                    <div id="reports-list">
+                        @foreach($reports as $report)
+                            @include('frontend.reports.reports-card', ['report' => $report])
+                        @endforeach
+                    </div>
 
-                    <div class="custom-pagination-wrapper mt-4">
+                    <div id="reports-pagination" class="custom-pagination-wrapper mt-4">
                         {{ $reports->appends(['query' => request('query')])->links('vendor.pagination.custom') }}
                     </div>
                 </div>
@@ -129,11 +131,21 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     }
 
-    function loadReportsByIndustry(industryId) {
-        fetch(`/get-reports-by-industry/${industryId}`)
+    function loadReportsByIndustry(industryId, page = 1) {
+        fetch(`/get-reports-by-industry/${industryId}?page=${page}`)
             .then(res => res.text())
             .then(html => {
                 document.getElementById("reports-container").innerHTML = html;
+
+                // Handle pagination click inside reports-container
+                document.querySelectorAll("#reports-container .pagination a").forEach(link => {
+                    link.addEventListener("click", function (e) {
+                        e.preventDefault();
+                        const url = new URL(this.href);
+                        const newPage = url.searchParams.get("page");
+                        loadReportsByIndustry(activeIndustryId, newPage);
+                    });
+                });
             });
     }
 
@@ -161,5 +173,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 </script>
+
 
 @endsection

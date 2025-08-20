@@ -36,6 +36,10 @@ Route::get('/about', function () {
 Route::get('/contact', function () {
     return view('frontend.contact');
 });
+//Thank you page
+Route::get('/thank-you', function () {
+    return view('frontend.thank-you');
+})->name('thank.you');
 
 Route::post('/contact', [ContactController::class, 'handleContactForm'])->name('contact.submit');
 

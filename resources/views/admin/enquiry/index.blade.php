@@ -52,11 +52,12 @@
                         <td><span class="fw-medium text-gray-300">{{ $enquiry->name }}</span></td>
                         <td><span class="fw-medium text-gray-300">{{ $enquiry->email }}</span></td>
                         <td><span class="fw-medium text-gray-300">{{ $enquiry->contact }}</span></td>
-                        <td>
+                        <td><span class="fw-medium text-gray-300">{{ $enquiry->page_name }}</span></td>
+                        <!-- <td>
                                     <a href="{{ $enquiry->page_url }}" target="_blank" class="fw-medium text-primary">
                                 {{ Str::limit($enquiry->page_url, 50) }}
                             </a>
-                        </td>
+                        </td> -->
                         <td><span class="fw-medium text-gray-300">{{ $enquiry->created_at->format('d M, Y H:i') }}</span></td>
                         <td>
                             <button class="btn btn-info btn-xs view-enquiry-btn" data-bs-toggle="modal" data-bs-target="#ViewEnquiry" data-enquiry='@json($enquiry)'>

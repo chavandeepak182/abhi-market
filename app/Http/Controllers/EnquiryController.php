@@ -30,6 +30,7 @@ class EnquiryController extends Controller
         'enquiry_type' => 'nullable|string',
         'page_url' => 'nullable|url',
         'page_name' => 'nullable|string',
+        
     ]);
 
     // Log the validated data
@@ -55,14 +56,6 @@ class EnquiryController extends Controller
         Log::error('Error inserting enquiry: ' . $e->getMessage());
     }
 
-    // Send email
-    $brevoService->sendEnquiryEmail([
-        'name' => $request->name,
-        'email' => $request->email,
-        'contact' => $request->contact,
-        'message' => $request->message,
-    ]);
-
-    return redirect()->back()->with('success', 'Enquiry Submitted Successfully!');
+   return redirect()->route('thank.you');
 }
 }

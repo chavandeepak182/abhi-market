@@ -8,7 +8,12 @@
 <div class="container py-5">
     <div class="row">
         <div class="col-lg-8 offset-lg-2">
- <h2 style="text-align: center; color: #006186;">{{ $report->report_title }}</h2>
+        <h2 style="text-align: center;">
+            <a href="{{ route('reports.details', $slug) }}" 
+            style="color:#006186; text-decoration: underline;">
+                {{ $report->report_title }}
+            </a>
+        </h2>
 
             <div class="card shadow">
                 <div class="card-body">
@@ -26,7 +31,7 @@
 
                         <input type="hidden" name="page_url" value="{{ url()->current() }}">
                         <input type="hidden" name="page_name" value="{{ $report->report_title }}">
-
+                        <input type="hidden" name="report_title" value="{{ $report->report_title }}">
                         <div class="form-group mb-3">
                             <input type="text" name="name" class="form-control" placeholder="Your Name" required>
                         </div>

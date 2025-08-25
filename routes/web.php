@@ -132,7 +132,7 @@ Route::middleware('isAdmin')->group(function () {
 });
 Route::get('/reports/search', [FrontendController::class, 'search'])->name('reports.search');
 
-
+Route::middleware('isAdmin')->group(function () {
 //Reports
 Route::get('admin/reports', [ReportController::class, 'index'])->name('reports.index');
 Route::get('/reports/create', [ReportController::class, 'create'])->name('reports.create');
@@ -143,10 +143,10 @@ Route::get('/reports/{slug}', [ReportController::class, 'show'])->name('reports.
 Route::get('/get-reports', [ReportController::class, 'getReports'])->name('reports.list');
 Route::get('/get-reports-by-industry/{id}', [ReportController::class, 'getReportsByIndustry']);
 
-Route::middleware('isAdmin')->group(function () {
+
     Route::post('/reports/delete/{id}', [ReportController::class, 'deleteReport'])->name('reports.delete');
 });
-
+Route::middleware('isAdmin')->group(function () {
 //services
 Route::get('admin/services', [ServiceController::class, 'index'])->name('services.index');
 Route::post('/services/store', [ServiceController::class, 'storeService'])->name('services.store');
@@ -155,13 +155,12 @@ Route::put('/services/update/{id}', [ServiceController::class, 'update'])->name(
 Route::get('/services/create', [ServiceController::class, 'create'])->name('services.create');
 Route::get('/get-subcategories/{categoryId}', [ServiceController::class, 'getSubcategories']);
 Route::get('/services/{slug}', [ServiceController::class, 'show'])->name('service.details');
-Route::middleware('isAdmin')->group(function () {
     Route::post('/services/delete/{id}', [ServiceController::class, 'delete'])->name('services.delete');
 });
 
 Route::get('/get-categories', [ServiceController::class, 'getCategories']);
 Route::get('/get-services', [ServiceController::class, 'getServices']);
-
+Route::middleware('isAdmin')->group(function () {
 //insights
 Route::get('admin/insights', [InsightsController::class, 'index'])->name('insights.index');
 Route::post('/insights/store', [InsightsController::class, 'storeService'])->name('insights.store');
@@ -195,9 +194,9 @@ Route::get('/industries/create', [IndustriesController::class, 'create'])->name(
 Route::get('/industries/{slug}', [IndustriesController::class, 'show'])->name('industries.details');
 Route::get('/get-subcategories-industries/{categoryId}', [IndustriesCategoryController::class, 'getSubcategories']);
 Route::get('/get-industries', [IndustriesController::class, 'getIndustries']);
-Route::middleware('isAdmin')->group(function () {
+
     Route::post('/industries/delete/{id}', [IndustriesController::class, 'deleteService'])->name('industries.delete');
-});
+
 
 //industries category & subcategory
 Route::get('/industries-categories', [IndustriesCategoryController::class, 'index'])->name('industries.categories.index');
@@ -212,7 +211,6 @@ Route::get('/industries-subcategories', [IndustriesCategoryController::class, 's
 Route::post('/industries-subcategories/store', [IndustriesCategoryController::class, 'storeSubcategory'])->name('industries.subcategories.store');
 Route::get('/industries-subcategories/edit/{id}', [IndustriesCategoryController::class, 'editSubcategory'])->name('industries.subcategories.edit');
 Route::post('/industries-subcategories/update/{id}', [IndustriesCategoryController::class, 'updateSubcategory'])->name('industries.subcategories.update');
-Route::middleware('isAdmin')->group(function () {
     Route::post('/industriessubcategories/delete/{id}', [IndustriesCategoryController::class, 'deleteSubcategory'])
         ->name('industries.subcategories.delete');
 });

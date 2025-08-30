@@ -7,6 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
         <title>@yield('title')</title>
           @yield('meta')
+          @yield('og_tags')
         <meta name="description" content="@yield('description')">
         <meta name="Keywords" content="@yield('keywords')">
         <!-- Favicon Icon -->

@@ -150,6 +150,7 @@
         </div>
     </div>
 </div>
+
 <script>
     document.getElementById('category').addEventListener('change', function () {
         let categoryId = this.value;

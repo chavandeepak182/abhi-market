@@ -135,8 +135,9 @@ Route::get('/reports/create', [ReportController::class, 'create'])->name('report
 Route::post('/reports/store', [ReportController::class, 'storeReport'])->name('reports.store');
 Route::get('/reports/edit/{id}', [ReportController::class, 'edit'])->name('reports.edit');
 Route::put('/reports/update/{id}', [ReportController::class, 'update'])->name('reports.update');
-    Route::post('/reports/delete/{id}', [ReportController::class, 'deleteReport'])->name('reports.delete');
+Route::post('/reports/delete/{id}', [ReportController::class, 'deleteReport'])->name('reports.delete');
 });
+
 //frontend reports
 Route::get('/reports/{slug}', [ReportController::class, 'show'])->name('reports.details');
 Route::get('/get-reports', [ReportController::class, 'getReports'])->name('reports.list');

@@ -2,6 +2,23 @@
 @section('title', $report->meta_title)
 @section('description', $report->meta_description)
 @section('keywords', $report->meta_keywords)
+@section('og_tags')
+    <meta property="og:title" content="{{ $report->report_title }}">
+    <meta property="og:description" content="{{ Str::limit(strip_tags($report->description), 150) }}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{ url()->current() }}">
+    @if(!empty($industry) && !empty($industry->image))
+        <meta property="og:image" content="{{ url($industry->image) }}">
+    @else
+        <meta property="og:image" content="{{ url('images/default-og.jpg') }}">
+    @endif
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $report->report_title }}">
+    <meta name="twitter:description" content="{{ Str::limit(strip_tags($report->description), 150) }}">
+    <meta name="twitter:image" content="{{ !empty($industry->image) ? url('storage/industries/'.$industry->image) : url('images/default-og.jpg') }}">
+@endsection
 
 @section('content')
 <!-- Page Header Start -->
@@ -496,8 +513,5 @@
     updateSidebar();
   });
 </script>
-
-
-
 
 @endsection

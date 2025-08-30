@@ -228,8 +228,10 @@ public function storeReport(Request $request)
     if (!$report) {
         abort(404);
     }
-
-    return view('frontend.report-details', compact('report'));
+    $industry = DB::table('industries')
+            ->where('industries_subcategory_id', $report->industry_category_id)
+            ->first();
+    return view('frontend.report-details', compact('report', 'industry'));
 }
 
    public function getReportsByIndustry($industryId)

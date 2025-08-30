@@ -5,6 +5,8 @@ use App\Models\Enquiry;
 use App\Services\BrevoService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
+
 
 class EnquiryController extends Controller
 {
@@ -17,8 +19,7 @@ class EnquiryController extends Controller
     {
         return view('frontend.enquiry-form');
     }
-
-   public function store(Request $request, BrevoService $brevoService)
+public function store(Request $request)
 {
     $validated = $request->validate([
         'name' => 'required|string|max:255',
@@ -30,32 +31,48 @@ class EnquiryController extends Controller
         'enquiry_type' => 'nullable|string',
         'page_url' => 'nullable|url',
         'page_name' => 'nullable|string',
-        
     ]);
 
-    // Log the validated data
     Log::info('Enquiry Store - Validated Request:', $validated);
 
     try {
+        // Insert enquiry into DB
         DB::table('enquiries')->insert([
-            'name' => $validated['name'],
-            'email' => $validated['email'],
-            'contact' => $validated['contact'],
-            'amount' => $validated['amount'] ?? null,
-            'address' => $validated['address'] ?? null,
-            'message' => $validated['message'] ?? null,
-            'enquiry_type' => $validated['enquiry_type'] ?? null,
-            'page_url' => $validated['page_url'] ?? null,
-            'page_name' => $validated['page_name'] ?? null,
-            'created_at' => now(),
-            'updated_at' => now(),
+            'name'        => $validated['name'],
+            'email'       => $validated['email'],
+            'contact'     => $validated['contact'],
+            'amount'      => $validated['amount'] ?? null,
+            'address'     => $validated['address'] ?? null,
+            'message'     => $validated['message'] ?? null,
+            'enquiry_type'=> $validated['enquiry_type'] ?? null,
+            'page_url'    => $validated['page_url'] ?? null,
+            'page_name'   => $validated['page_name'] ?? null,
+            'created_at'  => now(),
+            'updated_at'  => now(),
         ]);
 
-        Log::info('Enquiry successfully inserted into database.');
+        // Build email body
+        $message = "
+        A new enquiry has been submitted:\n\n
+        Name: {$validated['name']}\n
+        Email: {$validated['email']}\n
+        Contact: {$validated['contact']}\n
+        Message: " . ($validated['message'] ?? '-') . "\n
+        Report Name: " . ($validated['page_name'] ?? '-') . "\n
+        Submitted At: " . now()->toDateTimeString() . "
+        ";
+
+        // Send mail via Brevo SMTP
+        Mail::raw($message, function ($mail) {
+            $mail->to('sales@m2squareconsultancy.com') // 👈 your email
+                 ->subject('New Enquiry Received');
+        });
+
+        Log::info('Enquiry saved & email sent successfully via Brevo SMTP.');
     } catch (\Exception $e) {
-        Log::error('Error inserting enquiry: ' . $e->getMessage());
+        Log::error('Error in enquiry store: ' . $e->getMessage());
     }
 
-   return redirect()->route('thank.you');
+    return redirect()->route('thank.you');
 }
 }

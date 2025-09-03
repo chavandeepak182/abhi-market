@@ -63,7 +63,7 @@ public function store(Request $request)
             ";
 
             Mail::raw($adminMessage, function ($mail) use ($validated) {
-                $mail->to('deepak@jfstechnologies.com')
+                $mail->to('swapnil@jfsmarketresearch.com')
                     ->from(config('mail.from.address'), $validated['name'])
                     ->subject('M2Squre-New Enquiry Received - ' . $validated['name']);
             });

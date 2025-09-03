@@ -64,7 +64,7 @@ public function store(Request $request)
 
         // Send mail via Brevo SMTP
         Mail::raw($message, function ($mail) {
-            $mail->to('sales@m2squareconsultancy.com') // 👈 your email
+            $mail->to('swapnil@jfsmarketresearch.com') // 👈 your email
                  ->subject('New Enquiry Received');
         });
 

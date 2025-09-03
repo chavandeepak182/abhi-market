@@ -1,7 +1,9 @@
 @extends('frontend.layouts.header')
 @section('title', 'Request Sample')
 {{-- Inject meta noindex --}}
-<meta name="robots" content="noindex, nofollow">
+@section('meta')
+    <meta name="robots" content="noindex, nofollow">
+@endsection
 @section('content')
 <div class="container py-5">
     <div class="row">

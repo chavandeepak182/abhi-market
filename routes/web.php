@@ -3,6 +3,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\BlogCategoryController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\EnquiryController;
 use App\Http\Controllers\BannerController;
@@ -70,6 +72,34 @@ Route::middleware('isAdmin')->group(function () {
         Route::get('admin/allUsers', [UsersController::class, 'allUsers'])->name('allUsers');
         Route::post('update-user-status/{id}', [UsersController::class, 'updateStatus']);
     });
+
+    // blog
+    // frontend blog routes 
+    Route::get('/blog/{id}', [FrontendController::class, 'showBlog'])->name('blog.show');
+
+Route::get('/blog', [FrontendController::class, 'blog'])->name('blog');
+
+
+Route::get('admin/blog', [BlogController::class, 'index'])->name('blog.index');          // List blogs
+   Route::get('admin/blog/create', [BlogController::class, 'create'])->name('blog.create'); // Add blog form
+    Route::post('blog/store', [BlogController::class, 'storeService'])->name('blog.store'); // Save blog
+    Route::get('blog/edit/{id}', [BlogController::class, 'edit'])->name('blog.edit');  // Edit blog form
+    Route::put('blog/update/{id}', [BlogController::class, 'update'])->name('blog.update'); // Update blog
+    Route::post('blog/delete/{id}', [BlogController::class, 'deleteService'])->name('blog.delete'); // Delete blog
+
+
+    // blog category
+    Route::get('/blog-categories', [BlogCategoryController::class, 'index'])->name('blog.categories.index');
+Route::post('/blog-categories/store', [BlogCategoryController::class, 'store'])->name('blog.categories.store');
+Route::get('/blog-categories/edit/{pid}', [BlogCategoryController::class, 'edit'])->name('blog.categories.edit');
+Route::post('/blog-categories/update/{pid}', [BlogCategoryController::class, 'update'])->name('blog.categories.update');
+
+Route::middleware('isAdmin')->group(function () {
+    Route::post('/blog-categories/delete/{pid}', [BlogCategoryController::class, 'destroy'])
+        ->name('blog.categories.delete');
+});
+
+
 
 //admin user profile
 

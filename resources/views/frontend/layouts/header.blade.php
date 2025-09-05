@@ -177,6 +177,7 @@
                                 <li>
                                     <a href="{{ url('/about') }}">About Us</a>
                                 </li>
+                                <li><a href="{{ url('/blogs') }}">Blogs</a></li>
                                 <li class="nav-item search-item">
                                     <form action="{{ route('reports.search') }}" method="GET" class="search-form">
                                         <input 

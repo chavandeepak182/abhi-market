@@ -88,7 +88,23 @@
                                 <span class="text">News</span>
                             </a>
                         </li>
-                        <li class="sidebar-menu__item {{ Request::is('admin/reports') ? 'activePage' : '' }}">
+                                                <li class="sidebar-menu__item has-dropdown 
+                            {{ Request::is('admin/blog') || Request::is('blog/create') || Request::is('blog/edit/*') ? 'activePage' : '' }}">
+                            
+                            <a href="/admin/blog" class="sidebar-menu__link">
+                                <span class="icon"><i class="ph ph-chats-teardrop"></i></span>
+                                <span class="text">Blogs</span>
+                            </a>
+
+                            <ul class="sidebar-submenu">
+                                <li class="sidebar-submenu__item {{ Request::is('blog-categories') ? 'activePage' : '' }}">
+                                    <a href="{{ url('blog-categories') }}" class="sidebar-submenu__link"> Blogs Categories </a>
+                                </li>
+
+                            
+                            </ul>
+                        </li>
+                                                <li class="sidebar-menu__item {{ Request::is('admin/reports') ? 'activePage' : '' }}">
                             <a href="{{ url('admin/reports') }}" class="sidebar-menu__link">
                                 <span class="icon"><i class="ph ph-book-open"></i></span>
                                 <span class="text">All Reports</span>

@@ -177,6 +177,7 @@
                                 <li>
                                     <a href="{{ url('/about') }}">About Us</a>
                                 </li>
+                                <li><a href="{{ url('/blog') }}">Blogs</a></li>
                                 <li class="nav-item search-item">
                                     <form action="{{ route('reports.search') }}" method="GET" class="search-form">
                                         <input 
@@ -192,6 +193,8 @@
                                         </button>
                                     </form>
                                 </li>
+
+                                
                                 
                                 <div class="header-item float-end">
                                     <!-- Header Btn Start -->

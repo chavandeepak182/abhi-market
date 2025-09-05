@@ -44,8 +44,18 @@
                         <div class="form-group mb-3">
                             <textarea name="message" class="form-control" placeholder="Message (Optional)"></textarea>
                         </div>
+                         
+                        {{-- ✅ Google reCAPTCHA --}}
+                        <div class="form-group mt-3">
+                            {!! NoCaptcha::display() !!}
+                            @error('g-recaptcha-response')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
+                    {{-- Load reCAPTCHA script --}}
+{!! NoCaptcha::renderJs() !!}
                 </div>
             </div>
 

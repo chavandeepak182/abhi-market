@@ -32,6 +32,7 @@
     </div>
 
     <div class="card-deck">
+
         <!-- Excel Only -->
         <div class="plan-card">
             <div class="icon-right">
@@ -39,11 +40,14 @@
             </div>
             <div class="plan-title">EXCEL ONLY</div>
             <div class="price">US$ 2000</div>
-            <form action="{{ route('paypal.payment') }}" method="POST">
-                @csrf
-                <input type="hidden" name="report_name" value="{{ $report->report_name }}">
-                <input type="hidden" name="license_type" value="Excel Only">
-                <input type="hidden" name="price" value="2000">
+            <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+                <input type="hidden" name="business" value="sb-q73pr14720721@business.example.com">
+                <input type="hidden" name="cmd" value="_xclick">
+                <input type="hidden" name="item_name" value="{{ $report->report_name }} - Excel Only">
+                <input type="hidden" name="amount" value="2000">
+                <input type="hidden" name="currency_code" value="USD">
+                <input type="hidden" name="return" value="{{ route('paypal.success') }}">
+                <input type="hidden" name="cancel_return" value="{{ route('paypal.cancel') }}">
                 <button type="submit" class="buy-btn">Buy Now</button>
             </form>
             <ul>
@@ -62,11 +66,14 @@
             </div>
             <div class="plan-title">SINGLE USER ACCESS</div>
             <div class="price">US$ 4500</div>
-            <form action="{{ route('pay') }}" method="POST">
-                @csrf
-                <input type="hidden" name="report_name" value="{{ $report->report_name }}">
-                <input type="hidden" name="license_type" value="Single User Access">
-                <input type="hidden" name="price" value="4500">
+            <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+                <input type="hidden" name="business" value="sb-q73pr14720721@business.example.com">
+                <input type="hidden" name="cmd" value="_xclick">
+                <input type="hidden" name="item_name" value="{{ $report->report_name }} - Single User Access">
+                <input type="hidden" name="amount" value="4500">
+                <input type="hidden" name="currency_code" value="USD">
+                <input type="hidden" name="return" value="{{ route('paypal.success') }}">
+                <input type="hidden" name="cancel_return" value="{{ route('paypal.cancel') }}">
                 <button type="submit" class="btn buy-btn">Buy Now</button>
             </form>
             <ul>
@@ -88,11 +95,14 @@
             </div>
             <div class="plan-title">MULTI USER ACCESS</div>
             <div class="price">US$ 5750</div>
-            <form action="{{ route('pay') }}" method="POST">
-                @csrf
-                <input type="hidden" name="report_name" value="{{ $report->report_name }}">
-                <input type="hidden" name="license_type" value="Multi User Access">
-                <input type="hidden" name="price" value="5750">
+            <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+                <input type="hidden" name="business" value="sb-q73pr14720721@business.example.com">
+                <input type="hidden" name="cmd" value="_xclick">
+                <input type="hidden" name="item_name" value="{{ $report->report_name }} - Multi User Access">
+                <input type="hidden" name="amount" value="5750">
+                <input type="hidden" name="currency_code" value="USD">
+                <input type="hidden" name="return" value="{{ route('paypal.success') }}">
+                <input type="hidden" name="cancel_return" value="{{ route('paypal.cancel') }}">
                 <button type="submit" class="btn buy-btn">Buy Now</button>
             </form>
             <ul>
@@ -113,11 +123,14 @@
             </div>
             <div class="plan-title">CORPORATE ACCESS</div>
             <div class="price">US$ 7000</div>
-            <form action="{{ route('pay') }}" method="POST">
-                @csrf
-                <input type="hidden" name="report_name" value="{{ $report->report_name }}">
-                <input type="hidden" name="license_type" value="Corporate Access">
-                <input type="hidden" name="price" value="7000">
+            <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+                <input type="hidden" name="business" value="sb-q73pr14720721@business.example.com">
+                <input type="hidden" name="cmd" value="_xclick">
+                <input type="hidden" name="item_name" value="{{ $report->report_name }} - Corporate Access">
+                <input type="hidden" name="amount" value="7000">
+                <input type="hidden" name="currency_code" value="USD">
+                <input type="hidden" name="return" value="{{ route('paypal.success') }}">
+                <input type="hidden" name="cancel_return" value="{{ route('paypal.cancel') }}">
                 <button type="submit" class="btn buy-btn">Buy Now</button>
             </form>
             <ul>

@@ -51,7 +51,6 @@ Route::get('/overview', function () {
     return view('frontend.overview');
 });
 Route::get('/purchase/{id}', [PurchaseController::class, 'showById'])->name('purchase.page');
-Route::post('/pay', [PayPalController::class, 'pay'])->name('pay');
 Route::post('/paypal/payment', [PayPalController::class, 'handlePayment'])->name('paypal.payment');
 Route::get('/paypal/success', [PayPalController::class, 'paymentSuccess'])->name('paypal.success');
 Route::get('/paypal/cancel', [PayPalController::class, 'paymentCancel'])->name('paypal.cancel');

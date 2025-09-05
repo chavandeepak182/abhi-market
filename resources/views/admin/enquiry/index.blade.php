@@ -58,11 +58,31 @@
                                 {{ Str::limit($enquiry->page_url, 50) }}
                             </a>
                         </td> -->
-                        <td><span class="fw-medium text-gray-300">{{ $enquiry->created_at->format('d M, Y H:i') }}</span></td>
                         <td>
-                            <button class="btn btn-info btn-xs view-enquiry-btn" data-bs-toggle="modal" data-bs-target="#ViewEnquiry" data-enquiry='@json($enquiry)'>
+                            <span class="fw-medium text-gray-300">
+                                {{ \Carbon\Carbon::parse($enquiry->created_at)->format('d M, Y H:i') }}
+                            </span>
+                        </td>
+                        <td>
+                            <!-- View Button -->
+                            <button class="btn btn-info btn-xs view-enquiry-btn" 
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#ViewEnquiry" 
+                                    data-enquiry='@json($enquiry)'>
                                 <i class="far fa-eye"></i>
                             </button>
+
+                            <!-- Delete Button -->
+                            <form action="{{ route('enquiries.destroy', $enquiry->enquiry_id) }}" 
+                                method="POST" 
+                                style="display:inline-block;" 
+                                onsubmit="return confirm('Are you sure you want to delete this enquiry?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-xs">
+                                    <i class="far fa-trash-alt"></i>
+                                </button>
+                            </form>
                         </td>
                     </tr>
                     @endforeach

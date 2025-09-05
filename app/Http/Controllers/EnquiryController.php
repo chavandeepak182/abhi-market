@@ -12,8 +12,12 @@ class EnquiryController extends Controller
 {
     public function enquiryLead()
     {
-        $enquiries = Enquiry::all();
-        return view('admin.enquiry.index', compact('enquiries'));
+         $enquiries = DB::table('enquiries')
+        ->whereNull('deleted_at')   // Exclude soft deleted
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+         return view('admin.enquiry.index', compact('enquiries'));
     }
     public function showForm()
     {
@@ -31,6 +35,7 @@ public function store(Request $request)
             'enquiry_type' => 'nullable|string',
             'page_url' => 'nullable|url',
             'page_name' => 'nullable|string',
+            'g-recaptcha-response' => 'required|captcha',
         ]);
 
         Log::info('Enquiry Store - Validated Request:', $validated);
@@ -75,4 +80,15 @@ public function store(Request $request)
 
         return redirect()->route('thank.you');
     }
+public function destroy($id)
+{
+    DB::table('enquiries')
+        ->where('enquiry_id', $id)
+        ->update([
+            'deleted_at' => now()
+        ]);
+
+    return redirect()->back()->with('status', 'Enquiry deleted successfully!');
+}
+
 }

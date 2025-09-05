@@ -123,6 +123,7 @@ Route::get('/signup', function () {
 
 //enquiry
 Route::get('admin/enquiries', [EnquiryController::class, 'enquiryLead'])->name('enquiries.enquiryLead');
+Route::delete('/admin/enquiries/{id}', [EnquiryController::class, 'destroy'])->name('enquiries.destroy');
 
 //enquiry form
 Route::get('enquiry', [EnquiryController::class, 'showForm'])->name('enquiry.form');

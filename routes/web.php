@@ -74,9 +74,14 @@ Route::middleware('isAdmin')->group(function () {
 
     // blog
     // frontend blog routes 
-    Route::get('/blog/{id}', [FrontendController::class, 'showBlog'])->name('blog.show');
+    // Old
 
-Route::get('/blog', [FrontendController::class, 'blog'])->name('blog');
+
+// New
+Route::get('/blogs/{slug}', [FrontendController::class, 'showBlog'])->name('blog.show');
+
+
+Route::get('/blogs', [FrontendController::class, 'blog'])->name('blog');
 
 
 Route::get('admin/blog', [BlogController::class, 'index'])->name('blog.index');          // List blogs

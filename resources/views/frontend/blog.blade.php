@@ -8,7 +8,7 @@
 
 <!-- ===== Hero Banner ===== -->
 <section class="hero-wrap position-relative" style="background-color:#006186;">
-    <div class="hero-bg" style="background-color:#006186;') no-repeat center center; background-size: cover;"></div>
+    <div class="hero-bg" style="background-color:#006186; background-size: cover;"></div>
     <div class="hero-overlay bg-dark opacity-50"></div>
 
     <div class="container hero-content py-5">
@@ -22,10 +22,8 @@
                 </div>
 
                 <!-- Heading -->
-                <h1 class="hero-title display-5 mb-2">Explore Blogs</h1>
-                <p class="hero-sub lead mb-0">
-                    Insights, tutorials, and stories from our team — browse the latest posts across AI, Technology, Travel & more.
-                </p>
+                <h1 class="hero-title display-5 mb-2" style="color:#fff">Explore Blogs</h1>
+                
             </div>
         </div>
     </div>
@@ -69,7 +67,7 @@
     <div class="row gy-4 gx-4">
         @forelse($allIndustries as $blog)
             <div class="col-md-4">
-                <a href="{{ route('blog.show', $blog->id) }}" class="text-decoration-none text-dark">
+                <a href="{{ route('blog.show', $blog->slug) }}" class="text-decoration-none text-dark">
                     <div class="card h-100 shadow-sm border-0 blog-box">
                         <img src="{{ asset($blog->image) }}" class="card-img-top" alt="{{ $blog->blog_name }}">
                         <div class="card-body">

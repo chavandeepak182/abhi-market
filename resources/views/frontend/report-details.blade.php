@@ -3,7 +3,8 @@
 @section('description', $report->meta_description)
 @section('keywords', $report->meta_keywords)
 @section('og_tags')
-    <meta property="og:title" content="{{ $report->report_title }}">
+    
+<meta property="og:title" content="{{ $report->report_title }}">
     <meta property="og:description" content="{{ Str::limit(strip_tags($report->description), 150) }}">
     <meta property="og:type" content="article">
     <meta property="og:url" content="{{ url()->current() }}">
@@ -83,6 +84,9 @@
             <strong style="color: #0056b3;">CATEGORY NAME:</strong>
           </p>
           <p class="mb-0" style="font-size: 15px;">{!! $report->category_name !!}</p>
+          <p class="mb-0" style="font-size: 15px; display: none;">
+            {!! $report->schema_markup !!}
+        </p>
         </div>
       </div>
 

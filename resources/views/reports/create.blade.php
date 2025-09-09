@@ -65,23 +65,6 @@
                             <label for="summernote">Table Of Content</label>
                             <textarea name="toc" id="mySummernote" class="form-control"></textarea>
                         </div>
-                        <script>
-    $(document).ready(function() {
-        $('#mySummernote').summernote({
-            height: 250, // set editor height
-            toolbar: [
-                ['style', ['bold', 'italic', 'underline', 'clear']],
-                ['font', ['strikethrough', 'superscript', 'subscript']],
-                ['fontsize', ['fontsize']],
-                ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['insert', ['link', 'picture', 'video']],
-                ['view', ['fullscreen', 'codeview']]
-            ]
-        });
-    });
-</script>
-
                     </div>
                     <div class="col-md-4 col-sm-7">
                         <div class="position-relative pb-15 form-group">
@@ -161,6 +144,22 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        $('#mySummernote').summernote({
+            height: 250, // set editor height
+            toolbar: [
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['font', ['strikethrough', 'superscript', 'subscript']],
+                ['fontsize', ['fontsize']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['insert', ['link', 'picture', 'video']],
+                ['view', ['fullscreen', 'codeview']]
+            ]
+        });
+    });
+</script>
 <script>
     document.getElementById('add-faq').addEventListener('click', function () {
         const wrapper = document.getElementById('faq-wrapper');

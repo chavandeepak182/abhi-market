@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="zxx">
     <head>
+        <script 
+        src="https://www.paypal.com/sdk/js?client-id=BAA7qbjGHxnIpeIxf8a_2LH0VFXDc2c6mSOP55nXnPcbklSJhJI4wnNtIA313kdOfWBFjGGiT_ST0kwDqs&components=hosted-buttons&disable-funding=venmo&currency=USD">
+        </script>
         <!-- Google Tag Manager -->
         <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],

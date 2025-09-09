@@ -25,7 +25,9 @@ class AdminController extends Controller
 			$reportsCount = DB::table('reports')->count();
 			$industriesCount = DB::table('industries')->count();
 			$servicesCount = DB::table('services')->count();
-			$enquiriesCount = DB::table('enquiries')->count();
+			$enquiriesCount = DB::table('enquiries')
+			->whereNull('deleted_at')
+			->count();
 
 			return view('admin.dashboard', compact('reportsCount', 'industriesCount', 'servicesCount', 'enquiriesCount'));
 		} else {

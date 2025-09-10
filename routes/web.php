@@ -20,6 +20,9 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\PayPalController;
+use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\GalleryFolderController;
+
 
 Route::get('/', [FrontendController::class, 'index'])->name('home');
 
@@ -171,6 +174,12 @@ Route::post('/reports/store', [ReportController::class, 'storeReport'])->name('r
 Route::get('/reports/edit/{id}', [ReportController::class, 'edit'])->name('reports.edit');
 Route::put('/reports/update/{id}', [ReportController::class, 'update'])->name('reports.update');
 Route::post('/reports/delete/{id}', [ReportController::class, 'deleteReport'])->name('reports.delete');
+});
+
+//gallery
+Route::middleware('isAdmin')->prefix('admin')->name('admin.')->group(function () {
+    Route::resource('gallery-folder', \App\Http\Controllers\GalleryFolderController::class);
+    Route::resource('gallery', \App\Http\Controllers\GalleryController::class);
 });
 
 //frontend reports

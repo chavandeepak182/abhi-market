@@ -178,8 +178,15 @@ Route::post('/reports/delete/{id}', [ReportController::class, 'deleteReport'])->
 
 //gallery
 Route::middleware('isAdmin')->prefix('admin')->name('admin.')->group(function () {
-    Route::resource('gallery-folder', \App\Http\Controllers\GalleryFolderController::class);
-    Route::resource('gallery', \App\Http\Controllers\GalleryController::class);
+
+    // Gallery Folders (full CRUD: index, create, store, show, edit, update, destroy)
+    Route::resource('gallery-folder', GalleryFolderController::class);
+
+    // Gallery (full CRUD)
+    Route::resource('gallery', GalleryController::class);
+
+    // Optional: explicit create route (already included in resource, but you can keep if needed)
+    Route::get('gallery/create', [GalleryController::class, 'create'])->name('gallery.create');
 });
 
 //frontend reports

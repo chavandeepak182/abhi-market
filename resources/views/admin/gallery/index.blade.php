@@ -2,91 +2,130 @@
 @section('title', "Gallery")
 
 @section('content')
-    <h2>
-        @if(isset($galleryFolder))
-            Images in Folder: {{ $galleryFolder->name }}
-        @else
-            All Images
-        @endif
-    </h2>
+<div class="dashboard-body">
+    <!-- Breadcrumb -->
+    <div class="breadcrumb-with-buttons mb-24 flex-between flex-wrap gap-8">
 
-    <a href="{{ route('admin.gallery.create') }}">+ Add Image</a>
+        <!-- Back Button -->
+       
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Preview</th>
-                <th>Link</th>
-                <th>Folder</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse($galleries as $gallery)
+        <div class="breadcrumb mb-24">
+            <ul class="flex-align gap-4">
+                <li>
+                    <a href="{{ url('admin/dashboard') }}" 
+                       class="text-gray-200 fw-normal text-15 hover-text-main-600">
+                        Dashboard
+                    </a>
+                </li>
+                <li>
+                    <span class="text-gray-500 fw-normal d-flex">
+                        <i class="ph ph-caret-right"></i>
+                    </span>
+                </li>
+                <li>
+                    <span class="text-main-600 fw-normal text-15">Manage Gallery</span>
+                </li>
+            </ul>
+        </div>
+         <div class="back-button">
+             <a href="{{ route('admin.gallery.create') }}" class="add-btn">+ Add Image</a>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+    
+
+    <div class="table-wrapper">
+        <table class="gallery-table">
+            <thead>
                 <tr>
-                    <td>{{ $gallery->id }}</td>
-                    <td>
-                        <img src="{{ asset('storage/' . $gallery->image) }}" 
-                            width="80" 
-                            alt="{{ $gallery->alt ?? 'Gallery Image' }}">
-                    </td>
-                    <td>
-                        <input type="text" 
-                            id="link-{{ $gallery->id }}" 
-                            value="{{ asset('storage/' . ltrim($gallery->image, '/')) }}" 
-                            readonly 
-                            style="width:250px;">
-
-                        <button type="button" onclick="copyToClipboard('link-{{ $gallery->id }}')">
-                            Copy
-                        </button>
-                    </td>
-                    <td>{{ $gallery->folder?->name ?? 'No Folder' }}</td>
-                    <td>
-                        <a href="{{ route('admin.gallery.edit', $gallery->id) }}">Edit</a>
-                        <form action="{{ route('admin.gallery.destroy', $gallery->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit">Delete</button>
-                        </form>
-                    </td>
+                    <th>ID</th>
+                    <th>Preview</th>
+                    <th>Link</th>
+                    <th>Folder</th>
+                    <!-- <th>Title</th> -->
+                    <th>Actions</th>
                 </tr>
-            @empty
-                <tr>
-                    <td colspan="4">No images found.</td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @forelse($galleries as $gallery)
+                    <tr>
+                        <td>{{ $gallery->id }}</td>
+                        <td>
+                            <img src="{{ asset('storage/' . $gallery->image) }}" 
+                                 width="80" 
+                                 alt="{{ $gallery->alt ?? 'Gallery Image' }}">
+                        </td>
+                        <td>
+                            <div class="link-box">
+                                <input type="text" 
+                                       id="link-{{ $gallery->id }}" 
+                                       value="{{ asset('storage/' . ltrim($gallery->image, '/')) }}" 
+                                       readonly>
+                                <button type="button" class="copy-btn" onclick="copyToClipboard('link-{{ $gallery->id }}')">
+                                    📋 Copy
+                                </button>
+                            </div>
+                        </td>
+                        <td>{{ $gallery->folder?->name ?? 'No Folder' }}</td>
+                        <!-- <td>{{ $gallery->title }}</td> -->
+                       <td>
+    <a href="{{ route('admin.gallery.edit', $gallery->id) }}" 
+       class="btn btn-warning btn-xs edit">
+        <i class="far fa-edit"></i>
+    </a>
 
-    {{-- Show pagination only if $galleries is paginated --}}
+    <form action="{{ route('admin.gallery.destroy', $gallery->id) }}" 
+          method="POST" 
+          style="display:inline;">
+        @csrf
+        @method('DELETE')
+        <button type="submit" 
+                class="btn btn-danger btn-xs delete" 
+                onclick="return confirm('Are you sure?');">
+            <i class="far fa-trash-alt"></i>
+        </button>
+    </form>
+</td>
+
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="5" class="text-center">No images found.</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table><br>
+
+       
+    </div>
+
+    {{-- Pagination --}}
     @if(method_exists($galleries, 'links'))
-        {{ $galleries->links() }}
+        <div class="pagination-wrapper">
+            {{ $galleries->links() }}
+        </div>
     @endif
-    <script>
+</div>
+
+<!-- Script -->
+<script>
 function copyToClipboard(inputId) {
     const input = document.getElementById(inputId);
-
     if (navigator.clipboard) {
-        // Modern way (async + supported on most modern browsers)
         navigator.clipboard.writeText(input.value)
-            .then(() => {
-                alert("Copied: " + input.value);
-            })
+            .then(() => alert("Copied: " + input.value))
             .catch(err => {
                 console.error("Clipboard copy failed: ", err);
                 fallbackCopy(input);
             });
     } else {
-        // Fallback for older browsers
         fallbackCopy(input);
     }
 }
-
 function fallbackCopy(input) {
     input.select();
-    input.setSelectionRange(0, 99999); // For mobile
+    input.setSelectionRange(0, 99999);
     try {
         const successful = document.execCommand('copy');
         alert(successful ? "Copied: " + input.value : "Copy failed");
@@ -96,5 +135,7 @@ function fallbackCopy(input) {
     }
 }
 </script>
-@endsection
 
+<!-- CSS -->
+
+@endsection

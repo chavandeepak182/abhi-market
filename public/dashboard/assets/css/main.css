@@ -9805,6 +9805,253 @@ button:focus {
     color: var(--main-600) !important;
 }
 
+
+
+
+/* gallary section css Start */
+
+
+/* reuse same css from create form */
+.folder-label {font-weight:600;display:block;margin-bottom:6px;}
+.folder-select-wrapper{position:relative;display:flex;align-items:center;border:2px solid #cbd5e1;border-radius:10px;padding:8px 12px;background:#f8fbff;transition:.3s;margin-bottom:15px;}
+.folder-select-wrapper:hover{border-color:#3b82f6;background:#eef6ff;}
+.folder-icon{font-size:20px;margin-right:8px;}
+.folder-select{border:none;outline:none;background:transparent;width:100%;font-size:15px;padding:6px;cursor:pointer;}
+.upload-box{margin:15px 0;}
+.upload-area{display:flex;flex-direction:column;justify-content:center;align-items:center;border:2px dashed #cbd5e1;border-radius:10px;padding:40px;background:#f8fbff;cursor:pointer;transition:.3s;}
+.upload-area:hover{border-color:#3b82f6;background:#eef6ff;}
+.upload-icon{font-size:40px;margin-bottom:10px;}
+.browse{color:#3b82f6;cursor:pointer;}
+.title-input{width:100%;padding:10px;margin:15px 0;border:1px solid #ddd;border-radius:6px;}
+.upload-btn{display:inline-block;padding:10px 20px;border:none;background:#3b82f6;color:#fff;border-radius:20px;cursor:pointer;font-weight:bold;transition:.3s;}
+.upload-btn:hover{background:#2563eb;}
+
+
+
+/* Back button */
+.back-button {
+    margin-right: 15px;
+}
+.back-link {
+    display: inline-block;
+    padding: 6px 14px;
+    background: #f1f5f9;
+    color: #334155;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+.back-link:hover {
+    background: #3b82f6;
+    color: #fff;
+}
+
+/* Folder Select Styling */
+.folder-label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 6px;
+}
+.folder-select-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 2px solid #cbd5e1;
+    border-radius: 10px;
+    padding: 8px 12px;
+    background: #f8fbff;
+    transition: all 0.3s ease;
+    margin-bottom: 15px;
+}
+.folder-select-wrapper:hover {
+    border-color: #3b82f6;
+    background: #eef6ff;
+}
+.folder-icon {
+    font-size: 20px;
+    margin-right: 8px;
+}
+.folder-select {
+    border: none;
+    outline: none;
+    background: transparent;
+    width: 100%;
+    font-size: 15px;
+    padding: 6px;
+    cursor: pointer;
+}
+
+/* Upload box */
+.upload-box {
+    margin: 15px 0;
+}
+.upload-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed #cbd5e1;
+    border-radius: 10px;
+    padding: 40px;
+    background: #f8fbff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.upload-area:hover {
+    border-color: #3b82f6;
+    background: #eef6ff;
+}
+.upload-icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+.browse {
+    color: #3b82f6;
+    cursor: pointer;
+}
+
+/* Title input */
+.title-input {
+    width: 100%;
+    padding: 10px;
+    margin: 15px 0;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
+/* Upload button */
+.upload-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    background: #3b82f6;
+    color: #fff;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+.upload-btn:hover {
+    background: #2563eb;
+}
+
+/* Back button */
+.back-button {
+    margin-right: 15px;
+}
+.back-link {
+    display: inline-block;
+    padding: 6px 14px;
+    background: #f1f5f9;
+    color: #334155;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+.back-link:hover {
+    background: #3b82f6;
+    color: #fff;
+}
+
+.add-btn {
+    display: inline-block;
+    margin-bottom: 15px;
+    padding: 8px 15px;
+    background: #3b82f6;
+    color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s;
+    margin-left: 50px;
+}
+.add-btn:hover {
+    background: #2563eb;
+}
+.table-wrapper {
+    overflow-x: auto;
+}
+.gallery-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.gallery-table th, .gallery-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+.gallery-table th {
+    background: #f8fafc;
+    font-weight: 600;
+}
+.gallery-table tr:hover {
+    background: #f1f5f9;
+}
+.link-box {
+    display: flex;
+    align-items: center;
+}
+.link-box input {
+    width: 220px;
+    padding: 6px;
+    border: 1px solid #ddd;
+    border-radius: 6px 0 0 6px;
+    font-size: 13px;
+}
+.copy-btn {
+    padding: 6px 10px;
+    border: none;
+    background: #10b981;
+    color: #fff;
+    border-radius: 0 6px 6px 0;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background 0.3s;
+}
+.copy-btn:hover {
+    background: #059669;
+}
+.action-btns {
+    display: flex;
+    gap: 8px;
+}
+.edit-btn, .delete-btn {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+}
+.edit-btn {
+    background: #facc15;
+    color: #000;
+}
+.edit-btn:hover {
+    background: #eab308;
+}
+.delete-btn {
+    background: #ef4444;
+    color: #fff;
+}
+.delete-btn:hover {
+    background: #dc2626;
+}
+.pagination-wrapper {
+    margin-top: 15px;
+}
+/* gallary section End */
+
 /* ============================= List Grid View Css End ============================ */
 /* Email Css Start */
 .item-active.activePage > a {

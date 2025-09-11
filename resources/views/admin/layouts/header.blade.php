@@ -88,6 +88,19 @@
                                 <span class="text">News</span>
                             </a>
                         </li>
+                        <li class="sidebar-menu__item {{ Request::is('admin/gallery') || Request::is('admin/gallery/*') ? 'activePage' : '' }}">
+    <a href="{{ route('admin.gallery.index') }}" class="sidebar-menu__link">
+        <span class="icon"><i class="ph ph-image"></i></span>
+        <span class="text">Gallery</span>
+    </a>
+     <ul class="sidebar-submenu">
+    <li class="sidebar-submenu__item {{ Request::is('gallery-folder') || Request::is('gallery-folder/*') ? 'activePage' : '' }}">
+        <a href="{{ route('admin.gallery-folder.index') }}" class="sidebar-submenu__link"> Gallery Folders </a>
+    </li>
+</ul>
+
+</li>
+
                                                 <li class="sidebar-menu__item has-dropdown 
                             {{ Request::is('admin/blog') || Request::is('blog/create') || Request::is('blog/edit/*') ? 'activePage' : '' }}">
                             

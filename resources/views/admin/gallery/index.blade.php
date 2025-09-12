@@ -5,6 +5,10 @@
 <div class="dashboard-body">
     <!-- Breadcrumb -->
     <div class="breadcrumb-with-buttons mb-24 flex-between flex-wrap gap-8">
+
+        <!-- Back Button -->
+       
+
         <div class="breadcrumb mb-24">
             <ul class="flex-align gap-4">
                 <li>
@@ -28,6 +32,12 @@
         </div>
     </div>
     <!-- Breadcrumb End -->
+<form action="{{ route('admin.gallery.index') }}" method="GET" class="mb-3 d-flex" style="max-width: 400px;">
+    <input type="text" name="search" class="form-control me-2"
+           placeholder="Search by title..." value="{{ request('search') }}">
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+    
 
     <div class="table-wrapper">
         <table class="gallery-table">
@@ -36,8 +46,8 @@
                     <th>ID</th>
                     <th>Preview</th>
                     <th>Link</th>
-                    <th>Folder</th>
-                    <th>Title</th> <!-- ✅ Title column added -->
+                    <!-- <th>Folder</th> -->
+                    <th>Title</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -61,7 +71,7 @@
                                 </button>
                             </div>
                         </td>
-                        <td>{{ $gallery->folder?->name ?? 'No Folder' }}</td>
+                        <!-- <td>{{ $gallery->folder?->name ?? 'No Folder' }}</td> -->
                         <td>{{ $gallery->title ?? 'No Title' }}</td> <!-- ✅ Show Title -->
                         <td>
                             <a href="{{ route('admin.gallery.edit', $gallery->id) }}" 
@@ -98,4 +108,35 @@
         </div>
     @endif
 </div>
+
+<!-- Script -->
+<script>
+function copyToClipboard(inputId) {
+    const input = document.getElementById(inputId);
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(input.value)
+            .then(() => alert("Copied: " + input.value))
+            .catch(err => {
+                console.error("Clipboard copy failed: ", err);
+                fallbackCopy(input);
+            });
+    } else {
+        fallbackCopy(input);
+    }
+}
+function fallbackCopy(input) {
+    input.select();
+    input.setSelectionRange(0, 99999);
+    try {
+        const successful = document.execCommand('copy');
+        alert(successful ? "Copied: " + input.value : "Copy failed");
+    } catch (err) {
+        console.error('Fallback copy failed:', err);
+        alert("Copy not supported in this browser.");
+    }
+}
+</script>
+
+<!-- CSS -->
+
 @endsection

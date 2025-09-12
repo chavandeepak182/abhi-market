@@ -10,12 +10,21 @@ use Illuminate\Support\Facades\Storage;
 
 class GalleryController extends Controller
 {
-    // Show all images
-    public function index()
-    {
-        $galleries = Gallery::latest()->paginate(20);
-        return view('admin.gallery.index', compact('galleries'));
-    }
+    // Show all images (optional: without filtering)
+   public function index(Request $request)
+{
+    $search = $request->input('search');
+
+    $galleries = Gallery::query()
+        ->when($search, function ($query, $search) {
+            $query->where('title', 'like', '%' . $search . '%');
+        })
+        ->latest()
+        ->get(); // No pagination
+
+    return view('admin.gallery.index', compact('galleries', 'search'));
+}
+  
 
     // Show create form
     public function create()

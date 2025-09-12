@@ -320,4 +320,23 @@ public function search(Request $request)
 
     return view('frontend.reports.list', compact('reports', 'query'));
 }
+public function searchByTitle(Request $request)
+{
+    $query = $request->input('query');
+
+    // Optional: validate
+    $request->validate([
+        'query' => 'required|string|min:2',
+    ]);
+
+    // Search reports by title with category join
+    $reports = DB::table('reports')
+        ->leftJoin('categories', 'reports.industry_category_id', '=', 'categories.id')
+        ->select('reports.*', 'categories.name as category_name')
+        ->where('reports.report_title', 'like', '%' . $query . '%')
+        ->orderBy('reports.publish_date', 'desc')
+        ->paginate(10);
+
+    return view('reports.index', compact('reports', 'query'));
+}
 }

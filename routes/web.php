@@ -165,6 +165,7 @@ Route::middleware('isAdmin')->group(function () {
     Route::post('/subcategories/delete/{id}', [PropertyCategoryController::class, 'deleteSubcategory'])->name('subcategories.delete');
 });
 Route::get('/reports/search', [FrontendController::class, 'search'])->name('reports.search');
+Route::get('/admin/reports/search-title', [FrontendController::class, 'searchByTitle'])->name('reports.searchByTitle');
 
 Route::middleware('isAdmin')->group(function () {
 //Reports

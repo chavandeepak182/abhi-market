@@ -89,35 +89,33 @@
                             </a>
                         </li>
                         <li class="sidebar-menu__item {{ Request::is('admin/gallery') || Request::is('admin/gallery/*') ? 'activePage' : '' }}">
-    <a href="{{ route('admin.gallery.index') }}" class="sidebar-menu__link">
-        <span class="icon"><i class="ph ph-image"></i></span>
-        <span class="text">Gallery</span>
-    </a>
-     <ul class="sidebar-submenu">
-    <li class="sidebar-submenu__item {{ Request::is('gallery-folder') || Request::is('gallery-folder/*') ? 'activePage' : '' }}">
-        <a href="{{ route('admin.gallery-folder.index') }}" class="sidebar-submenu__link"> Gallery Folders </a>
-    </li>
-</ul>
-
-</li>
-
-                                                <li class="sidebar-menu__item has-dropdown 
-                            {{ Request::is('admin/blog') || Request::is('blog/create') || Request::is('blog/edit/*') ? 'activePage' : '' }}">
-                            
-                            <a href="/admin/blog" class="sidebar-menu__link">
-                                <span class="icon"><i class="ph ph-chats-teardrop"></i></span>
-                                <span class="text">Blogs</span>
+                            <a href="{{ route('admin.gallery.index') }}" class="sidebar-menu__link">
+                                <span class="icon"><i class="ph ph-image"></i></span>
+                                <span class="text">Gallery</span>
                             </a>
-
                             <ul class="sidebar-submenu">
-                                <li class="sidebar-submenu__item {{ Request::is('blog-categories') ? 'activePage' : '' }}">
-                                    <a href="{{ url('blog-categories') }}" class="sidebar-submenu__link"> Blogs Categories </a>
-                                </li>
+                            <li class="sidebar-submenu__item {{ Request::is('gallery-folder') || Request::is('gallery-folder/*') ? 'activePage' : '' }}">
+                                <a href="{{ route('admin.gallery-folder.index') }}" class="sidebar-submenu__link"> Gallery Folders </a>
+                            </li>
+                        </ul>
 
-                            
-                            </ul>
                         </li>
-                                                <li class="sidebar-menu__item {{ Request::is('admin/reports') ? 'activePage' : '' }}">
+
+                        <li class="sidebar-menu__item has-dropdown 
+                                {{ Request::is('admin/blog') || Request::is('blog/create') || Request::is('blog/edit/*') ? 'activePage' : '' }}">
+                                
+                                <a href="/admin/blog" class="sidebar-menu__link">
+                                    <span class="icon"><i class="ph ph-chats-teardrop"></i></span>
+                                    <span class="text">Blogs</span>
+                                </a>
+
+                                <ul class="sidebar-submenu">
+                                    <li class="sidebar-submenu__item {{ Request::is('blog-categories') ? 'activePage' : '' }}">
+                                        <a href="{{ url('blog-categories') }}" class="sidebar-submenu__link"> Blogs Categories </a>
+                                </li>                            
+                                </ul>
+                        </li>
+                        <li class="sidebar-menu__item {{ Request::is('admin/reports') ? 'activePage' : '' }}">
                             <a href="{{ url('admin/reports') }}" class="sidebar-menu__link">
                                 <span class="icon"><i class="ph ph-book-open"></i></span>
                                 <span class="text">All Reports</span>
@@ -171,99 +169,10 @@
                                 <span class="text">All Enquiries</span>
                             </a>
                         </li>
-                        <!-- <li class="sidebar-menu__item">
-                            <a href="#" class="sidebar-menu__link">
-                                <span class="icon"><i class="ph ph-users"></i></span>
-                                <span class="text">Mentors</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-menu__item">
-                            <a href="#" class="sidebar-menu__link">
-                                <span class="icon"><i class="ph ph-bookmarks"></i></span>
-                                <span class="text">Resources</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-menu__item">
-                            <a href="#" class="sidebar-menu__link">
-                                <span class="icon"><i class="ph ph-chats-teardrop"></i></span>
-                                <span class="text">Messages</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-menu__item">
-                            <a href="#" class="sidebar-menu__link">
-                                <span class="icon"><i class="ph ph-chart-bar"></i></span>
-                                <span class="text">Analytics</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-menu__item">
-                            <a href="#" class="sidebar-menu__link">
-                                <span class="icon"><i class="ph ph-calendar-dots"></i></span>
-                                <span class="text">Events</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-menu__item">
-                            <a href="#" class="sidebar-menu__link">
-                                <span class="icon"><i class="ph ph-books"></i></span>
-                                <span class="text">Library</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-menu__item">
-                            <a href="#" class="sidebar-menu__link">
-                                <span class="icon"><i class="ph ph-coins"></i></span>
-                                <span class="text">Pricing</span>
-                            </a>
-                        </li>
-                        
-                        <li class="sidebar-menu__item">
-                            <span class="text-gray-300 text-sm px-20 pt-20 fw-semibold border-top border-gray-100 d-block text-uppercase">Settings</span>
-                        </li>
-                        <li class="sidebar-menu__item">
-                            <a href="setting.html" class="sidebar-menu__link">
-                                <span class="icon"><i class="ph ph-gear"></i></span>
-                                <span class="text">Account Settings</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-menu__item has-dropdown">
-                            <a href="javascript:void(0)" class="sidebar-menu__link">
-                                <span class="icon"><i class="ph ph-shield-check"></i></span>
-                                <span class="text">Authetication</span>
-                            </a>
-                            <ul class="sidebar-submenu">
-                                <li class="sidebar-submenu__item">
-                                    <a href="sign-in.html" class="sidebar-submenu__link">Sign In</a>
-                                </li>
-                                <li class="sidebar-submenu__item">
-                                    <a href="sign-up.html" class="sidebar-submenu__link">Sign Up</a>
-                                </li>
-                                <li class="sidebar-submenu__item">
-                                    <a href="forgot-password.html" class="sidebar-submenu__link">Forgot Password</a>
-                                </li>
-                                <li class="sidebar-submenu__item">
-                                    <a href="reset-password.html" class="sidebar-submenu__link">Reset Password</a>
-                                </li>
-                                <li class="sidebar-submenu__item">
-                                    <a href="verify-email.html" class="sidebar-submenu__link">Verify Email</a>
-                                </li>
-                                <li class="sidebar-submenu__item">
-                                    <a href="two-step-verification.html" class="sidebar-submenu__link">Two Step Verification</a>
-                                </li>
-                            </ul>
-                        </li>  -->                      
+                                              
                     </ul>
                 </div>
-                <!-- <div class="p-20 pt-80">
-                    <div class="bg-main-50 p-20 pt-0 rounded-16 text-center mt-74">
-                        <span class="border border-5 bg-white mx-auto border-primary-50 w-114 h-114 rounded-circle flex-center text-success-600 text-2xl translate-n74">
-                            <img src="{{ asset('dashboard') }}/assets/images/icons/certificate.png" alt="" class="centerised-img">
-                        </span>
-                        <div class="mt-n74">
-                            <h5 class="mb-4 mt-22">Get Pro Certificate</h5>
-                            <p class="">Explore 400+ courses with lifetime members</p>
-                            <a href="pricing-plan.html" class="btn btn-main mt-16 rounded-pill">Get Access</a>
-                        </div>
-                    </div>
-                </div> -->
+
             </div>
         </aside> 
 
@@ -274,11 +183,16 @@
                     <button type="button" class="toggle-btn d-xl-none d-flex text-26 text-gray-500"><i class="ph ph-list"></i></button>
                     <!-- Toggle Button End -->
                     
-                    <form action="#" class="w-350 d-sm-block d-none">
-                        <div class="position-relative">
-                            <button type="submit" class="input-icon text-xl d-flex text-gray-100 pointer-event-none"><i class="ph ph-magnifying-glass"></i></button> 
-                            <input type="text" class="form-control ps-40 h-40 border-transparent focus-border-main-600 bg-main-50 rounded-pill placeholder-15" placeholder="Search...">
-                        </div>
+                    <form action="{{ route('reports.searchByTitle') }}" method="GET" class="d-flex mb-3" role="search">
+                        <input 
+                            type="text" 
+                            name="query" 
+                            class="form-control me-2" 
+                            placeholder="Search by title" 
+                            value="{{ request('query') }}" 
+                            required
+                        >
+                        <button type="submit" class="btn btn-primary">Search</button>
                     </form>
                 </div>
 

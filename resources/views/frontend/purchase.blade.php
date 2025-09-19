@@ -20,9 +20,15 @@
     </div>
 </div>
 
-<div class="container py-5">
-    <div class="text-center pricing-header">
-        <p><strong>{{ $report->report_name }}</strong></p>
+    <div class="container py-5">
+        <div class="text-center pricing-header">
+        <p>
+            <strong>
+                <a href="{{ route('reports.details', $report->slug) }}">
+                    {{ $report->report_name }}
+                </a>
+            </strong>
+        </p>
     </div>
 
     <div class="step-nav">

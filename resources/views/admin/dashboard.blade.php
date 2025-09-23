@@ -8,48 +8,56 @@
             <!-- Widgets Start -->
             <div class="row gy-4">
                 <div class="col-xxl-3 col-sm-6">
-                    <div class="card">
+                    <div class="card" onclick="window.location='{{ route('reports.index') }}';" style="cursor: pointer;">
                         <div class="card-body">
                             <h4 class="mb-2">{{ $reportsCount }}</h4>
                             <span class="text-gray-600">Total Reports</span>
                             <div class="flex-between gap-8 mt-16">
-                                <span class="flex-shrink-0 w-48 h-48 flex-center rounded-circle bg-main-600 text-white text-2xl"><i class="ph-fill ph-book-open"></i></span>
+                                <span class="flex-shrink-0 w-48 h-48 flex-center rounded-circle bg-main-600 text-white text-2xl">
+                                    <i class="ph-fill ph-book-open"></i>
+                                </span>
                                 <div id="complete-course" class="remove-tooltip-title rounded-tooltip-value"></div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-xxl-3 col-sm-6">
-                    <div class="card">
+                    <div class="card" onclick="window.location='{{ route('industries.index') }}';" style="cursor: pointer;">
                         <div class="card-body">
                             <h4 class="mb-2">{{ $industriesCount }}</h4>
                             <span class="text-gray-600">Total Industries</span>
                             <div class="flex-between gap-8 mt-16">
-                                <span class="flex-shrink-0 w-48 h-48 flex-center rounded-circle bg-main-two-600 text-white text-2xl"><i class="ph-fill ph-certificate"></i></span>
+                                <span class="flex-shrink-0 w-48 h-48 flex-center rounded-circle bg-main-two-600 text-white text-2xl">
+                                    <i class="ph-fill ph-certificate"></i>
+                                </span>
                                 <div id="earned-certificate" class="remove-tooltip-title rounded-tooltip-value"></div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-xxl-3 col-sm-6">
-                    <div class="card">
+                    <div class="card" onclick="window.location='{{ route('services.index') }}';" style="cursor: pointer;">
                         <div class="card-body">
                             <h4 class="mb-2">{{ $servicesCount }}</h4>
                             <span class="text-gray-600">Total Capabilities</span>
                             <div class="flex-between gap-8 mt-16">
-                                <span class="flex-shrink-0 w-48 h-48 flex-center rounded-circle bg-purple-600 text-white text-2xl"> <i class="ph-fill ph-graduation-cap"></i></span>
+                                <span class="flex-shrink-0 w-48 h-48 flex-center rounded-circle bg-purple-600 text-white text-2xl">
+                                    <i class="ph-fill ph-graduation-cap"></i>
+                                </span>
                                 <div id="course-progress" class="remove-tooltip-title rounded-tooltip-value"></div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-xxl-3 col-sm-6">
-                    <div class="card">
+                    <div class="card" onclick="window.location='{{ route('enquiries.enquiryLead') }}';" style="cursor: pointer;">
                         <div class="card-body">
                             <h4 class="mb-2">{{ $enquiriesCount }}</h4>
                             <span class="text-gray-600">Total Enquiries</span>
                             <div class="flex-between gap-8 mt-16">
-                                <span class="flex-shrink-0 w-48 h-48 flex-center rounded-circle bg-warning-600 text-white text-2xl"><i class="ph-fill ph-users-three"></i></span>
+                                <span class="flex-shrink-0 w-48 h-48 flex-center rounded-circle bg-warning-600 text-white text-2xl">
+                                    <i class="ph-fill ph-users-three"></i>
+                                </span>
                                 <div id="community-support" class="remove-tooltip-title rounded-tooltip-value"></div>
                             </div>
                         </div>

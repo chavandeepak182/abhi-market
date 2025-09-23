@@ -41,5 +41,8 @@ return [
     'sitekey' => env('NOCAPTCHA_SITEKEY'),
     'secret' => env('NOCAPTCHA_SECRET'),
     ],
+    'openai' => [
+    'api_key' => env('OPENAI_API_KEY'),
+],
 
 ];

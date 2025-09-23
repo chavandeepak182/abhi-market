@@ -37,6 +37,9 @@
             <img src="{{ asset($blog->image) }}" alt="{{ $blog->blog_name }}" class="img-fluid rounded mb-4 shadow-sm">
 
             <h2 class="mb-3">{{ $blog->blog_name }}</h2>
+            <p class="mb-0" style="font-size: 15px; display: none;">
+            {!! $blog->schema_markup !!}
+        </p>
 
             <p class="text-muted mb-4">
                 Published on {{ \Carbon\Carbon::parse($blog->created_at)->format('F d, Y') }} 

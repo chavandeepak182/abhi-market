@@ -129,6 +129,8 @@ Route::get('/signup', function () {
     return view('admin.sign-up');
 });
 
+
+
 //enquiry
 Route::get('admin/enquiries', [EnquiryController::class, 'enquiryLead'])->name('enquiries.enquiryLead');
 Route::delete('/admin/enquiries/{id}', [EnquiryController::class, 'destroy'])->name('enquiries.destroy');

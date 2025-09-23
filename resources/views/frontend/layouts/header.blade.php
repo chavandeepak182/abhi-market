@@ -231,9 +231,9 @@
         </div>
         {{-- end main content --}}
 
-        <a data-bs-toggle="modal" href="#addUserView" class="whatsapp-icon">
+        <!-- <a data-bs-toggle="modal" href="#addUserView" class="whatsapp-icon">
             <i class="fas fa-envelope"></i>
-        </a>
+        </a> -->
 
         <!-- Add User Modal -->
         <div class="modal fade" id="addUserView" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -273,7 +273,7 @@
         </div>
 
         @include('frontend.layouts.footer')
-
+        <script src="//code.tidio.co/qyr53x6ecvh8koeaohwzoqijnioq4yqk.js" async></script>
         <script>
             const menu = document.querySelector(".menu");
             const menuMain = menu.querySelector(".menu-main");

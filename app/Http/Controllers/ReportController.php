@@ -266,6 +266,9 @@ public function showSampleForm($slug)
         abort(404, 'Report not found');
     }
 
-    return view('frontend.reports.sample-form', compact('report', 'slug'));
+    // Fetch countries list
+    $countries = DB::table('countries')->orderBy('name')->get();
+
+    return view('frontend.reports.sample-form', compact('report', 'slug', 'countries'));
 }
 }

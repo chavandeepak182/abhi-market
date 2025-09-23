@@ -31,15 +31,18 @@ public function store(Request $request)
     ]);
 
     $validated = $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|email|max:255',
-        'contact' => 'required|string|max:15',
-        'amount' => 'nullable|numeric',
-        'address' => 'nullable|string',
-        'message' => 'nullable|string',
+        'name'         => 'required|string|max:255',
+        'email'        => 'required|email|max:255',
+        'contact'      => 'required|string|max:15',
+        'amount'       => 'nullable|numeric',
+        'address'      => 'nullable|string',
+        'message'      => 'nullable|string',
         'enquiry_type' => 'nullable|string',
-        'page_url' => 'nullable|url',
-        'page_name' => 'nullable|string',
+        'page_url'     => 'nullable|url',
+        'page_name'    => 'nullable|string',
+        'job_title'    => 'nullable|string|max:255',
+        'company_name' => 'nullable|string|max:255',
+        'country_id'   => 'nullable|exists:countries,id',
         'g-recaptcha-response' => 'required|captcha',
     ]);
 
@@ -51,19 +54,29 @@ public function store(Request $request)
     \Log::info('Enquiry Store - Validated Request:', $validated);
 
     try {
+        // Get country details if provided
+        $country = null;
+        if (!empty($validated['country_id'])) {
+            $country = DB::table('countries')->where('id', $validated['country_id'])->first();
+        }
+
         // Insert enquiry into DB
         DB::table('enquiries')->insert([
-            'name'        => $validated['name'],
-            'email'       => $validated['email'],
-            'contact'     => $validated['contact'],
-            'amount'      => $validated['amount'] ?? null,
-            'address'     => $validated['address'] ?? null,
-            'message'     => $validated['message'] ?? null,
+            'name'         => $validated['name'],
+            'email'        => $validated['email'],
+            'contact'      => $validated['contact'],
+            'amount'       => $validated['amount'] ?? null,
+            'address'      => $validated['address'] ?? null,
+            'message'      => $validated['message'] ?? null,
             'enquiry_type' => $validated['enquiry_type'] ?? null,
-            'page_url'    => $validated['page_url'] ?? null,
-            'page_name'   => $validated['page_name'] ?? null,
-            'created_at'  => now(),
-            'updated_at'  => now(),
+            'page_url'     => $validated['page_url'] ?? null,
+            'page_name'    => $validated['page_name'] ?? null,
+            'job_title'    => $validated['job_title'] ?? null,
+            'company_name' => $validated['company_name'] ?? null,
+            'country_id'   => $validated['country_id'] ?? null,
+            'phone_code'   => $country->phone_code ?? null,
+            'created_at'   => now(),
+            'updated_at'   => now(),
         ]);
 
         // --- Send email to the admin ---
@@ -71,7 +84,10 @@ public function store(Request $request)
         A new enquiry has been submitted:\n\n
         Name: {$validated['name']}\n
         Email: {$validated['email']}\n
-        Contact: {$validated['contact']}\n
+        Contact: " . ($country->phone_code ?? '') . " {$validated['contact']}\n
+        Job Title: " . ($validated['job_title'] ?? '-') . "\n
+        Company: " . ($validated['company_name'] ?? '-') . "\n
+        Country: " . ($country->name ?? '-') . "\n
         Message: " . ($validated['message'] ?? '-') . "\n
         Report Name: " . ($validated['page_name'] ?? '-') . "\n
         Submitted At: " . now()->toDateTimeString() . "
@@ -79,13 +95,15 @@ public function store(Request $request)
 
         Mail::raw($adminMessage, function ($mail) use ($validated) {
             $mail->to('swapnil@jfsmarketresearch.com')
-                ->from(config('mail.from.address'), $validated['name'])
-                ->subject('M2Squre - New Enquiry Received - ' . $validated['name']);
+                ->from(config('mail.from.address'), 'M2Square Enquiry')
+                ->replyTo($validated['email'], $validated['name'])
+                ->subject('M2Square - New Enquiry Received - ' . $validated['name']);
         });
 
         \Log::info('Enquiry saved & email sent successfully via Brevo SMTP.');
     } catch (\Exception $e) {
         \Log::error('Error in enquiry store: ' . $e->getMessage());
+        return back()->withErrors(['msg' => 'Something went wrong, please try again.']);
     }
 
     return redirect()->route('thank.you');

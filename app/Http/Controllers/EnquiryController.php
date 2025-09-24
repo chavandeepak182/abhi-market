@@ -10,15 +10,17 @@ use Illuminate\Support\Facades\Mail;
 
 class EnquiryController extends Controller
 {
-    public function enquiryLead()
-    {
-         $enquiries = DB::table('enquiries')
-        ->whereNull('deleted_at')   // Exclude soft deleted
-        ->orderBy('created_at', 'desc')
+   public function enquiryLead()
+{
+    $enquiries = DB::table('enquiries')
+        ->leftJoin('countries', 'enquiries.country_id', '=', 'countries.id')
+        ->whereNull('enquiries.deleted_at') // Exclude soft deleted
+        ->orderBy('enquiries.created_at', 'desc')
+        ->select('enquiries.*', 'countries.name as country_name')
         ->get();
 
-         return view('admin.enquiry.index', compact('enquiries'));
-    }
+    return view('admin.enquiry.index', compact('enquiries'));
+}
     public function showForm()
     {
         return view('frontend.enquiry-form');

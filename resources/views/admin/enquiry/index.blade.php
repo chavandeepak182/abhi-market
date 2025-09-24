@@ -38,6 +38,7 @@
                         <th>ID</th>
                         <th>Name</th>
                         <th>Email ID</th>
+                        <th>country</th>
                         <th>Mobile No.</th>
                         <th>Page</th>
                         <th>Date</th>
@@ -51,6 +52,7 @@
                         <td><span class="fw-medium text-gray-300">{{ $enquiry->enquiry_id }}</span></td>
                         <td><span class="fw-medium text-gray-300">{{ $enquiry->name }}</span></td>
                         <td><span class="fw-medium text-gray-300">{{ $enquiry->email }}</span></td>
+                        <td><span class="fw-medium text-gray-300">{{ $enquiry->country_name }}</span></td>
                         <td><span class="fw-medium text-gray-300">{{ $enquiry->contact }}</span></td>
                         <td><span class="fw-medium text-gray-300">{{ $enquiry->page_name }}</span></td>
                         <!-- <td>
@@ -112,6 +114,10 @@
                         <div class="form-group col-md-4">
                             <label class="col-form-label">Email ID:</label>
                             <input type="email" class="form-control" id="modal_email" name="email" readonly>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="col-form-label">Mobile Number:</label>
+                            <input type="tel" class="form-control" id="modal_contact" name="contact" readonly>
                         </div>
                         <div class="form-group col-md-4">
                             <label class="col-form-label">Mobile Number:</label>

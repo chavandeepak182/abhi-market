@@ -37,6 +37,18 @@
         </script>
     @endif
 @endsection
+@section('alternate_links')
+    <link rel="alternate" hreflang="x-default" href="{{ url()->current() }}">
+    <link rel="alternate" hreflang="en" href="{{ url()->current() }}">
+    <link rel="alternate" hreflang="ar" href="{{ url()->current() }}">
+    <link rel="alternate" hreflang="zh-CN" href="{{ url()->current() }}">
+    <link rel="alternate" hreflang="fr" href="{{ url()->current() }}">
+    <link rel="alternate" hreflang="de" href="{{ url()->current() }}">
+    <link rel="alternate" hreflang="ja" href="{{ url()->current() }}">
+    <link rel="alternate" hreflang="pt" href="{{ url()->current() }}">
+    <link rel="alternate" hreflang="ru" href="{{ url()->current() }}">
+    <link rel="alternate" hreflang="es" href="{{ url()->current() }}">
+@endsection
 
 @section('content')
 <!-- Page Header Start -->

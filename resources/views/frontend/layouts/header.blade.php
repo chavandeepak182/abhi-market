@@ -25,10 +25,9 @@
     <meta name="keywords" content="@yield('keywords')">
     @yield('meta')
     @yield('og_tags')
-    
-
     <!-- ✅ Schema Markup -->
     @yield('schema_markup')
+    @yield('alternate_links')
     @yield('robots')
 
     <!-- Favicon -->

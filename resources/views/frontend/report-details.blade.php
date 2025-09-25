@@ -1,10 +1,18 @@
 @extends('frontend.layouts.header')
+
+{{-- Page Meta --}}
 @section('title', $report->meta_title)
 @section('description', $report->meta_description)
 @section('keywords', $report->meta_keywords)
+
+{{-- Robots --}}
+@section('robots')
+    <meta name="robots" content="index, follow">
+@endsection
+
+{{-- Open Graph (Facebook / LinkedIn) --}}
 @section('og_tags')
-    
-<meta property="og:title" content="{{ $report->report_title }}">
+    <meta property="og:title" content="{{ $report->report_title }}">
     <meta property="og:description" content="{{ Str::limit(strip_tags($report->description), 150) }}">
     <meta property="og:type" content="article">
     <meta property="og:url" content="{{ url()->current() }}">
@@ -19,6 +27,15 @@
     <meta name="twitter:title" content="{{ $report->report_title }}">
     <meta name="twitter:description" content="{{ Str::limit(strip_tags($report->description), 150) }}">
     <meta name="twitter:image" content="{{ !empty($industry->image) ? url('storage/industries/'.$industry->image) : url('images/default-og.jpg') }}">
+@endsection
+
+{{-- ✅ Schema Markup --}}
+@section('schema_markup')
+    @if(!empty($report->schema_markup))
+        <script type="application/ld+json">
+            {!! $report->schema_markup !!}
+        </script>
+    @endif
 @endsection
 
 @section('content')
@@ -84,9 +101,7 @@
             <strong style="color: #0056b3;">CATEGORY NAME:</strong>
           </p>
           <p class="mb-0" style="font-size: 15px;">{!! $report->category_name !!}</p>
-          <p class="mb-0" style="font-size: 15px; display: none;">
-            {!! $report->schema_markup !!}
-        </p>
+          
         </div>
       </div>
 

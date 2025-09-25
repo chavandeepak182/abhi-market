@@ -1,9 +1,16 @@
 @extends('frontend.layouts.header')
 
-@section('title', $blog->blog_name)
-@section('description', Str::limit(strip_tags($blog->description), 160))
-@section('keywords', $blog->blog_name)
+{{-- Page Meta --}}
+@section('title', $blog->meta_title)
+@section('description', Str::limit(strip_tags($blog->meta_description), 160))
+@section('keywords', $blog->meta_keywords)
 
+{{-- Robots --}}
+@section('robots')
+    <meta name="robots" content="index, follow">
+@endsection
+
+{{-- Open Graph & Twitter & Schema --}}
 @section('og_tags')
     {{-- Canonical --}}
     <link rel="canonical" href="{{ url()->current() }}">

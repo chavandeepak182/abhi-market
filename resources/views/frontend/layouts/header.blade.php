@@ -21,10 +21,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
     <title>@yield('title')</title>
-    @yield('meta')
-    @yield('og_tags')
     <meta name="description" content="@yield('description')">
     <meta name="keywords" content="@yield('keywords')">
+    @yield('meta')
+    @yield('og_tags')
+    
+
+    <!-- ✅ Schema Markup -->
+    @yield('schema_markup')
+    @yield('robots')
 
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('assets/images/favicon.png') }}" type="image/png">
@@ -43,12 +48,14 @@
     <link href="{{ asset('assets/css/magnific-popup.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/mousecursor.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/custom.css') }}" rel="stylesheet" media="screen">
+
     {{-- Canonical --}}
     <link rel="canonical" href="{{ url()->current() }}">
 
     <!-- External Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 
 
 <body>

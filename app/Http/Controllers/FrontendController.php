@@ -88,7 +88,23 @@ public function blog(Request $request)
     // Blog details by slug
 public function showBlog($slug)
 {
-    // Main blog
+    // 🔹 1. All your old slug → new slug mappings here:
+    $redirectSlugs = [
+        'fast-fashion-circular-fashion'      => 'fast-fashion-vs-circular-fashion-sustainable-retail',
+        'global-healthcare'     => 'cell-and-gene-therapy-in-2025-transforming-global-healthcare',
+        'eu-green-deal'                 => 'eu-green-deal-global-trade-policies',
+        'sustainable-packaging-industry' => 'sustainable-packaging-industry-regulation-global-fmcg',
+        // add as many as you need...
+    ];
+
+    // 🔹 2. If current slug is old → redirect permanently
+    if (isset($redirectSlugs[$slug])) {
+        return redirect()
+            ->route('blog.show', ['slug' => $redirectSlugs[$slug]])
+            ->setStatusCode(301); // permanent redirect
+    }
+
+    // 🔹 3. Main blog query
     $blog = DB::table('blog')
         ->join('blog_category', 'blog.category_id', '=', 'blog_category.pid')
         ->select('blog.*', 'blog_category.category_name as category_name')
@@ -99,37 +115,27 @@ public function showBlog($slug)
         abort(404);
     }
 
-    // Related blogs
+    // 🔹 4. Related blogs
     $relatedBlogs = DB::table('blog')
-        ->select('id','blog_name','slug','image','description','created_at','category_id')
+        ->select('id', 'blog_name', 'slug', 'image', 'description', 'created_at', 'category_id')
         ->where('slug', '!=', $slug)
         ->where('category_id', $blog->category_id)
         ->latest()
         ->take(3)
         ->get()
-        ->map(function($item) {
-            $item->slug = (string) $item->slug; // ✅ Cast slug as string
-            return $item;
-        });
+        ->map(fn($item) => tap($item, fn($i) => $i->slug = (string)$i->slug));
 
-    // Latest blogs
+    // 🔹 5. Latest blogs
     $latestBlogs = DB::table('blog')
-        ->select('id','blog_name','slug','image','description','created_at','category_id')
+        ->select('id', 'blog_name', 'slug', 'image', 'description', 'created_at', 'category_id')
         ->where('slug', '!=', $slug)
         ->latest()
         ->take(3)
         ->get()
-        ->map(function($item) {
-            $item->slug = (string) $item->slug; // ✅ Cast slug as string
-            return $item;
-        });
+        ->map(fn($item) => tap($item, fn($i) => $i->slug = (string)$i->slug));
 
     return view('frontend.blog-details', compact('blog', 'relatedBlogs', 'latestBlogs'));
 }
-
-
-
-
 
     public function userLogin(Request $req)
     {

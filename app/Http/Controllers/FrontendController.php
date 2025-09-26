@@ -94,6 +94,7 @@ public function showBlog($slug)
         'global-healthcare'     => 'cell-and-gene-therapy-in-2025-transforming-global-healthcare',
         'eu-green-deal'                 => 'eu-green-deal-global-trade-policies',
         'sustainable-packaging-industry' => 'sustainable-packaging-industry-regulation-global-fmcg',
+        'Sustainable-Packaging-Industry' => 'sustainable-packaging-industry-regulation-global-fmcg',
         // add as many as you need...
     ];
 

@@ -13,8 +13,8 @@
     <!-- बाकी CSS -->
 </head>
 
-@section('description', "")
-@section('keywords', "")
+@section('description', "M2 Square Consultancy is a leading market research growth advisory firm offering syndicated research and insights among top market research companies")
+@section('keywords', "market research companies, market research agency, marketing research companies, b2b market research companies, market research survey, market research for small business, market research services, market research for startups")
 
 @section('content')
 

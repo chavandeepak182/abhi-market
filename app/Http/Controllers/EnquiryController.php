@@ -6,6 +6,8 @@ use App\Services\BrevoService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Twilio\Rest\Client;
+use Illuminate\Support\Facades\Http;
 
 
 class EnquiryController extends Controller
@@ -48,7 +50,6 @@ public function store(Request $request)
         'g-recaptcha-response' => 'required|captcha',
     ]);
 
-    // 🔍 Log after validation success
     \Log::info('Captcha validation passed.', [
         'validated_token' => $validated['g-recaptcha-response'] ?? null,
     ]);
@@ -56,60 +57,87 @@ public function store(Request $request)
     \Log::info('Enquiry Store - Validated Request:', $validated);
 
     try {
-        // Get country details if provided
+        // Get country details from selected country_id
         $country = null;
         if (!empty($validated['country_id'])) {
             $country = DB::table('countries')->where('id', $validated['country_id'])->first();
         }
 
+        // Get visitor IP
+        $ip = $request->getClientIp();
+        if ($ip === '127.0.0.1' || $ip === '::1') {
+            $ip = null; // skip for local development
+        }
+
+        // Get visitor country from IP
+        $visitor_country = null;
+        if ($ip) {
+            try {
+                $response = Http::timeout(5)->get("https://ipapi.co/{$ip}/country_name/");
+                if ($response->successful()) {
+                    $visitor_country = $response->body(); // e.g., "India"
+                }
+            } catch (\Exception $e) {
+                \Log::warning("Geo lookup failed for IP {$ip}: " . $e->getMessage());
+            }
+        }
+
         // Insert enquiry into DB
         DB::table('enquiries')->insert([
-            'name'         => $validated['name'],
-            'email'        => $validated['email'],
-            'contact'      => $validated['contact'],
-            'amount'       => $validated['amount'] ?? null,
-            'address'      => $validated['address'] ?? null,
-            'message'      => $validated['message'] ?? null,
-            'enquiry_type' => $validated['enquiry_type'] ?? null,
-            'page_url'     => $validated['page_url'] ?? null,
-            'page_name'    => $validated['page_name'] ?? null,
-            'job_title'    => $validated['job_title'] ?? null,
-            'company_name' => $validated['company_name'] ?? null,
-            'country_id'   => $validated['country_id'] ?? null,
-            'phone_code'   => $country->phone_code ?? null,
-            'created_at'   => now(),
-            'updated_at'   => now(),
+            'name'             => $validated['name'],
+            'email'            => $validated['email'],
+            'contact'          => $validated['contact'],
+            'amount'           => $validated['amount'] ?? null,
+            'address'          => $validated['address'] ?? null,
+            'message'          => $validated['message'] ?? null,
+            'enquiry_type'     => $validated['enquiry_type'] ?? null,
+            'page_url'         => $validated['page_url'] ?? null,
+            'page_name'        => $validated['page_name'] ?? null,
+            'job_title'        => $validated['job_title'] ?? null,
+            'company_name'     => $validated['company_name'] ?? null,
+            'country_id'       => $validated['country_id'] ?? null,
+            'phone_code'       => $country->phone_code ?? null,
+            'visitor_country'  => $visitor_country,
+            'created_at'       => now(),
+            'updated_at'       => now(),
         ]);
 
-        // --- Send email to the admin ---
-        $adminMessage = "
-        A new enquiry has been submitted:\n\n
-        Name: {$validated['name']}\n
-        Email: {$validated['email']}\n
-        Contact: " . ($country->phone_code ?? '') . " {$validated['contact']}\n
-        Job Title: " . ($validated['job_title'] ?? '-') . "\n
-        Company: " . ($validated['company_name'] ?? '-') . "\n
-        Country: " . ($country->name ?? '-') . "\n
-        Message: " . ($validated['message'] ?? '-') . "\n
-        Report Name: " . ($validated['page_name'] ?? '-') . "\n
-        Submitted At: " . now()->toDateTimeString() . "
-        ";
+        \Log::info('Enquiry saved successfully.');
 
-        Mail::raw($adminMessage, function ($mail) use ($validated) {
-            $mail->to('swapnil@jfsmarketresearch.com')
-                ->from(config('mail.from.address'), 'M2Square Enquiry')
-                ->replyTo($validated['email'], $validated['name'])
-                ->subject('M2Square - New Enquiry Received - ' . $validated['name']);
-        });
+        // --- WhatsApp Notification via Twilio ---
+        $twilio = new Client(env('TWILIO_SID'), env('TWILIO_TOKEN'));
 
-        \Log::info('Enquiry saved & email sent successfully via Brevo SMTP.');
+       $message = "*New Enquiry Received:*\n"
+        . "*Name:* {$validated['name']}\n"
+        . "*Email:* {$validated['email']}\n"
+        . "*Contact:* " . ($country->phone_code ?? '') . " {$validated['contact']}\n"
+        . "*Job Title:* " . ($validated['job_title'] ?? '-') . "\n"
+        . "*Company:* " . ($validated['company_name'] ?? '-') . "\n"
+        . "*Country (selected):* " . ($country->name ?? '-') . "\n"
+        . "*Visitor Country:* " . ($visitor_country ?? '-') . "\n"
+        . "*Message:* " . ($validated['message'] ?? '-') . "\n"
+        . "*Report/Page:* " . ($validated['page_name'] ?? '-') . "\n"
+        . "*Submitted At:* " . now()->toDateTimeString();
+
+        $twilio->messages->create(
+            'whatsapp:+918788524747', // Replace with admin WhatsApp number
+            [
+                'from' => env('TWILIO_WHATSAPP_NUMBER'),
+                'body' => $message
+            ]
+        );
+
+        \Log::info('WhatsApp notification sent successfully.');
+
     } catch (\Exception $e) {
         \Log::error('Error in enquiry store: ' . $e->getMessage());
         return back()->withErrors(['msg' => 'Something went wrong, please try again.']);
     }
 
+    // Redirect to thank-you page
     return redirect()->route('thank.you');
 }
+
 
 public function destroy($id)
 {

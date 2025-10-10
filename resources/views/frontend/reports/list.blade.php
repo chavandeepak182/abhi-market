@@ -1,6 +1,6 @@
 @extends('frontend.layouts.header')
 
-@section('title', 'All Reports')
+@section('title', 'M2 Square Consultancy - All Reports')
 @section('description', 'Explore the latest market research reports across industries.')
 @section('keywords', 'market reports, industry analysis, research insights')
 

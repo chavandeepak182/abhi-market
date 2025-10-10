@@ -1,8 +1,10 @@
 @extends('frontend.layouts.header')
 
-@section('title', "Blogs")
-@section('description', "Explore blogs, insights, tutorials, and stories from our team.")
-@section('keywords', "blogs, AI, Technology, Travel, tutorials, stories")
+@section('title', 'M2square Consultancy - Blog | Latest Blog | Industry Blog')
+
+@section('description', 'Market Research Blog, Market Research Articles.')
+
+@section('keywords', 'market research blog, market research insights, business consulting tips, m2square consultancy blog, data-driven decisions, market analysis articles, consulting industry trends')
 
 @section('content')
 

@@ -1,7 +1,10 @@
 @extends('frontend.layouts.header')
-@section('title', "Contact Us")
-@section('description', "")
-@section('keywords', "")
+
+@section('title', 'Contact US – Market Research and Consulting Services')
+
+@section('description', 'We’re here to support you with market research and consulting services.Feel free to contact m2square consultancy anytime with your requirements – we’re available 24/7.')
+
+@section('keywords', 'market research services, consulting firm, m2square consultancy, business consulting, custom market research, 24/7 consulting support, business insights')
 
 @section('content')
     <!-- Page Header Start -->

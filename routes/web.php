@@ -55,6 +55,10 @@ Route::get('/details', function () {
 Route::get('/overview', function () {
     return view('frontend.overview');
 });
+Route::fallback(function () {
+    return response()->view('404', [], 404);
+});
+
 Route::get('/purchase/{id}', [PurchaseController::class, 'showById'])->name('purchase.page');
 Route::post('/paypal/payment', [PayPalController::class, 'handlePayment'])->name('paypal.payment');
 Route::get('/paypal/success', [PayPalController::class, 'paymentSuccess'])->name('paypal.success');

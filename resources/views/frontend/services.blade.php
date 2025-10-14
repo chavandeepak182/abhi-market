@@ -1,7 +1,7 @@
 @extends('frontend.layouts.header')
-@section('title', "Services")
-@section('description', "")
-@section('keywords', "")
+@section('title', "Market Research Services - M2 Square Consultancy")
+@section('description', "M2 Square Consultancy offers Market Research Services and Industry Analysis across 800+ technologies in 50 countries, delivering insights on emerging markets.")
+@section('keywords', "Market Research Services, Industry analysis, market reports , market research")
 
 @section('content')
     <!-- Page Header Start -->
@@ -38,15 +38,12 @@
                             <h2 class="text-anime-style-2" data-cursor="-opaque">Capabilities <span>We Serve</span></h2>
                             <p class="wow fadeInUp" data-wow-delay="0.2s">We cater to a wide range of industries by delivering customized solutions, strategic insights, and innovative support that help organizations grow, adapt, and lead in their respective sectors. Here’s a brief overview of key industries we work with.</p>
                         </div>
-                        <!-- Section Title End -->
-
-                        
+                        <!-- Section Title End -->                    
 
 
                     </div>
                     <!-- What We Do Content End -->
-                </div>
-                
+                </div>              
                
             </div>
         </div>

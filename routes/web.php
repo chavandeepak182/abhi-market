@@ -138,6 +138,8 @@ Route::get('/signup', function () {
 //enquiry
 Route::get('admin/enquiries', [EnquiryController::class, 'enquiryLead'])->name('enquiries.enquiryLead');
 Route::delete('/admin/enquiries/{id}', [EnquiryController::class, 'destroy'])->name('enquiries.destroy');
+Route::get('admin/enquiries/export/{type}', [FrontendController::class, 'export'])->name('enquiries.export');
+
 
 //enquiry form
 Route::get('enquiry', [EnquiryController::class, 'showForm'])->name('enquiry.form');

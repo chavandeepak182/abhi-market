@@ -152,4 +152,16 @@
         });
     });
 </script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const exportSelect = document.getElementById('exportOptions');
+    exportSelect.addEventListener('change', function() {
+        const type = this.value;
+        if (type) {
+            window.location.href = `/admin/enquiries/export/${type}`;
+            this.selectedIndex = 0; // Reset dropdown after click
+        }
+    });
+});
+</script>
 @endsection

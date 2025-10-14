@@ -1,7 +1,7 @@
 @extends('frontend.layouts.header')
-@section('title', "Industries")
-@section('description', "")
-@section('keywords', "")
+@section('title', "Industry Analysis, Research, Insights | M2 Square Consultancy")
+@section('description', "M2 Square Consultancy delivers industry analysis, insights, and research reports with granular data, custom coverage, and competitive intelligence worldwide.")
+@section('keywords', "industry analysis, industry research, industry insights, industry overview, industry outlook, industry intelligence")
 
 @section('content')
     <!-- Page Header Start -->
@@ -38,9 +38,7 @@
                             <h2 class="text-anime-style-2" data-cursor="-opaque">Industries <span>We Serve</span></h2>
                             <p class="wow fadeInUp" data-wow-delay="0.2s">We cater to a wide range of industries by delivering customized solutions, strategic insights, and innovative support that help organizations grow, adapt, and lead in their respective sectors. Here’s a brief overview of key industries we work with.</p>
                         </div>
-                        <!-- Section Title End -->
-
-                        
+                        <!-- Section Title End -->                    
 
 
                     </div>

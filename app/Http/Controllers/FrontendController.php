@@ -11,6 +11,8 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
 use App\Models\PasswordResets;
 use App\Models\News;
+use App\Models\Enquiry;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Log;
 
 class FrontendController extends Controller
@@ -245,32 +247,31 @@ public function showBlog($slug)
         return view('frontend.layouts.footer', $data);
     }
 
-    public function services()
-    {
-        $data['allServices'] = DB::table('services')
-            ->select(
-                'id',
-                'property_subcategory_id',
-                'image',
-                'service_name',
-                'description',
-                'slug',
-                'meta_title',
-                'meta_keywords',
-                'meta_description',
-                'created_at',
-                'updated_at'
-            )
-            ->paginate(700);
-
-        return view('frontend.services', $data);
-
-        $data['allServices'] = DB::table('services')
-            ->select('id', 'service_name')
-            ->get();
-
-        return view('frontend.layouts.footer', $data);
+    public function services(Request $request)
+{
+    // If ?page exists and is not 1, show custom 404
+    if ($request->has('page') && $request->query('page') != 1) {
+        return response()->view('404', [], 404);
     }
+
+    $data['allServices'] = DB::table('services')
+        ->select(
+            'id',
+            'property_subcategory_id',
+            'image',
+            'service_name',
+            'description',
+            'slug',
+            'meta_title',
+            'meta_keywords',
+            'meta_description',
+            'created_at',
+            'updated_at'
+        )
+        ->get(); // fetch all items
+
+    return view('frontend.services', $data);
+}
 
     public function insights()
     {
@@ -293,26 +294,30 @@ public function showBlog($slug)
         return view('frontend.insights', $data);
     }
 
-    public function industries()
-    {
-        $data['allIndustries'] = DB::table('industries')
-            ->select(
-                'id',
-                'image',
-                'industries_name',  // Fixed column name
-                'description',
-                'slug',
-                'meta_title',
-                'meta_keywords',
-                'meta_description',
-                'created_at',
-                'updated_at',
-                'industries_subcategory_id' // Fixed column name
-            )
-            ->paginate(700);
-
-        return view('frontend.industries', $data);
+    public function industries(Request $request)
+{
+    if ($request->has('page') && $request->query('page') != 1) {
+        return response()->view('404', [], 404); // Your custom blade
     }
+
+    $data['allIndustries'] = DB::table('industries')
+        ->select(
+            'id',
+            'image',
+            'industries_name',
+            'description',
+            'slug',
+            'meta_title',
+            'meta_keywords',
+            'meta_description',
+            'created_at',
+            'updated_at',
+            'industries_subcategory_id'
+        )
+        ->get();
+
+    return view('frontend.industries', $data);
+}
 public function search(Request $request)
 {
     $query = $request->input('query');
@@ -345,5 +350,61 @@ public function searchByTitle(Request $request)
         ->paginate(10);
 
     return view('reports.index', compact('reports', 'query'));
+}
+
+//export enquiery
+
+public function export($type)
+{
+    $enquiries = Enquiry::all();
+
+    if ($type === 'csv') {
+        $filename = 'enquiries_' . date('Y_m_d_H_i_s') . '.csv';
+        $headers = [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => "attachment; filename=\"$filename\"",
+        ];
+
+        $columns = ['ID', 'Name', 'Email', 'Country', 'Contact', 'Page', 'Date'];
+        $callback = function() use ($enquiries, $columns) {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, $columns);
+
+            foreach ($enquiries as $enquiry) {
+                fputcsv($file, [
+                    $enquiry->enquiry_id,
+                    $enquiry->name,
+                    $enquiry->email,
+                    $enquiry->country_name,
+                    $enquiry->contact,
+                    $enquiry->page_name,
+                    $enquiry->created_at->format('d M, Y H:i'),
+                ]);
+            }
+            fclose($file);
+        };
+
+        return Response::stream($callback, 200, $headers);
+    } 
+    elseif ($type === 'json') {
+        $filename = 'enquiries_' . date('Y_m_d_H_i_s') . '.json';
+        $data = $enquiries->map(function ($e) {
+            return [
+                'id' => $e->enquiry_id,
+                'name' => $e->name,
+                'email' => $e->email,
+                'country' => $e->country_name,
+                'contact' => $e->contact,
+                'page' => $e->page_name,
+                'date' => $e->created_at->format('d M, Y H:i'),
+            ];
+        });
+
+        return response()->streamDownload(function() use ($data) {
+            echo $data->toJson(JSON_PRETTY_PRINT);
+        }, $filename);
+    }
+
+    return redirect()->back()->with('status', 'Invalid export type selected.');
 }
 }

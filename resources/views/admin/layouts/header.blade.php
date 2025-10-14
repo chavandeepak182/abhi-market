@@ -163,12 +163,16 @@
                                 </li>
                             </ul>
                         </li>
+                        <?php    
+                        $role_id = session()->get('role_id');
+                        if($role_id == 4) { ?>
                         <li class="sidebar-menu__item {{ Request::is('admin/enquiries') ? 'activePage' : '' }}">
                             <a href="{{ url('admin/enquiries') }}" class="sidebar-menu__link">
                                 <span class="icon"><i class="ph ph-clipboard-text"></i></span>
                                 <span class="text">All Enquiries</span>
                             </a>
                         </li>
+                        <?php } ?>
                                               
                     </ul>
                 </div>

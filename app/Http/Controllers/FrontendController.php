@@ -354,10 +354,27 @@ public function searchByTitle(Request $request)
 
 //export enquiery
 
-public function export($type)
+  public function export($type)
 {
-    $enquiries = Enquiry::all();
+    // Fetch only non-deleted enquiries, joined with countries
+    $enquiries = DB::table('enquiries')
+        ->leftJoin('countries', 'enquiries.country_id', '=', 'countries.id')
+        ->whereNull('enquiries.deleted_at')
+        ->select(
+            'enquiries.enquiry_id',
+            'enquiries.name',
+            'enquiries.email',
+            'countries.name as country_name',
+            'enquiries.phone_code',
+            'enquiries.contact',
+            'enquiries.page_name',
+            'enquiries.visitor_country',
+            'enquiries.created_at'
+        )
+        ->orderByDesc('enquiries.created_at')
+        ->get();
 
+    // --- CSV Export ---
     if ($type === 'csv') {
         $filename = 'enquiries_' . date('Y_m_d_H_i_s') . '.csv';
         $headers = [
@@ -365,7 +382,8 @@ public function export($type)
             'Content-Disposition' => "attachment; filename=\"$filename\"",
         ];
 
-        $columns = ['ID', 'Name', 'Email', 'Country', 'Contact', 'Page', 'Date'];
+        $columns = ['ID', 'Name', 'Email', 'Country', 'Phone Code', 'Contact', 'Visitor Country', 'Page', 'Date'];
+
         $callback = function() use ($enquiries, $columns) {
             $file = fopen('php://output', 'w');
             fputcsv($file, $columns);
@@ -375,28 +393,35 @@ public function export($type)
                     $enquiry->enquiry_id,
                     $enquiry->name,
                     $enquiry->email,
-                    $enquiry->country_name,
+                    $enquiry->country_name ?? '-',
+                    $enquiry->phone_code ?? '-',
                     $enquiry->contact,
-                    $enquiry->page_name,
-                    $enquiry->created_at->format('d M, Y H:i'),
+                    $enquiry->visitor_country ?? '-',
+                    $enquiry->page_name ?? '-',
+                    Carbon::parse($enquiry->created_at)->format('d M, Y H:i'),
                 ]);
             }
+
             fclose($file);
         };
 
         return Response::stream($callback, 200, $headers);
-    } 
+    }
+
+    // --- JSON Export ---
     elseif ($type === 'json') {
         $filename = 'enquiries_' . date('Y_m_d_H_i_s') . '.json';
         $data = $enquiries->map(function ($e) {
             return [
-                'id' => $e->enquiry_id,
-                'name' => $e->name,
-                'email' => $e->email,
-                'country' => $e->country_name,
-                'contact' => $e->contact,
-                'page' => $e->page_name,
-                'date' => $e->created_at->format('d M, Y H:i'),
+                'id'              => $e->enquiry_id,
+                'name'            => $e->name,
+                'email'           => $e->email,
+                'country'         => $e->country_name ?? '-',
+                'phone_code'      => $e->phone_code ?? '-',
+                'contact'         => $e->contact,
+                'visitor_country' => $e->visitor_country ?? '-',
+                'page'            => $e->page_name ?? '-',
+                'date'            => Carbon::parse($e->created_at)->format('d M, Y H:i'),
             ];
         });
 

@@ -192,7 +192,7 @@
                                     <div class="tab-content-wrapper">
                                      @if($hasDesc)
                                         <div class="tab-content active" id="desc">
-                                            <h2>Description</h2>
+                                            <h2 style="font-size: 14pt;">Description</h2>
                                            <div class="summernote-output">{!! $report->description !!}</div>
 
                                                 {{-- FAQ Section --}}
@@ -203,7 +203,7 @@
 
                                                 @if (!empty($faqQues[0]) && !empty($faqAns[0]))
                                                     <div class="faq-section">
-                                                        <h2 class="faq-title" style="text-align: center;">Frequently Asked Questions</h2>
+                                                        <h2 class="faq-title" style="text-align: center; font-size: 14pt;">Frequently Asked Questions</h2>
 
                                                         <div class="accordion">
                                                             @foreach ($faqQues as $index => $question)

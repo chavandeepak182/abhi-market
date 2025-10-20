@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="en">
 <head>
     <script 
         src="https://www.paypal.com/sdk/js?client-id=BAA7qbjGHxnIpeIxf8a_2LH0VFXDc2c6mSOP55nXnPcbklSJhJI4wnNtIA313kdOfWBFjGGiT_ST0kwDqs&components=hosted-buttons&disable-funding=venmo&currency=USD">

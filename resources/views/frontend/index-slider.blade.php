@@ -5,6 +5,23 @@
 @section('description', 'M2 Square Consultancy is a leading market research growth advisory firm offering syndicated research and insights among top market research companies')
 
 @section('keywords', 'market research companies, market research agency, marketing research companies, b2b market research companies, market research survey, market research for small business, market research services, market research for startups')
+{{-- Robots --}}
+@section('robots')
+    <meta name="robots" content="index, follow">
+@endsection
+@section('meta')
+    <meta property="og:title" content="M2 Square Consultancy - Market Research Growth Advisory Firm" />
+    <meta property="og:description" content="M2 Square Consultancy is a leading market research growth advisory firm offering syndicated research and insights among top market research companies" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ url()->current() }}" />
+    <meta property="og:image" content="{{ asset('assets/img/og-image.jpg') }}" />
+    <meta property="og:site_name" content="M2 Square Consultancy" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="M2 Square Consultancy - Market Research Growth Advisory Firm" />
+    <meta name="twitter:description" content="M2 Square Consultancy is a leading market research growth advisory firm offering syndicated research and insights among top market research companies" />
+    <meta name="twitter:image" content="{{ asset('assets/img/og-image.jpg') }}" />
+@endsection
 
 @section('content')
 

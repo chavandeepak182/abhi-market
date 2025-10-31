@@ -180,7 +180,7 @@
                         @endphp
 
                         @if($role_id == 4)
-                        <li class="sidebar-menu__item {{ Request::is('admin/enquiries') ? 'activePage' : '' }}">
+                        <li class="sidebar-menu__item {{ Request::is('admin/contact') ? 'activePage' : '' }}">
                             <a href="{{ url('admin/contact') }}" class="sidebar-menu__link">
                                 <span class="icon"><i class="ph ph-clipboard-text"></i></span>
                                 <span class="text">All Contacts</span>

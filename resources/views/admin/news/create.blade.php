@@ -29,36 +29,66 @@
                 <div class="alert alert-success">{{ session('success') }}</div>
             @endif
 
-            <form action="{{ route('admin.news.store') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="row gy-20">
-                    <label class="h5 fw-semibold font-heading mt-15 mb-0">Add News</label>
+           <form action="{{ route('admin.news.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="row gy-20">
+                <label class="h5 fw-semibold font-heading mt-15 mb-0">Add News</label>
 
-                    <!-- Left Section -->
-                    <div class="col-md-8 col-sm-6">
-                        <div class="position-relative pb-15">
-                            <input type="text" name="title" class="form-control" placeholder="Enter News Title" required>
-                        </div>
-
-                        <div class="position-relative pb-15">
-                            <textarea name="content" rows="6" class="form-control" placeholder="Enter News Content" required></textarea>
-                        </div>
+                <!-- Left Section -->
+                <div class="col-md-8 col-sm-6">
+                    <!-- News Title -->
+                    <div class="position-relative pb-15">
+                        <label class="form-label fw-semibold">News Title</label>
+                        <input type="text" name="title" class="form-control" placeholder="Enter News Title" required>
                     </div>
 
-                    <!-- Right Section -->
-                    <div class="col-md-4 col-sm-6">
+                    <!-- News Content -->
+                    <div class="position-relative pb-15">
+                        <label class="form-label fw-semibold">Content</label>
+                        <textarea name="content" rows="6" class="form-control" placeholder="Enter News Content" required></textarea>
+                    </div>
+
+                    <!-- SEO Section -->
+                    <div class="border rounded p-3 mt-3 bg-light">
+                        <h6 class="fw-semibold mb-3"><i class="fas fa-search"></i> SEO Settings</h6>
+
+                        <!-- Meta Title -->
                         <div class="position-relative pb-15">
-                            <input type="file" name="image" class="form-control" placeholder="Upload Image">
+                            <label class="form-label">Meta Title</label>
+                            <input type="text" name="meta_title" class="form-control" placeholder="Enter Meta Title (optional)">
                         </div>
 
-                        <div class="flex-align mt-10">
-                            <button type="submit" class="btn btn-main rounded-pill py-9 w-100">
-                                <i class="fas fa-plus"></i> Add News
-                            </button>
+                        <!-- Meta Description -->
+                        <div class="position-relative pb-15">
+                            <label class="form-label">Meta Description</label>
+                            <textarea name="meta_description" rows="3" class="form-control" placeholder="Enter Meta Description (optional)"></textarea>
+                        </div>
+
+                        <!-- Meta Keywords -->
+                        <div class="position-relative pb-15">
+                            <label class="form-label">Meta Keywords</label>
+                            <input type="text" name="meta_keywords" class="form-control" placeholder="Enter Meta Keywords (comma-separated)">
                         </div>
                     </div>
                 </div>
-            </form>
+
+                <!-- Right Section -->
+                <div class="col-md-4 col-sm-6">
+                    <!-- Image Upload -->
+                    <div class="position-relative pb-15">
+                        <label class="form-label fw-semibold">News Image</label>
+                        <input type="file" name="image" class="form-control" placeholder="Upload Image">
+                    </div>
+
+                    <div class="flex-align mt-10">
+                        <button type="submit" class="btn btn-main rounded-pill py-9 w-100">
+                            <i class="fas fa-plus"></i> Add News
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
         </div>
     </div>
 </div>

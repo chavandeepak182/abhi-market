@@ -133,7 +133,7 @@
                         @endif
 
                         <!-- Contact Form Start -->
-                        <form action="{{ route('enquiry.store') }}" method="POST" class="wow fadeInUp" data-wow-delay="0.4s">
+                        <form action="{{ route('enquiry.contact.store') }}" method="POST" class="wow fadeInUp" data-wow-delay="0.4s">
                             @csrf
                             <input type="hidden" name="page_url" value="{{ url()->current() }}">
                             <input type="hidden" name="page_name" value="{{ Route::currentRouteName() }}">

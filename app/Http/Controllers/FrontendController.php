@@ -23,7 +23,7 @@ class FrontendController extends Controller
 
     $data['allIndustries'] = DB::table('industries')
         ->select('id', 'image', 'industries_name', 'description', 'slug', 'meta_title', 'meta_keywords', 'meta_description', 'created_at', 'updated_at', 'industries_subcategory_id')
-        ->take(4)
+        ->take(6)
         ->get(); 
 
     $data['allServices'] = DB::table('services')

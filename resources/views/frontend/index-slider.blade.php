@@ -163,70 +163,116 @@
 <!-- How It Work Section Start -->
    
 
-    <!-- Our Services Section Start -->
-    <div class="our-services">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4">
-                    <!-- Service Content Start -->
-                    <div class="our-service-content">
-                        <!-- Section Title Start -->
-                        <div class="section-title">
-                            <h3 class="wow fadeInUp"> Our Industries</h3>
-                            <h2 class="text-anime-style-2" data-cursor="-opaque">Our  <span>Industries</span></h2>
+   <!-- Our Industries Section Start -->
+    <style>
+     .industry-card {
+    background: #fff;
+    padding: 35px 25px;
+    border-radius: 18px;
+    text-align: center;
+    transition: 0.35s ease;
+    border: 1px solid #e8e8e8;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.04);
+}
+
+.industry-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 14px 28px rgba(0,0,0,0.09);
+}
+
+/* Icon Style */
+.industry-icon img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    margin-bottom: 15px;
+    transition: 0.3s ease;
+}
+
+.industry-card:hover .industry-icon img {
+    transform: scale(1.07);
+}
+
+/* Learn More Button */
+.learn-more-btn {
+    display: inline-block;
+    margin-top: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 15px;
+    color: #0057ff;
+    transition: 0.3s ease;
+}
+
+.learn-more-btn:hover {
+    color: #0039b3;
+}
+
+/* CTA */
+.btn-primary-main {
+    background: linear-gradient(90deg, #0057ff, #007bff);
+    border-radius: 30px;
+    padding: 12px 28px;
+    color: #fff;
+    font-weight: 600;
+    display: inline-block;
+    transition: 0.3s ease-in-out;
+}
+.btn-primary-main:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0,87,255,0.35);
+}
+        </style>
+    <div class="our-industries py-5">
+        <div class="container text-center">
+
+            <!-- Title -->
+            <h2 class="mb-4 text-anime-style-2" data-cursor="-opaque">
+                Our <span>Industries</span>
+            </h2>
+
+            <!-- 6 Grid Boxes -->
+            <div class="row justify-content-center">
+                @foreach($allIndustries->take(6) as $industry)
+                    @php
+                        $industryName = $industry->industries_name;
+                        $slug = $industry->slug;
+                        $description = Str::limit(strip_tags($industry->description), 80);
+                        $iconImage = asset('assets/images/' . $slug . '.svg');
+                    @endphp
+
+                    <div class="col-lg-4 col-md-6 col-sm-6 mb-4">
+                        <div class="industry-card h-100">
+                            
+                            <!-- Icon -->
+                            <div class="industry-icon">
+                                <img src="{{ $iconImage }}" alt="{{ $industryName }}">
+                            </div>
+
+                            <!-- Title -->
+                            <h4>{{ $industryName }}</h4>
+
+                            <!-- Description -->
+                            <p>{{ $description }}</p>
+
+                            <!-- Button -->
+                            <a href="{{ route('industries.details', ['slug' => $slug]) }}" class="learn-more-btn">
+                                Learn More →
+                            </a>
                         </div>
-                        <!-- Section Title End -->
-                        
-                        <!-- Section content Button Start -->
-                        <div class="service-content-btn wow fadeInUp" data-wow-delay="0.25s">
-                            <a href="{{ url('/industries') }}" class="btn-default">all Industries</a>
-                        </div>
-                        <!-- Section content Button End -->
                     </div>
-                    <!-- Service Content End -->
-                </div>
-
-                <div class="col-lg-8">
-   
-                    <div class="our-service-list">
-                            @foreach($allIndustries as $index => $industry)
-                                @php
-                                    $industryName = $industry->industries_name;
-                                    $slug = $industry->slug;
-                                    $description = Str::limit(strip_tags($industry->description), 120);
-                                    $iconImage = asset('assets/images/' . $slug . '.svg');
-                                @endphp
-
-                                <!-- Service Item Start -->
-                                <div class="service-item">
-                                    <div class="service-no">
-                                        <h2>{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</h2>
-                                    </div>
-                                    <div class="service-content-box">
-                                        <div class="icon-box">
-                                            <img src="{{ $iconImage }}" alt="{{ $industryName }} Icon">
-                                        </div>
-
-                                        <div class="service-item-content">
-                                            <h3>{{ $industryName }}</h3>
-                                            <p>{{ $description }}</p>
-                                            <a href="{{ route('industries.details', ['slug' => $slug]) }}" class="service-btn">
-                                                <img src="{{ asset('assets/images/arrow-white.svg') }}" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Service Item End -->
-                            @endforeach
-                </div>
-
-    
+                @endforeach
             </div>
 
-            </div>
+            <!-- CTA Button -->
+            <a href="{{ url('/industries') }}" class="btn btn-primary btn-lg mt-3">
+                View All Industries
+            </a>
+
         </div>
     </div>
-    <!-- Our Services Section End -->
+    <!-- Our Industries Section End -->
+
 
     
     <!-- Our Feature Section Stat -->

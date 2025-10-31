@@ -18,7 +18,7 @@
         </p>
 
         <div class="d-flex gap-2">
-            <a href="{{ route('request.sample', $report->slug) }}" class="btn btn-success">Request Sample</a>
+            <a href="{{ route('request.sample', ['slug' => $report->slug, 'id' => $report->id]) }}" class="btn btn-success">Request Sample</a>
             <a href="{{ route('purchase.page', $report->id) }}" class="btn btn-primary">Buy Now</a>                    
         </div>
     </div>

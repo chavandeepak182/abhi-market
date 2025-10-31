@@ -258,17 +258,20 @@ public function storeReport(Request $request)
     return response($html);
 }
 
-public function showSampleForm($slug)
+public function showSampleForm($slug, $id = null)
 {
-    $report = DB::table('reports')->where('slug', $slug)->first();
+    // Try to find the report either by slug or ID (both ways safe)
+    $report = DB::table('reports')
+        ->where('slug', $slug)
+        ->when($id, fn($q) => $q->where('id', $id))
+        ->first();
 
     if (!$report) {
         abort(404, 'Report not found');
     }
 
-    // Fetch countries list
     $countries = DB::table('countries')->orderBy('name')->get();
 
-    return view('frontend.reports.sample-form', compact('report', 'slug', 'countries'));
+    return view('frontend.reports.sample-form', compact('report', 'slug', 'id', 'countries'));
 }
 }

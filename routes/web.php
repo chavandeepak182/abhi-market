@@ -41,9 +41,14 @@ Route::get('/about', function () {
 Route::get('/contact', function () {
     return view('frontend.contact');
 });
+
+//privacy & policy
+Route::get('/privacy-policy', function () {
+    return view('frontend.privacy');
+});
 //Thank you page
-Route::get('/thank-you', function () {
-    return view('frontend.thank-you');
+Route::get('/thank-you/{slug?}', function ($slug = null) {
+    return view('frontend.thank-you', compact('slug'));
 })->name('thank.you');
 
 Route::post('/contact', [ContactController::class, 'handleContactForm'])->name('contact.submit');
@@ -149,7 +154,7 @@ Route::post('enquiry', [EnquiryController::class, 'store'])->name('enquiry.store
 Route::delete('/admin/enquiries/{id}', [EnquiryController::class, 'destroy'])->name('enquiries.destroy');
 
 
-Route::get('/request-sample/{slug}', [ReportController::class, 'showSampleForm'])->name('request.sample');
+Route::get('/request-sample/{slug}/{id}', [ReportController::class, 'showSampleForm'])->name('request.sample');
 
 //contact form
 Route::post('/enquiry/contact/store', [EnquiryController::class, 'contactStore'])->name('enquiry.contact.store');

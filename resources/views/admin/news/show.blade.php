@@ -3,6 +3,18 @@
 @section('title', $news->meta_title ?? $news->title)
 @section('description', $news->meta_description ?? '')
 @section('keywords', $news->meta_keywords ?? '')
+{{-- ✅ Open Graph Tags --}}
+@section('og_tags')
+    <meta property="og:title" content="{{ $news->meta_title ?? $news->title }}">
+    <meta property="og:description" content="{{ $news->meta_description ?? Str::limit(strip_tags($news->content), 160) }}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:site_name" content="{{ config('app.name') }}">
+    @if(!empty($news->image))
+        <meta property="og:image" content="{{ asset('storage/' . $news->image) }}">
+        <meta property="og:image:alt" content="{{ $news->meta_title ?? $news->title }}">
+    @endif
+@endsection
 
 @section('content')
 <!-- Hero Section Start -->
@@ -18,9 +30,9 @@
                         </p>
 
                         @php $words = explode(' ', $news->title); @endphp
-                        <h1 class="text-anime-style-2" data-cursor="-opaque" style="white-space: nowrap;">
+                        <h2 class="text-anime-style-2" data-cursor="-opaque" style="white-space: nowrap;">
                             <span>{{ $words[0] }}</span> {{ implode(' ', array_slice($words, 1)) }}
-                        </h1>
+                        </h2>
                     </div>
                 </div>
             </div>

@@ -14,4 +14,5 @@ class PurchaseController extends Controller
     }
     return view('frontend.purchase', compact('report'));
 }
+
 }

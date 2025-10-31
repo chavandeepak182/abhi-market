@@ -30,40 +30,67 @@
     <!-- Edit Form -->
     <div class="card">
         <div class="card-body">
-            <form action="{{ url('admin/news/update/' . $news->id) }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="row gy-20">
-                    <div class="col-md-8">
-                        <div class="mb-3">
-                            <label for="title" class="form-label">News Title:</label>
-                            <input type="text" name="title" class="form-control" value="{{ $news->title }}" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="content" class="form-label">News Content:</label>
-                            <textarea name="content" class="form-control" rows="8" required>{{ $news->content }}</textarea>
-                        </div>
+           <form action="{{ url('admin/news/update/' . $news->id) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="row gy-20">
+                <div class="col-md-8">
+                    <!-- News Title -->
+                    <div class="mb-3">
+                        <label for="title" class="form-label fw-semibold">News Title:</label>
+                        <input type="text" name="title" class="form-control" value="{{ old('title', $news->title) }}" required>
                     </div>
 
-                    <div class="col-md-4">
+                    <!-- News Content -->
+                    <div class="mb-3">
+                        <label for="content" class="form-label fw-semibold">News Content:</label>
+                        <textarea name="content" class="form-control" rows="8" required>{{ old('content', $news->content) }}</textarea>
+                    </div>
+
+                    <!-- SEO Section -->
+                    <div class="border rounded p-3 bg-light mt-4">
+                        <h6 class="fw-semibold mb-3"><i class="fas fa-search"></i> SEO Settings</h6>
+
+                        <!-- Meta Title -->
                         <div class="mb-3">
-                            <label for="image" class="form-label">News Image:</label>
-                            @if($news->image)
-                                <div class="mb-2">
-                                    <img src="{{ asset('storage/' . $news->image) }}" width="100" class="rounded shadow-sm" alt="Current Image">
-                                </div>
-                            @endif
-                            <input type="file" name="image" class="form-control">
+                            <label for="meta_title" class="form-label">Meta Title:</label>
+                            <input type="text" name="meta_title" class="form-control" value="{{ old('meta_title', $news->meta_title) }}" placeholder="Enter Meta Title">
                         </div>
 
-                        <div class="flex-align mt-10">
-                            <button type="submit" class="btn btn-success rounded-pill py-9 w-100">
-                                <i class="fas fa-sync-alt me-1"></i> Update News
-                            </button>
+                        <!-- Meta Description -->
+                        <div class="mb-3">
+                            <label for="meta_description" class="form-label">Meta Description:</label>
+                            <textarea name="meta_description" class="form-control" rows="3" placeholder="Enter Meta Description">{{ old('meta_description', $news->meta_description) }}</textarea>
+                        </div>
+
+                        <!-- Meta Keywords -->
+                        <div class="mb-3">
+                            <label for="meta_keywords" class="form-label">Meta Keywords:</label>
+                            <input type="text" name="meta_keywords" class="form-control" value="{{ old('meta_keywords', $news->meta_keywords) }}" placeholder="Enter Meta Keywords (comma-separated)">
                         </div>
                     </div>
                 </div>
-            </form>
+
+                <div class="col-md-4">
+                    <!-- News Image -->
+                    <div class="mb-3">
+                        <label for="image" class="form-label fw-semibold">News Image:</label>
+                        @if($news->image)
+                            <div class="mb-2">
+                                <img src="{{ asset('storage/' . $news->image) }}" width="100" class="rounded shadow-sm" alt="Current Image">
+                            </div>
+                        @endif
+                        <input type="file" name="image" class="form-control">
+                    </div>
+
+                    <div class="flex-align mt-10">
+                        <button type="submit" class="btn btn-success rounded-pill py-9 w-100">
+                            <i class="fas fa-sync-alt me-1"></i> Update News
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
         </div>
     </div>
 </div>

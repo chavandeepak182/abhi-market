@@ -137,6 +137,8 @@ Route::get('/signup', function () {
 
 //enquiry
 Route::get('admin/enquiries', [EnquiryController::class, 'enquiryLead'])->name('enquiries.enquiryLead');
+Route::get('admin/contact', [EnquiryController::class, 'contactLead'])->name('enquiries.contactLead');
+
 Route::delete('/admin/enquiries/{id}', [EnquiryController::class, 'destroy'])->name('enquiries.destroy');
 Route::get('admin/enquiries/export/{type}', [FrontendController::class, 'export'])->name('enquiries.export');
 
@@ -144,8 +146,16 @@ Route::get('admin/enquiries/export/{type}', [FrontendController::class, 'export'
 //enquiry form
 Route::get('enquiry', [EnquiryController::class, 'showForm'])->name('enquiry.form');
 Route::post('enquiry', [EnquiryController::class, 'store'])->name('enquiry.store');
+Route::delete('/admin/enquiries/{id}', [EnquiryController::class, 'destroy'])->name('enquiries.destroy');
+
 
 Route::get('/request-sample/{slug}', [ReportController::class, 'showSampleForm'])->name('request.sample');
+
+//contact form
+Route::post('/enquiry/contact/store', [EnquiryController::class, 'contactStore'])->name('enquiry.contact.store');
+Route::view('/contact/thank-you', 'contact.thank-you')->name('contact.thank-you');
+Route::delete('/admin/contacts/{id}', [EnquiryController::class, 'contactdestroy'])->name('contacts.destroy');
+
 
 //banner
 Route::middleware('isPartner')->group(function () {

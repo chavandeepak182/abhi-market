@@ -124,7 +124,7 @@
           Buy Now
         </a>
 
-        <a href="{{ route('request.sample', $report->slug) }}" class="btn w-100"
+        <a href="{{ route('request.sample', ['slug' => $report->slug, 'id' => $report->id]) }}" class="btn w-100"
            style="background-color: #8BC34A; color: white; font-size: 14px; padding: 10px 12px; border-radius: 8px; text-align: center;">
           Request Sample
         </a>

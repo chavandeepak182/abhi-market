@@ -27,60 +27,61 @@
                     <p><strong>Published:</strong> {{ \Carbon\Carbon::parse($report->publish_date)->format('F, Y') }}</p>
 
                    <form id="enquiry-form" action="{{ route('enquiry.store') }}" method="POST">
-    @csrf
+                        @csrf
+                        <input type="hidden" name="slug" value="{{ $slug }}">
 
-    <input type="hidden" name="page_url" value="{{ url()->current() }}">
-    <input type="hidden" name="page_name" value="{{ $report->report_title }}">
-    <input type="hidden" name="report_title" value="{{ $report->report_title }}">
+                        <input type="hidden" name="page_url" value="{{ url()->current() }}">
+                        <input type="hidden" name="page_name" value="{{ $report->report_title }}">
+                        <input type="hidden" name="report_title" value="{{ $report->report_title }}">
 
-    {{-- reCAPTCHA v3 hidden field --}}
-    <input type="hidden" name="g-recaptcha-response" id="recaptchaResponse">
+                        {{-- reCAPTCHA v3 hidden field --}}
+                        <input type="hidden" name="g-recaptcha-response" id="recaptchaResponse">
 
-    {{-- Name --}}
-    <div class="form-group mb-3">
-        <input type="text" name="name" class="form-control" placeholder="Your Name" required>
-    </div>
+                        {{-- Name --}}
+                        <div class="form-group mb-3">
+                            <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                        </div>
 
-    {{-- Job Title (optional) --}}
-    <div class="form-group mb-3">
-        <input type="text" name="job_title" class="form-control" placeholder="Job Title (Optional)">
-    </div>
+                        {{-- Job Title (optional) --}}
+                        <div class="form-group mb-3">
+                            <input type="text" name="job_title" class="form-control" placeholder="Job Title (Optional)">
+                        </div>
 
-    {{-- Company Name (optional) --}}
-    <div class="form-group mb-3">
-        <input type="text" name="company_name" class="form-control" placeholder="Company Name (Optional)">
-    </div>
+                        {{-- Company Name (optional) --}}
+                        <div class="form-group mb-3">
+                            <input type="text" name="company_name" class="form-control" placeholder="Company Name (Optional)">
+                        </div>
 
-    {{-- Country + Phone --}}
-    <div class="form-group mb-3">
-        <select name="country_id" id="country_id" class="form-control">
-            <option value="">Select Country</option>
-            @foreach($countries as $country)
-                <option value="{{ $country->id }}" data-phone="{{ $country->phone_code }}">
-                    {{ $country->name }} ({{ $country->phone_code }})
-                </option>
-            @endforeach
-        </select>
-    </div>
+                        {{-- Country + Phone --}}
+                        <div class="form-group mb-3">
+                            <select name="country_id" id="country_id" class="form-control">
+                                <option value="">Select Country</option>
+                                @foreach($countries as $country)
+                                    <option value="{{ $country->id }}" data-phone="{{ $country->phone_code }}">
+                                        {{ $country->name }} ({{ $country->phone_code }})
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
 
-    {{-- Phone Number with auto phone code --}}
-    <div class="form-group mb-3 d-flex">
-        <input type="text" id="phone_code" class="form-control me-2" style="max-width:100px;" placeholder="+Code" readonly>
-        <input type="text" name="contact" class="form-control" placeholder="Phone Number" required>
-    </div>
+                        {{-- Phone Number with auto phone code --}}
+                        <div class="form-group mb-3 d-flex">
+                            <input type="text" id="phone_code" class="form-control me-2" style="max-width:100px;" placeholder="+Code" readonly>
+                            <input type="text" name="contact" class="form-control" placeholder="Phone Number" required>
+                        </div>
 
-    {{-- Email --}}
-    <div class="form-group mb-3">
-        <input type="email" name="email" class="form-control" placeholder="Your Email" required>
-    </div>
+                        {{-- Email --}}
+                        <div class="form-group mb-3">
+                            <input type="email" name="email" class="form-control" placeholder="Your Email" required>
+                        </div>
 
-    {{-- Message --}}
-    <div class="form-group mb-3">
-        <textarea name="message" class="form-control" placeholder="Message (Optional)"></textarea>
-    </div>
+                        {{-- Message --}}
+                        <div class="form-group mb-3">
+                            <textarea name="message" class="form-control" placeholder="Message (Optional)"></textarea>
+                        </div>
 
-    <button type="submit" class="btn btn-primary w-100">Submit</button>
-</form>
+                        <button type="submit" class="btn btn-primary w-100">Submit</button>
+                    </form>
 
                 </div>
             </div>

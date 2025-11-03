@@ -22,6 +22,8 @@ use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\PayPalController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\GalleryFolderController;
+use Illuminate\Support\Facades\DB;
+
 
 
 Route::get('/', [FrontendController::class, 'index'])->name('home');
@@ -84,9 +86,6 @@ Route::middleware('isAdmin')->group(function () {
         Route::post('update-user-status/{id}', [UsersController::class, 'updateStatus']);
     });
 
-    // blog
-    // frontend blog routes 
-    // Old
 
 
 // New
@@ -155,6 +154,17 @@ Route::delete('/admin/enquiries/{id}', [EnquiryController::class, 'destroy'])->n
 
 
 Route::get('/request-sample/{slug}/{id}', [ReportController::class, 'showSampleForm'])->name('request.sample');
+Route::get('/request-sample/{slug}', function ($slug) {
+    // Fetch report directly using DB facade (no model)
+    $report = DB::table('reports')->where('slug', $slug)->first();
+
+    if ($report) {
+        // Permanent redirect (SEO-friendly) to route with ID
+        return redirect()->to("/request-sample/{$report->slug}/{$report->id}", 301);
+    }
+
+    abort(404, 'Report not found');
+});
 
 //contact form
 Route::post('/enquiry/contact/store', [EnquiryController::class, 'contactStore'])->name('enquiry.contact.store');

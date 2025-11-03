@@ -60,10 +60,6 @@
                         <div class="how-it-work-content">
                             <div class="section-title text-center mb-5">
                                 <h1 class="text-anime-style-2" data-cursor="-opaque">Latest <span>News</span></h1>
-                                <p class="wow fadeInUp" data-wow-delay="0.2s">
-                                    We are a purpose-driven market research and consulting company passionate about turning data into direction.
-                                    Founded in 2023, we bring together researchers, strategists, and data scientists who believe that intelligence isn’t just about numbers—it's about insight that sparks progress.
-                                </p>
                             </div>
 
                             <div class="container py-5">
@@ -160,103 +156,85 @@
 
 <!-- Growth Staragy End -->
 
-<!-- How It Work Section Start -->
-   
-
-   <!-- Our Industries Section Start -->
+    <!-- Our Industries Section Start -->
     <style>
-     .industry-card {
-    background: #fff;
-    padding: 35px 25px;
-    border-radius: 18px;
+        .our-industries h2 {
     text-align: center;
-    transition: 0.35s ease;
-    border: 1px solid #e8e8e8;
-    box-shadow: 0 6px 14px rgba(0,0,0,0.04);
+    font-weight: 700;
 }
 
+.industry-card {
+    padding: 25px;
+    border-radius: 15px;
+    background: #fff;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
 .industry-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 14px 28px rgba(0,0,0,0.09);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
 }
 
-/* Icon Style */
-.industry-icon img {
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
-    margin-bottom: 15px;
-    transition: 0.3s ease;
+.industry-image img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 10px;
 }
 
-.industry-card:hover .industry-icon img {
-    transform: scale(1.07);
+.section-btn {
+    text-align: center;
+    margin-top: 40px;
 }
 
-/* Learn More Button */
-.learn-more-btn {
-    display: inline-block;
-    margin-top: 12px;
-    font-weight: 600;
-    text-decoration: none;
-    font-size: 15px;
-    color: #0057ff;
-    transition: 0.3s ease;
-}
 
-.learn-more-btn:hover {
-    color: #0039b3;
+.btn-default:hover {
+    background: var(--secondary-color);
 }
-
-/* CTA */
-.btn-primary-main {
-    background: linear-gradient(90deg, #0057ff, #007bff);
-    border-radius: 30px;
-    padding: 12px 28px;
-    color: #fff;
-    font-weight: 600;
-    display: inline-block;
-    transition: 0.3s ease-in-out;
-}
-.btn-primary-main:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 20px rgba(0,87,255,0.35);
-}
-        </style>
+    </style>
+    <!-- Our Industries Section Start -->
     <div class="our-industries py-5">
-        <div class="container text-center">
+        <div class="container">
+            
+            <!-- Section Heading -->
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-8">
+                    <h2 class="mb-4 text-anime-style-2" data-cursor="-opaque">
+                        Our <span>Industries</span>
+                    </h2>
+                </div>
+            </div>
 
-            <!-- Title -->
-            <h2 class="mb-4 text-anime-style-2" data-cursor="-opaque">
-                Our <span>Industries</span>
-            </h2>
-
-            <!-- 6 Grid Boxes -->
-            <div class="row justify-content-center">
-                @foreach($allIndustries->take(6) as $industry)
+            <!-- Industry Grid -->
+            <div class="row justify-content-center mt-4">
+                @foreach($allIndustries as $industry)
                     @php
-                        $industryName = $industry->industries_name;
-                        $slug = $industry->slug;
-                        $description = Str::limit(strip_tags($industry->description), 80);
-                        $iconImage = asset('assets/images/' . $slug . '.svg');
+                        $imagePath = $industry->image;
+
+                        // ✅ Prevent duplicate /uploads/industries path
+                        if (!Str::startsWith($imagePath, 'uploads/industries/')) {
+                            $imagePath = 'uploads/industries/' . $imagePath;
+                        }
+
+                        $imagePath = asset($imagePath);
                     @endphp
 
                     <div class="col-lg-4 col-md-6 col-sm-6 mb-4">
-                        <div class="industry-card h-100">
+                        <div class="industry-card h-100 wow fadeInUp" data-wow-delay="0.1s">
                             
-                            <!-- Icon -->
-                            <div class="industry-icon">
-                                <img src="{{ $iconImage }}" alt="{{ $industryName }}">
+                            <!-- Image -->
+                            <div class="industry-image mb-3">
+                                <img src="{{ $imagePath }}" alt="{{ $industry->industries_name }}" class="img-fluid rounded">
                             </div>
 
                             <!-- Title -->
-                            <h4>{{ $industryName }}</h4>
+                            <h4>{{ $industry->industries_name }}</h4>
 
                             <!-- Description -->
-                            <p>{{ $description }}</p>
+                            <p>{{ Str::limit(strip_tags($industry->description), 80) }}</p>
 
-                            <!-- Button -->
-                            <a href="{{ route('industries.details', ['slug' => $slug]) }}" class="learn-more-btn">
+                            <!-- Learn More Button -->
+                            <a href="{{ route('industries.details', ['slug' => $industry->slug]) }}" class="learn-more-btn">
                                 Learn More →
                             </a>
                         </div>
@@ -264,86 +242,85 @@
                 @endforeach
             </div>
 
-            <!-- CTA Button -->
-            <a href="{{ url('/industries') }}" class="btn btn-primary btn-lg mt-3">
-                View All Industries
-            </a>
+            <!-- View All Button (Below the Section) -->
+            <div class="row justify-content-center text-center mt-5">
+                <div class="col-auto">
+                    <div class="section-btn wow fadeInUp" data-wow-delay="0.2s">
+                        <a href="{{ url('/industries') }}" class="btn-default">View All Industries</a>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>
     <!-- Our Industries Section End -->
 
+    <!-- Our Industries Section End -->
+
+    <!-- Our Industries Section End -->
 
     
-    <!-- Our Feature Section Stat -->
+    <!-- Our Feature Section Start -->
     <div class="our-feature">
         <div class="container">
             
-            <div class="row section-row align-items-center">
-                <div class="col-lg-6">
-                    <!-- Section Title Start -->
-                    
-                     <div class="section-title">
-                        <h3 class="wow fadeInUp">Our Capabilities</h3>
-                        <h2 class="text-anime-style-2" data-cursor="-opaque">Our <span>Capabilities</span></h2>
+            <!-- Section Heading Centered -->
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-8">
+                    <div class="section-title">
+                        <h2 class="text-anime-style-2" data-cursor="-opaque">
+                            Our <span>Capabilities</span>
+                        </h2>
                     </div>
-                    <!-- Section Title End -->
-                     
-
                 </div>
+            </div>
 
+            <!-- Feature List -->
+            <div class="row mt-4">      
+                <div class="col-lg-12">
+                    <div class="our-feature-list">
+                        @foreach($allServices as $index => $service)
+                            @php
+                                $serviceName = $service->service_name;
+                                $slug = $service->slug;
+                                $iconImage = asset('assets/images/' . $slug . '.svg');
+                                $delay = $index * 0.2;
+                                $shortDescription = \Illuminate\Support\Str::words(strip_tags($service->description), 25, '...');
+                                $textColor = $index % 2 == 0 ? 'var(--white-color)' : '#040303';
+                            @endphp
 
-                <div class="col-lg-6">
-                    <!-- Section Button Start -->
+                            <!-- Feature Item -->
+                            <div class="our-feature-item wow fadeInUp" data-wow-delay="{{ $delay }}s"
+                                style="min-height: 320px; display: flex; flex-direction: column; justify-content: space-between; padding: 20px;">
+                                <div class="icon-box">
+                                    <img src="{{ $iconImage }}" alt="{{ $serviceName }}">
+                                </div>
+                                <div class="feature-item-content">
+                                    <h3 style="color: {{ $textColor }};">{{ $serviceName }}</h3>
+                                    <p style="color: {{ $textColor }};">{!! $shortDescription !!}</p>
+                                    <a href="{{ route('service.details', ['slug' => $slug]) }}" class="service-btn">
+                                        <img src="{{ asset('assets/images/arrow-white.svg') }}" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>            
+            </div>
+
+            <!-- Button Below the Section -->
+            <div class="row justify-content-center text-center mt-5">
+                <div class="col-auto">
                     <div class="section-btn wow fadeInUp" data-wow-delay="0.2s">
                         <a href="{{ url('/services') }}" class="btn-default"> All Capabilities </a>
                     </div>
-                    <!-- Section Button End -->
                 </div>
             </div>
-
-    <div class="row">      
-        <div class="col-lg-12">
-            <!-- Our Feature List Start -->
-            <div class="our-feature-list">
-                @foreach($allServices as $index => $service)
-                    @php
-                        $serviceName = $service->service_name;
-                        $slug = $service->slug;
-                        $iconImage = asset('assets/images/' . $slug . '.svg');
-                        $delay = $index * 0.2;
-                        $shortDescription = \Illuminate\Support\Str::words(strip_tags($service->description), 25, '...');
-                        $textColor = $index % 2 == 0 ? 'var(--white-color)' : '#040303';
-                    @endphp
-
-                    <!-- Feature Item Start -->
-                    <div class="our-feature-item wow fadeInUp" data-wow-delay="{{ $delay }}s" style="min-height: 320px; display: flex; flex-direction: column; justify-content: space-between; padding: 20px;">
-                        <div class="icon-box">
-                            <img src="{{ $iconImage }}" alt="{{ $serviceName }}">
-                        </div>
-                        <div class="feature-item-content">
-                            <h3 style="color: {{ $textColor }};">{{ $serviceName }}</h3>
-
-                            <p style="color: {{ $textColor }};">
-                                {!! $shortDescription !!}
-                            </p>
-
-                            <a href="{{ route('service.details', ['slug' => $slug]) }}" class="service-btn">
-                                <img src="{{ asset('assets/images/arrow-white.svg') }}" alt="">
-                            </a>
-                        </div>
-                    </div>
-                    <!-- Feature Item End -->
-                @endforeach
-            </div>
-            <!-- Our Feature List End -->
-        </div>
-                      
-    </div>
 
         </div>
     </div>
     <!-- Our Feature Section End -->
+
      <!-- Our Testimonial Section Start -->
     <div class="our-testimonial">
         <div class="container">

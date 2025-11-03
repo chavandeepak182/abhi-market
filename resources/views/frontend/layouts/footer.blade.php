@@ -35,7 +35,7 @@
                         <li><a href="{{ url('/services') }}">services</a></li>
                         <li><a href="{{ url('/about') }}">about Us</a></li>
                         <li><a href="{{ url('/contact') }}">contact</a></li>
-                        <li><a href="{{ url('/privacy-policy') }}">Privacy & Policy</a></li>
+                        <li><a href="{{ url('/privacy-policy') }}">Privacy Policy</a></li>
                     </ul>
                 </div>
                 <!-- Footer Links End -->

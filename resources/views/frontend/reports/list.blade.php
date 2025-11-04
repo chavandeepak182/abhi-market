@@ -88,15 +88,11 @@
                     @endif
                 </h3>
                 <div id="reports-container">
-                    <div id="reports-list">
-                        @foreach($reports as $report)
-                            @include('frontend.reports.reports-card', ['report' => $report])
-                        @endforeach
-                    </div>
+                    <div id="reports-container">
+          @include('frontend.reports.ajax-reports-list', ['reports' => $reports])
+        </div>
 
-                    <div id="reports-pagination" class="custom-pagination-wrapper mt-4">
-                        {{ $reports->appends(['query' => request('query')])->links('vendor.pagination.custom') }}
-                    </div>
+                    
                 </div>
             </div>
            
@@ -131,23 +127,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     }
 
-    function loadReportsByIndustry(industryId, page = 1) {
-        fetch(`/get-reports-by-industry/${industryId}?page=${page}`)
-            .then(res => res.text())
-            .then(html => {
-                document.getElementById("reports-container").innerHTML = html;
-
-                // Handle pagination click inside reports-container
-                document.querySelectorAll("#reports-container .pagination a").forEach(link => {
-                    link.addEventListener("click", function (e) {
-                        e.preventDefault();
-                        const url = new URL(this.href);
-                        const newPage = url.searchParams.get("page");
-                        loadReportsByIndustry(activeIndustryId, newPage);
-                    });
-                });
-            });
-    }
+    
 
     // Initial load
     loadIndustries();
@@ -173,6 +153,145 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 </script>
+<!-- ✅ AJAX Pagination (for All Reports page only) -->
+<script>
+$(document).on('click', '#reports-pagination a', function(e) {
+    e.preventDefault();
+    let url = $(this).attr('href');
+    if (!url) return;
 
+    $.ajax({
+        url: url,
+        type: 'GET',
+        beforeSend: function() {
+            $('#reports-container').css('opacity', '0.6');
+        },
+        success: function(response) {
+            // Replace only inner elements to keep layout + CSS
+            var newList = $(response).find('#reports-list').html();
+            var newPag  = $(response).find('#reports-pagination').html();
+
+            $('#reports-list').html(newList);
+            $('#reports-pagination').html(newPag);
+        },
+        complete: function() {
+            $('#reports-container').css('opacity', '1');
+        },
+        error: function() {
+            alert('Failed to load next page.');
+        }
+    });
+});
+</script>
+
+
+
+<!-- Load jQuery if not already loaded (remove if you load it globally in layout) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- AJAX & Pagination script -->
+<script>
+(function($){
+  // Ensure code runs after DOM ready
+  $(function(){
+
+    // Delegated click handler for pagination links inside #reports-container
+    $(document).on('click', '#reports-container .pagination a', function(e){
+      e.preventDefault();
+
+      var url = $(this).attr('href');
+      if (!url) {
+        console.warn('Pagination link has no href');
+        return;
+      }
+
+      // Visual loader
+      $('#reports-container').css('opacity', 0.6);
+
+      $.ajax({
+        url: url,
+        type: 'GET',
+        cache: false,
+        success: function(response) {
+          // response should contain our partial that has #reports-list and #reports-pagination
+          var $res = $(response);
+
+          var newList = $res.find('#reports-list').html();
+          var newPag  = $res.find('#reports-pagination').html();
+
+          if (typeof newList !== 'undefined') {
+            $('#reports-list').html(newList);
+          } else {
+            console.warn('AJAX response missing #reports-list — replacing entire container as fallback');
+            $('#reports-container').html(response);
+            return;
+          }
+
+          if (typeof newPag !== 'undefined') {
+            $('#reports-pagination').html(newPag);
+          } else {
+            console.warn('AJAX response missing #reports-pagination');
+          }
+
+          // ensure any JS that needs to re-run (e.g., lazy load, animations) can be invoked here
+        },
+        error: function(xhr, status, err) {
+          console.error('AJAX pagination error', status, err);
+          alert('Failed to load page — check console for details.');
+        },
+        complete: function() {
+          $('#reports-container').css('opacity', 1);
+        }
+      });
+    });
+
+    // Industry filter logic (delegated in case list changes)
+    $(document).on('click', '.industry-link', function(e){
+      e.preventDefault();
+      var industryId = $(this).data('id') ?? 'all';
+      loadReportsByIndustry(industryId, 1);
+      // toggle active class
+      $('.industry-link').removeClass('active');
+      $(this).addClass('active');
+    });
+
+    // helper to load by industry and page (used by industry click and programmatically)
+    window.loadReportsByIndustry = function(industryId, page){
+      page = page || 1;
+      var url = '/get-reports-by-industry/' + industryId + '?page=' + page;
+
+      $('#reports-container').css('opacity', 0.6);
+
+      $.ajax({
+        url: url,
+        type: 'GET',
+        cache: false,
+        success: function(response){
+          // response should be partial HTML (ajax-reports-list) containing #reports-list & #reports-pagination
+          var $res = $(response);
+          var newList = $res.find('#reports-list').html();
+          var newPag  = $res.find('#reports-pagination').html();
+
+          if (typeof newList !== 'undefined') {
+            $('#reports-list').html(newList);
+          } else {
+            $('#reports-container').html(response); // fallback
+            return;
+          }
+
+          if (typeof newPag !== 'undefined') {
+            $('#reports-pagination').html(newPag);
+          }
+        },
+        error: function(xhr, status, err){
+          console.error('Error loading reports by industry', err);
+        },
+        complete: function(){ $('#reports-container').css('opacity', 1); }
+      });
+    };
+
+  });
+})(jQuery);
+</script>
 
 @endsection

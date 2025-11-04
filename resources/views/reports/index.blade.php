@@ -11,6 +11,18 @@
     padding: 6px 12px;
     border-radius: 6px;
 }
+    /* Fix for striped table index visibility */
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: #f9f9f9 !important; /* light gray for odd rows */
+    }
+
+    .table-striped tbody tr:nth-of-type(even) {
+        background-color: #ffffff !important; /* white for even rows */
+    }
+
+    .table td, .table th {
+        color: #333 !important; /* dark text color so visible on all rows */
+    }
 </style>
 <div class="dashboard-body">
     <div class="breadcrumb-with-buttons mb-24 flex-between flex-wrap gap-8">

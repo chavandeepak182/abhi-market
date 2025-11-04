@@ -22,6 +22,7 @@ use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\PayPalController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\GalleryFolderController;
+use App\Http\Controllers\PressReleaseController;
 use Illuminate\Support\Facades\DB;
 
 
@@ -209,6 +210,20 @@ Route::get('/reports/edit/{id}', [ReportController::class, 'edit'])->name('repor
 Route::put('/reports/update/{id}', [ReportController::class, 'update'])->name('reports.update');
 Route::post('/reports/delete/{id}', [ReportController::class, 'deleteReport'])->name('reports.delete');
 });
+
+//press releases
+Route::middleware('isAdmin')->group(function () {
+    // Press Releases
+    Route::get('admin/press-releases', [PressReleaseController::class, 'index'])->name('press-releases.index');
+    Route::get('/press-releases/create', [PressReleaseController::class, 'create'])->name('press-releases.create');
+    Route::post('/press-releases/store', [PressReleaseController::class, 'store'])->name('press-releases.store');
+    Route::get('/press-releases/edit/{id}', [PressReleaseController::class, 'edit'])->name('press-releases.edit');
+    Route::put('/press-releases/update/{id}', [PressReleaseController::class, 'update'])->name('press-releases.update');
+    Route::post('/press-releases/delete/{id}', [PressReleaseController::class, 'destroy'])->name('press-releases.delete');
+});
+Route::get('/press-release/{slug}', [PressReleaseController::class, 'show'])->name('press-releases.details');
+Route::get('/press-releases', [PressReleaseController::class, 'pressReleases'])->name('press-releases');
+
 
 //gallery
 Route::middleware('isAdmin')->prefix('admin')->name('admin.')->group(function () {

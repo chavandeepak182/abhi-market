@@ -174,16 +174,19 @@
                                 </div>
                             </li>
 
-
                             <li>
                                 <a href="{{ url('/get-reports') }}">Reports</a>
                             </li>
-
+                            <li>
+                                <a href="{{ url('/press-releases') }}">Press Release</a>
+                            </li>
 
                             <li>
                                 <a href="{{ url('/about') }}">About Us</a>
                             </li>
                             <li><a href="{{ url('/blogs') }}">Blogs</a></li>
+                            <li><a href="{{ url('/contacts') }}">Contact</a></li>
+
                             <li class="nav-item search-item">
                                 <form action="{{ route('reports.search') }}" method="GET" class="search-form">
                                     <input 
@@ -198,17 +201,7 @@
                                         <i class="fas fa-search"></i>
                                     </button>
                                 </form>
-                            </li>
-
-                            
-                            <div class="header-item float-end">
-                                <!-- Header Btn Start -->
-                                <div class="header-btn d-none d-lg-inline-flex">
-                                <a href="{{ url('/contact') }}" class="btn-default btn-highlighted">contact us</a>
-                            </div>
-                            
-
-                                <!-- Header Btn End -->
+                            </li>                       
                             </div>
                         </ul>                            
                     </nav>

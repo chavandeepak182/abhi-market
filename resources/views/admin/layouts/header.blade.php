@@ -135,7 +135,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="sidebar-menu__item has-dropdown {{ Request::is('admin/insights') || Request::is('insights/create') || Request::is('insights/edit/*') ? 'activePage' : '' }}">
+                        <!-- <li class="sidebar-menu__item has-dropdown {{ Request::is('admin/insights') || Request::is('insights/create') || Request::is('insights/edit/*') ? 'activePage' : '' }}">
                             <a href="/admin/insights" class="sidebar-menu__link">
                                 <span class="icon"><i class="ph ph-bookmarks"></i></span>
                                 <span class="text">Insights</span>
@@ -148,6 +148,12 @@
                                     <a href="{{ url('insights-subcategories') }}" class="sidebar-submenu__link"> Sub Categories </a>
                                 </li>
                             </ul>
+                        </li> -->
+                         <li class="sidebar-menu__item has-dropdown {{ Request::is('admin/press-releases') || Request::is('press-releases/create') || Request::is('press-releases/edit/*') ? 'activePage' : '' }}">
+                            <a href="/admin/press-releases" class="sidebar-menu__link">
+                                <span class="icon"><i class="ph ph-bookmarks"></i></span>
+                                <span class="text">Press Releases</span>
+                            </a>
                         </li>
                         <li class="sidebar-menu__item has-dropdown {{ Request::is('admin/industries') || Request::is('industries/create') || Request::is('industries/edit/*') ? 'activePage' : '' }}">
                             <a href="/admin/industries" class="sidebar-menu__link">

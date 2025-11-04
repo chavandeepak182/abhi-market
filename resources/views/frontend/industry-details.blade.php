@@ -12,16 +12,24 @@
                 <!-- Hero Content Start -->
                 <div class="hero-content">
                     <!-- Section Title Start -->
-                    <div class="section-title dark-section">
-                        <p class="wow fadeInUp text-white"><a href="{{ url('/') }}" class="text-white">Home</a> / <a href="#" class="text-white">{{ $industries->industries_name }}</a></p>
-                       @php
-                            $words = explode(' ', $industries->industries_name);
-                        @endphp
-                        <h1 class="text-anime-style-2" data-cursor="-opaque" style="white-space: nowrap;">
-                            <span>{{ $words[0] }}</span> {{ implode(' ', array_slice($words, 1)) }}
-                        </h1>
+                    <div class="industry-banner">
+    <div class="section-title">
+        <p class="wow fadeInUp text-white breadcrumb-text">
+            <a href="{{ url('/') }}" class="text-white">Home</a> /
+            <a href="#" class="text-white">{{ $industries->industries_name }}</a>
+        </p>
 
-                    </div>
+        @php
+            $words = explode(' ', $industries->industries_name);
+        @endphp
+
+        <h1 class="text-anime-style-2 text-white industry-title" data-cursor="-opaque">
+            <span>{{ $words[0] }}</span> {{ implode(' ', array_slice($words, 1)) }}
+        </h1>
+    </div>
+</div>
+
+
                     <!-- Section Title End -->
                 </div>
                 <!-- Hero Content End -->

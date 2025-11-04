@@ -26,9 +26,31 @@
 @section('content')
 
     @php
-        $banners = App\Models\Banner::latest()->take(2)->get(); // Fetch latest 3 banners
+        $banners = App\Models\Banner::latest()->take(3)->get(); // Fetch latest 3 banners
     @endphp
     <!-- Hero Section Start -->
+     <style>
+.jfin-hero-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.jfin-hero-pagination {
+  position: absolute;
+  bottom: 20px; 
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+
+.jfin-hero-wrapper + .jfin-hero-pagination {
+  position: relative;
+  bottom: 0;
+  margin-top: 15px; 
+  text-align: center;
+}
+</style>
         <div class="jfin-hero-wrapper">
             <div class="swiper jfin-swiper">
                 @if ($banners->count())
@@ -45,11 +67,173 @@
                             </div>
                         @endforeach
                     </div>
+                    
                 @endif
-                <div class="swiper-pagination jfin-hero-pagination"></div>
+                
             </div>
+           
         </div>
+         <div class="swiper-pagination jfin-hero-pagination"></div>
+        
     <!-- Hero Section End -->
+
+<!-- who we are start -->
+<style>
+
+  .who-we-are-section {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 80px;
+    overflow: hidden;
+    background: #fff;
+  }
+
+  .who-we-are-section::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width:50%;
+    height:100%;
+    background: url('{{ asset('assets') }}/images/who_we_are.webp') center/cover no-repeat;
+    filter: blur(0px);
+  }
+
+  .who-we-are-content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    z-index: 1;
+  }
+
+  .who-we-are-left {
+    position: relative;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .growth-box {
+    position: absolute;
+    background-color:#519bb8;
+    color: #fff;
+    text-align: center;
+    padding: 40px 60px;
+    font-size: 2rem;
+    font-weight: 600;
+    border-radius: 4px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    margin-left: 489px;
+    margin-bottom: -92px;
+  }
+
+  .growth-box span {
+    display: block;
+    color: #fff;
+    font-size: 1rem;
+    margin-top: 8px;
+  }
+
+  .who-we-are-right {
+    width: 50%;
+    padding-left: 60px;
+  }
+
+  .who-we-are-right h2 {
+    font-size: 2rem;
+    color: #222;
+    margin-bottom: 15px;
+  }
+
+  .who-we-are-right p {
+    color: #555;
+    line-height: 1.6;
+    max-width: 500px;
+  }
+
+  .wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  .wave svg {
+    display: block;
+    width: 100%;
+    height: 80px;
+  }
+
+  @media (max-width: 900px) {
+    .who-we-are-section {
+      flex-direction: column;
+      padding: 40px 20px;
+    }
+
+    .who-we-are-section::before {
+      width: 100%;
+      height: 250px;
+    }
+
+    .who-we-are-content {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .who-we-are-left,
+    .who-we-are-right {
+      width: 100%;
+    }
+
+    .growth-box {
+      position: relative;
+      margin: 20px auto;
+    }
+
+    .who-we-are-right {
+      padding-left: 0;
+      margin-top: 20px;
+    }
+  }
+</style>
+
+<section class="who-we-are-section">
+  <div class="who-we-are-content">
+    <div class="who-we-are-left">
+      <div class="growth-box">
+        +790
+        <span>Growth</span>
+      </div>
+    </div>
+    <div class="who-we-are-right">
+      
+                             <div class="section-title"> 
+                        <h2 class="text-anime-style-2" data-cursor="-opaque">
+                           The Minds Behind<span>Market Intelligence</span>
+                        </h2>
+                    </div>
+      <p>At M2Square, we don’t just study markets — we decode them.
+Founded in 2023, we are a dynamic market research and business intelligence firm empowering organizations to make smarter, faster, and data-driven decisions. Our expertise spans across diverse industries, helping clients navigate complex markets, identify emerging opportunities, and stay ahead of evolving consumer and business trends.</p>
+<p>With a team of passionate researchers, analysts, and strategists, we turn numbers into narratives and insights into action. Whether it’s understanding market shifts, measuring brand performance, or exploring the next big trend — M2Square delivers clarity where it matters most.</p>
+<p>Because in a world driven by change, insight is your greatest advantage.</p>
+    </div>
+  </div>
+
+  <!-- Wave Shape -->
+  <div class="wave">
+    <svg viewBox="0 0 1440 320">
+      <path fill="#f8f8f8" fill-opacity="1" d="M0,288L48,272C96,256,192,224,288,208C384,192,480,192,576,208C672,224,768,256,864,256C960,256,1056,224,1152,197.3C1248,171,1344,149,1392,138.7L1440,128V320H0Z"></path>
+    </svg>
+  </div>
+</section>
+<!-- who we are End -->
+
+
           
    <!-- What's New Section Start -->
         <div class="how-it-work">
@@ -199,9 +383,12 @@
             <!-- Section Heading -->
             <div class="row justify-content-center text-center">
                 <div class="col-lg-8">
-                    <h2 class="mb-4 text-anime-style-2" data-cursor="-opaque">
-                        Our <span>Industries</span>
-                    </h2>
+                  
+                     <div class="section-title">
+                        <h2 class="text-anime-style-2" data-cursor="-opaque">
+                            Our <span>Industries</span>
+                        </h2>
+                    </div>
                 </div>
             </div>
 
@@ -235,7 +422,7 @@
 
                             <!-- Learn More Button -->
                             <a href="{{ route('industries.details', ['slug' => $industry->slug]) }}" class="learn-more-btn">
-                                Learn More →
+                                Read More →
                             </a>
                         </div>
                     </div>
@@ -255,71 +442,261 @@
     </div>
     <!-- Our Industries Section End -->
 
-    <!-- Our Industries Section End -->
-
-    <!-- Our Industries Section End -->
-
     
-    <!-- Our Feature Section Start -->
-    <div class="our-feature">
+
+    <style>.read-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent-color);; /* Primary blue color */
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 30px;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+}
+
+.read-more-btn img {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.3s ease;
+}
+
+.read-more-btn:hover {
+    background: #0056b3;
+}
+
+.read-more-btn:hover img {
+    transform: translateX(5px);
+}
+</style>
+
+   
+<div class="our-industries py-5">
         <div class="container">
             
-            <!-- Section Heading Centered -->
-            <div class="row justify-content-center text-center">
-                <div class="col-lg-8">
-                    <div class="section-title">
-                        <h2 class="text-anime-style-2" data-cursor="-opaque">
-                            Our <span>Capabilities</span>
-                        </h2>
-                    </div>
-                </div>
-            </div>
+                        <section class="business-section">
+                        <div class="row justify-content-center text-center">
+                                        <div class="col-lg-8">
+                                            <div class="section-title">
+                                                <h2 class="text-anime-style-1" data-cursor="-opaque">
+                                                    Our <span>Capabilities</span>
+                                                </h2>
+                                            </div>
+                                        </div>
+                                    </div>
 
-            <!-- Feature List -->
-            <div class="row mt-4">      
-                <div class="col-lg-12">
-                    <div class="our-feature-list">
-                        @foreach($allServices as $index => $service)
-                            @php
+                        <div class="swiper business-slider">
+                            <div class="swiper-wrapper">
+                            @foreach($allServices as $index => $service)
+                                @php
                                 $serviceName = $service->service_name;
                                 $slug = $service->slug;
                                 $iconImage = asset('assets/images/' . $slug . '.svg');
                                 $delay = $index * 0.2;
-                                $shortDescription = \Illuminate\Support\Str::words(strip_tags($service->description), 25, '...');
-                                $textColor = $index % 2 == 0 ? 'var(--white-color)' : '#040303';
-                            @endphp
 
-                            <!-- Feature Item -->
-                            <div class="our-feature-item wow fadeInUp" data-wow-delay="{{ $delay }}s"
-                                style="min-height: 320px; display: flex; flex-direction: column; justify-content: space-between; padding: 20px;">
-                                <div class="icon-box">
+                                // Fixed character limit for uniform text
+                                $plainText = strip_tags($service->description);
+                                $maxChars = 120; // You can adjust this number (100–130 works best)
+                                $shortDescription = strlen($plainText) > $maxChars
+                                    ? substr($plainText, 0, $maxChars) . '...'
+                                    : $plainText;
+
+                                $colors = ['orange', 'green', 'teal', 'blue'];
+                                $colorClass = $colors[$index % count($colors)];
+                                @endphp
+
+                                <div class="swiper-slide">
+                                <div class="card {{ $colorClass }} wow fadeInUp" data-wow-delay="{{ $delay }}s">
+                                    <div class="icon">
                                     <img src="{{ $iconImage }}" alt="{{ $serviceName }}">
+                                    </div>
+                                    <h3>{{ $serviceName }}</h3>
+                                    <p>{{ $shortDescription }}</p>
+                                    
+                                     <a href="{{ route('service.details', ['slug' => $slug]) }}" class="learn-more-btn">
+                                Read More →
+                            </a>
                                 </div>
-                                <div class="feature-item-content">
-                                    <h3 style="color: {{ $textColor }};">{{ $serviceName }}</h3>
-                                    <p style="color: {{ $textColor }};">{!! $shortDescription !!}</p>
-                                    <a href="{{ route('service.details', ['slug' => $slug]) }}" class="service-btn">
-                                        <img src="{{ asset('assets/images/arrow-white.svg') }}" alt="">
-                                    </a>
                                 </div>
+                            @endforeach
                             </div>
-                        @endforeach
-                    </div>
-                </div>            
-            </div>
 
-            <!-- Button Below the Section -->
+                            <!-- Dots only -->
+                            
+                        </div>
+                        </section>
+
+
+
+
             <div class="row justify-content-center text-center mt-5">
                 <div class="col-auto">
-                    <div class="section-btn wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="section-btn wow fadeInUp" data-wow-delay="0.2s" style="margin-left: 50px;margin-top: -19px;">
                         <a href="{{ url('/services') }}" class="btn-default"> All Capabilities </a>
                     </div>
-                </div>
-            </div>
+                </div> </div>
+          
 
         </div>
-    </div>
-    <!-- Our Feature Section End -->
+</div>
+
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<style>
+.business-section {
+  text-align: center;
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.business-section h2 {
+  font-size: 26px;
+  color: #333;
+  margin-bottom: 40px;
+  font-weight: 600;
+}
+
+.business-slider {
+  padding-bottom: 40px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 30px 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 330px;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+}
+
+.icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 15px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.icon img {
+  width: 30px;
+  height: 30px;
+  filter: brightness(0) invert(1);
+}
+
+.card h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 15px;
+  min-height: 60px; /* makes height uniform for all descriptions */
+}
+
+/* Color Variations */
+.orange .icon { background: #ff7b00; }
+.green .icon { background: #6ecb63; }
+.teal .icon { background: #00bcd4; }
+.blue .icon { background: #007bff; }
+
+.orange h3 { color: #ff7b00; }
+.green h3 { color: #6ecb63; }
+.teal h3 { color: #00bcd4; }
+.blue h3 { color: #007bff; }
+
+/* Read More Button */
+.read-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: color 0.3s ease;
+  /* margin-left: 50px; */
+}
+
+.read-more-btn img {
+  width: 12px;
+  height: 12px;
+  filter: brightness(0) saturate(100%) invert(31%) sepia(89%) saturate(1588%) hue-rotate(193deg) brightness(94%) contrast(99%);
+}
+
+.read-more-btn:hover {
+  color: #ff7b00;
+}
+
+/* Pagination Dots */
+.swiper-pagination {
+  margin-top: 20px;
+}
+.swiper-pagination-bullet {
+  background: #ccc;
+  opacity: 1;
+  width: 10px;
+  height: 10px;
+}
+.swiper-pagination-bullet-active {
+  background: #007bff;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .card { min-height: 360px; }
+}
+@media (max-width: 768px) {
+  .card { min-height: 380px; }
+}
+</style>
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+  var swiper = new Swiper(".business-slider", {
+    slidesPerView: 4,
+    spaceBetween: 20,
+    loop: true,
+    grabCursor: true,
+    autoplay: {
+      delay: 2500,
+      disableOnInteraction: false,
+    },
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    breakpoints: {
+      1200: { slidesPerView: 4 },
+      992: { slidesPerView: 3 },
+      768: { slidesPerView: 2 },
+      480: { slidesPerView: 1 },
+    },
+  });
+</script>
+
+    <!-- Our services Section End -->
 
      <!-- Our Testimonial Section Start -->
     <div class="our-testimonial">
@@ -330,14 +707,16 @@
                     <div class="testimonial-content">
                         <!-- Section Title Start -->
                         <div class="section-title">
-                            <h3 class="wow fadeInUp">our testimonial</h3>
-                            <h2 class="text-anime-style-2" data-cursor="-opaque">What Customer Says <span>About M2square</span></h2>
+                            <h3 class="wow fadeInUp">our testimonial</h3> 
+
+                            <h2 class="text-anime-style-2" data-cursor="-opaque">Voices of Our <span>Valued Partners</span></h2> 
+
                             <p class="wow fadeInUp" data-wow-delay="0.2s">With over 1,250 satisfied clients, our finance and consulting services have earned praise for reliability, personalized guidance, and impactful results.</p>
                         </div>
                         <!-- Section Title End -->
 
                         <!-- Testimonial Button Start -->
-                        <div class="testimonial-btn">
+                        <div class="testimonial-btn" style="margin-left: 132px;">
                             <a href="contact.html" class="btn-default">contact now</a>
                         </div>
                         <!-- Testimonial Button End -->
@@ -357,24 +736,12 @@
                                         <!-- Testimonial Item Start -->
                                         <div class="testimonial-item">
                                             <!-- Testimonial Header Start -->
-                                            <div class="testimonial-header">
-                                                <!-- Customer Logo Start -->
-                                                <div class="customer-logo">
-                                                    <img src="{{ asset('assets') }}/images/customer-logo.svg" alt="">
-                                                </div>
-                                                <!-- Customer Logo End -->
-
-                                                <!-- Testimonial Quotes Start -->
-                                                <!-- <div class="testimonial-quotes">
-                                                    <img src="{{ asset('assets') }}/images/testimonial-quotes.svg" alt="">
-                                                </div> -->
-                                                <!-- Testimonial Quotes End -->
-                                            </div>
+                                            
                                             <!-- Testimonial Header End -->
 
                                             <!-- Testimonial Body Start -->
                                             <div class="testimonial-body">
-                                                <p>"The guidance we received has transformed our financial outlook. Our consultant was patient, knowledgeable, and crafted a plan that aligned perfectly with our goals. Thanks to their strategic advice, optimistic about our future!"</p>
+                                                <p>"Partnering with M2Square has transformed the way we make business decisions. Their market insights are not only data-rich but also action-oriented. The team truly understands industry dynamics and delivers clarity that drives growth."</p>
                                             </div>
                                             <!-- Testimonial Body End -->
 
@@ -390,7 +757,7 @@
 
                                                 <!-- Author Content Start -->
                                                 <div class="author-content">
-                                                    <h3>sarah t. / <span>entrepreneur</span></h3>
+                                                    <h3>Amit Sharma<span>  Marketing Director, Sudarshan Industries Pvt. Ltd.</span></h3>
                                                 </div>
                                                 <!-- Author Content End -->
                                             </div>
@@ -405,24 +772,12 @@
                                         <!-- Testimonial Item Start -->
                                         <div class="testimonial-item">
                                             <!-- Testimonial Header Start -->
-                                            <div class="testimonial-header">
-                                                <!-- Customer Logo Start -->
-                                                <div class="customer-logo">
-                                                    <img src="{{ asset('assets') }}/images/customer-logo.svg" alt="">
-                                                </div>
-                                                <!-- Customer Logo End -->
-
-                                                <!-- Testimonial Quotes Start -->
-                                                <!-- <div class="testimonial-quotes">
-                                                    <img src="{{ asset('assets') }}/images/testimonial-quotes.svg" alt="">
-                                                </div> -->
-                                                <!-- Testimonial Quotes End -->
-                                            </div>
+                                            
                                             <!-- Testimonial Header End -->
 
                                             <!-- Testimonial Body Start -->
                                             <div class="testimonial-body">
-                                                <p>"The guidance we received has transformed our financial outlook. Our consultant was patient, knowledgeable, and crafted a plan that aligned perfectly with our goals. Thanks to their strategic advice, optimistic about our future!"</p>
+                                                <p>"What sets M2Square apart is their commitment to understanding our unique business challenges. Their research helped us identify new market opportunities and refine our go-to-market strategy with confidence. Truly a reliable research partner!"</p>
                                             </div>
                                             <!-- Testimonial Body End -->
 
@@ -438,7 +793,7 @@
 
                                                 <!-- Author Content Start -->
                                                 <div class="author-content">
-                                                    <h3>ellyse p. / <span>finance manager</span></h3>
+                                                    <h3>Neha Patel,  / <span>Head of Strategy, Yes Capital</span></h3>
                                                 </div>
                                                 <!-- Author Content End -->
                                             </div>
@@ -453,24 +808,12 @@
                                         <!-- Testimonial Item Start -->
                                         <div class="testimonial-item">
                                             <!-- Testimonial Header Start -->
-                                            <div class="testimonial-header">
-                                                <!-- Customer Logo Start -->
-                                                <div class="customer-logo">
-                                                    <img src="{{ asset('assets') }}/images/customer-logo.svg" alt="">
-                                                </div>
-                                                <!-- Customer Logo End -->
-
-                                                <!-- Testimonial Quotes Start -->
-                                                <div class="testimonial-quotes">
-                                                    <img src="{{ asset('assets') }}/images/testimonial-quotes.svg" alt="">
-                                                </div>
-                                                <!-- Testimonial Quotes End -->
-                                            </div>
+                                            
                                             <!-- Testimonial Header End -->
 
                                             <!-- Testimonial Body Start -->
                                             <div class="testimonial-body">
-                                                <p>"The guidance we received has transformed our financial outlook. Our consultant was patient, knowledgeable, and crafted a plan that aligned perfectly with our goals. Thanks to their strategic advice, optimistic about our future!"</p>
+                                                <p>"We were impressed by M2Square’s attention to detail and their ability to turn complex data into simple, strategic insights. Their professionalism, speed, and accuracy make them an indispensable part of our decision-making process."</p>
                                             </div>
                                             <!-- Testimonial Body End -->
 
@@ -486,7 +829,7 @@
 
                                                 <!-- Author Content Start -->
                                                 <div class="author-content">
-                                                    <h3>robert t. / <span>accounts manager</span></h3>
+                                                    <h3>Rahul Mehta <span>Chief Operating Officer, Ecoenergy Solutions</span></h3>
                                                 </div>
                                                 <!-- Author Content End -->
                                             </div>
@@ -569,6 +912,7 @@
         </div>
     </div>
     <!-- Our Testimonial Section End -->
+ 
      <!-- Why Choose Us Section Start -->
     <div class="why-choose-us">
         <div class="container">

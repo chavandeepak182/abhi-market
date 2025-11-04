@@ -10,18 +10,39 @@ class ReportController extends Controller
 {
     public function getReports()
     {
-        $reports = DB::table('reports')->orderBy('created_at', 'desc')->paginate(1); // LIFO
+        $reports = DB::table('reports')
+            ->orderBy('created_at', 'desc')
+            ->paginate(25); // LIFO + per-page limit
+
         return view('frontend.reports.list', compact('reports'));
     }
-  public function index()
-{
-    $reports = DB::table('reports')
-        ->join('industries_category', 'reports.industry_category_id', '=', 'industries_category.pid')
-        ->select('reports.*', 'industries_category.category_name as category_name')
-        ->orderBy('reports.publish_date', 'desc') // Latest first
-        ->paginate(25); // 25 per page
+//   public function index()
+// {
+//     $reports = DB::table('reports')
+//         ->join('industries_category', 'reports.industry_category_id', '=', 'industries_category.pid')
+//         ->select('reports.*', 'industries_category.category_name as category_name')
+//         ->orderBy('reports.publish_date', 'desc') 
+//         ->paginate(25); 
 
-    return view('reports.index', compact('reports'));
+//     return view('reports.index', compact('reports'));
+// }
+ public function list(Request $request)
+{
+    $query = DB::table('reports')
+        ->join('industries_category', 'reports.industry_category_id', '=', 'industries_category.pid')
+        ->select('reports.id','reports.report_title','reports.image','reports.slug','reports.publish_date','industries_category.category_name')
+        ->whereNotNull('reports.publish_date')
+        ->orderBy('reports.publish_date','desc')
+        ->orderBy('reports.id','desc');
+
+    $reports = $query->paginate(25);
+
+    if ($request->ajax()) {
+        // return partial HTML (not JSON)
+        return view('frontend.reports.ajax-reports-list', compact('reports'))->render();
+    }
+
+    return view('frontend.reports.list', compact('reports'));
 }
 
     public function create()
@@ -235,28 +256,19 @@ public function storeReport(Request $request)
     return view('frontend.report-details', compact('report', 'industry'));
 }
 
-   public function getReportsByIndustry($industryId)
-{
-    if ($industryId === 'all') {
-        // Get all reports
-        $reports = DB::table('reports')
-            ->orderBy('created_at', 'desc')
-            ->get();
-    } else {
-        // Get filtered reports
-        $reports = DB::table('reports')
-            ->where('industry_category_id', $industryId)
-            ->orderBy('created_at', 'desc')
-            ->get();
+public function getReportsByIndustry($industryId)
+    {
+        $query = DB::table('reports')->orderBy('created_at', 'desc');
+
+        if ($industryId !== 'all') {
+            $query->where('industry_category_id', $industryId);
+        }
+
+        $reports = $query->paginate(25);
+
+        return view('frontend.reports.ajax-reports-list', compact('reports'))->render();
     }
 
-    $html = '';
-    foreach ($reports as $report) {
-        $html .= view('frontend.reports.reports-card', compact('report'))->render();
-    }
-
-    return response($html);
-}
 
 public function showSampleForm($slug, $id = null)
 {

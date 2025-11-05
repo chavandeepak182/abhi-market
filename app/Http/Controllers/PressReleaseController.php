@@ -134,7 +134,7 @@ class PressReleaseController extends Controller
         ]);
 
         $data = $request->only([
-            'title', 'short_description', 'content', 'publish_date',
+            'title', 'short_description', 'content', 'publish_date', 'slug',
             'meta_title', 'meta_keywords', 'meta_description', 'schema_markup',
             'industry_category_id', 'author_name'
         ]);
@@ -237,9 +237,9 @@ public function pressReleases(Request $request)
         $query->where('press_releases.industry_category_id', $request->category);
     }
 
-    // 📄 Paginate and preserve filters
+    // 📄 Paginate 25 per page
     $data['pressReleases'] = $query->orderBy('press_releases.publish_date', 'desc')
-        ->paginate(12)
+        ->paginate(25)
         ->appends($request->all());
 
     // 📂 Fetch categories
@@ -249,6 +249,7 @@ public function pressReleases(Request $request)
 
     return view('frontend.press-releases', $data);
 }
+
 
 
 

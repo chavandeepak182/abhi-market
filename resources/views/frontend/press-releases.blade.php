@@ -32,68 +32,92 @@
 
 <!-- ===== Press Releases Section ===== -->
 <div class="container py-5">
-
-    <!-- Section Title -->
-    <h2 class="section-title mb-4 text-center">Explore Press Releases</h2>
-
-    <!-- Search & Category Filter -->
-    <form method="GET" action="{{ route('press-releases') }}" class="mb-5">
-        <div class="row g-2 justify-content-center align-items-center">
-            <div class="col-md-5">
-                <input type="text" name="search" value="{{ request('search') }}" 
-                       class="form-control" placeholder="Search press releases...">
-            </div>
-
-            <div class="col-md-4">
-                <select id="category" name="category" class="form-select">
-                    <option value="">-- Select Category --</option>
-                    @foreach($categories as $category)
-                        <option value="{{ $category->pid }}" 
-                            {{ request('category') == $category->pid ? 'selected' : '' }}>
-                            {{ $category->category_name }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
-
-            <div class="col-md-2">
-                <button type="submit" class="btn btn-primary w-100">Search</button>
-            </div>
-        </div>
-    </form>
-
     <!-- Press Release Cards -->
-    <div class="row gy-4 gx-4">
-        @forelse($pressReleases as $press)
-            <div class="col-md-4">
-                <a href="{{ url('press-release/' . $press->slug) }}" class="text-decoration-none text-dark">
-                    <div class="card h-100 shadow-sm border-0 blog-box">
-                        @if($press->image)
-                            <img src="{{ asset($press->image) }}" class="card-img-top" alt="{{ $press->title }}">
-                        @else
-                            <img src="{{ asset('frontend/images/no-image.jpg') }}" class="card-img-top" alt="No image available">
-                        @endif
-
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $press->title }}</h5>
-                            <p class="card-text">{{ Str::limit(strip_tags($press->short_description), 120, '...') }}</p>
-                        </div>
-
-                        <div class="card-footer bg-white border-0">
-                            <small class="text-muted">
-                                {{ \Carbon\Carbon::parse($press->publish_date)->format('F d, Y') }}
-                            </small>
-                        </div>
+    <!-- ===== Press Releases Section ===== -->
+    <div class="container py-5">
+        <div class="row">
+            <!-- ===== Left Sidebar (Categories) ===== -->
+            <aside class="col-lg-3 mb-4">
+                <div class="card shadow-sm border-0">
+                    <div class="card-header text-white fw-bold" style="background-color:#006186;">
+                        Industries
                     </div>
-                </a>
-            </div>
-        @empty
-            <div class="col-12">
-                <p class="text-center text-muted">No press releases found.</p>
-            </div>
-        @endforelse
-    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <a href="{{ route('press-releases') }}" 
+                            class="text-decoration-none {{ request('category') == '' ? 'fw-bold text-primary' : 'text-dark' }}">
+                            All Industries
+                            </a>
+                        </li>
+                        @foreach($categories as $category)
+                            <li class="list-group-item">
+                                <a href="{{ route('press-releases', ['category' => $category->pid]) }}" 
+                                class="text-decoration-none {{ request('category') == $category->pid ? 'fw-bold text-primary' : 'text-dark' }}">
+                                {{ $category->category_name }}
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </aside>
 
+            <!-- ===== Right Content (Press Releases) ===== -->
+            <div class="col-lg-9">
+
+                <!-- Search Bar -->
+                <form method="GET" action="{{ route('press-releases') }}" class="mb-4">
+                    <div class="input-group">
+                        <input type="hidden" name="category" value="{{ request('category') }}">
+                        <input type="text" name="search" value="{{ request('search') }}" 
+                            class="form-control" placeholder="Search press releases...">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-search"></i> Search
+                        </button>
+                    </div>
+                </form>
+
+            <!-- ===== List Style Press Releases ===== -->
+                <div class="list-group shadow-sm">
+                    @forelse($pressReleases as $press)
+                        <div class="list-group-item py-4 mb-3 border rounded-3">  <!-- ✅ Added mb-3 + border + rounded -->
+                            <div class="d-flex justify-content-between flex-wrap">
+                                <div class="flex-grow-1">
+                                    <h5 class="fw-bold mb-2">
+                                        <a href="{{ url('press-release/' . $press->slug) }}" class="text-decoration-none" style="color:#006186;">
+                                            {{ $press->title }}
+                                        </a>
+                                    </h5>
+                                    <p class="mb-2 text-muted">
+                                        {{ Str::limit(strip_tags($press->content), 160, '...') }}
+                                    </p>
+
+                                    <div class="d-flex flex-wrap small text-secondary">
+                                        <div class="me-3">
+                                            <i class="bi bi-tags"></i>
+                                            {{ $press->category_name ?? 'Uncategorized' }}
+                                        </div>
+                                        <div>
+                                            <i class="bi bi-calendar3"></i>
+                                            {{ \Carbon\Carbon::parse($press->publish_date)->format('F d, Y') }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @empty
+                        <div class="list-group-item text-center text-muted py-5">
+                            No press releases found.
+                        </div>
+                    @endforelse
+                </div>
+
+                <!-- Pagination -->
+                <div class="mt-5 d-flex justify-content-center">
+                    {{ $pressReleases->withQueryString()->links() }}
+                </div>
+
+        </div>
+    </div>
     <!-- Pagination -->
     <div class="mt-5 d-flex justify-content-center">
         {{ $pressReleases->withQueryString()->links() }}

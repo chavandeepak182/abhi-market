@@ -40,6 +40,9 @@ Route::get('/reports', [FrontendController::class, 'reports'])->name('reports');
 Route::get('/about', function () {
     return view('frontend.about');
 });
+Route::get('/testing', function () {
+    return view('testing');
+});
 
 Route::get('/contact', function () {
     return view('frontend.contact');

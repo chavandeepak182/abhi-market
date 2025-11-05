@@ -42,22 +42,34 @@
 
 
 @section('content')
+<style>
+   .hero-section{
+    width:100%;
+}
 
+.press-title{
+    font-size:2.1rem;
+    line-height:1.3;
+    max-width:1100px;
+    margin:auto;
+}
+
+@media(max-width: 768px){
+    .press-title{
+        font-size:1.45rem;
+    }
+}
+</style>
 <!-- Hero Section -->
-<section class="hero-wrap position-relative" style="background-color:#006186;">
-    <div class="hero-bg" 
-         style="background-image: url('{{ asset($pressRelease->image) }}'); background-size: cover; background-position: center;">
+<section class="hero-section d-flex align-items-center justify-content-center"
+         style="background:#006186; padding:50px 0;">
+    <div class="container text-center">
+        <h1 class="press-title fw-bold text-white m-0">
+            {{ $pressRelease->title }}
+        </h1>
     </div>
-    <div class="hero-overlay bg-dark opacity-50"></div>
-
-    <div class="container hero-content py-5 text-white text-center">
-    <div class="row justify-content-center">
-        <div class="col-lg-9">
-            <h1 class="display-5 fw-bold text-white">{{ $pressRelease->title }}</h1>
-        </div>
-    </div>
-</div>
 </section>
+
 
 <!-- Press Release Content Section -->
 <div class="container py-5">
@@ -65,24 +77,12 @@
 
         <!-- Main Content -->
         <div class="col-lg-8 mb-5 mb-lg-0">
-            @if($pressRelease->image)
-                <div style="width: 100%; height: 400px; overflow: hidden; border-radius: 8px;">
-                    <img src="{{ asset($pressRelease->image) }}" 
-                        alt="{{ $pressRelease->title }}" 
-                        class="w-100 h-100 shadow-sm" 
-                        style="object-fit: cover;">
-                </div>
-            @endif
-
             <h1 class="mb-3">{{ $pressRelease->title }}</h1>
 
-            <p class="text-muted mb-4">
+            <p class="text-white mb-4" style="background:#006186;">
                 Published on {{ \Carbon\Carbon::parse($pressRelease->publish_date)->format('F d, Y') }}
                 <span class="mx-2">|</span>
                 Category: <strong>{{ $pressRelease->category_name ?? 'N/A' }}</strong>
-                @if(!empty($pressRelease->author_name))
-                    <span class="mx-2">|</span> Author: <strong>{{ $pressRelease->author_name }}</strong>
-                @endif
             </p>
 
             <div class="press-content">
@@ -120,26 +120,7 @@
                 </div>
             </div>
 
-            <!-- Latest Press Releases -->
-            <h5 class="mb-4">Latest Press Releases</h5>
-            @foreach($latestPressReleases as $latest)
-                <div class="card mb-3 shadow-sm border-0 latest-item">
-                    <a href="{{ route('press-releases.details', $latest->slug) }}">
-                        <img src="{{ asset($latest->image) }}" class="card-img-top" alt="{{ $latest->title }}">
-                    </a>
-                    <div class="card-body p-3">
-                        <a href="{{ route('press-releases.details', $latest->slug) }}" class="text-dark text-decoration-none">
-                            <h6 class="card-title">{{ $latest->title }}</h6>
-                        </a>
-                        <p class="card-text text-muted" style="font-size: 14px;">
-                            {{ Str::limit(strip_tags($latest->short_description), 60) }}
-                        </p>
-                        <p class="text-muted mb-0" style="font-size: 12px;">
-                            {{ \Carbon\Carbon::parse($latest->publish_date)->format('F d, Y') }}
-                        </p>
-                    </div>
-                </div>
-            @endforeach
+           
         </div>
     </div>
 
@@ -150,9 +131,6 @@
             @foreach($relatedPressReleases as $related)
                 <div class="col-md-4">
                     <div class="card border-0 shadow-sm overflow-hidden related-item h-100">
-                        <a href="{{ route('press-releases.details', $related->slug) }}">
-                            <img src="{{ asset($related->image) }}" class="card-img-top" alt="{{ $related->title }}">
-                        </a>
                         <div class="card-body">
                             <a href="{{ route('press-releases.details', $related->slug) }}" class="text-dark text-decoration-none">
                                 <h6 class="card-title">{{ $related->title }}</h6>

@@ -61,12 +61,22 @@
 }
 </style>
 <!-- Hero Section -->
-<section class="hero-section d-flex align-items-center justify-content-center"
-         style="background:#006186; padding:50px 0;">
+<section class="hero-section d-flex align-items-center justify-content-center" style="background:#006186; padding:50px 0;">
     <div class="container text-center">
         <h1 class="press-title fw-bold text-white m-0">
             {{ $pressRelease->title }}
         </h1>
+                    <ul class="breadcrumb mt-2" style="background:transparent; padding:0; margin:0; list-style:none;">
+                        <li style="display:inline; margin-right:8px;">
+                            <a href="{{ url('/') }}" style="color:#00aaff; text-decoration:none; font-weight:600;">Home &gt;</a>
+                        </li>
+                        <li style="display:inline; margin-right:8px;">
+                            <a href="{{ url('/press-releases') }}" style="color:#00aaff; text-decoration:none; font-weight:600;">Press Releases &gt;</a>
+                        </li>
+                        <li class="active" style="display:inline; color:#00aaff; font-weight:700;">
+                            {{ $pressRelease->title }}
+                        </li>
+                    </ul>
     </div>
 </section>
 

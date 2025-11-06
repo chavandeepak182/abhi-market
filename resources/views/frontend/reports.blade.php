@@ -150,7 +150,7 @@
                             <!-- Why Choose Box Start -->
                             <div class="why-choose-box wow fadeInUp" data-wow-delay="0.2s">
                                 <div class="icon-box">
-                                    <img src="{{ asset('assets') }}/images/icon-why-choose-1.svg" alt="">
+                                    <img src="{{ asset('assets') }}/images/icon-why-choose-1.svg" alt="why choose us">
                                 </div>
 
                                 <div class="why-choose-box-content">
@@ -163,7 +163,7 @@
                             <!-- Why Choose Box Start -->
                             <div class="why-choose-box wow fadeInUp" data-wow-delay="0.2s">
                                 <div class="icon-box">
-                                    <img src="{{ asset('assets') }}/images/icon-why-choose-2.svg" alt="">
+                                    <img src="{{ asset('assets') }}/images/icon-why-choose-2.svg" alt="why choose us">
                                 </div>
 
                                 <div class="why-choose-box-content">
@@ -193,7 +193,7 @@
                         <!-- Why Choose Image 1 Start -->
                         <div class="why-choose-img-1">
                             <figure class="image-anime reveal">
-                                <img src="{{ asset('assets') }}/images/why-choose-img-1.jpg" alt="">
+                                <img src="{{ asset('assets') }}/images/why-choose-img-1.jpg" alt="why choose us image">
                             </figure>
                         </div>
                         <!-- Why Choose Image 1 End -->
@@ -201,7 +201,7 @@
                         <!-- Why Choose Image 2 Start -->
                         <div class="why-choose-img-2">
                             <figure class="image-anime reveal">
-                                <img src="{{ asset('assets') }}/images/why-choose-img-2.jpg" alt="">
+                                <img src="{{ asset('assets') }}/images/why-choose-img-2.jpg" alt="why choose us image 2">
                             </figure>
                         </div>
                         <!-- Why Choose Image 2 End -->
@@ -281,7 +281,7 @@
                                                 <!-- Author Image Start -->
                                                 <div class="author-image">
                                                     <figure class="image-anime">
-                                                        <img src="{{ asset('assets') }}/images/author-1.jpg" alt="">
+                                                        <img src="{{ asset('assets') }}/images/author-1.jpg" alt="Amit Sharma">
                                                     </figure>
                                                 </div>
                                                 <!-- Author Image End -->
@@ -329,7 +329,7 @@
                                                 <!-- Author Image Start -->
                                                 <div class="author-image">
                                                     <figure class="image-anime">
-                                                        <img src="{{ asset('assets') }}/images/author-2.jpg" alt="">
+                                                        <img src="{{ asset('assets') }}/images/author-2.jpg" alt="Neha Patel">
                                                     </figure>
                                                 </div>
                                                 <!-- Author Image End -->
@@ -377,7 +377,7 @@
                                                 <!-- Author Image Start -->
                                                 <div class="author-image">
                                                     <figure class="image-anime">
-                                                        <img src="{{ asset('assets') }}/images/author-3.jpg" alt="">
+                                                        <img src="{{ asset('assets') }}/images/author-3.jpg" alt="Rahul Mehta">
                                                     </figure>
                                                 </div>
                                                 <!-- Author Image End -->
@@ -405,7 +405,7 @@
                             <div class="customer-rating-box">
                                 <!-- Customer Rating Image Start -->
                                 <div class="customer-rating-image">
-                                    <img src="{{ asset('assets') }}/images/icon-google.svg" alt="">
+                                    <img src="{{ asset('assets') }}/images/icon-google.svg" alt="Google rating icon">
                                 </div>
                                 <!-- Customer Rating Image End -->
 
@@ -446,7 +446,7 @@
                                     </div>
 
                                     <div class="star-rating-img">
-                                        <img src="{{ asset('assets') }}/images/customer-rating-img.svg" alt="">
+                                        <img src="{{ asset('assets') }}/images/customer-rating-img.svg" alt="Customer rating icon">
                                     </div>
                                 </div>
                                 <!-- Customer Rating Counter End -->

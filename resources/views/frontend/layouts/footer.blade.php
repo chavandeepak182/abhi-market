@@ -100,11 +100,29 @@
                 </div>
             </div>
         </div>
+        <div id="backToTop"
+            style="position: fixed; bottom: 25px; left: 25px; display:none; cursor:pointer; z-index:1000; background:#006186; color:#fff; width:45px; height:45px; border-radius:50%; display:flex; justify-content:center; align-items:center; font-size:22px;">
+            ↑
+        </div>
         <!-- Footer Copyright Section End -->
     </div>
 </footer>
 <!-- Footer Section End -->
+<script>
+    const backToTop = document.getElementById('backToTop');
 
+    window.addEventListener('scroll', function () {
+        if (window.scrollY > 200) {
+            backToTop.style.display = 'flex';
+        } else {
+            backToTop.style.display = 'none';
+        }
+    });
+
+    backToTop.addEventListener('click', function () {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    });
+</script>
 <!-- Jquery Library File -->
 <script src="{{ asset('assets') }}/js/jquery-3.7.1.min.js"></script>
 <!-- Bootstrap js file -->

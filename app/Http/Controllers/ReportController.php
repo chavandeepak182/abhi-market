@@ -16,16 +16,16 @@ class ReportController extends Controller
 
         return view('frontend.reports.list', compact('reports'));
     }
-//   public function index()
-// {
-//     $reports = DB::table('reports')
-//         ->join('industries_category', 'reports.industry_category_id', '=', 'industries_category.pid')
-//         ->select('reports.*', 'industries_category.category_name as category_name')
-//         ->orderBy('reports.publish_date', 'desc') 
-//         ->paginate(25); 
+  public function index()
+{
+    $reports = DB::table('reports')
+        ->join('industries_category', 'reports.industry_category_id', '=', 'industries_category.pid')
+        ->select('reports.*', 'industries_category.category_name as category_name')
+        ->orderBy('reports.publish_date', 'desc') 
+        ->paginate(25); 
 
-//     return view('reports.index', compact('reports'));
-// }
+    return view('reports.index', compact('reports'));
+}
  public function list(Request $request)
 {
     $query = DB::table('reports')

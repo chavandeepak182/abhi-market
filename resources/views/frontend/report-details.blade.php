@@ -51,6 +51,7 @@
 @endsection
 
 @section('content')
+
 <!-- Page Header Start -->
 <div class="page-header">
     <div class="container">
@@ -66,9 +67,20 @@
                         <span>{{ $words[0] }}</span>
                         {{ implode(' ', array_slice($words, 1)) }}
                     </h1>
-                    
+
+                    <ul class="breadcrumb mt-2" style="background:transparent; padding:0; margin:0; list-style:none;">
+                        <li style="display:inline; margin-right:8px;">
+                            <a href="{{ url('/') }}" style="color:#00aaff; text-decoration:none; font-weight:600;">Home &gt;</a>
+                        </li>
+                        <li style="display:inline; margin-right:8px;">
+                            <a href="{{ url('/get-reports') }}" style="color:#00aaff; text-decoration:none; font-weight:600;">Reports &gt;</a>
+                        </li>
+                        <li class="active" style="display:inline; color:#00aaff; font-weight:700;">
+                            {{ $report->report_title }}
+                        </li>
+                    </ul>
                 </div>
-                
+                <!-- Page Header Box End -->
             </div>
         </div>
     </div>

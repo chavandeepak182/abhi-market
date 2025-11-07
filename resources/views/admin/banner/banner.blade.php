@@ -36,10 +36,12 @@
                             <button type="submit" class="btn btn-main rounded-pill py-9"><i class="fas fa-upload"></i> Upload Banner</button>
                         </div>
                     </div>
+            </form>
                     <div class="col-xxl-8 col-md-8 col-sm-7">
                         <div class="mb-20">
                             <label class="h5 fw-semibold font-heading mb-0">Existing Banners</label>
                         </div>
+                        
                         <div class="table-responsive">
                             <table class="table table-bordered">
                                 <thead>
@@ -74,7 +76,7 @@
                         </div>
                     </div>
                 </div>
-            </form>
+            
         </div>
     </div>    
 </div>

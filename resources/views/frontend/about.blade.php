@@ -248,7 +248,7 @@
                                        
                                         <div class="about-info-box">
                                             <figure class="image-anime reveal">
-                                                <img src="{{ asset('assets') }}/images/author-1.jpg" alt="">
+                                                <img src="{{ asset('assets') }}/images/amit-sharma.jpg" alt="">
                                             </figure>
             
                                             <div class="about-author-content">

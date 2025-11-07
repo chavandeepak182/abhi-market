@@ -91,7 +91,13 @@
                 </tbody>
             </table>
         </div>
+        <div class="card-footer">
+            <div class="d-flex justify-content-center">
+                {{ $enquiries->links('pagination::bootstrap-5') }}
+            </div>
+        </div>
     </div>    
+    
 </div>
 
 <!-- Enquiry Modal -->

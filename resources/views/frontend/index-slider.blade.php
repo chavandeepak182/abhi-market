@@ -750,7 +750,7 @@ Founded in 2023, we are a dynamic market research and business intelligence firm
                                                 <!-- Author Image Start -->
                                                 <div class="author-image">
                                                     <figure class="image-anime">
-                                                        <img src="{{ asset('assets') }}/images/author-1.jpg" alt="Amit Sharma">
+                                                        <img src="{{ asset('assets') }}/images/amit-sharma.jpg" alt="Amit Sharma">
                                                     </figure>
                                                 </div>
                                                 <!-- Author Image End -->
@@ -786,7 +786,7 @@ Founded in 2023, we are a dynamic market research and business intelligence firm
                                                 <!-- Author Image Start -->
                                                 <div class="author-image">
                                                     <figure class="image-anime">
-                                                        <img src="{{ asset('assets') }}/images/author-2.jpg" alt="Neha Patel">
+                                                        <img src="{{ asset('assets') }}/images/neha.jpg" alt="Neha Patel">
                                                     </figure>
                                                 </div>
                                                 <!-- Author Image End -->
@@ -822,7 +822,7 @@ Founded in 2023, we are a dynamic market research and business intelligence firm
                                                 <!-- Author Image Start -->
                                                 <div class="author-image">
                                                     <figure class="image-anime">
-                                                        <img src="{{ asset('assets') }}/images/author-3.jpg" alt="Rahul Mehta">
+                                                        <img src="{{ asset('assets') }}/images/rahul-mehta.jpg" alt="Rahul Mehta">
                                                     </figure>
                                                 </div>
                                                 <!-- Author Image End -->

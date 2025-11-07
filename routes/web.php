@@ -178,11 +178,15 @@ Route::delete('/admin/contacts/{id}', [EnquiryController::class, 'contactdestroy
 
 //banner
 Route::middleware('isPartner')->group(function () {
-    Route::get('/admin/banners', [BannerController::class, 'index'])->name('banners.index');
-    Route::post('/banners', [BannerController::class, 'store'])->name('banners.store');
-    Route::get('/banners/{id}/edit', [BannerController::class, 'edit'])->name('banners.edit');
-    Route::put('/banners/{id}', [BannerController::class, 'update'])->name('banners.update');
-    Route::delete('/banners/{id}', [BannerController::class, 'destroy'])->name('banners.destroy');
+
+    Route::prefix('admin')->group(function () {
+        Route::get('/banners', [BannerController::class, 'index'])->name('banners.index');
+        Route::post('/banners', [BannerController::class, 'store'])->name('banners.store');
+        Route::get('/banners/{id}/edit', [BannerController::class, 'edit'])->name('banners.edit');
+        Route::put('/banners/{id}', [BannerController::class, 'update'])->name('banners.update');
+        Route::delete('/banners/{id}', [BannerController::class, 'destroy'])->name('banners.destroy');
+    });
+
 });
 //channel partner
 
@@ -261,7 +265,7 @@ Route::get('admin/services', [ServiceController::class, 'index'])->name('service
 Route::post('/services/store', [ServiceController::class, 'storeService'])->name('services.store');
 Route::get('/services/edit/{id}', [ServiceController::class, 'edit'])->name('services.edit');
 Route::put('/services/update/{id}', [ServiceController::class, 'update'])->name('services.update');
-Route::get('/services/create', [ServiceController::class, 'create'])->name('services.create');
+Route::get('admin/services/create', [ServiceController::class, 'create'])->name('services.create');
 
     Route::post('/services/delete/{id}', [ServiceController::class, 'delete'])->name('services.delete');
 });
@@ -296,7 +300,7 @@ Route::get('admin/industries', [IndustriesController::class, 'index'])->name('in
 Route::post('/industries/store', [IndustriesController::class, 'storeService'])->name('industries.store');
 Route::get('/industries/edit/{id}', [IndustriesController::class, 'edit'])->name('industries.edit');
 Route::put('/industries/update/{id}', [IndustriesController::class, 'update'])->name('industries.update');
-Route::get('/industries/create', [IndustriesController::class, 'create'])->name('industries.create');
+Route::get('admin/industries/create', [IndustriesController::class, 'create'])->name('industries.create');
 Route::post('/industries/delete/{id}', [IndustriesController::class, 'deleteService'])->name('industries.delete');
 
 

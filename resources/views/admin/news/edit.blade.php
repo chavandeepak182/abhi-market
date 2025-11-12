@@ -78,8 +78,14 @@
                             <div class="mb-2">
                                 <img src="{{ asset('storage/' . $news->image) }}" width="100" class="rounded shadow-sm" alt="Current Image">
                             </div>
-                        @endif
+                        @endif;
                         <input type="file" name="image" class="form-control">
+                    </div>
+                    <!-- ✅ Slug Field -->
+                    <div class="mb-3">
+                        <label for="slug" class="form-label fw-semibold">Slug:</label>
+                        <input type="text" name="slug" class="form-control" value="{{ old('slug', $news->slug) }}" placeholder="Enter custom slug or leave blank to auto-generate">
+                        <small class="text-muted">If left blank, the slug will be auto-generated from the title.</small>
                     </div>
 
                     <div class="flex-align mt-10">

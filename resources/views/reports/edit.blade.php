@@ -62,6 +62,17 @@
                     
                     <div class="col-md-4">
                         <div class="form-group">
+                            <label for="industry_category_id" class="fw-semibold">Industry Category</label>
+                            <select name="industry_category_id" id="industry_category_id" class="form-control" required>
+                                <option value="">-- Select Industry Category --</option>
+                                @foreach($industries as $industry)
+                                    <option value="{{ $industry->pid }}" {{ $report->industry_category_id == $industry->pid ? 'selected' : '' }}>
+                                        {{ $industry->category_name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="image">Report Image</label>
                             @if($report->image)
                                 <div>

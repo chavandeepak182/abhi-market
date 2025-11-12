@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class ReportController extends Controller
 {
@@ -132,15 +133,20 @@ public function storeReport(Request $request)
     $logData = $data;
     unset($logData['description'], $logData['toc'], $logData['faq_que'], $logData['faq_ans']);
     Log::info('Prepared data for DB insert', $logData);
+    $this->updateSitemap($request->slug ?? Str::slug($request->report_title, '-'));
 
     // Insert into DB with error handling
     try {
-        DB::table('reports')->insert($data);
-        Log::info('Report inserted successfully');
-    } catch (\Exception $e) {
-        Log::error('Insert error', ['message' => $e->getMessage()]);
-        return redirect()->back()->with('error', 'Failed to save report. Check logs for error.');
-    }
+            DB::table('reports')->insert($data);
+            Log::info('Report inserted successfully');
+
+            // 🟢 Add report to sitemap.xml automatically
+            $this->updateSitemap($request->slug ?? Str::slug($request->report_title, '-'));
+
+        } catch (\Exception $e) {
+            Log::error('Insert error', ['message' => $e->getMessage()]);
+            return redirect()->back()->with('error', 'Failed to save report. Check logs for error.');
+        }
 
     return redirect()->route('reports.index')->with('success', 'Report added successfully.');
 }
@@ -149,17 +155,23 @@ public function storeReport(Request $request)
 
 
     public function edit($id)
-    {
-        $report = DB::table('reports')->where('id', $id)->first();
+{
+    $report = DB::table('reports')->where('id', $id)->first();
 
-        if (!$report) {
-            return redirect()->route('reports.index')->with('error', 'Report not found.');
-        }
-
-        return view('reports.edit', compact('report'));
+    if (!$report) {
+        return redirect()->route('reports.index')->with('error', 'Report not found.');
     }
 
-    public function update(Request $request, $id)
+    // ✅ Fetch all industries for dropdown
+    $industries = DB::table('industries_category')
+        ->select('pid', 'category_name')
+        ->orderBy('category_name')
+        ->get();
+
+    return view('reports.edit', compact('report', 'industries'));
+}
+
+ public function update(Request $request, $id)
 {
     $request->validate([
         'report_name' => 'required|string',
@@ -177,6 +189,7 @@ public function storeReport(Request $request)
         'faq_ans.*' => 'nullable|string|max:1000',
         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         'publish_date' => 'required|date',
+        'industry_category_id' => 'required|integer|exists:industries_category,pid',
     ]);
 
     $report = DB::table('reports')->where('id', $id)->first();
@@ -185,8 +198,25 @@ public function storeReport(Request $request)
         return redirect()->route('reports.index')->with('error', 'Report not found.');
     }
 
-    $imagePath = $report->image;
+    // ✅ Handle slug (manual or auto)
+    if (!empty($request->slug)) {
+        $slug = Str::slug($request->slug, '-');
+    } else {
+        $slug = Str::slug($request->report_title, '-');
+    }
 
+    // Ensure slug uniqueness
+    $existingCount = DB::table('reports')
+        ->where('slug', $slug)
+        ->where('id', '!=', $id)
+        ->count();
+
+    if ($existingCount > 0) {
+        $slug .= '-' . ($existingCount + 1);
+    }
+
+    // ✅ Handle Image Upload
+    $imagePath = $report->image;
     if ($request->hasFile('image')) {
         if ($report->image && File::exists(public_path($report->image))) {
             File::delete(public_path($report->image));
@@ -199,13 +229,14 @@ public function storeReport(Request $request)
         $imagePath = 'uploads/reports/' . $imageName;
     }
 
-    // Handle optional FAQ fields
+    // ✅ Handle FAQ
     $faqQue = is_array($request->faq_que) ? implode('||', $request->faq_que) : null;
     $faqAns = is_array($request->faq_ans) ? implode('||', $request->faq_ans) : null;
 
-    // If toc is required in DB but nullable in form, fallback default:
+    // ✅ Handle TOC
     $tocContent = $request->filled('toc') ? $request->toc : 'N/A';
 
+    // ✅ Update DB
     DB::table('reports')->where('id', $id)->update([
         'report_name' => $request->report_name,
         'report_title' => $request->report_title,
@@ -213,12 +244,13 @@ public function storeReport(Request $request)
         'publish_date' => $request->publish_date,
         'schema_markup' => $request->schema_markup,
         'toc' => $tocContent,
-        'slug' => $request->slug,
+        'slug' => $slug,
         'meta_title' => $request->meta_title,
         'meta_keywords' => $request->meta_keywords,
         'meta_description' => $request->meta_description,
         'faq_que' => $faqQue,
         'faq_ans' => $faqAns,
+        'industry_category_id' => $request->industry_category_id, // ✅ new field
         'image' => $imagePath,
         'updated_at' => now(),
     ]);
@@ -285,5 +317,48 @@ public function showSampleForm($slug, $id = null)
     $countries = DB::table('countries')->orderBy('name')->get();
 
     return view('frontend.reports.sample-form', compact('report', 'slug', 'id', 'countries'));
+}
+private function updateSitemap($slug)
+{
+    $sitemapPath = base_path('sitemap.xml');
+    $reportUrl = url('/reports/' . $slug);
+
+    // Ensure sitemap file exists and is valid
+    if (!file_exists($sitemapPath)) {
+        $xml = new \SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?>' .
+            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>');
+    } else {
+        libxml_use_internal_errors(true);
+        $xml = simplexml_load_file($sitemapPath);
+        if ($xml === false) {
+            // Rebuild sitemap if it's broken
+            $xml = new \SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?>' .
+                '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>');
+        }
+    }
+
+    // Avoid duplicates
+    foreach ($xml->url as $url) {
+        if ((string)$url->loc === $reportUrl) {
+            \Log::info('ℹ️ Sitemap: report URL already exists', ['url' => $reportUrl]);
+            return;
+        }
+    }
+
+    // Add new entry
+    $urlNode = $xml->addChild('url');
+    $urlNode->addChild('loc', $reportUrl);
+    $urlNode->addChild('lastmod', now()->toAtomString());
+    $urlNode->addChild('changefreq', 'monthly');
+    $urlNode->addChild('priority', '0.8');
+
+    // ---- FORMAT XML NEATLY (THIS IS THE NEW PART) ----
+    $dom = new \DOMDocument('1.0', 'UTF-8');
+    $dom->preserveWhiteSpace = false;
+    $dom->formatOutput = true;
+    $dom->loadXML($xml->asXML());
+    $dom->save($sitemapPath);
+
+    \Log::info('✅ Sitemap updated for new report', ['url' => $reportUrl]);
 }
 }

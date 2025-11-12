@@ -214,7 +214,7 @@
       
                              <div class="section-title"> 
                         <h2 class="text-anime-style-2" data-cursor="-opaque">
-                           The Minds Behind<span>Market Intelligence</span>
+                           The Minds Behind <span> Market Intelligence</span>
                         </h2>
                     </div>
       <p>At M2Square, we don’t just study markets — we decode them.
@@ -258,9 +258,9 @@ Founded in 2023, we are a dynamic market research and business intelligence firm
                                                 <div class="webinar-content">
                                                     <span class="text-muted mb-2">{{ \Carbon\Carbon::parse($news->created_at)->format('d M Y') }}</span>
                                                     <h5>{{ $news->title }}</h5>
-                                                    <p>{{ \Illuminate\Support\Str::limit(strip_tags($news->description), 100, '...') }}</p>
+                                                    <p>{{ \Illuminate\Support\Str::limit(strip_tags($news->content), 100, '...') }}</p>
                                                     <div class="read-more">
-                                                        <a href="{{ route('news.show', $news->id) }}">Read More</a>
+                                                        <a href="{{ route('news.show', $news->slug) }}">Read More</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -268,6 +268,7 @@ Founded in 2023, we are a dynamic market research and business intelligence firm
                                     @endforeach
                                 </div>
                             </div>
+
 
                         </div>
                     </div>

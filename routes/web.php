@@ -331,4 +331,4 @@ Route::middleware('isAdmin')->group(function () {
         Route::delete('/delete/{id}', [NewsController::class, 'destroy'])->name('destroy');
     });
 });
-Route::get('/news/{id}', [NewsController::class, 'show'])->name('news.show');
+Route::get('/news/{slug}', [NewsController::class, 'show'])->name('news.show');

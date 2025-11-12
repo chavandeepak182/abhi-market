@@ -79,6 +79,12 @@
                         <label class="form-label fw-semibold">News Image</label>
                         <input type="file" name="image" class="form-control" placeholder="Upload Image">
                     </div>
+                    <!-- ✅ Slug Field -->
+                    <div class="position-relative pb-15">
+                        <label class="form-label fw-semibold">Slug</label>
+                        <input type="text" name="slug" class="form-control" placeholder="Enter or auto-generate slug" value="{{ old('slug') }}">
+                        <small class="text-muted">Leave blank to auto-generate from the title.</small>
+                    </div>
 
                     <div class="flex-align mt-10">
                         <button type="submit" class="btn btn-main rounded-pill py-9 w-100">

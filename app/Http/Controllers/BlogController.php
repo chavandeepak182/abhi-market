@@ -206,6 +206,37 @@ class BlogController extends Controller
 
         return redirect()->route('blog.index')->with('success', 'Blog deleted successfully.');
     }
+
+    public function news(Request $request)
+{
+    $query = DB::table('news')
+        ->select(
+            'id',
+            'title',
+            'slug',
+            'content',
+            'image',
+            'status',
+            'created_at',
+            'updated_at',
+        )
+        ->where('status', 1);
+
+    // 🔍 Search by title or content
+    if ($request->filled('search')) {
+        $query->where(function ($q) use ($request) {
+            $q->where('title', 'LIKE', '%' . $request->search . '%')
+              ->orWhere('content', 'LIKE', '%' . $request->search . '%');
+        });
+    }
+
+    // 📄 Pagination (12 per page)
+    $data['newsList'] = $query
+        ->paginate(12)
+        ->appends($request->all());
+
+    return view('frontend.news', $data);
+}
     private function updateSitemapForBlog($slug)
 {
     // Sitemap file path in root directory (same as .env)

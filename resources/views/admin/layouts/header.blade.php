@@ -206,17 +206,7 @@
                     <button type="button" class="toggle-btn d-xl-none d-flex text-26 text-gray-500"><i class="ph ph-list"></i></button>
                     <!-- Toggle Button End -->
                     
-                    <form action="{{ route('reports.searchByTitle') }}" method="GET" class="d-flex mb-3" role="search">
-                        <input 
-                            type="text" 
-                            name="query" 
-                            class="form-control me-2" 
-                            placeholder="Search by title" 
-                            value="{{ request('query') }}" 
-                            required
-                        >
-                        <button type="submit" class="btn btn-primary">Search</button>
-                    </form>
+                    
                 </div>
 
                 <div class="flex-align gap-16">

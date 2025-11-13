@@ -230,6 +230,8 @@ Route::middleware('isAdmin')->group(function () {
 });
 Route::get('/press-release/{slug}', [PressReleaseController::class, 'show'])->name('press-releases.details');
 Route::get('/press-releases', [PressReleaseController::class, 'pressReleases'])->name('press-releases');
+Route::get('/admin/press/search-title', [PressReleaseController::class, 'searchByTitle'])
+    ->name('press.searchByTitle');
 
 
 //gallery

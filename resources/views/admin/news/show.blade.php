@@ -30,7 +30,7 @@
                         </p>
 
                         @php $words = explode(' ', $news->title); @endphp
-                        <h1 class="text-anime-style-2" data-cursor="-opaque" style="white-space: nowrap;">
+                        <h1 class="text-anime-style-2" data-cursor="-opaque" style="white-space: nowrap; font-size: 30px;">
                             <span>{{ $words[0] }}</span> {{ implode(' ', array_slice($words, 1)) }}
                         </h1>
                     </div>

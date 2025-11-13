@@ -90,6 +90,8 @@ class PressReleaseController extends Controller
         try {
             DB::table('press_releases')->insert($data);
             Log::info('Press release inserted successfully');
+             $this->updateSitemapForPressRelease($request->slug);
+
         } catch (\Exception $e) {
             Log::error('Insert error', ['message' => $e->getMessage()]);
             return redirect()->back()->with('error', 'Failed to save press release. Check logs for error.');
@@ -249,8 +251,65 @@ public function pressReleases(Request $request)
 
     return view('frontend.press-releases', $data);
 }
+public function searchByTitle(Request $request)
+{
+    $query = $request->input('query');
 
+    $request->validate([
+        'query' => 'required|string|min:2',
+    ]);
 
+    $pressReleases = DB::table('press_releases')
+        ->leftJoin('industries_category', 'press_releases.industry_category_id', '=', 'industries_category.pid')
+        ->select('press_releases.*', 'industries_category.category_name as category_name')
+        ->where('press_releases.title', 'like', '%' . $query . '%')
+        ->orderBy('press_releases.publish_date', 'desc')
+        ->paginate(10);
 
+    return view('press_releases.index', compact('pressReleases', 'query'));
+}
+private function updateSitemapForPressRelease($slug)
+{
+    // Sitemap file path in root directory (same level as .env)
+    $sitemapPath = base_path('sitemap.xml');
+    $pressReleaseUrl = url('/press-release/' . $slug);
 
+    // Create new sitemap if not present or invalid
+    if (!file_exists($sitemapPath)) {
+        $xml = new \SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?>' .
+            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>');
+    } else {
+        libxml_use_internal_errors(true);
+        $xml = simplexml_load_file($sitemapPath);
+        if ($xml === false) {
+            // Recreate if XML is broken
+            $xml = new \SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?>' .
+                '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>');
+        }
+    }
+
+    // Avoid duplicate entries
+    foreach ($xml->url as $url) {
+        if ((string)$url->loc === $pressReleaseUrl) {
+            \Log::info('ℹ️ Sitemap: Press release URL already exists', ['url' => $pressReleaseUrl]);
+            return;
+        }
+    }
+
+    // Add new <url> node
+    $urlNode = $xml->addChild('url');
+    $urlNode->addChild('loc', $pressReleaseUrl);
+    $urlNode->addChild('lastmod', now()->toAtomString());
+    $urlNode->addChild('changefreq', 'monthly');
+    $urlNode->addChild('priority', '0.9');
+
+    // ✅ Format XML with indentation and new lines
+    $dom = new \DOMDocument('1.0', 'UTF-8');
+    $dom->preserveWhiteSpace = false;
+    $dom->formatOutput = true;
+    $dom->loadXML($xml->asXML());
+    $dom->save($sitemapPath);
+
+    \Log::info('✅ Sitemap updated for new press release', ['url' => $pressReleaseUrl]);
+}
 }

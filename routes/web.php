@@ -334,5 +334,5 @@ Route::middleware('isAdmin')->group(function () {
     });
 });
 Route::get('/news/{slug}', [NewsController::class, 'show'])->name('news.show');
-Route::get('/news', [BlogController::class, 'news'])->name('news');
+Route::get('/news', [NewsController::class, 'news'])->name('news');
 

@@ -49,6 +49,17 @@
 
         <!-- Breadcrumb Right Start -->
         <div class="flex-align gap-8 flex-wrap">
+            <form action="{{ route('press.searchByTitle') }}" method="GET" class="d-flex mb-3" role="search">
+    <input 
+        type="text" 
+        name="query" 
+        class="form-control me-2" 
+        placeholder="Search by title" 
+        value="{{ request('query') }}" 
+        required
+    >
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
             <div class="flex-align text-gray-500 text-13 border-gray-100 focus-border-main-600">
                 <a href="{{ route('press-releases.create') }}" class="btn btn-primary">
                     <i class="fa fa-plus"></i> Create Press Release

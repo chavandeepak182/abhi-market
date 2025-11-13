@@ -350,7 +350,7 @@ private function updateSitemap($slug)
     $urlNode->addChild('loc', $reportUrl);
     $urlNode->addChild('lastmod', now()->toAtomString());
     $urlNode->addChild('changefreq', 'monthly');
-    $urlNode->addChild('priority', '0.8');
+    $urlNode->addChild('priority', '1.0');
 
     // ---- FORMAT XML NEATLY (THIS IS THE NEW PART) ----
     $dom = new \DOMDocument('1.0', 'UTF-8');

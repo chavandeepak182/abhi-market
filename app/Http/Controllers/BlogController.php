@@ -239,7 +239,7 @@ class BlogController extends Controller
     $urlNode->addChild('loc', $blogUrl);
     $urlNode->addChild('lastmod', now()->toAtomString());
     $urlNode->addChild('changefreq', 'monthly');
-    $urlNode->addChild('priority', '0.9');
+    $urlNode->addChild('priority', '1.0');
 
     // ✅ Format XML nicely with line breaks and indentation
     $dom = new \DOMDocument('1.0', 'UTF-8');

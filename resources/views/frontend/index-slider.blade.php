@@ -97,7 +97,7 @@
     top: 0;
     width:50%;
     height:100%;
-    background: url('{{ asset('assets') }}/images/who-we-are_02.jpg') center/cover no-repeat;
+    background: url('{{ asset('assets') }}/images/who_we_are.webp') center/cover no-repeat;
     filter: blur(0px);
   }
 
@@ -214,7 +214,7 @@
       
                              <div class="section-title"> 
                         <h2 class="text-anime-style-2" data-cursor="-opaque">
-                           The Minds Behind <span> Market Intelligence</span>
+                           The Minds Behind<span>Market Intelligence</span>
                         </h2>
                     </div>
       <p>At M2Square, we don’t just study markets — we decode them.
@@ -258,9 +258,10 @@ Founded in 2023, we are a dynamic market research and business intelligence firm
                                                 <div class="webinar-content">
                                                     <span class="text-muted mb-2">{{ \Carbon\Carbon::parse($news->created_at)->format('d M Y') }}</span>
                                                     <h5>{{ $news->title }}</h5>
-                                                    <p>{{ \Illuminate\Support\Str::limit(strip_tags($news->content), 100, '...') }}</p>
+                                                    <p>{{ \Illuminate\Support\Str::limit(strip_tags($news->description), 100, '...') }}</p>
                                                     <div class="read-more">
                                                         <a href="{{ route('news.show', $news->slug) }}">Read More</a>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -268,7 +269,6 @@ Founded in 2023, we are a dynamic market research and business intelligence firm
                                     @endforeach
                                 </div>
                             </div>
-
 
                         </div>
                     </div>
@@ -445,7 +445,8 @@ Founded in 2023, we are a dynamic market research and business intelligence firm
 
     
 
-    <style>.read-more-btn {
+    <style>
+    .read-more-btn {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -471,7 +472,122 @@ Founded in 2023, we are a dynamic market research and business intelligence firm
 .read-more-btn:hover img {
     transform: translateX(5px);
 }
+
+
+/* ✅ MOBILE VIEW ONLY - Stack cards vertically */
+@media (max-width: 768px) {
+
+    .business-section .swiper {
+        overflow: visible !important;
+    }
+
+    /* Stack vertically instead of horizontal scroll */
+    .business-section .swiper-wrapper {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 20px !important;
+        padding: 0 !important;
+        transform: none !important; /* remove swiper transform */
+    }
+
+    .business-section .swiper-slide {
+        width: 100% !important;
+        max-width: 100% !important;
+        flex: 1 1 auto !important;
+        margin: 0 !important;
+    }
+
+    .business-section .card {
+        width: 100%;
+        background: #fff;
+        border-radius: 15px;
+        padding: 25px 20px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .business-section .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .business-section .card .icon img {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 10px;
+    }
+
+    .business-section .card h3 {
+        font-size: 18px;
+        font-weight: 600;
+        margin-top: 10px;
+    }
+
+    .business-section .card p {
+        font-size: 14px;
+        line-height: 1.5;
+        margin: 10px 0 15px;
+    }
+
+    .learn-more-btn,
+    .read-more-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--accent-color);
+        color: #fff;
+        font-size: 14px;
+        font-weight: 500;
+        text-decoration: none;
+        border-radius: 30px;
+        padding: 8px 18px;
+        transition: all 0.3s ease;
+    }
+
+    .learn-more-btn:hover,
+    .read-more-btn:hover {
+        background: #0056b3;
+    }
+
+    .learn-more-btn img,
+    .read-more-btn img {
+        width: 16px;
+        height: 16px;
+        transition: transform 0.3s ease;
+    }
+
+    .learn-more-btn:hover img,
+    .read-more-btn:hover img {
+        transform: translateX(5px);
+    }
+}
 </style>
+
+
+
+
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    if (window.innerWidth <= 768) {
+        // ✅ Destroy Swiper instance on mobile
+        if (typeof swiper !== 'undefined' && swiper && swiper.destroy) {
+            try { swiper.destroy(true, true); } catch (e) {}
+        }
+
+        // ✅ Convert swiper layout to stacked layout
+        const wrapper = document.querySelector('.business-section .swiper-wrapper');
+        if (wrapper) {
+            wrapper.style.display = 'flex';
+            wrapper.style.flexDirection = 'column';
+            wrapper.style.gap = '20px';
+            wrapper.style.transform = 'none';
+        }
+    }
+});
+</script>
 
    
 <div class="our-industries py-5">
@@ -751,7 +867,7 @@ Founded in 2023, we are a dynamic market research and business intelligence firm
                                                 <!-- Author Image Start -->
                                                 <div class="author-image">
                                                     <figure class="image-anime">
-                                                        <img src="{{ asset('assets') }}/images/amit-sharma.jpg" alt="Amit Sharma">
+                                                        <img src="{{ asset('assets') }}/images/author-1.jpg" alt="">
                                                     </figure>
                                                 </div>
                                                 <!-- Author Image End -->
@@ -787,7 +903,7 @@ Founded in 2023, we are a dynamic market research and business intelligence firm
                                                 <!-- Author Image Start -->
                                                 <div class="author-image">
                                                     <figure class="image-anime">
-                                                        <img src="{{ asset('assets') }}/images/neha.jpg" alt="Neha Patel">
+                                                        <img src="{{ asset('assets') }}/images/author-2.jpg" alt="">
                                                     </figure>
                                                 </div>
                                                 <!-- Author Image End -->
@@ -823,7 +939,7 @@ Founded in 2023, we are a dynamic market research and business intelligence firm
                                                 <!-- Author Image Start -->
                                                 <div class="author-image">
                                                     <figure class="image-anime">
-                                                        <img src="{{ asset('assets') }}/images/rahul-mehta.jpg" alt="Rahul Mehta">
+                                                        <img src="{{ asset('assets') }}/images/author-3.jpg" alt="">
                                                     </figure>
                                                 </div>
                                                 <!-- Author Image End -->
@@ -851,7 +967,7 @@ Founded in 2023, we are a dynamic market research and business intelligence firm
                             <div class="customer-rating-box">
                                 <!-- Customer Rating Image Start -->
                                 <div class="customer-rating-image">
-                                    <img src="{{ asset('assets') }}/images/icon-google.svg" alt="Google rating icon">
+                                    <img src="{{ asset('assets') }}/images/icon-google.svg" alt="">
                                 </div>
                                 <!-- Customer Rating Image End -->
 
@@ -892,7 +1008,7 @@ Founded in 2023, we are a dynamic market research and business intelligence firm
                                     </div>
 
                                     <div class="star-rating-img">
-                                        <img src="{{ asset('assets') }}/images/customer-rating-img.svg" alt="Customer rating icon">
+                                        <img src="{{ asset('assets') }}/images/customer-rating-img.svg" alt="">
                                     </div>
                                 </div>
                                 <!-- Customer Rating Counter End -->
@@ -933,7 +1049,7 @@ Founded in 2023, we are a dynamic market research and business intelligence firm
                          
                             <div class="why-choose-box wow fadeInUp" data-wow-delay="0.2s">
                                 <div class="icon-box">
-                                    <img src="{{ asset('assets') }}/images/icon-why-choose-1.svg" alt="why choose us">
+                                    <img src="{{ asset('assets') }}/images/icon-why-choose-1.svg" alt="">
                                 </div>
 
                                 <div class="why-choose-box-content">
@@ -946,7 +1062,7 @@ Founded in 2023, we are a dynamic market research and business intelligence firm
                       
                             <div class="why-choose-box wow fadeInUp" data-wow-delay="0.2s">
                                 <div class="icon-box">
-                                    <img src="{{ asset('assets') }}/images/icon-why-choose-2.svg" alt="why choose us">
+                                    <img src="{{ asset('assets') }}/images/icon-why-choose-2.svg" alt="">
                                 </div>
 
                                 <div class="why-choose-box-content">
@@ -976,7 +1092,7 @@ Founded in 2023, we are a dynamic market research and business intelligence firm
                         
                         <div class="why-choose-img-1">
                             <figure class="image-anime reveal">
-                                <img src="{{ asset('assets') }}/images/why-choose-img-1.jpg" alt="why choose us image">
+                                <img src="{{ asset('assets') }}/images/why-choose-img-1.jpg" alt="">
                             </figure>
                         </div>
                       
@@ -984,7 +1100,7 @@ Founded in 2023, we are a dynamic market research and business intelligence firm
                     
                         <div class="why-choose-img-2">
                             <figure class="image-anime reveal">
-                                <img src="{{ asset('assets') }}/images/why-choose-img-2.jpg" alt="why choose us image 2">
+                                <img src="{{ asset('assets') }}/images/why-choose-img-2.jpg" alt="">
                             </figure>
                         </div>
                        

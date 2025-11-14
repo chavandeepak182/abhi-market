@@ -177,15 +177,27 @@
                             <li>
                                 <a href="{{ url('/get-reports') }}">Reports</a>
                             </li>
-                            <li>
-                                <a href="{{ url('/press-releases') }}">Press Release</a>
-                            </li>
+                            
 
                             <li>
                                 <a href="{{ url('/about') }}">About Us</a>
                             </li>
-                            <li><a href="{{ url('/blogs') }}">Blogs</a></li>
-                            <li><a href="{{ url('/contact') }}">Contact</a></li>
+                            <li class="menu-item-has-children">
+                            <a href="#">Resources <i class="fas fa-plus"></i></a>
+                            <div class="sub-menu capabilities-two-column">
+                                <div class="capabilities-columns">
+                                    <div class="capability-list">
+                                        <a href="{{ url('/press-releases') }}">Press Release</a>
+                                        <a href="{{ url('/news') }}">News</a>
+                                        <a href="{{ url('/blogs') }}">Blogs</a>
+                                        
+                                    </div>
+                                </div>
+                               
+                            </div>
+                        </li>
+                            <!-- <li><a href="{{ url('/blogs') }}">Blogs</a></li> -->
+                            <li><a href="{{ url('/contacts') }}">Contact</a></li>
 
                             <li class="nav-item search-item">
                                 <form action="{{ route('reports.search') }}" method="GET" class="search-form">

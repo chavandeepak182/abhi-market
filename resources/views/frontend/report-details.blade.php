@@ -12,8 +12,8 @@
 
 {{-- Open Graph (Facebook / LinkedIn) --}}
 @section('og_tags')
-    <meta property="og:title" content="{{ $report->report_title }}">
-    <meta property="og:description" content="{{ Str::limit(strip_tags($report->description), 150) }}">
+    <meta property="og:title" content="{{ $report->meta_title }}">
+    <meta property="og:description" content="{{ Str::limit(strip_tags($report->meta_description), 150) }}">
     <meta property="og:type" content="article">
     <meta property="og:url" content="{{ url()->current() }}">
     @if(!empty($industry) && !empty($industry->image))
@@ -24,8 +24,8 @@
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{{ $report->report_title }}">
-    <meta name="twitter:description" content="{{ Str::limit(strip_tags($report->description), 150) }}">
+    <meta name="twitter:title" content="{{ $report->meta_title }}">
+    <meta name="twitter:description" content="{{ Str::limit(strip_tags($report->meta_description), 150) }}">
     <meta name="twitter:image" content="{{ !empty($industry->image) ? url('storage/industries/'.$industry->image) : url('images/default-og.jpg') }}">
 @endsection
 
@@ -35,8 +35,119 @@
         <script type="application/ld+json">
             {!! $report->schema_markup !!}
         </script>
+        <script type="application/ld+json">
+            {
+                "@context":"https://schema.org/",
+                "@type":"Dataset",
+                "name":"{{ $report->report_title }}",
+                "description":"{{ $report->meta_description}}",
+                "url":"{{ url()->current() }}",
+                "license" : "https://m2squareconsultancy.com/privacy-policy",
+                "distribution":[
+                {
+                    "@type":"DataDownload",
+                    "encodingFormat":"pdf",
+                    "contentUrl":"https://m2squareconsultancy.com/"
+                }
+                ],
+                "creator":{
+                "@type":"Organization",
+                "url": "https://m2squareconsultancy.com/#organization",
+                "name":"M2 Square Consultancy",
+                "logo":{
+                    "@type":"ImageObject",
+                    "url":"https://m2squareconsultancy.com/assets/images/logo1.png"
+                }
+                },
+                "temporalCoverage":"2025 - 2033",
+                "spatialCoverage": "Global"
+                
+            }
+        </script>
+        <script type="application/ld+json">
+            {
+            "@context": "https://schema.org/", 
+            "@type": "BreadcrumbList", 
+            "itemListElement": [{
+                "@type": "ListItem", 
+                "position": 1, 
+                "name": "Home",
+                "item": "https://m2squareconsultancy.com/"  
+            },{
+                "@type": "ListItem", 
+                "position": 2, 
+                "name": "Market Reports",
+                "item": "https://m2squareconsultancy.com/get-reports"  
+            },{
+                "@type": "ListItem", 
+                "position": 3, 
+                "name": "{{ $report->report_title }}",
+                "item": "{{ url()->current() }}"  
+            }]
+            }
+            </script>
+           @php
+            $questions = explode('||', $report->faq_que);
+            $answers   = explode('||', $report->faq_ans);
+
+            $faqSchema = [];
+
+            foreach ($questions as $index => $q) {
+                $q = trim($q);
+                $a = trim($answers[$index] ?? '');
+
+                // skip empty values
+                if ($q !== '' && $a !== '') {
+                    $faqSchema[] = [
+                        "@type" => "Question",
+                        "name"  => $q,
+                        "acceptedAnswer" => [
+                            "@type" => "Answer",
+                            "text"  => $a
+                        ]
+                    ];
+                }
+            }
+            @endphp
+
+            <script type="application/ld+json">
+            {!! json_encode([
+                "@context" => "https://schema.org",
+                "@type" => "FAQPage",
+                "mainEntity" => $faqSchema
+            ], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) !!}
+            </script>
+            <script type="application/ld+json">
+                {
+                "@context": "https://schema.org",
+                "@type": "Article",
+                "mainEntityOfPage": {
+                    "@type": "WebPage",
+                    "@id": "{{ url()->current() }}"
+                },
+                "headline": "{{ $report->report_title }}",
+                "description": "{{ $report->meta_description }}",
+                "image": "https://m2squareconsultancy.com/storage/gallery/LK1rz8y9A06h9tONAVCoQasxVO5LqWIqKKa0l8Et.gif",  
+                "author": {
+                    "@type": "Organization",
+                    "name": "M2 Square Consultancy",
+                    "url": "https://m2squareconsultancy.com/"
+                },  
+                "publisher": {
+                    "@type": "Organization",
+                    "name": "M2 Square Consultancy",
+                    "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://m2squareconsultancy.com/assets/images/logo1.png"
+                    }
+                },
+                "datePublished": "{{ $report->publish_date }}"
+                "dateModified" : "{{ $report->updated_at }}"
+                }
+                </script>
     @endif
 @endsection
+
 @section('alternate_links')
     <link rel="alternate" hreflang="x-default" href="{{ url()->current() }}">
     <link rel="alternate" hreflang="en" href="{{ url()->current() }}">

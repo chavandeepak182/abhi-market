@@ -32,12 +32,83 @@
     <meta name="twitter:description" content="{{ Str::limit(strip_tags($blog->description), 150) }}">
     <meta name="twitter:image" content="{{ !empty($blog->image) ? url('storage/blogs/'.$blog->image) : url('images/default-og.jpg') }}">
 
-    {{-- Schema Markup --}}
-    @if(!empty($blog->schema_markup))
-        <script type="application/ld+json">
-            {!! $blog->schema_markup !!}
+   {{-- Schema Markup --}}
+@if(!empty($blog->schema_markup))
+    <script type="application/ld+json">
+        {!! $blog->schema_markup !!}
+    </script>    
+@endif
+{{-- BreadcrumbList Schema --}}
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "item": {
+                    "@type": "WebPage",
+                    "@id": "https://m2squareconsultancy.com/",
+                    "name": "Home"
+                }
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "item": {
+                    "@type": "WebPage",
+                    "@id": "https://m2squareconsultancy.com/blogs",
+                    "name": "Blogs"
+                }
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "item": {
+                    "@type": "WebPage",
+                    "@id": "{{ url()->current() }}",
+                    "name": "{{ ($blog->blog_name) }}"
+                }
+            }
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+        {
+        "@context": "https://schema.org/",
+        "@type": "BlogPosting",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "{{ url()->current() }}"
+        "
+        },
+        "headline": "{{ ($blog->blog_name) }}",
+        "description": "{{$blog->meta_description}}",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://m2squareconsultancy.com/assets/images/logo1.png",
+            "width": "795",
+            "height": "331.25"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "M2 Square Consultancy"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "M2 Square Consultancy",
+            "logo": {
+            "@type": "ImageObject",
+            "url": "https://m2squareconsultancy.com/assets/images/logo1.png",
+            "width": "129",
+            "height": "48.47"
+            }
+        },
+        "datePublished": "{{ $blog->created_at}}",
+        "dateModified": "{{ $blog->updated_at}}"
+        }
         </script>
-    @endif
 @endsection
 
 

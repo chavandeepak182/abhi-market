@@ -25,6 +25,18 @@
     <meta name="keywords" content="@yield('keywords')">
     @yield('meta')
     @yield('og_tags')
+    <!-- Site Verification & SEO -->
+    <meta name="google-site-verification" content="uN04EA4cj2RgC0pa0CaC8GI-bo26iFW8E73I-f2Z9Y8">
+    <meta name="document-type" content="Public">
+    <meta name="Page-Topic" content="Market Research Reports">
+    <meta name="copyright" content="M2Square Consultancy, https://m2squareconsultancy.com/, 2025 All Rights Reserved">
+    <meta name="classification" content="Market Research Reports">
+    <meta name="document-classification" content="Market Research Reports and Consulting Services">
+    <meta name="distribution" content="global">
+    <meta name="coverage" content="global">
+    <meta name="abstract" content="market research reports, syndicated research, industry analysis, Industry Insights, consulting services">
+    <meta name="author" content="M2Square Consultancy, https://m2squareconsultancy.com/">
+    <meta name="Audience" content="All, Market Research, Research Reports, Business, Market Study Report, Management, Research, Services, consulting">
     <!-- ✅ Schema Markup -->
     @yield('schema_markup')
     @yield('alternate_links')
@@ -53,6 +65,35 @@
 
     <!-- External Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    </script>
+    </main>
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "M2 Square Consultancy",
+        "url": "https://m2squareconsultancy.com/",
+        "logo": "https://m2squareconsultancy.com/assets/images/logo1.png",
+        "sameAs": [
+          "#",
+          "#",
+          "#"
+        ]
+      }
+      </script>
+
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "url": "https://m2squareconsultancy.com/",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://m2squareconsultancy.com/reports?query={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+      </script>
 </head>
 
 
@@ -197,7 +238,7 @@
                             </div>
                         </li>
                             <!-- <li><a href="{{ url('/blogs') }}">Blogs</a></li> -->
-                            <li><a href="{{ url('/contacts') }}">Contact</a></li>
+                            <li><a href="{{ url('/contact') }}">Contact</a></li>
 
                             <li class="nav-item search-item">
                                 <form action="{{ route('reports.search') }}" method="GET" class="search-form">

@@ -37,6 +37,55 @@
         <script type="application/ld+json">
             {!! $pressRelease->schema_markup !!}
         </script>
+        <script type="application/ld+json">
+            {
+            "@context": "https://schema.org/", 
+            "@type": "BreadcrumbList", 
+            "itemListElement": [{
+                "@type": "ListItem", 
+                "position": 1, 
+                "name": "Home",
+                "item": "https://m2squareconsultancy.com/"
+            },{
+                "@type": "ListItem", 
+                "position": 2, 
+                "name": "Press Releases",
+                "item": "https://m2squareconsultancy.com/press-releases"  
+            },{
+                "@type": "ListItem", 
+                "position": 3, 
+                "name": "{{ $pressRelease->title}}",
+                "item": "{{ url()->current() }}"  
+            }]
+            }
+            </script>
+        <script type="application/ld+json">
+            {
+            "@context": "https://schema.org",
+            "@type": "NewsArticle",
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "{{ url()->current() }}"
+            },
+            "headline": "{{ $pressRelease->title}}",
+            "image": "",  
+            "author": {
+                "@type": "Organization",
+                "name": "M2 Square Consultancy",
+                "url": "https://m2squareconsultancy.com/"
+            },  
+            "publisher": {
+                "@type": "Organization",
+                "name": "M2 Square Consultancy",
+                "logo": {
+                "@type": "ImageObject",
+                "url": "https://m2squareconsultancy.com/assets/images/logo1.png"
+                }
+            },
+            "datePublished": "{{$pressRelease->publish_date}}",
+            "dateModified": "{{$pressRelease->updated_at}}"
+            }
+            </script>
     @endif
 @endsection
 

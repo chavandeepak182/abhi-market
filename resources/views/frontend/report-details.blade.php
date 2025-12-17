@@ -35,7 +35,8 @@
         <script type="application/ld+json">
             {!! $report->schema_markup !!}
         </script>
-        <script type="application/ld+json">
+    @endif
+    <script type="application/ld+json">
             {
                 "@context":"https://schema.org/",
                 "@type":"Dataset",
@@ -145,7 +146,6 @@
                 "dateModified" : "{{ $report->updated_at }}"
                 }
                 </script>
-    @endif
 @endsection
 
 @section('alternate_links')

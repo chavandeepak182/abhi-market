@@ -72,7 +72,7 @@
 
                         {{-- Email --}}
                         <div class="form-group mb-3">
-                            <input type="email" name="email" class="form-control" placeholder="Your Email" required>
+                            <input type="email" name="email" class="form-control" placeholder="Official Email" required>
                         </div>
 
                         {{-- Message --}}

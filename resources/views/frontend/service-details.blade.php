@@ -77,7 +77,7 @@
                                         </div>
 
                                         <div class="form-group col-md-12 mb-4">
-                                            <input type="email" name="email" id="email" class="form-control" placeholder="Your Email" required>
+                                            <input type="email" name="email" id="email" class="form-control" placeholder="Official Email" required>
                                             <div class="help-block with-errors"></div>
                                         </div>
 

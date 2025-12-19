@@ -148,7 +148,7 @@
                                 </div>
 
                                 <div class="form-group col-md-12 mb-4">
-                                    <input type="email" name="email" id="email" class="form-control" required data-error="Please Enter Your Email" placeholder="Email">
+                                    <input type="email" name="email" id="email" class="form-control" required data-error="Please Enter Official Email" placeholder="Email">
                                     <div class="help-block with-errors"></div>
                                 </div>
 

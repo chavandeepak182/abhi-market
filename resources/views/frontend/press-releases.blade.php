@@ -118,10 +118,6 @@
 
         </div>
     </div>
-    <!-- Pagination -->
-    <div class="mt-5 d-flex justify-content-center">
-        {{ $pressReleases->withQueryString()->links() }}
-    </div>
 </div>
 
 <!-- Dependencies -->

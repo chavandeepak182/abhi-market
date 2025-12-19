@@ -66,7 +66,7 @@
                                         <input type="text" name="contact" class="form-control" placeholder="Phone Number" required>
                                     </div>
                                     <div class="form-group mb-3">
-                                        <input type="email" name="email" class="form-control" placeholder="Your Email" required>
+                                        <input type="email" name="email" class="form-control" placeholder="Official Email" required>
                                     </div>
                                     <button type="submit" class="btn-default py-2">Send</button>
                                 </form>

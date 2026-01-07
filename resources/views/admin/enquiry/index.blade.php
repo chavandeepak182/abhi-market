@@ -41,6 +41,7 @@
                         <th>country</th>
                         <th>Mobile No.</th>
                         <th>Page</th>
+                        <th>Message</th>
                         <th>Date</th>
                         <th>Actions</th>
                     </tr>
@@ -55,6 +56,7 @@
                         <td><span class="fw-medium text-gray-300">{{ $enquiry->country_name }}</span></td>
                         <td><span class="fw-medium text-gray-300">{{ $enquiry->contact }}</span></td>
                         <td><span class="fw-medium text-gray-300">{{ $enquiry->page_name }}</span></td>
+                        <td><span class="fw-medium text-gray-300">{{ $enquiry->message }}</span></td>
                         <!-- <td>
                                     <a href="{{ $enquiry->page_url }}" target="_blank" class="fw-medium text-primary">
                                 {{ Str::limit($enquiry->page_url, 50) }}

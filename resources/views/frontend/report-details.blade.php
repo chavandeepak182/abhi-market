@@ -142,7 +142,7 @@
                     "url": "https://m2squareconsultancy.com/assets/images/logo1.png"
                     }
                 },
-                "datePublished": "{{ $report->publish_date }}"
+                "datePublished": "{{ $report->publish_date }}",
                 "dateModified" : "{{ $report->updated_at }}"
                 }
                 </script>
@@ -273,7 +273,7 @@
 
                     <!-- Case Study Entry Start -->
                     <div class="service-entry">
-                        <h1 class="wow fadeInUp custom-title">{!! $report->report_name !!}</h1>
+                        <h2 class="wow fadeInUp custom-title">{!! $report->report_name !!}</h2>
                         <br>
                         
                         <div class="d-flex justify-content-start text-center" style="gap: 40px;">

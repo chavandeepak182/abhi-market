@@ -867,7 +867,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                                 <!-- Author Image Start -->
                                                 <div class="author-image">
                                                     <figure class="image-anime">
-                                                        <img src="{{ asset('assets') }}/images/author-1.jpg" alt="">
+                                                        <img src="{{ asset('assets') }}/images/author-1.jpg" alt="author-1">
                                                     </figure>
                                                 </div>
                                                 <!-- Author Image End -->
@@ -903,7 +903,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                                 <!-- Author Image Start -->
                                                 <div class="author-image">
                                                     <figure class="image-anime">
-                                                        <img src="{{ asset('assets') }}/images/author-2.jpg" alt="">
+                                                        <img src="{{ asset('assets') }}/images/author-2.jpg" alt="author-2">
                                                     </figure>
                                                 </div>
                                                 <!-- Author Image End -->
@@ -939,7 +939,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                                 <!-- Author Image Start -->
                                                 <div class="author-image">
                                                     <figure class="image-anime">
-                                                        <img src="{{ asset('assets') }}/images/author-3.jpg" alt="">
+                                                        <img src="{{ asset('assets') }}/images/author-3.jpg" alt="author-3">
                                                     </figure>
                                                 </div>
                                                 <!-- Author Image End -->
@@ -967,7 +967,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             <div class="customer-rating-box">
                                 <!-- Customer Rating Image Start -->
                                 <div class="customer-rating-image">
-                                    <img src="{{ asset('assets') }}/images/icon-google.svg" alt="">
+                                    <img src="{{ asset('assets') }}/images/icon-google.svg" alt="icon-google">
                                 </div>
                                 <!-- Customer Rating Image End -->
 
@@ -1008,7 +1008,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                     </div>
 
                                     <div class="star-rating-img">
-                                        <img src="{{ asset('assets') }}/images/customer-rating-img.svg" alt="">
+                                        <img src="{{ asset('assets') }}/images/customer-rating-img.svg" alt="customer-rating-img">
                                     </div>
                                 </div>
                                 <!-- Customer Rating Counter End -->
@@ -1049,7 +1049,7 @@ document.addEventListener('DOMContentLoaded', function () {
                          
                             <div class="why-choose-box wow fadeInUp" data-wow-delay="0.2s">
                                 <div class="icon-box">
-                                    <img src="{{ asset('assets') }}/images/icon-why-choose-1.svg" alt="">
+                                    <img src="{{ asset('assets') }}/images/icon-why-choose-1.svg" alt="why choose us">
                                 </div>
 
                                 <div class="why-choose-box-content">
@@ -1062,7 +1062,7 @@ document.addEventListener('DOMContentLoaded', function () {
                       
                             <div class="why-choose-box wow fadeInUp" data-wow-delay="0.2s">
                                 <div class="icon-box">
-                                    <img src="{{ asset('assets') }}/images/icon-why-choose-2.svg" alt="">
+                                    <img src="{{ asset('assets') }}/images/icon-why-choose-2.svg" alt="why choose us">
                                 </div>
 
                                 <div class="why-choose-box-content">
@@ -1092,7 +1092,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         
                         <div class="why-choose-img-1">
                             <figure class="image-anime reveal">
-                                <img src="{{ asset('assets') }}/images/why-choose-img-1.jpg" alt="">
+                                <img src="{{ asset('assets') }}/images/why-choose-img-1.jpg" alt="why choose us image">
                             </figure>
                         </div>
                       
@@ -1100,7 +1100,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     
                         <div class="why-choose-img-2">
                             <figure class="image-anime reveal">
-                                <img src="{{ asset('assets') }}/images/why-choose-img-2.jpg" alt="">
+                                <img src="{{ asset('assets') }}/images/why-choose-img-2.jpg" alt="why choose us image 2">
                             </figure>
                         </div>
                        

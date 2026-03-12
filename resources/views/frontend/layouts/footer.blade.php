@@ -28,15 +28,16 @@
                 <!-- Footer Links Start -->
                 <div class="footer-links">
                     <h3 class="mb-3">Quick Links</h3>
-                    <ul>
-                        <li><a href="{{ url('/') }}">home</a></li>
-                        <!-- <li><a href="{{ url('/insights') }}">insights</a></li> -->
-                        <li><a href="{{ url('/industries') }}">industries</a></li>
-                        <li><a href="{{ url('/services') }}">services</a></li>
-                        <li><a href="{{ url('/about') }}">about Us</a></li>
-                        <li><a href="{{ url('/contact') }}">contact</a></li>
-                        <li><a href="{{ url('/privacy-policy') }}">Privacy Policy</a></li>
-                    </ul>
+<ul>
+    <li><a href="{{ url('/') }}">home</a></li>
+    <li><a href="{{ url('/industries') }}">industries</a></li>
+    <li><a href="{{ url('/services') }}">services</a></li>
+    <li><a href="{{ url('/about') }}">about Us</a></li>
+    <li><a href="{{ url('/contact') }}">contact</a></li>
+    <li><a href="{{ url('/privacy-policy') }}">Privacy Policy</a></li>
+
+   
+</ul>
                 </div>
                 <!-- Footer Links End -->
             </div>
@@ -53,6 +54,7 @@
                                     </a>
                                     
                                 </li>
+                                
                                 @endforeach
                     </ul>
 
@@ -85,6 +87,17 @@
 
             
         </div>
+        <div class="row mt-4">
+    <div class="col-md-6"></div>
+
+    <div class="col-md-6 text-white">
+        <p style="margin:0;margin-top: -101px;">
+            <strong style="font-size:20px;">Address:</strong> 
+            Office No. 710, 7th Floor, DNK Square, 111-112 Airport Road, 
+           <br> Sakore Nagar, Viman Nagar, Pune, Maharashtra 411014
+        </p>
+    </div>
+</div>
 
         <!-- Footer Copyright Section Start -->
         <div class="footer-copyright mt-4 pt-4 border-top" style="border-color: rgba(255,255,255,0.2);">

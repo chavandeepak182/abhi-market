@@ -47,6 +47,11 @@
                             <input type="date" name="publish_date" id="publish_date" class="form-control" 
                                 value="{{ old('publish_date', \Carbon\Carbon::parse($report->publish_date)->format('Y-m-d')) }}" required>
                         </div>
+                         <div class="position-relative pb-15 form-group">
+                            <label for="author_name">Author Name</label>
+                           <input type="text" name="author_name" id="author_name" class="form-control"  value="{{ old('author_name', $report->author_name) }}" required>
+                        </div>
+
 
                         <div class="mb-3">
                             <label for="summernote" class="form-label">Description:</label>
@@ -56,6 +61,11 @@
                         <div class="mb-3">
                             <label for="mySummernote" class="form-label">Table Of Content:</label>
                             <textarea name="toc" id="mySummernote" class="form-control">{{ old('toc', $report->toc) }}</textarea>
+                        </div>
+
+                         <div class="mb-3">
+                            <label for="bio_summernote" class="form-label">Bio Author:</label>
+                            <textarea name="bio" id="bio_summernote" class="form-control">{{ old('bio', $report->bio) }}</textarea>
                         </div>
 
                     </div>
@@ -178,20 +188,34 @@
     });
 </script>
 <script>
-    $(document).ready(function() {
-        $('#mySummernote').summernote({
-            height: 250, // set editor height
-            toolbar: [
-                ['style', ['bold', 'italic', 'underline', 'clear']],
-                ['font', ['strikethrough', 'superscript', 'subscript']],
-                ['fontsize', ['fontsize']],
-                ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['insert', ['link', 'picture', 'video']],
-                ['view', ['fullscreen', 'codeview']]
-            ]
-        });
+$(document).ready(function() {
+
+    const summernoteConfig = {
+        height: 250,
+        toolbar: [
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['font', ['strikethrough', 'superscript', 'subscript']],
+            ['fontsize', ['fontsize']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['insert', ['link', 'picture', 'video']],
+            ['view', ['fullscreen', 'codeview']]
+        ]
+    };
+
+    // Description
+    $('#summernote').summernote(summernoteConfig);
+
+    // Table of Content
+    $('#mySummernote').summernote(summernoteConfig);
+
+    // Author Bio
+    $('#bio_summernote').summernote({
+        ...summernoteConfig,
+        height: 180 // slightly smaller for bio
     });
+
+});
 </script>
 <script>
     document.getElementById('add-faq').addEventListener('click', function () {

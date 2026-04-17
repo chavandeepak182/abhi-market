@@ -46,7 +46,7 @@
                     <div class="col-md-8 col-sm-5">
                          <div class="position-relative pb-15 form-group">
                             <label for="report_name">Report title</label>
-                            <input type="text" name="report_title" id="report_name" class="form-control" required>
+                            <input type="text" name="report_title" id="report_title" class="form-control" required>
                         </div>
                         <div class="position-relative pb-15 form-group">
                             <label for="report_name">Report Name</label>
@@ -56,6 +56,10 @@
                             <label for="publish_date">Publish Date</label>
                             <input type="date" name="publish_date" id="publish_date" class="form-control" required>
                         </div>
+                        <div class="position-relative pb-15 form-group">
+                            <label for="author_name">Author Name</label>
+                            <input type="text" name="author_name" id="author_name" class="form-control" required>
+                        </div>
 
                         <div class="position-relative pb-15 form-group">
                             <label for="summernote">Description</label>
@@ -64,6 +68,10 @@
                         <div class="position-relative pb-15 form-group">
                             <label for="summernote">Table Of Content</label>
                             <textarea name="toc" id="mySummernote" class="form-control"></textarea>
+                        </div>
+                        <div class="position-relative pb-15 form-group">
+                            <label for="summernote">Author Bio</label>
+                            <textarea name="bio" id="bio_summernote" class="form-control"></textarea>
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-7">
@@ -145,20 +153,34 @@
     </div>
 </div>
 <script>
-    $(document).ready(function() {
-        $('#mySummernote').summernote({
-            height: 250, // set editor height
-            toolbar: [
-                ['style', ['bold', 'italic', 'underline', 'clear']],
-                ['font', ['strikethrough', 'superscript', 'subscript']],
-                ['fontsize', ['fontsize']],
-                ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['insert', ['link', 'picture', 'video']],
-                ['view', ['fullscreen', 'codeview']]
-            ]
-        });
+$(document).ready(function() {
+
+    const summernoteConfig = {
+        height: 250,
+        toolbar: [
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['font', ['strikethrough', 'superscript', 'subscript']],
+            ['fontsize', ['fontsize']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['insert', ['link', 'picture', 'video']],
+            ['view', ['fullscreen', 'codeview']]
+        ]
+    };
+
+    // Description
+    $('#summernote').summernote(summernoteConfig);
+
+    // Table of Content
+    $('#mySummernote').summernote(summernoteConfig);
+
+    // Author Bio
+    $('#bio_summernote').summernote({
+        ...summernoteConfig,
+        height: 180 // slightly smaller for bio
     });
+
+});
 </script>
 <script>
     document.getElementById('add-faq').addEventListener('click', function () {

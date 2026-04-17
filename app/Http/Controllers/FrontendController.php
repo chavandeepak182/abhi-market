@@ -194,6 +194,8 @@ public function showBlog($slug)
         switch ($user->role_id) {
             case 4:
                 return redirect('admin/dashboard');
+            case 2: // agent
+                return redirect('agent/dashboard');
             case 1:
                 return redirect('/');
             default:
@@ -361,7 +363,7 @@ public function searchByTitle(Request $request)
         ->leftJoin('countries', 'enquiries.country_id', '=', 'countries.id')
         ->whereNull('enquiries.deleted_at')
         ->select(
-            'enquiries.enquiry_id',
+            'enquiries.id',
             'enquiries.name',
             'enquiries.email',
             'countries.name as country_name',
@@ -390,7 +392,7 @@ public function searchByTitle(Request $request)
 
             foreach ($enquiries as $enquiry) {
                 fputcsv($file, [
-                    $enquiry->enquiry_id,
+                    $enquiry->id,
                     $enquiry->name,
                     $enquiry->email,
                     $enquiry->country_name ?? '-',
@@ -413,7 +415,7 @@ public function searchByTitle(Request $request)
         $filename = 'enquiries_' . date('Y_m_d_H_i_s') . '.json';
         $data = $enquiries->map(function ($e) {
             return [
-                'id'              => $e->enquiry_id,
+                'id'              => $e->id,
                 'name'            => $e->name,
                 'email'           => $e->email,
                 'country'         => $e->country_name ?? '-',

@@ -1,11 +1,14 @@
 @extends('admin.layouts.header')
-@section('title', "Welcome to M2Square")
+@section('title', "Dashboard")
 
 @section('content')
 <div class="dashboard-body">
     <div class="row gy-4">
+
+        <!-- LEFT SIDE -->
         <div class="col-lg-9">
-            <!-- Widgets Start -->
+
+            <!-- COUNTS -->
             <div class="row gy-4">
                 <div class="col-xxl-3 col-sm-6">
                     <div class="card" onclick="window.location='{{ route('reports.index') }}';" style="cursor: pointer;">
@@ -21,6 +24,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-xxl-3 col-sm-6">
                     <div class="card" onclick="window.location='{{ route('industries.index') }}';" style="cursor: pointer;">
                         <div class="card-body">
@@ -35,6 +39,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-xxl-3 col-sm-6">
                     <div class="card" onclick="window.location='{{ route('services.index') }}';" style="cursor: pointer;">
                         <div class="card-body">
@@ -49,6 +54,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-xxl-3 col-sm-6">
                     <div class="card" onclick="window.location='{{ route('enquiries.enquiryLead') }}';" style="cursor: pointer;">
                         <div class="card-body">
@@ -64,273 +70,123 @@
                     </div>
                 </div>
             </div>
-            <!-- Widgets End -->
 
-            <!-- Top Course Start -->
+            <!-- MONTHLY REVENUE -->
             <div class="card mt-24">
                 <div class="card-body">
-                    <div class="mb-20 flex-between flex-wrap gap-8">
-                        <h4 class="mb-0">Study Statistics</h4>
-                        <div class="flex-align gap-16 flex-wrap">
-                            <div class="flex-align flex-wrap gap-16">
-                                <div class="flex-align flex-wrap gap-8">
-                                    <span class="w-8 h-8 rounded-circle bg-main-600"></span>
-                                    <span class="text-13 text-gray-600">Study</span>
-                                </div>
-                                <div class="flex-align flex-wrap gap-8">
-                                    <span class="w-8 h-8 rounded-circle bg-main-two-600"></span>
-                                    <span class="text-13 text-gray-600">Test</span>
-                                </div>
-                            </div>
-                            <select class="form-select form-control text-13 px-8 pe-24 py-8 rounded-8 w-auto">
-                                <option value="1">Yearly</option>
-                                <option value="1">Monthly</option>
-                                <option value="1">Weekly</option>
-                                <option value="1">Today</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div id="doubleLineChart" class="tooltip-style y-value-left"></div>
-                    
+                    <h4>Monthly Revenue</h4>
+                    <canvas id="revenueChart" height="100"></canvas>
                 </div>
             </div>
-            <!-- Top Course End -->
 
-            <!-- Top Course Start -->
+            <!-- LEAD STATUS -->
             <div class="card mt-24">
-                <div class="card-body">
-                    <div class="mb-20 flex-between flex-wrap gap-8">
-                        <h4 class="mb-0">Top Courses Pick for You</h4>
-                        <a href="student-courses.html" class="text-13 fw-medium text-main-600 hover-text-decoration-underline">See All</a>
-                    </div>
-                    
-                    <div class="row g-20">
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="card border border-gray-100">
-                                <div class="card-body p-8">
-                                    <a href="course-details.html" class="bg-main-100 rounded-8 overflow-hidden text-center mb-8 h-164 flex-center p-8">
-                                        <img src="{{ asset('dashboard') }}/assets/images/thumbs/course-img1.png" alt="Course Image">
-                                    </a>
-                                    <div class="p-8">
-                                        <span class="text-13 py-2 px-10 rounded-pill bg-success-50 text-success-600 mb-16">Development</span>
-                                        <h5 class="mb-0"><a href="course-details.html" class="hover-text-main-600">Full Stack Web Development</a></h5>
-
-                                        <div class="flex-align gap-8 flex-wrap mt-16">
-                                            <img src="{{ asset('dashboard') }}/assets/images/thumbs/user-img1.png" class="w-28 h-28 rounded-circle object-fit-cover" alt="User Image">
-                                            <div>
-                                                <span class="text-gray-600 text-13">Created by <a href="profile.html" class="fw-semibold text-gray-700 hover-text-main-600 hover-text-decoration-underline">Albert James</a> </span>
-                                            </div>
-                                        </div>
-
-                                        <div class="flex-align gap-8 mt-12 pt-12 border-top border-gray-100">
-                                            <div class="flex-align gap-4">
-                                                <span class="text-sm text-main-600 d-flex"><i class="ph ph-video-camera"></i></span>
-                                                <span class="text-13 text-gray-600">24 Lesson</span>
-                                            </div>
-                                            <div class="flex-align gap-4">
-                                                <span class="text-sm text-main-600 d-flex"><i class="ph ph-clock"></i></span>
-                                                <span class="text-13 text-gray-600">40 Hours</span>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="flex-between gap-4 flex-wrap mt-24">
-                                            <div class="flex-align gap-4">
-                                                <span class="text-15 fw-bold text-warning-600 d-flex"><i class="ph-fill ph-star"></i></span>
-                                                <span class="text-13 fw-bold text-gray-600">4.9</span>
-                                                <span class="text-13 fw-bold text-gray-600">(12k)</span>
-                                            </div>
-                                            <a href="course-details.html" class="btn btn-outline-main rounded-pill py-9">View Details</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="card border border-gray-100">
-                                <div class="card-body p-8">
-                                    <a href="course-details.html" class="bg-main-100 rounded-8 overflow-hidden text-center mb-8 h-164 flex-center p-8">
-                                        <img src="{{ asset('dashboard') }}/assets/images/thumbs/course-img5.png" alt="Course Image">
-                                    </a>
-                                    <div class="p-8">
-                                        <span class="text-13 py-2 px-10 rounded-pill bg-warning-50 text-warning-600 mb-16">Design</span>
-                                        <h5 class="mb-0"><a href="course-details.html" class="hover-text-main-600">Design System</a></h5>
-
-                                        <div class="flex-align gap-8 flex-wrap mt-16">
-                                            <img src="{{ asset('dashboard') }}/assets/images/thumbs/user-img5.png" class="w-28 h-28 rounded-circle object-fit-cover" alt="User Image">
-                                            <div>
-                                                <span class="text-gray-600 text-13">Created by <a href="profile.html" class="fw-semibold text-gray-700 hover-text-main-600 hover-text-decoration-underline">Albert James</a> </span>
-                                            </div>
-                                        </div>
-
-                                        <div class="flex-align gap-8 mt-12 pt-12 border-top border-gray-100">
-                                            <div class="flex-align gap-4">
-                                                <span class="text-sm text-main-600 d-flex"><i class="ph ph-video-camera"></i></span>
-                                                <span class="text-13 text-gray-600">24 Lesson</span>
-                                            </div>
-                                            <div class="flex-align gap-4">
-                                                <span class="text-sm text-main-600 d-flex"><i class="ph ph-clock"></i></span>
-                                                <span class="text-13 text-gray-600">40 Hours</span>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="flex-between gap-4 flex-wrap mt-24">
-                                            <div class="flex-align gap-4">
-                                                <span class="text-15 fw-bold text-warning-600 d-flex"><i class="ph-fill ph-star"></i></span>
-                                                <span class="text-13 fw-bold text-gray-600">4.9</span>
-                                                <span class="text-13 fw-bold text-gray-600">(12k)</span>
-                                            </div>
-                                            <a href="course-details.html" class="btn btn-outline-main rounded-pill py-9">View Details</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="card border border-gray-100">
-                                <div class="card-body p-8">
-                                    <a href="course-details.html" class="bg-main-100 rounded-8 overflow-hidden text-center mb-8 h-164 flex-center p-8">
-                                        <img src="{{ asset('dashboard') }}/assets/images/thumbs/course-img6.png" alt="Course Image">
-                                    </a>
-                                    <div class="p-8">
-                                        <span class="text-13 py-2 px-10 rounded-pill bg-danger-50 text-danger-600 mb-16">Frontend</span>
-                                        <h5 class="mb-0"><a href="course-details.html" class="hover-text-main-600">React Native Courese</a></h5>
-
-                                        <div class="flex-align gap-8 flex-wrap mt-16">
-                                            <img src="{{ asset('dashboard') }}/assets/images/thumbs/user-img6.png" class="w-28 h-28 rounded-circle object-fit-cover" alt="User Image">
-                                            <div>
-                                                <span class="text-gray-600 text-13">Created by <a href="profile.html" class="fw-semibold text-gray-700 hover-text-main-600 hover-text-decoration-underline">Albert James</a> </span>
-                                            </div>
-                                        </div>
-
-                                        <div class="flex-align gap-8 mt-12 pt-12 border-top border-gray-100">
-                                            <div class="flex-align gap-4">
-                                                <span class="text-sm text-main-600 d-flex"><i class="ph ph-video-camera"></i></span>
-                                                <span class="text-13 text-gray-600">24 Lesson</span>
-                                            </div>
-                                            <div class="flex-align gap-4">
-                                                <span class="text-sm text-main-600 d-flex"><i class="ph ph-clock"></i></span>
-                                                <span class="text-13 text-gray-600">40 Hours</span>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="flex-between gap-4 flex-wrap mt-24">
-                                            <div class="flex-align gap-4">
-                                                <span class="text-15 fw-bold text-warning-600 d-flex"><i class="ph-fill ph-star"></i></span>
-                                                <span class="text-13 fw-bold text-gray-600">4.9</span>
-                                                <span class="text-13 fw-bold text-gray-600">(12k)</span>
-                                            </div>
-                                            <a href="course-details.html" class="btn btn-outline-main rounded-pill py-9">View Details</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <div class="card-body text-center">
+                    <h4>Lead Status</h4>
+                    <div style="height:250px;">
+                        <canvas id="statusChart"></canvas>
                     </div>
                 </div>
             </div>
-            <!-- Top Course End -->
+
+            <!-- REVENUE SUMMARY -->
+            <div class="card mt-24">
+                <div class="card-body">
+                    <h4>Revenue Summary</h4>
+                    <p><strong>Total Revenue:</strong> ₹{{ number_format($totalRevenue) }}</p>
+                    <p><strong>This Month:</strong> ₹{{ number_format($currentMonthRevenue) }}</p>
+                </div>
+            </div>
+
         </div>
 
+        <!-- RIGHT SIDE -->
         <div class="col-lg-3">
-            <!-- Calendar Start -->
+
+            <!-- CALENDAR -->
             <div class="card">
                 <div class="card-body">
                     <div class="calendar">
                         <div class="calendar__header">
-                            <button type="button" class="calendar__arrow left"><i class="ph ph-caret-left"></i></button>
-                            <p class="display h6 mb-0">""</p>
-                            <button type="button" class="calendar__arrow right"><i class="ph ph-caret-right"></i></button>
+                            <button class="calendar__arrow left"><i class="ph ph-caret-left"></i></button>
+                            <p class="display h6 mb-0"></p>
+                            <button class="calendar__arrow right"><i class="ph ph-caret-right"></i></button>
                         </div>
-                    
                         <div class="calendar__week week">
-                            <div class="calendar__week-text">Su</div>
-                            <div class="calendar__week-text">Mo</div>
-                            <div class="calendar__week-text">Tu</div>
-                            <div class="calendar__week-text">We</div>
-                            <div class="calendar__week-text">Th</div>
-                            <div class="calendar__week-text">Fr</div>
-                            <div class="calendar__week-text">Sa</div>
+                            <div>Su</div><div>Mo</div><div>Tu</div>
+                            <div>We</div><div>Th</div><div>Fr</div><div>Sa</div>
                         </div>
                         <div class="days"></div>
                     </div>
                 </div>
             </div>
-            <!-- Calendar End -->
-            
-            <!-- Assignment Start -->
-            <div class="card mt-24">
-                <div class="card-body">
-                    <div class="mb-20 flex-between flex-wrap gap-8">
-                        <h4 class="mb-0">Assignments</h4>
-                        <a href="assignment.html" class="text-13 fw-medium text-main-600 hover-text-decoration-underline">See All</a>
-                    </div>
-                    <div class="p-xl-4 py-16 px-12 flex-between gap-8 rounded-8 border border-gray-100 hover-border-gray-200 transition-1 mb-16">
-                        <div class="flex-align flex-wrap gap-8">
-                            <span class="text-main-600 bg-main-50 w-44 h-44 rounded-circle flex-center text-2xl flex-shrink-0"><i class="ph-fill ph-graduation-cap"></i></span>
-                            <div>
-                                <h6 class="mb-0">Do The Research</h6>
-                                <span class="text-13 text-gray-400">Due in 9 days</span>
-                            </div>
-                        </div>
-                        <a href="assignment.html" class="text-gray-900 hover-text-main-600"><i class="ph ph-caret-right"></i></a>
-                    </div>
-                    <div class="p-xl-4 py-16 px-12 flex-between gap-8 rounded-8 border border-gray-100 hover-border-gray-200 transition-1 mb-16">
-                        <div class="flex-align flex-wrap gap-8">
-                            <span class="text-main-600 bg-main-50 w-44 h-44 rounded-circle flex-center text-2xl flex-shrink-0"><i class="ph ph-code"></i></span>
-                            <div>
-                                <h6 class="mb-0">PHP Dvelopment</h6>
-                                <span class="text-13 text-gray-400">Due in 2 days</span>
-                            </div>
-                        </div>
-                        <a href="assignment.html" class="text-gray-900 hover-text-main-600"><i class="ph ph-caret-right"></i></a>
-                    </div>
-                    <div class="p-xl-4 py-16 px-12 flex-between gap-8 rounded-8 border border-gray-100 hover-border-gray-200 transition-1">
-                        <div class="flex-align flex-wrap gap-8">
-                            <span class="text-main-600 bg-main-50 w-44 h-44 rounded-circle flex-center text-2xl flex-shrink-0"><i class="ph ph-bezier-curve"></i></span>
-                            <div>
-                                <h6 class="mb-0">Graphic Design</h6>
-                                <span class="text-13 text-gray-400">Due in 5 days</span>
-                            </div>
-                        </div>
-                        <a href="assignment.html" class="text-gray-900 hover-text-main-600"><i class="ph ph-caret-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            <!-- Assignment End -->
-            
-            <!-- Progress Bar Start -->
-            <div class="card mt-24">
-                <div class="card-header border-bottom border-gray-100">
-                    <h5 class="mb-0">My Progress</h5>
-                </div>
-                <div class="card-body">
-                <div id="radialMultipleBar"></div>
 
-                <div class="">
-                        <h6 class="text-lg mb-16 text-center"> <span class="text-gray-400">Total hour:</span> 6h 32 min</h6>
-                        <div class="flex-between gap-8 flex-wrap">
-                            <div class="flex-align flex-column">
-                                <h6 class="mb-6">60/60</h6>
-                                <span class="w-30 h-3 rounded-pill bg-main-600"></span>
-                                <span class="text-13 mt-6 text-gray-600">Completed</span>
-                            </div>
-                            <div class="flex-align flex-column">
-                                <h6 class="mb-6">60/60</h6>
-                                <span class="w-30 h-3 rounded-pill bg-main-two-600"></span>
-                                <span class="text-13 mt-6 text-gray-600">Completed</span>
-                            </div>
-                            <div class="flex-align flex-column">
-                                <h6 class="mb-6">60/60</h6>
-                                <span class="w-30 h-3 rounded-pill bg-gray-500"></span>
-                                <span class="text-13 mt-6 text-gray-600">Completed</span>
-                            </div>
+            <!-- RECENT LEADS -->
+            <div class="card mt-24">
+                <div class="card-body">
+                    <h5>Recent Leads</h5>
+
+                    @foreach(DB::table('enquiries')->latest()->limit(5)->get() as $lead)
+                        <div class="mb-2">
+                            <strong>{{ $lead->name }}</strong><br>
+                            <small>{{ ucfirst($lead->status) }}</small>
                         </div>
-                </div>
+                    @endforeach
                 </div>
             </div>
-            <!-- Progress bar end -->
+
         </div>
     </div>
 </div>
+
+<!-- CHART JS -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+// Monthly Revenue Chart
+new Chart(document.getElementById('revenueChart'), {
+    type: 'bar',
+    data: {
+        labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+        datasets: [{
+            label: 'Monthly Revenue',
+            data: @json($months),
+            borderWidth: 1
+        }]
+    }
+});
+
+// Lead Status Doughnut Chart (FIXED SIZE)
+new Chart(document.getElementById('statusChart'), {
+    type: 'doughnut',
+    data: {
+        labels: ['New', 'Contacted', 'Converted', 'Not Interested'],
+        datasets: [{
+            data: [
+                {{ $statusCounts['new'] ?? 0 }},
+                {{ $statusCounts['contacted'] ?? 0 }},
+                {{ $statusCounts['converted'] ?? 0 }},
+                {{ $statusCounts['not_interested'] ?? 0 }}
+            ],
+            backgroundColor: [
+                '#0d6efd',
+                '#ffc107',
+                '#198754',
+                '#dc3545'
+            ]
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '70%',
+        plugins: {
+            legend: {
+                position: 'bottom'
+            }
+        }
+    }
+});
+</script>
+
 @endsection

@@ -3,32 +3,96 @@
 
 @section('content')
 <div class="dashboard-body">
-    <div class="breadcrumb-with-buttons mb-24 flex-between flex-wrap gap-8">
-        <!-- Breadcrumb Start -->
-        <div class="breadcrumb mb-24">
-            <ul class="flex-align gap-4">
-                <li><a href="{{ url('admin/dashboard') }}" class="text-gray-200 fw-normal text-15 hover-text-main-600">Dashboard</a></li>
-                <li><span class="text-gray-500 fw-normal d-flex"><i class="ph ph-caret-right"></i></span></li>
-                <li><span class="text-main-600 fw-normal text-15">All Enquiries</span></li>
+    <div class="breadcrumb-with-buttons mb-24">
+
+    <!-- TOP ROW -->
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+
+        <!-- Breadcrumb -->
+        <div class="breadcrumb mb-0">
+            <ul class="flex-align gap-4 mb-0">
+                <li>
+                    <a href="{{ url('admin/dashboard') }}" class="text-gray-200 fw-normal text-15 hover-text-main-600">
+                        Dashboard
+                    </a>
+                </li>
+                <li>
+                    <span class="text-gray-500 d-flex">
+                        <i class="ph ph-caret-right"></i>
+                    </span>
+                </li>
+                <li>
+                    <span class="text-main-600 fw-normal text-15">
+                        All Enquiries
+                    </span>
+                </li>
             </ul>
         </div>
 
-        <!-- Export Option -->
-        <div class="flex-align gap-8 flex-wrap">
+        <!-- Right Side (Export + Message) -->
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+
             @if (session('status'))
-                <div class="alert alert-success">{{ session('status') }}</div>
+                <div class="alert alert-success mb-0 py-2 px-3">
+                    {{ session('status') }}
+                </div>
             @endif
-            <div class="flex-align text-gray-500 text-13 border border-gray-100 rounded-4 ps-20 focus-border-main-600 bg-white">
-                <span class="text-lg"><i class="ph ph-layout"></i></span>
-                <select class="form-control ps-8 pe-20 py-16 border-0 text-inherit rounded-4 text-center" id="exportOptions">
-                    <option value="" selected disabled>Export</option>
-                    <option value="csv">CSV</option>
-                    <option value="json">JSON</option>
-                </select>
-            </div>
+
+            <select class="form-control" id="exportOptions" style="width:120px;">
+                <option value="" selected disabled>Export</option>
+                <option value="csv">CSV</option>
+                <option value="json">JSON</option>
+            </select>
+
         </div>
+
     </div>
 
+    <!-- FILTER ROW -->
+    <form method="GET" action="{{ url('admin/enquiries') }}" class="row g-2 mt-3">
+
+        <!-- Status -->
+        <div class="col-md-2">
+            <select name="status" class="form-control">
+                <option value="">All Status</option>
+                <option value="new" {{ request('status')=='new' ? 'selected' : '' }}>New</option>
+                <option value="contacted" {{ request('status')=='contacted' ? 'selected' : '' }}>Contacted</option>
+                <option value="converted" {{ request('status')=='converted' ? 'selected' : '' }}>Converted</option>
+                <option value="not_interested" {{ request('status')=='not_interested' ? 'selected' : '' }}>Not Interested</option>
+            </select>
+        </div>
+
+        <!-- Agent -->
+        <div class="col-md-2">
+            <select name="agent" class="form-control">
+                <option value="">All Agents</option>
+                @foreach($agents as $agent)
+                    <option value="{{ $agent->id }}" {{ request('agent')==$agent->id ? 'selected' : '' }}>
+                        {{ $agent->name }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        <!-- From Date -->
+        <div class="col-md-2">
+            <input type="date" name="from_date" class="form-control" value="{{ request('from_date') }}">
+        </div>
+
+        <!-- To Date -->
+        <div class="col-md-2">
+            <input type="date" name="to_date" class="form-control" value="{{ request('to_date') }}">
+        </div>
+
+        <!-- Buttons -->
+        <div class="col-md-2 d-flex gap-2">
+            <button class="btn btn-primary w-100">Filter</button>
+            <a href="{{ url('admin/enquiries') }}" class="btn btn-secondary w-100">Reset</a>
+        </div>
+
+    </form>
+
+</div>
     <div class="card overflow-hidden">
         <div class="card-body p-0 overflow-x-auto">
             <table id="studentTable" class="table table-striped">
@@ -38,6 +102,7 @@
                         <th>ID</th>
                         <th>Name</th>
                         <th>Email ID</th>
+                        <th>Usage type </th>
                         <th>country</th>
                         <th>Mobile No.</th>
                         <th>Page</th>
@@ -50,9 +115,16 @@
                     @foreach($enquiries as $enquiry)
                     <tr>
                         <td class="fixed-width"><div class="form-check"><input class="form-check-input" type="checkbox"></div></td>
-                        <td><span class="fw-medium text-gray-300">{{ $enquiry->enquiry_id }}</span></td>
+                        <td><span class="fw-medium text-gray-300">{{ $enquiry->id }}</span></td>
                         <td><span class="fw-medium text-gray-300">{{ $enquiry->name }}</span></td>
                         <td><span class="fw-medium text-gray-300">{{ $enquiry->email }}</span></td>
+                        <td>
+                            @if($enquiry->usage_type == 'office')
+                                <span class="badge bg-success">Office</span>
+                            @else
+                                <span class="badge bg-secondary">Personal</span>
+                            @endif
+                        </td>
                         <td><span class="fw-medium text-gray-300">{{ $enquiry->country_name }}</span></td>
                         <td><span class="fw-medium text-gray-300">{{ $enquiry->contact }}</span></td>
                         <td><span class="fw-medium text-gray-300">{{ $enquiry->page_name }}</span></td>
@@ -77,7 +149,7 @@
                             </button>
 
                             <!-- Delete Button -->
-                            <form action="{{ route('enquiries.destroy', $enquiry->enquiry_id) }}" 
+                            <form action="{{ route('enquiries.destroy', $enquiry->id) }}" 
                                 method="POST" 
                                 style="display:inline-block;" 
                                 onsubmit="return confirm('Are you sure you want to delete this enquiry?')">
@@ -113,29 +185,75 @@
             <div class="modal-body mb-10">
                 <form class="user" id="addUser" method="post">
                     @csrf
-                    <input type="hidden" id="modal_enquiry_id" name="enquiry_id">
+                    <input type="hidden" id="modal_enquiry_id" name="id">
+
                     <div class="row">
+
+                        <!-- Readonly Fields -->
                         <div class="form-group col-md-4">
-                            <label class="col-form-label">Name:</label>
-                            <input type="text" class="form-control" id="modal_name" name="name" readonly>
+                            <label>Name:</label>
+                            <input type="text" class="form-control" id="modal_name" readonly>
                         </div>
+
                         <div class="form-group col-md-4">
-                            <label class="col-form-label">Email ID:</label>
-                            <input type="email" class="form-control" id="modal_email" name="email" readonly>
+                            <label>Email:</label>
+                            <input type="email" class="form-control" id="modal_email" readonly>
                         </div>
+
                         <div class="form-group col-md-4">
-                            <label class="col-form-label">Mobile Number:</label>
-                            <input type="tel" class="form-control" id="modal_contact" name="contact" readonly>
+                            <label>Mobile:</label>
+                            <input type="tel" class="form-control" id="modal_contact" readonly>
                         </div>
-                        <div class="form-group col-md-4">
-                            <label class="col-form-label">Mobile Number:</label>
-                            <input type="tel" class="form-control" id="modal_contact" name="contact" readonly>
-                        </div>
+
                         <div class="form-group col-12">
-                            <label class="col-form-label">Message:</label>
-                            <textarea class="form-control" id="modal_message" name="message" rows="5" readonly></textarea>
+                            <label>Message:</label>
+                            <textarea class="form-control" id="modal_message" rows="3" readonly></textarea>
                         </div>
+                      @if(session('role_id') != config('constants.roles.agent'))
+                        <div class="form-group col-md-4">
+                            <label>Assign To (Agent)</label>
+                            <select name="assigned_to" id="modal_assigned_to" class="form-control">
+                                <option value="">Select Agent</option>
+                                @foreach($agents as $agent)
+                                    <option value="{{ $agent->id }}">{{ $agent->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    @endif
+                        <!-- ✅ NEW CRM FIELDS -->
+
+                        <div class="form-group col-md-4">
+                            <label>Status</label>
+                            <select name="status" id="modal_status" class="form-control">
+                                <option value="new">New</option>
+                                <option value="contacted">Contacted</option>
+                                <option value="not_interested">Not Interested</option>
+                                <option value="converted">Converted</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label>Follow-up Date</label>
+                            <input type="datetime-local" name="followup_date" id="modal_followup" class="form-control">
+                        </div>
+
+                        <div class="form-group col-md-4" id="amountField" style="display:none;">
+                            <label>Converted Amount</label>
+                            <input type="number" step="0.01" name="converted_amount" id="modal_amount" class="form-control">
+                        </div>
+
+                        <div class="form-group col-12">
+                            <label>Remark</label>
+                            <textarea name="remark" id="modal_remark" class="form-control"></textarea>
+                        </div>
+
                     </div>
+
+                    <!-- Submit button -->
+                    <div class="mt-3 text-end">
+                        <button type="submit" class="btn btn-primary">Update Lead</button>
+                    </div>
+
                 </form>
             </div>
         </div>
@@ -144,21 +262,87 @@
 
 <!-- JavaScript for Populating Modal -->
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const viewButtons = document.querySelectorAll('.view-enquiry-btn');
+document.addEventListener('DOMContentLoaded', function () {
 
-        viewButtons.forEach(button => {
-            button.addEventListener('click', function () {
-                const enquiry = JSON.parse(this.getAttribute('data-enquiry'));
+    const viewButtons = document.querySelectorAll('.view-enquiry-btn');
 
-                document.getElementById('modal_enquiry_id').value = enquiry.enquiry_id || '';
-                document.getElementById('modal_name').value = enquiry.name || '';
-                document.getElementById('modal_email').value = enquiry.email || '';
-                document.getElementById('modal_contact').value = enquiry.contact || '';
-                document.getElementById('modal_message').value = enquiry.message || '';
-            });
+    viewButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const enquiry = JSON.parse(this.getAttribute('data-enquiry'));
+
+            // Basic fields
+            document.getElementById('modal_enquiry_id').value = enquiry.id || '';
+if (document.getElementById('modal_assigned_to')) {
+    document.getElementById('modal_assigned_to').value = enquiry.assigned_to || '';
+}            document.getElementById('modal_name').value = enquiry.name || '';
+            document.getElementById('modal_email').value = enquiry.email || '';
+            document.getElementById('modal_contact').value = enquiry.contact || '';
+            document.getElementById('modal_message').value = enquiry.message || '';
+
+            // CRM fields
+            document.getElementById('modal_status').value = enquiry.status || 'new';
+
+            // Fix datetime format for input
+            if (enquiry.followup_date) {
+                document.getElementById('modal_followup').value = enquiry.followup_date.replace(' ', 'T');
+            } else {
+                document.getElementById('modal_followup').value = '';
+            }
+
+            document.getElementById('modal_remark').value = enquiry.remark || '';
+            document.getElementById('modal_amount').value = enquiry.converted_amount || '';
+
+            // Show/Hide amount
+            toggleAmountField(enquiry.status);
         });
     });
+
+    // Status change handler (ONLY ONCE)
+    document.getElementById('modal_status').addEventListener('change', function () {
+        toggleAmountField(this.value);
+    });
+
+    function toggleAmountField(status) {
+        const amountField = document.getElementById('amountField');
+
+        if (status === 'converted') {
+            amountField.style.display = 'block';
+        } else {
+            amountField.style.display = 'none';
+            document.getElementById('modal_amount').value = '';
+        }
+    }
+});
+</script>
+
+<!-- ✅ AJAX -->
+<script>
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+    }
+});
+
+$('#addUser').off('submit').on('submit', function(e) {
+    e.preventDefault();
+    e.stopPropagation(); // ✅ important
+
+    $.ajax({
+        url: "{{ route('enquiry.update') }}",
+        type: "POST",
+        data: $(this).serialize(),
+        success: function(res) {
+            alert('Updated successfully');
+            location.reload();
+        },
+        error: function(err) {
+            console.log(err.responseText);
+            alert('Error: ' + err.responseText);
+        }
+    });
+
+    return false; // ✅ extra safety
+});
 </script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -172,4 +356,16 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+<script>
+document.getElementById('modal_status').addEventListener('change', function () {
+    let amountField = document.getElementById('amountField');
+
+    if (this.value === 'converted') {
+        amountField.style.display = 'block';
+    } else {
+        amountField.style.display = 'none';
+    }
+});
+</script>
+
 @endsection

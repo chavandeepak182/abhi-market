@@ -2,6 +2,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AgentController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BlogCategoryController;
@@ -89,6 +90,11 @@ Route::middleware('isAdmin')->group(function () {
         Route::get('admin/allUsers', [UsersController::class, 'allUsers'])->name('allUsers');
         Route::post('update-user-status/{id}', [UsersController::class, 'updateStatus']);
     });
+Route::middleware('isAgent')->group(function () {
+    
+        Route::get('agent/dashboard', [AgentController::class, 'dashboard'])->name('agent.dashboard');
+      
+    });
 
 
 
@@ -144,17 +150,21 @@ Route::get('/signup', function () {
 
 
 //enquiry
-Route::get('admin/enquiries', [EnquiryController::class, 'enquiryLead'])->name('enquiries.enquiryLead');
 Route::get('admin/contact', [EnquiryController::class, 'contactLead'])->name('enquiries.contactLead');
-
 Route::delete('/admin/enquiries/{id}', [EnquiryController::class, 'destroy'])->name('enquiries.destroy');
 Route::get('admin/enquiries/export/{type}', [FrontendController::class, 'export'])->name('enquiries.export');
+Route::delete('/admin/enquiries/{id}', [EnquiryController::class, 'destroy'])->name('enquiries.destroy');
+Route::middleware(['isAdminAgent'])->group(function () {
 
+    Route::get('admin/enquiries', [EnquiryController::class, 'enquiryLead'])->name('enquiries.enquiryLead');
+
+    Route::post('/enquiry/update', [EnquiryController::class, 'update'])->name('enquiry.update');
+
+});
 
 //enquiry form
 Route::get('enquiry', [EnquiryController::class, 'showForm'])->name('enquiry.form');
 Route::post('enquiry', [EnquiryController::class, 'store'])->name('enquiry.store');
-Route::delete('/admin/enquiries/{id}', [EnquiryController::class, 'destroy'])->name('enquiries.destroy');
 
 
 Route::get('/request-sample/{slug}/{id}', [ReportController::class, 'showSampleForm'])->name('request.sample');
@@ -177,7 +187,7 @@ Route::delete('/admin/contacts/{id}', [EnquiryController::class, 'contactdestroy
 
 
 //banner
-Route::middleware('isPartner')->group(function () {
+Route::middleware('isAdminAgent')->group(function () {
 
     Route::prefix('admin')->group(function () {
         Route::get('/banners', [BannerController::class, 'index'])->name('banners.index');
@@ -208,18 +218,20 @@ Route::middleware('isAdmin')->group(function () {
 Route::get('/reports/search', [FrontendController::class, 'search'])->name('reports.search');
 Route::get('/admin/reports/search-title', [FrontendController::class, 'searchByTitle'])->name('reports.searchByTitle');
 
-Route::middleware('isAdmin')->group(function () {
-//Reports
-Route::get('admin/reports', [ReportController::class, 'index'])->name('reports.index');
-Route::get('/reports/create', [ReportController::class, 'create'])->name('reports.create');
-Route::post('/reports/store', [ReportController::class, 'storeReport'])->name('reports.store');
-Route::get('/reports/edit/{id}', [ReportController::class, 'edit'])->name('reports.edit');
-Route::put('/reports/update/{id}', [ReportController::class, 'update'])->name('reports.update');
-Route::post('/reports/delete/{id}', [ReportController::class, 'deleteReport'])->name('reports.delete');
+Route::middleware('isAdminAgent')->group(function () {
+
+    // Reports
+    Route::get('admin/reports', [ReportController::class, 'index'])->name('reports.index');
+    Route::get('/reports/create', [ReportController::class, 'create'])->name('reports.create');
+    Route::post('/reports/store', [ReportController::class, 'storeReport'])->name('reports.store');
+    Route::get('/reports/edit/{id}', [ReportController::class, 'edit'])->name('reports.edit');
+    Route::put('/reports/update/{id}', [ReportController::class, 'update'])->name('reports.update');
+    Route::post('/reports/delete/{id}', [ReportController::class, 'deleteReport'])->name('reports.delete');
+
 });
 
 //press releases
-Route::middleware('isAdmin')->group(function () {
+Route::middleware('isAdminAgent')->group(function () {
     // Press Releases
     Route::get('admin/press-releases', [PressReleaseController::class, 'index'])->name('press-releases.index');
     Route::get('/press-releases/create', [PressReleaseController::class, 'create'])->name('press-releases.create');
@@ -235,7 +247,7 @@ Route::get('/admin/press/search-title', [PressReleaseController::class, 'searchB
 
 
 //gallery
-Route::middleware('isAdmin')->prefix('admin')->name('admin.')->group(function () {
+Route::middleware('isAdminAgent')->prefix('admin')->name('admin.')->group(function () {
 
     // Gallery Folders (full CRUD: index, create, store, show, edit, update, destroy)
     Route::resource('gallery-folder', GalleryFolderController::class);
@@ -261,7 +273,7 @@ Route::get('/services/{slug}', [ServiceController::class, 'show'])->name('servic
 Route::get('/get-categories', [ServiceController::class, 'getCategories']);
 Route::get('/get-services', [ServiceController::class, 'getServices']);
 
-Route::middleware('isAdmin')->group(function () {
+Route::middleware('isAdminAgent')->group(function () {
 //services
 Route::get('admin/services', [ServiceController::class, 'index'])->name('services.index');
 Route::post('/services/store', [ServiceController::class, 'storeService'])->name('services.store');
@@ -272,7 +284,7 @@ Route::get('admin/services/create', [ServiceController::class, 'create'])->name(
     Route::post('/services/delete/{id}', [ServiceController::class, 'delete'])->name('services.delete');
 });
 
-Route::middleware('isAdmin')->group(function () {
+Route::middleware('isAdminAgent')->group(function () {
 //insights
 Route::get('admin/insights', [InsightsController::class, 'index'])->name('insights.index');
 Route::post('/insights/store', [InsightsController::class, 'storeService'])->name('insights.store');
@@ -323,7 +335,7 @@ Route::post('/industries-subcategories/update/{id}', [IndustriesCategoryControll
         ->name('industries.subcategories.delete');
 });
 //news
-Route::middleware('isAdmin')->group(function () {
+Route::middleware('isAdminAgent')->group(function () {
     Route::prefix('admin/news')->name('admin.news.')->group(function () {
         Route::get('/', [NewsController::class, 'index'])->name('index');
         Route::get('/create', [NewsController::class, 'create'])->name('create');

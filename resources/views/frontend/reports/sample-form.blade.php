@@ -97,6 +97,17 @@
                         <div class="form-group mb-3">
                             <textarea name="message" class="form-control" placeholder="Message (Optional)"></textarea>
                         </div>
+                        <div class="form-group mb-3">
+                            <label><strong>Usage Type <span style="color:red">*</span></strong></label><br>
+
+                            <label class="me-3">
+                                <input type="radio" name="usage_type" value="personal" required> Personal Use
+                            </label>
+
+                            <label>
+                                <input type="radio" name="usage_type" value="office" required> Office Use
+                            </label>
+                        </div>
 
                         <button type="submit" class="btn btn-primary w-100">Submit</button>
                     </form>

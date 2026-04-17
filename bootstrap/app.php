@@ -4,6 +4,7 @@ use App\Http\Middleware\IsAdminMiddleware;
 use App\Http\Middleware\IsAgentMiddleware;
 use App\Http\Middleware\IsPartnerMiddleware;
 use App\Http\Middleware\IsUserMiddleware;
+use App\Http\Middleware\IsAdminOrAgentMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -19,6 +20,7 @@ return Application::configure(basePath: dirname(__DIR__))
        $middleware->alias([
             'isAdmin' => IsAdminMiddleware::class,
             'isAgent' => IsAgentMiddleware::class,
+            'isAdminAgent' => IsAdminOrAgentMiddleware::class,
             'isPartner' => IsPartnerMiddleware::class,
             'isUser' => IsUserMiddleware::class,
        ]);

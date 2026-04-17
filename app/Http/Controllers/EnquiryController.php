@@ -8,20 +8,121 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Twilio\Rest\Client;
 use Illuminate\Support\Facades\Http;
-
+use Carbon\Carbon;
 
 class EnquiryController extends Controller
 {
- public function enquiryLead()
+ public function enquiryLead(Request $request)
 {
-    $enquiries = DB::table('enquiries')
-        ->leftJoin('countries', 'enquiries.country_id', '=', 'countries.id')
-        ->whereNull('enquiries.deleted_at') // Exclude soft deleted
-        ->orderBy('enquiries.created_at', 'desc')
-        ->select('enquiries.*', 'countries.name as country_name')
-        ->paginate(15); // 👈 Show 25 per page
+    $roleId = session('role_id');
+    $userId = session('user_id');
 
-    return view('admin.enquiry.index', compact('enquiries'));
+    $query = DB::table('enquiries')
+        ->leftJoin('countries', 'enquiries.country_id', '=', 'countries.id')
+        ->whereNull('enquiries.deleted_at')
+        ->orderBy('enquiries.created_at', 'desc')
+        ->select('enquiries.*', 'countries.name as country_name');
+
+    // ✅ Agent restriction
+    if ($roleId == config('constants.roles.agent')) {
+        $query->where('enquiries.assigned_to', $userId);
+    }
+
+    // =========================
+    // ✅ FILTERS START
+    // =========================
+
+    // Status filter
+    if ($request->filled('status')) {
+        $query->where('enquiries.status', $request->status);
+    }
+
+    // Agent filter (only admin)
+    if ($request->filled('agent')) {
+        $query->where('enquiries.assigned_to', $request->agent);
+    }
+
+    // Date filters
+    if ($request->filled('from_date')) {
+        $query->whereDate('enquiries.created_at', '>=', $request->from_date);
+    }
+
+    if ($request->filled('to_date')) {
+        $query->whereDate('enquiries.created_at', '<=', $request->to_date);
+    }
+
+    // =========================
+    // ✅ FILTERS END
+    // =========================
+
+    $enquiries = $query->paginate(15)->appends($request->all());
+
+    // Agents list (for admin filter dropdown)
+    $agents = [];
+    if ($roleId != config('constants.roles.agent')) {
+        $agents = DB::table('users')
+            ->where('role_id', config('constants.roles.agent'))
+            ->select('id', 'name')
+            ->get();
+    }
+
+    return view('admin.enquiry.index', compact('enquiries', 'agents'));
+}
+public function update(Request $request)
+{
+    $roleId = session('role_id');
+    $userId = session('user_id');
+
+    $request->validate([
+        'id' => 'required|exists:enquiries,id',
+        'assigned_to' => 'nullable|exists:users,id',
+        'status' => 'required|in:new,contacted,not_interested,converted',
+        'followup_date' => 'nullable|date_format:Y-m-d\TH:i', // ✅ strict format
+        'remark' => 'nullable|string',
+        'converted_amount' => 'nullable|numeric'
+    ]);
+
+    // ✅ Safe datetime conversion
+    $followupDate = null;
+
+    if ($request->followup_date) {
+        $followupDate = Carbon::createFromFormat('Y-m-d\TH:i', $request->followup_date)
+            ->format('Y-m-d H:i:s');
+    }
+
+    // ✅ Base query
+    $query = DB::table('enquiries')->where('id', $request->id);
+
+    // ✅ Agent restriction
+    if ($roleId == config('constants.roles.agent')) {
+        $query->where('assigned_to', $userId);
+    }
+
+    // ✅ Update data
+    $updateData = [
+        'status' => $request->status,
+        'followup_date' => $followupDate, // ✅ fixed
+        'remark' => $request->remark,
+        'converted_amount' => $request->status == 'converted' 
+            ? $request->converted_amount 
+            : null,
+        'updated_at' => now()
+    ];
+
+    // ✅ Only admin can assign
+    if ($roleId != config('constants.roles.agent')) {
+        $updateData['assigned_to'] = $request->assigned_to;
+    }
+
+    $updated = $query->update($updateData);
+
+    if (!$updated) {
+        return response()->json([
+            'error' => 'Unauthorized or lead not found'
+        ], 403);
+    }
+
+    return response()->json(['success' => true]);
 }
 public function contactLead()
 {
@@ -56,6 +157,7 @@ public function store(Request $request)
         'company_name' => 'nullable|string|max:255',
         'country_id'   => 'nullable|exists:countries,id',
         'g-recaptcha-response' => 'required|captcha',
+        'usage_type' => 'required|in:personal,office',
     ]);
 
     \Log::info('Captcha passed:', $validated);
@@ -101,6 +203,7 @@ public function store(Request $request)
             'country_id'      => $validated['country_id'] ?? null,
             'phone_code'      => $country->phone_code ?? null,
             'visitor_country' => $visitor_country,
+            'usage_type' => $request->usage_type,
             'created_at'      => now(),
             'updated_at'      => now(),
         ]);

@@ -67,6 +67,8 @@ public function storeReport(Request $request)
         $request->validate([
             'report_name' => 'required|string',
             'report_title' => 'required|string',
+            'author_name' => 'nullable|string|max:255',   // ✅ added
+            'bio' => 'nullable|string',       
             'description' => 'nullable|string',
             'schema_markup' => 'nullable|string',
             'faq_que' => 'nullable|array',
@@ -113,6 +115,8 @@ public function storeReport(Request $request)
     $data = [
         'report_name' => $request->report_name,
         'report_title' => $request->report_title,
+         'author_name' => $request->author_name,   // ✅ added
+        'bio' => $request->bio, 
         'industry_category_id' => $request->industry_category_id,
         'publish_date' => $request->publish_date,
         'description' => $request->description,
@@ -176,8 +180,10 @@ public function storeReport(Request $request)
     $request->validate([
         'report_name' => 'required|string',
         'report_title' => 'required|string',
+        'author_name' => 'nullable|string',
         'schema_markup' => 'nullable|string',
         'description' => 'nullable|string',
+        'bio' => 'nullable|string',
         'toc' => 'nullable|string',
         'slug' => 'nullable|string|max:255',
         'meta_title' => 'nullable|string|max:255',
@@ -240,7 +246,9 @@ public function storeReport(Request $request)
     DB::table('reports')->where('id', $id)->update([
         'report_name' => $request->report_name,
         'report_title' => $request->report_title,
+        'author_name' => $request->author_name,
         'description' => $request->description,
+        'bio' => $request->bio,
         'publish_date' => $request->publish_date,
         'schema_markup' => $request->schema_markup,
         'toc' => $tocContent,

@@ -64,12 +64,14 @@
             <div class="sidebar-menu-wrapper overflow-y-auto scroll-sm">
                 <div class="p-20 pt-10">
                     <ul class="sidebar-menu">
-                        <li class="sidebar-menu__item {{ Request::is('admin/dashboard') ? 'activePage' : '' }}">
-                            <a href="{{ url('admin/dashboard') }}" class="sidebar-menu__link">
-                                <span class="icon"><i class="ph ph-squares-four"></i></span>
-                                <span class="text">Dashboard</span>
-                            </a>
-                        </li>
+                       @if(in_array(session('role_id'), [2, 4]))
+<li class="sidebar-menu__item {{ Request::is('admin/dashboard') || Request::is('agent/dashboard') ? 'activePage' : '' }}">
+    <a href="{{ session('role_id') == 4 ? url('admin/dashboard') : url('agent/dashboard') }}" class="sidebar-menu__link">
+        <span class="icon"><i class="ph ph-squares-four"></i></span>
+        <span class="text">Dashboard</span>
+    </a>
+</li>
+@endif
                         <li class="sidebar-menu__item {{ Request::is('admin/allUsers') ? 'activePage' : '' }}">
                             <a href="{{ url('admin/allUsers') }}" class="sidebar-menu__link">
                                 <span class="icon"><i class="ph ph-users-three"></i></span>
@@ -170,17 +172,17 @@
                             </ul>
                         </li>
                         @php
-                            $role_id = session('role_id'); 
+                            $roleId = session('role_id');
                         @endphp
 
-                        @if($role_id == 4)
                         <li class="sidebar-menu__item {{ Request::is('admin/enquiries') ? 'activePage' : '' }}">
                             <a href="{{ url('admin/enquiries') }}" class="sidebar-menu__link">
                                 <span class="icon"><i class="ph ph-clipboard-text"></i></span>
-                                <span class="text">All Enquiries</span>
+                                <span class="text">
+                                    {{ $roleId == config('constants.roles.agent') ? 'My Enquiries' : 'All Enquiries' }}
+                                </span>
                             </a>
                         </li>
-                        @endif
                         @php
                             $role_id = session('role_id'); 
                         @endphp

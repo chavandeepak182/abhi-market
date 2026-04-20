@@ -114,13 +114,15 @@ public function update(Request $request)
         $updateData['assigned_to'] = $request->assigned_to;
     }
 
-    $updated = $query->update($updateData);
+    $exists = (clone $query)->exists(); // check if record exists first
 
-    if (!$updated) {
+    if (!$exists) {
         return response()->json([
             'error' => 'Unauthorized or lead not found'
         ], 403);
     }
+
+    $query->update($updateData); // run update anyway
 
     return response()->json(['success' => true]);
 }

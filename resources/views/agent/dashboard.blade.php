@@ -8,7 +8,7 @@
             <!-- Widgets Start -->
             <div class="row gy-4">
                 <div class="col-xxl-3 col-sm-6">
-                    <div class="card" onclick="window.location='{{ route('reports.index') }}';" style="cursor: pointer;">
+                    <div class="card" onclick="window.location='#';" style="cursor: pointer;">
                         <div class="card-body">
                             <h4 class="mb-2">{{ $reportsCount }}</h4>
                             <span class="text-gray-600">Total Reports</span>
@@ -22,7 +22,7 @@
                     </div>
                 </div>
                 <div class="col-xxl-3 col-sm-6">
-                    <div class="card" onclick="window.location='{{ route('industries.index') }}';" style="cursor: pointer;">
+                    <div class="card" onclick="window.location='#';" style="cursor: pointer;">
                         <div class="card-body">
                             <h4 class="mb-2">{{ $industriesCount }}</h4>
                             <span class="text-gray-600">Total Industries</span>
@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div class="col-xxl-3 col-sm-6">
-                    <div class="card" onclick="window.location='{{ route('services.index') }}';" style="cursor: pointer;">
+                    <div class="card" onclick="window.location='#';" style="cursor: pointer;">
                         <div class="card-body">
                             <h4 class="mb-2">{{ $servicesCount }}</h4>
                             <span class="text-gray-600">Total Capabilities</span>

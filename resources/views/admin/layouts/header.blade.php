@@ -65,13 +65,18 @@
                 <div class="p-20 pt-10">
                     <ul class="sidebar-menu">
                        @if(in_array(session('role_id'), [2, 4]))
-<li class="sidebar-menu__item {{ Request::is('admin/dashboard') || Request::is('agent/dashboard') ? 'activePage' : '' }}">
-    <a href="{{ session('role_id') == 4 ? url('admin/dashboard') : url('agent/dashboard') }}" class="sidebar-menu__link">
-        <span class="icon"><i class="ph ph-squares-four"></i></span>
-        <span class="text">Dashboard</span>
-    </a>
-</li>
-@endif
+                        <li class="sidebar-menu__item {{ Request::is('admin/dashboard') || Request::is('agent/dashboard') ? 'activePage' : '' }}">
+                            <a href="{{ session('role_id') == 4 ? url('admin/dashboard') : url('agent/dashboard') }}" class="sidebar-menu__link">
+                                <span class="icon"><i class="ph ph-squares-four"></i></span>
+                                <span class="text">Dashboard</span>
+                            </a>
+                        </li>
+                        @endif
+                        @php
+                            $roleId = session('role_id');
+                        @endphp
+
+                        @if(in_array($roleId, [config('constants.roles.admin'), config('constants.roles.partner')]))
                         <li class="sidebar-menu__item {{ Request::is('admin/allUsers') ? 'activePage' : '' }}">
                             <a href="{{ url('admin/allUsers') }}" class="sidebar-menu__link">
                                 <span class="icon"><i class="ph ph-users-three"></i></span>
@@ -151,12 +156,14 @@
                                 </li>
                             </ul>
                         </li> -->
-                         <li class="sidebar-menu__item has-dropdown {{ Request::is('admin/press-releases') || Request::is('press-releases/create') || Request::is('press-releases/edit/*') ? 'activePage' : '' }}">
-                            <a href="/admin/press-releases" class="sidebar-menu__link">
-                                <span class="icon"><i class="ph ph-bookmarks"></i></span>
-                                <span class="text">Press Releases</span>
-                            </a>
-                        </li>
+                       
+                            <li class="sidebar-menu__item has-dropdown {{ Request::is('admin/press-releases') || Request::is('press-releases/create') || Request::is('press-releases/edit/*') ? 'activePage' : '' }}">
+                                <a href="/admin/press-releases" class="sidebar-menu__link">
+                                    <span class="icon"><i class="ph ph-bookmarks"></i></span>
+                                    <span class="text">Press Releases</span>
+                                </a>
+                            </li>
+                       
                         <li class="sidebar-menu__item has-dropdown {{ Request::is('admin/industries') || Request::is('industries/create') || Request::is('industries/edit/*') ? 'activePage' : '' }}">
                             <a href="/admin/industries" class="sidebar-menu__link">
                                 <span class="icon"><i class="ph ph-chats-teardrop"></i></span>
@@ -171,6 +178,7 @@
                                 </li>
                             </ul>
                         </li>
+                         @endif
                         @php
                             $roleId = session('role_id');
                         @endphp

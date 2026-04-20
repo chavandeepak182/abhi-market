@@ -108,6 +108,7 @@
                         <th>Page</th>
                         <th>Message</th>
                         <th>Date</th>
+                        <th>Assigned To</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -138,6 +139,17 @@
                             <span class="fw-medium text-gray-300">
                                 {{ \Carbon\Carbon::parse($enquiry->created_at)->format('d M, Y H:i') }}
                             </span>
+                        </td>
+                        <td>
+                            @if($enquiry->assigned_to)
+                                <span class="badge bg-success">
+                                    {{ $enquiry->agent_name }}
+                                </span>
+                            @else
+                                <span class="badge bg-danger">
+                                    Unassigned
+                                </span>
+                            @endif
                         </td>
                         <td>
                             <!-- View Button -->

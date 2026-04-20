@@ -18,10 +18,15 @@ class EnquiryController extends Controller
     $userId = session('user_id');
 
     $query = DB::table('enquiries')
-        ->leftJoin('countries', 'enquiries.country_id', '=', 'countries.id')
-        ->whereNull('enquiries.deleted_at')
-        ->orderBy('enquiries.created_at', 'desc')
-        ->select('enquiries.*', 'countries.name as country_name');
+    ->leftJoin('countries', 'enquiries.country_id', '=', 'countries.id')
+    ->leftJoin('users', 'enquiries.assigned_to', '=', 'users.id') // ✅ ADD THIS
+    ->whereNull('enquiries.deleted_at')
+    ->orderBy('enquiries.created_at', 'desc')
+    ->select(
+        'enquiries.*',
+        'countries.name as country_name',
+        'users.name as agent_name'
+    );
 
     // ✅ Agent restriction
     if ($roleId == config('constants.roles.agent')) {

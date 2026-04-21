@@ -285,6 +285,10 @@
                             <strong>CATEGORY NAME</strong><br>
                             <span>{!! $report->category_name !!}</span>
                         </div>
+                         <div>
+                            <strong>AUTHOR NAME</strong><br>
+                            <span>{!! $report->author_name !!}</span>
+                        </div>
                         </div>
 
 
@@ -317,6 +321,8 @@
                                         <div class="tab-content active" id="desc">
                                             <h2 style="font-size: 14pt;">Description</h2>
                                            <div class="summernote-output">{!! $report->description !!}</div>
+                                            
+
 
                                                 {{-- FAQ Section --}}
                                                 @php
@@ -347,7 +353,28 @@
                                         </div>
                                             @endif
 
+                                             <!-- AUTHOR BIOGRAPHY -->
+                                             <strong>Author Biography</strong>
+                                        @if($report->author_name || $report->bio)
+                                        <div style="
+                                            margin-top: 30px;
+                                            background: #e9f1fb;
+                                            padding: 20px;
+                                            border-radius: 10px;
+                                        ">
 
+                                            <h5 style="margin-bottom:5px; font-weight:600;">
+                                                {{ $report->author_name }}
+                                            </h5>
+
+                                            <hr>
+
+                                            <p style="font-size:14px; color:#333; line-height:1.6;">
+                                                {!! $report->bio !!}
+                                            </p>
+
+                                        </div>
+                                        @endif
                                             @if($hasToc)
                                                 <div class="tab-content {{ !$hasDesc ? 'active' : '' }}" id="toc">
                                                     <div class="wow fadeInUp">{!! $report->toc !!}</div>
@@ -492,12 +519,12 @@
 
                                             <!-- Case Study - Automotive Sector -->
                                             
-                                            
-
+                                           
                                             <!-- Case Study - ICT Sector -->
                                             
                                         </div>
-                                                                                </div>
+                                        </div>
+                                        
                                                                                 
                                                                             </div>
                                                                     </div>

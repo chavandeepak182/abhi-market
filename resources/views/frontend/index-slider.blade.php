@@ -903,7 +903,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                                 <!-- Author Image Start -->
                                                 <div class="author-image">
                                                     <figure class="image-anime">
-                                                        <img src="{{ asset('assets') }}/images/author-2.jpg" alt="author-2">
+                                                        <img src="{{ asset('assets') }}/images/author-3.jpg" alt="author-2">
                                                     </figure>
                                                 </div>
                                                 <!-- Author Image End -->
@@ -939,7 +939,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                                 <!-- Author Image Start -->
                                                 <div class="author-image">
                                                     <figure class="image-anime">
-                                                        <img src="{{ asset('assets') }}/images/author-3.jpg" alt="author-3">
+                                                        <img src="{{ asset('assets') }}/images/author-2.jpg" alt="author-3">
                                                     </figure>
                                                 </div>
                                                 <!-- Author Image End -->

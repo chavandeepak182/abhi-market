@@ -203,6 +203,18 @@
                             </a>
                         </li>
                         @endif
+
+    @php
+    $roleId = session('role_id');
+@endphp
+@if($roleId == config('constants.roles.agent'))
+<li class="sidebar-menu__item {{ Request::is('followups') ? 'activePage' : '' }}">
+    <a href="{{ route('followups') }}" class="sidebar-menu__link">
+        <span class="icon"><i class="ph ph-calendar"></i></span>
+        <span class="text">Today Follow-up List</span>
+    </a>
+</li>
+@endif
                                               
                     </ul>
                 </div>

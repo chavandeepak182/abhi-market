@@ -160,6 +160,45 @@ Route::middleware(['isAdminAgent'])->group(function () {
 
     Route::post('/enquiry/update', [EnquiryController::class, 'update'])->name('enquiry.update');
 
+    Route::get('/followups', [EnquiryController::class, 'todayFollowups'])->name('followups');
+
+Route::get('/followup/{id}', [EnquiryController::class, 'followupDetail'])->name('followup.detail');
+Route::get('/get-followups/{id}', function($id){
+
+    $userId = session('user_id');
+    $roleId = session('role_id');
+
+    $query = DB::table('enquiry_followups')
+        ->leftJoin('users', 'enquiry_followups.user_id', '=', 'users.id')
+        ->select(
+            'enquiry_followups.*',
+            'users.name as user_name'
+        )
+        ->where('enquiry_id', $id);
+
+    // 🔥 Agent sees only their data
+    if ($roleId == config('constants.roles.agent')) {
+        $query->where('enquiry_followups.user_id', $userId);
+    }
+
+    $data = $query->orderBy('created_at','desc')->get();
+
+    $html = '';
+
+    foreach($data as $d){
+        $html .= "
+        <div style='border-bottom:1px solid #ddd; padding:8px'>
+            <b>Followed By:</b> {$d->user_name}<br>
+            <b>Status:</b> {$d->status} | 
+            <b>Type:</b> ".($d->lead_type ?? '-') ."<br>
+            <b>Date:</b> {$d->followup_date}<br>
+            <b>Remark:</b> {$d->remark}
+        </div>";
+    }
+
+    return $html ?: 'No history found';
+});
+
 });
 
 //enquiry form

@@ -185,6 +185,51 @@
     </div>    
     
 </div>
+<div class="simple-summary mt-4">
+
+    <div class="summary-title">📊 Summary</div>
+
+    <div class="summary-line">
+        <span>Total Leads</span>
+        <b>{{ $totalLeads }}</b>
+    </div>
+
+    <div class="summary-line">
+        <span>This Month</span>
+        <b>{{ $thisMonth }}</b>
+    </div>
+
+    <div class="summary-line">
+        <span>Today</span>
+        <b>{{ $todayLeads }}</b>
+    </div>
+
+</div>
+<style>
+.simple-summary {
+    max-width: 350px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-left: 445px;
+    margin-bottom: 30px;
+}
+
+.summary-title {
+    font-weight: 600;
+    margin-bottom: 10px;
+    border-bottom: 1px dashed #ccc;
+    padding-bottom: 5px;
+}
+
+.summary-line {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    font-size: 14px;
+}
+</style>
 
 <!-- Enquiry Modal -->
 <div class="modal fade" id="ViewEnquiry" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -192,6 +237,18 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Enquiry Details</h5>
+                <div style="
+    background:#eef4ff;
+    padding:10px 15px;
+    border-radius:8px;
+    margin-top:10px;
+    margin-bottom:10px;
+    border-left:4px solid #3b82f6;
+    margin-left: 50px;
+">
+    
+    <span id="modal_page_name" style="font-weight:500;"></span>
+</div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body mb-10">
@@ -216,6 +273,10 @@
                             <label>Mobile:</label>
                             <input type="tel" class="form-control" id="modal_contact" readonly>
                         </div>
+                                            <div class="form-group col-md-4">
+                        <label>Country:</label>
+                        <input type="text" class="form-control" id="modal_country" readonly>
+                    </div>
 
                         <div class="form-group col-12">
                             <label>Message:</label>
@@ -243,6 +304,15 @@
                                 <option value="converted">Converted</option>
                             </select>
                         </div>
+                        <div class="form-group col-md-4" id="leadTypeField" style="display:none;">
+                        <label>Lead Type</label>
+                        <select name="lead_type" id="modal_lead_type" class="form-control">
+                            <option value="">Select</option>
+                            <option value="hot">Hot</option>
+                            <option value="warm">Warm</option>
+                            <option value="cold">Cold</option>
+                        </select>
+                    </div>
 
                         <div class="form-group col-md-4">
                             <label>Follow-up Date</label>
@@ -268,9 +338,16 @@
 
                 </form>
             </div>
+              <hr>
+    <h6>📜 Follow-up History</h6>
+    <div id="followHistoryBox" style="max-height:200px; overflow-y:auto; background:#f8f9fb; padding:10px;">
+        Loading...
+    </div>
         </div>
     </div>
+    
 </div>
+
 
 <!-- JavaScript for Populating Modal -->
 <script>
@@ -279,8 +356,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const viewButtons = document.querySelectorAll('.view-enquiry-btn');
 
     viewButtons.forEach(button => {
-        button.addEventListener('click', function () {
-            const enquiry = JSON.parse(this.getAttribute('data-enquiry'));
+       button.addEventListener('click', function () {
+
+    const enquiry = JSON.parse(this.getAttribute('data-enquiry')); // ✅ ADD THIS
+    document.getElementById('modal_country').value = enquiry.country_name || '-';
+
+    document.getElementById('modal_page_name').innerText = enquiry.page_name || '-';
 
             // Basic fields
             document.getElementById('modal_enquiry_id').value = enquiry.id || '';
@@ -305,25 +386,40 @@ if (document.getElementById('modal_assigned_to')) {
             document.getElementById('modal_amount').value = enquiry.converted_amount || '';
 
             // Show/Hide amount
-            toggleAmountField(enquiry.status);
+            toggleFields(enquiry.status);
+              // ✅ ADD THIS EXACTLY HERE
+        fetch('/get-followups/' + enquiry.id)
+        .then(res => res.text())
+        .then(data => {
+            document.getElementById('followHistoryBox').innerHTML = data;
+        });
         });
     });
 
     // Status change handler (ONLY ONCE)
-    document.getElementById('modal_status').addEventListener('change', function () {
-        toggleAmountField(this.value);
-    });
+ document.getElementById('modal_status').addEventListener('change', function () {
+    toggleFields(this.value);
+});
+   function toggleFields(status) {
+    const amountField = document.getElementById('amountField');
+    const leadTypeField = document.getElementById('leadTypeField');
 
-    function toggleAmountField(status) {
-        const amountField = document.getElementById('amountField');
-
-        if (status === 'converted') {
-            amountField.style.display = 'block';
-        } else {
-            amountField.style.display = 'none';
-            document.getElementById('modal_amount').value = '';
-        }
+    // Converted → show amount
+    if (status === 'converted') {
+        amountField.style.display = 'block';
+    } else {
+        amountField.style.display = 'none';
+        document.getElementById('modal_amount').value = '';
     }
+
+    // Contacted → show Hot/Warm/Cold
+    if (status === 'contacted') {
+        leadTypeField.style.display = 'block';
+    } else {
+        leadTypeField.style.display = 'none';
+        document.getElementById('modal_lead_type').value = '';
+    }
+}
 });
 </script>
 

@@ -51,7 +51,7 @@
     <div class="page-title">
     📋 Today Follow-ups 
     <span class="badge bg-primary">{{ $todayCount }}</span>
-</div>
+</div>w
 
     <table class="table table-hover table-custom">
         <thead>

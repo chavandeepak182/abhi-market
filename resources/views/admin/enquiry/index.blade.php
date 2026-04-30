@@ -50,6 +50,12 @@
 
     <!-- FILTER ROW -->
     <form method="GET" action="{{ url('admin/enquiries') }}" class="row g-2 mt-3">
+                <!-- Email -->
+                <div class="col-md-2">
+                    <input type="text" name="email" class="form-control" 
+                        placeholder="Search Email" 
+                        value="{{ request('email') }}">
+                </div>
 
         <!-- Status -->
         <div class="col-md-2">
@@ -83,6 +89,7 @@
         <div class="col-md-2">
             <input type="date" name="to_date" class="form-control" value="{{ request('to_date') }}">
         </div>
+
 
         <!-- Buttons -->
         <div class="col-md-2 d-flex gap-2">

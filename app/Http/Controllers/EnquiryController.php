@@ -59,6 +59,10 @@ class EnquiryController extends Controller
     if ($request->filled('to_date')) {
         $query->whereDate('enquiries.created_at', '<=', $request->to_date);
     }
+    // Email filter
+if ($request->filled('email')) {
+    $query->where('enquiries.email', 'like', '%' . $request->email . '%');
+}
 
     // =========================
     // ✅ FILTERS END
@@ -445,7 +449,7 @@ public function store(Request $request)
 public function destroy($id)
 {
     DB::table('enquiries')
-        ->where('enquiry_id', $id)
+       ->where('id', $id) 
         ->update([
             'deleted_at' => now()
         ]);

@@ -290,7 +290,8 @@ public function update(Request $request)
         'status' => 'required|in:new,contacted,not_interested,converted',
         'followup_date' => 'nullable|date_format:Y-m-d\TH:i',
         'remark' => 'nullable|string',
-        'converted_amount' => 'nullable|numeric'
+        'converted_amount' => 'nullable|numeric',
+        'job_title' => 'nullable|string|max:255'
     ]);
 
     // ✅ Convert date
@@ -318,6 +319,7 @@ public function update(Request $request)
         'status' => $request->status,
         'followup_date' => $followupDate,
         'remark' => $request->remark,
+         'job_title' => $request->job_title,
         'converted_amount' => $request->status == 'converted' 
             ? $request->converted_amount 
             : null,
@@ -341,6 +343,7 @@ public function update(Request $request)
     'remark'       => $request->remark,
     'status'       => $request->status,
     'lead_type'    => $request->lead_type,
+    'job_title'     => $request->job_title,
     'user_id'      => session('user_id'), // ✅ KEEP HERE
     'created_at'   => now()
 ]);

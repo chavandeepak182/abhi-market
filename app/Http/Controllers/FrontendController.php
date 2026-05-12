@@ -356,13 +356,46 @@ public function searchByTitle(Request $request)
 
 //export enquiery
 
-  public function export($type)
+public function export(Request $request, $type)
 {
-    // Fetch only non-deleted enquiries, joined with countries
-    $enquiries = DB::table('enquiries')
+    $query = DB::table('enquiries')
         ->leftJoin('countries', 'enquiries.country_id', '=', 'countries.id')
-        ->whereNull('enquiries.deleted_at')
-        ->select(
+        ->whereNull('enquiries.deleted_at');
+
+    // =========================
+    // APPLY FILTERS
+    // =========================
+
+    // Status
+    if ($request->filled('status')) {
+        $query->where('enquiries.status', $request->status);
+    }
+
+    // Agent
+    if ($request->filled('agent')) {
+        $query->where('enquiries.assigned_to', $request->agent);
+    }
+
+    // Email
+    if ($request->filled('email')) {
+        $query->where('enquiries.email', 'like', '%' . $request->email . '%');
+    }
+
+    // From Date
+    if ($request->filled('from_date')) {
+        $query->whereDate('enquiries.created_at', '>=', $request->from_date);
+    }
+
+    // To Date
+    if ($request->filled('to_date')) {
+        $query->whereDate('enquiries.created_at', '<=', $request->to_date);
+    }
+
+    // =========================
+    // GET DATA
+    // =========================
+
+    $enquiries = $query->select(
             'enquiries.id',
             'enquiries.name',
             'enquiries.email',
@@ -373,31 +406,49 @@ public function searchByTitle(Request $request)
             'enquiries.visitor_country',
             'enquiries.created_at'
         )
-        ->orderByDesc('enquiries.created_at')
+        ->orderBy('enquiries.created_at', 'desc')
         ->get();
 
-    // --- CSV Export ---
-    if ($type === 'csv') {
+    // =========================
+    // CSV EXPORT
+    // =========================
+
+    if ($type == 'csv') {
+
         $filename = 'enquiries_' . date('Y_m_d_H_i_s') . '.csv';
+
         $headers = [
             'Content-Type' => 'text/csv',
             'Content-Disposition' => "attachment; filename=\"$filename\"",
         ];
 
-        $columns = ['ID', 'Name', 'Email', 'Country', 'Phone Code', 'Contact', 'Visitor Country', 'Page', 'Date'];
+        $callback = function () use ($enquiries) {
 
-        $callback = function() use ($enquiries, $columns) {
             $file = fopen('php://output', 'w');
-            fputcsv($file, $columns);
 
+            // Header Row
+            fputcsv($file, [
+                'ID',
+                'Name',
+                'Email',
+                'Country',
+                'Phone Code',
+                'Contact',
+                'Visitor Country',
+                'Page',
+                'Date'
+            ]);
+
+            // Data Rows
             foreach ($enquiries as $enquiry) {
+
                 fputcsv($file, [
                     $enquiry->id,
                     $enquiry->name,
                     $enquiry->email,
                     $enquiry->country_name ?? '-',
                     $enquiry->phone_code ?? '-',
-                    $enquiry->contact,
+                    $enquiry->contact ?? '-',
                     $enquiry->visitor_country ?? '-',
                     $enquiry->page_name ?? '-',
                     Carbon::parse($enquiry->created_at)->format('d M, Y H:i'),
@@ -410,28 +461,32 @@ public function searchByTitle(Request $request)
         return Response::stream($callback, 200, $headers);
     }
 
-    // --- JSON Export ---
-    elseif ($type === 'json') {
+    // =========================
+    // JSON EXPORT
+    // =========================
+
+    if ($type == 'json') {
+
         $filename = 'enquiries_' . date('Y_m_d_H_i_s') . '.json';
+
         $data = $enquiries->map(function ($e) {
+
             return [
-                'id'              => $e->id,
-                'name'            => $e->name,
-                'email'           => $e->email,
-                'country'         => $e->country_name ?? '-',
-                'phone_code'      => $e->phone_code ?? '-',
-                'contact'         => $e->contact,
+                'id' => $e->id,
+                'name' => $e->name,
+                'email' => $e->email,
+                'country' => $e->country_name ?? '-',
+                'phone_code' => $e->phone_code ?? '-',
+                'contact' => $e->contact ?? '-',
                 'visitor_country' => $e->visitor_country ?? '-',
-                'page'            => $e->page_name ?? '-',
-                'date'            => Carbon::parse($e->created_at)->format('d M, Y H:i'),
+                'page' => $e->page_name ?? '-',
+                'date' => Carbon::parse($e->created_at)->format('d M, Y H:i'),
             ];
         });
 
-        return response()->streamDownload(function() use ($data) {
-            echo $data->toJson(JSON_PRETTY_PRINT);
-        }, $filename);
+        return response()->json($data);
     }
 
-    return redirect()->back()->with('status', 'Invalid export type selected.');
+    return back()->with('status', 'Invalid export type');
 }
 }

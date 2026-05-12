@@ -280,6 +280,13 @@
                             <label>Mobile:</label>
                             <input type="tel" class="form-control" id="modal_contact" readonly>
                         </div>
+                        <div class="form-group col-md-4">
+                            <label>Job Title:</label>
+                            <input type="text" 
+                                class="form-control" 
+                                id="modal_job_title" 
+                                name="job_title">
+                        </div>
                                             <div class="form-group col-md-4">
                         <label>Country:</label>
                         <input type="text" class="form-control" id="modal_country" readonly>
@@ -377,6 +384,7 @@ if (document.getElementById('modal_assigned_to')) {
 }            document.getElementById('modal_name').value = enquiry.name || '';
             document.getElementById('modal_email').value = enquiry.email || '';
             document.getElementById('modal_contact').value = enquiry.contact || '';
+            document.getElementById('modal_job_title').value = enquiry.job_title || '';
             document.getElementById('modal_message').value = enquiry.message || '';
 
             // CRM fields
@@ -460,15 +468,16 @@ $('#addUser').off('submit').on('submit', function(e) {
 });
 </script>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const exportSelect = document.getElementById('exportOptions');
-    exportSelect.addEventListener('change', function() {
-        const type = this.value;
-        if (type) {
-            window.location.href = `/admin/enquiries/export/${type}`;
-            this.selectedIndex = 0; // Reset dropdown after click
-        }
-    });
+document.getElementById('exportOptions').addEventListener('change', function () {
+
+    let type = this.value;
+
+    // Current filters from URL
+    let params = new URLSearchParams(window.location.search);
+
+    // Redirect with filters
+    window.location.href =
+        "{{ url('admin/enquiries/export') }}/" + type + "?" + params.toString();
 });
 </script>
 <script>

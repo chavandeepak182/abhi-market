@@ -158,7 +158,7 @@ public function showBlog($slug)
 
         // Fetch user data including the password
         $users = DB::select('
-            SELECT u.id, u.name, u.email_id, u.password, p.mobile_no, r.id as role_id, r.name as role_name, u.is_email_verify
+            SELECT u.id, u.name, u.email_id, u.password, u.can_assign_leads, p.mobile_no, r.id as role_id, r.name as role_name, u.is_email_verify
             FROM users u
             JOIN profile p ON u.id = p.user_id
             JOIN roles r ON r.id = u.role_id
@@ -189,6 +189,7 @@ public function showBlog($slug)
         Session::put('user_id', $user->id);
         Session::put('role_id', $user->role_id);
         Session::put('email', $user->email_id);
+        Session::put('can_assign_leads', $user->can_assign_leads);
 
         // Redirect based on role_id
         switch ($user->role_id) {
@@ -401,6 +402,8 @@ public function export(Request $request, $type)
             'enquiries.email',
             'countries.name as country_name',
             'enquiries.phone_code',
+            'enquiries.usage_type',
+            'enquiries.job_title',
             'enquiries.contact',
             'enquiries.page_name',
             'enquiries.visitor_country',
@@ -433,6 +436,8 @@ public function export(Request $request, $type)
                 'Email',
                 'Country',
                 'Phone Code',
+                'Usage Type',
+                'Job Title',
                 'Contact',
                 'Visitor Country',
                 'Page',
@@ -448,6 +453,8 @@ public function export(Request $request, $type)
                     $enquiry->email,
                     $enquiry->country_name ?? '-',
                     $enquiry->phone_code ?? '-',
+                    $enquiry->usage_type ?? '-',
+                    $enquiry->job_title ?? '-',
                     $enquiry->contact ?? '-',
                     $enquiry->visitor_country ?? '-',
                     $enquiry->page_name ?? '-',
@@ -477,6 +484,8 @@ public function export(Request $request, $type)
                 'email' => $e->email,
                 'country' => $e->country_name ?? '-',
                 'phone_code' => $e->phone_code ?? '-',
+                'usage_type' => $e->usage_type ?? '-',
+                'job_title' => $e->job_title ?? '-',
                 'contact' => $e->contact ?? '-',
                 'visitor_country' => $e->visitor_country ?? '-',
                 'page' => $e->page_name ?? '-',

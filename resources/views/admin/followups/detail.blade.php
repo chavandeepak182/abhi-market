@@ -49,22 +49,41 @@
                 <h5>👤 Lead Details</h5>
 
                 <div class="info-box">
-                    <p><strong> {{ $enquiry->page_name ?? '-' }}</strong></p>
-                    <p><b>{{ $enquiry->name }}</b></p>
-                    <p>{{ $enquiry->email }}</p>
-                    <p><b>📞</b> {{ $enquiry->contact }}</p>
-                    <p>
-                        <b>🌍 Country:</b> 
-                        {{ $enquiry->country_name ?? 'N/A' }}
-                    </p>
-                    <!-- <p><b>📄</b> {{ $enquiry->page_name ?? '-' }}</p> -->
-                    <p><b></b> {{ $enquiry->message }}</p>
+
+                    @if($enquiry)
+
+                        <p><strong>{{ $enquiry->page_name ?? '-' }}</strong></p>
+
+                        <p>
+                            <b>{{ $enquiry->name ?? '-' }}</b>
+                        </p>
+
+                        <p>{{ $enquiry->email ?? '-' }}</p>
+
+                        <p>
+                            <b>📞</b> {{ $enquiry->contact ?? '-' }}
+                        </p>
+
+                        <p>
+                            <b>🌍 Country:</b>
+                            {{ $enquiry->country_name ?? 'N/A' }}
+                        </p>
+
+                        <p>{{ $enquiry->message ?? '-' }}</p>
+
+                    @else
+
+                        <p class="text-danger">Lead details not found.</p>
+
+                    @endif
+
                 </div>
 
                 <!-- FORM -->
+                 @if($enquiry)
                 <form method="POST" action="{{ route('enquiry.update') }}">
                     @csrf
-                    <input type="hidden" name="id" value="{{ $enquiry->id }}">
+                    <input type="hidden" name="id" value="{{ $enquiry->id ?? '' }}">
 
                     <label>Status</label>
                     <select name="status" id="statusSelect" class="form-control">
@@ -114,6 +133,13 @@
                         ✔ Update Follow-up
                     </button>
                 </form>
+                @else
+
+                <div class="alert alert-danger">
+                    Lead not found.
+                </div>
+
+                @endif
 
             </div>
         </div>
@@ -133,7 +159,7 @@
                             <th>Remark</th>
                         </tr>
 
-                        @foreach($followups as $f)
+                        @foreach($followups ?? [] as $f)
                         <tr>
                             <td>
                                 {{ \Carbon\Carbon::parse($f->followup_date)->format('d M Y h:i A') }}
@@ -146,7 +172,7 @@
                                                         @else bg-danger
                                                         @endif
                                                     ">
-                                                        {{ ucfirst($f->status) }}
+                                                        {{ ucfirst($f->status ?? '-') }}
                                                     </span>
                         </td>
 
@@ -164,7 +190,7 @@
 </td>
 
 
-                      <td>{{ $f->remark }}</td>
+                      <td>{{ $f->remark ?? '-' }}</td>
                         </tr>
                         @endforeach
 

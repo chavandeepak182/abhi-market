@@ -29,9 +29,25 @@ class EnquiryController extends Controller
     );
 
     // ✅ Agent restriction
-    if ($roleId == config('constants.roles.agent')) {
+   if ($roleId == config('constants.roles.agent')) {
+
+    // ✅ Team Lead Agent
+    if (session('can_assign_leads') == 1) {
+
+        $query->where(function($q) use ($userId) {
+
+            $q->where('enquiries.assigned_to', $userId)
+              ->orWhere('enquiries.assigned_by', $userId);
+
+        });
+
+    } else {
+
+        // ✅ Normal agent
         $query->where('enquiries.assigned_to', $userId);
+
     }
+}
 
     if ($request->type == 'today') {
     $query->whereDate('enquiries.followup_date', \Carbon\Carbon::today());
@@ -84,13 +100,19 @@ $todayLeads = (clone $summaryQuery)
     ->count();
 
     // Agents list (for admin filter dropdown)
-    $agents = [];
-    if ($roleId != config('constants.roles.agent')) {
-        $agents = DB::table('users')
-            ->where('role_id', config('constants.roles.agent'))
-            ->select('id', 'name')
-            ->get();
-    }
+   $agents = [];
+
+// Admin OR agents with assign permission
+if (
+    $roleId != config('constants.roles.agent') ||
+    session('can_assign_leads') == 1
+) {
+    $agents = DB::table('users')
+        ->where('role_id', config('constants.roles.agent'))
+        ->whereNull('deleted_at')
+        ->select('id', 'name')
+        ->get();
+}
 return view('admin.enquiry.index', compact(
     'enquiries',
     'agents',
@@ -329,9 +351,16 @@ public function update(Request $request)
     ];
 
     // ✅ Only admin can assign
-    if ($roleId != config('constants.roles.agent')) {
-        $updateData['assigned_to'] = $request->assigned_to;
-    }
+  if (
+    $roleId != config('constants.roles.agent') ||
+    session('can_assign_leads') == 1
+) {
+
+    $updateData['assigned_to'] = $request->assigned_to;
+
+    // ✅ Save who assigned the lead
+    $updateData['assigned_by'] = session('user_id');
+}
 
     $query->update($updateData);
 

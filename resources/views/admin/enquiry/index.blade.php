@@ -110,6 +110,7 @@
                         <th>Name</th>
                         <th>Email ID</th>
                         <th>Usage type </th>
+                        <th>Designation</th>
                         <th>country</th>
                         <th>Mobile No.</th>
                         <th>Page</th>
@@ -133,6 +134,7 @@
                                 <span class="badge bg-secondary">Personal</span>
                             @endif
                         </td>
+                        <td><span class="fw-medium text-gray-300">{{ $enquiry->job_title }}</span></td>
                         <td><span class="fw-medium text-gray-300">{{ $enquiry->country_name }}</span></td>
                         <td><span class="fw-medium text-gray-300">{{ $enquiry->contact }}</span></td>
                         <td><span class="fw-medium text-gray-300">{{ $enquiry->page_name }}</span></td>
@@ -150,7 +152,7 @@
                         <td>
                             @if($enquiry->assigned_to)
                                 <span class="badge bg-success">
-                                    {{ $enquiry->agent_name }}
+                                    {{ $enquiry->agent_name ?? 'Assigned' }}
                                 </span>
                             @else
                                 <span class="badge bg-danger">
@@ -296,13 +298,20 @@
                             <label>Message:</label>
                             <textarea class="form-control" id="modal_message" rows="3" readonly></textarea>
                         </div>
-                      @if(session('role_id') != config('constants.roles.agent'))
+                     @if(
+                            session('role_id') != config('constants.roles.agent') ||
+                            session('can_assign_leads') == 1
+                        )
                         <div class="form-group col-md-4">
                             <label>Assign To (Agent)</label>
                             <select name="assigned_to" id="modal_assigned_to" class="form-control">
                                 <option value="">Select Agent</option>
                                 @foreach($agents as $agent)
-                                    <option value="{{ $agent->id }}">{{ $agent->name }}</option>
+                                    @if($agent)
+                                        <option value="{{ $agent->id }}">
+                                            {{ $agent->name ?? 'Unknown Agent' }}
+                                        </option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>

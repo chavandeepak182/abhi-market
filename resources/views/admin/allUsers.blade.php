@@ -59,9 +59,11 @@
                                 <input class="form-check-input border-gray-200 rounded-4" type="checkbox">
                             </div>
                         </td>
-                        <td>
-                            <span class="h6 mb-0 fw-medium text-gray-300">{{ $user->name }}</span>
-                        </td>
+                       <td>
+    <span class="h6 mb-0 fw-medium text-gray-300">
+        {{ optional($user)->name ?? 'N/A' }}
+    </span>
+</td>
                         <td>
                             <span class="h6 mb-0 fw-medium text-gray-300">{{ $user->email_id }}</span>
                         </td>

@@ -25,8 +25,19 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\GalleryFolderController;
 use App\Http\Controllers\PressReleaseController;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
+Route::get('/test-mail', function () {
 
+    Mail::raw('Mail working successfully', function ($message) {
+
+        $message->to('swapnil@jfsmarketresearch.com')
+                ->subject('Laravel Mail Test');
+
+    });
+
+    return 'Mail Sent';
+});
 
 Route::get('/', [FrontendController::class, 'index'])->name('home');
 

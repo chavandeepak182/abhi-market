@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Mail;
 use Twilio\Rest\Client;
 use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
+use App\Jobs\ProcessEnquiryAI;
+
 
 class EnquiryController extends Controller
 {
@@ -396,11 +398,6 @@ public function contactLead()
     }
 public function store(Request $request)
 {
-    // Log raw captcha
-    \Log::info('Raw captcha response:', [
-        'g-recaptcha-response' => $request->input('g-recaptcha-response')
-    ]);
-
     $validated = $request->validate([
         'name'         => 'required|string|max:255',
         'email'        => 'required|email|max:255',
@@ -414,39 +411,22 @@ public function store(Request $request)
         'job_title'    => 'nullable|string|max:255',
         'company_name' => 'nullable|string|max:255',
         'country_id'   => 'nullable|exists:countries,id',
-        'g-recaptcha-response' => 'required|captcha',
-        'usage_type' => 'required|in:personal,office',
+        'usage_type'   => 'required|in:personal,office',
     ]);
 
-    \Log::info('Captcha passed:', $validated);
-
     try {
+
         // Get selected country
         $country = null;
+
         if (!empty($validated['country_id'])) {
-            $country = DB::table('countries')->where('id', $validated['country_id'])->first();
+            $country = DB::table('countries')
+                ->where('id', $validated['country_id'])
+                ->first();
         }
 
-        // Visitor country from IP
-        $ip = $request->getClientIp();
-        if ($ip === '127.0.0.1' || $ip === '::1') {
-            $ip = null;
-        }
-
-        $visitor_country = null;
-        if ($ip) {
-            try {
-                $response = Http::timeout(5)->get("https://ipapi.co/{$ip}/country_name/");
-                if ($response->successful()) {
-                    $visitor_country = $response->body();
-                }
-            } catch (\Exception $e) {
-                \Log::warning("Geo lookup failed for IP {$ip}: " . $e->getMessage());
-            }
-        }
-
-        // Insert into DB
-        DB::table('enquiries')->insert([
+        // Save enquiry
+        $enquiryId = DB::table('enquiries')->insertGetId([
             'name'            => $validated['name'],
             'email'           => $validated['email'],
             'contact'         => $validated['contact'],
@@ -460,19 +440,30 @@ public function store(Request $request)
             'company_name'    => $validated['company_name'] ?? null,
             'country_id'      => $validated['country_id'] ?? null,
             'phone_code'      => $country->phone_code ?? null,
-            'visitor_country' => $visitor_country,
-            'usage_type' => $request->usage_type,
+            'visitor_country' => null,
+            'usage_type'      => $validated['usage_type'],
             'created_at'      => now(),
             'updated_at'      => now(),
         ]);
 
-        \Log::info('Enquiry saved successfully.');
+        \Log::info('Enquiry saved successfully.', [
+            'enquiry_id' => $enquiryId
+        ]);
+
+        // Dispatch AI job
+        ProcessEnquiryAI::dispatch($enquiryId);
+
     } catch (\Exception $e) {
+
         \Log::error('Enquiry store failed: ' . $e->getMessage());
-        return back()->withErrors(['msg' => 'Something went wrong, please try again.']);
+
+        return back()->withErrors([
+            'msg' => 'Something went wrong, please try again.'
+        ]);
     }
 
-    $slug = $request->slug; // Get slug from hidden input
+    $slug = $request->slug;
+
     return redirect()->route('thank.you', $slug);
 }
 

@@ -53,7 +53,7 @@
                         <input type="hidden" name="report_title" value="{{ $report->report_title }}">
 
                         {{-- reCAPTCHA v3 hidden field --}}
-                        <input type="hidden" name="g-recaptcha-response" id="recaptchaResponse">
+                        <!-- <input type="hidden" name="g-recaptcha-response" id="recaptchaResponse"> -->
 
                         {{-- Name --}}
                         <div class="form-group mb-3">

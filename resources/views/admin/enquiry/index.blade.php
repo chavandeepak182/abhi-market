@@ -1,6 +1,45 @@
 @extends('admin.layouts.header')
 @section('title', "All Enquiries")
+<style>/* NEW lead highlight */
+.new-lead-row {
+    background-color: #fff3cd !important;
+    animation: blinkRow 1s infinite;
+}
 
+/* NEW badge */
+.new-status-blink {
+    background: red;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 5px;
+    animation: blinkText 1s infinite;
+}
+
+/* Row blinking */
+@keyframes blinkRow {
+    0% {
+        background-color: #fff3cd;
+    }
+    50% {
+        background-color: #ffe08a;
+    }
+    100% {
+        background-color: #fff3cd;
+    }
+}
+
+/* Badge blinking */
+@keyframes blinkText {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.3;
+    }
+    100% {
+        opacity: 1;
+    }
+}</style>
 @section('content')
 <div class="dashboard-body">
     <div class="breadcrumb-with-buttons mb-24">
@@ -114,18 +153,26 @@
                         <th>country</th>
                         <th>Mobile No.</th>
                         <th>Page</th>
-                        <th>Message</th>
+                        <!-- <th>Message</th> -->
                         <th>Date</th>
+                        <th>Status</th>
                         <th>Assigned To</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody id="user_table_body">
                     @foreach($enquiries as $enquiry)
-                    <tr>
+                   <tr class="{{ $enquiry->status == 'new' ? 'new-lead-row' : '' }}">
                         <td class="fixed-width"><div class="form-check"><input class="form-check-input" type="checkbox"></div></td>
                         <td><span class="fw-medium text-gray-300">{{ $enquiry->id }}</span></td>
-                        <td><span class="fw-medium text-gray-300">{{ $enquiry->name }}</span></td>
+                       <td>
+                            <a href="{{ route('enquiry.show', $enquiry->id) }}"
+                        class="lead-name-link">
+
+                            {{ $enquiry->name }}
+
+                        </a>
+                        </td>
                         <td><span class="fw-medium text-gray-300">{{ $enquiry->email }}</span></td>
                         <td>
                             @if($enquiry->usage_type == 'office')
@@ -138,7 +185,7 @@
                         <td><span class="fw-medium text-gray-300">{{ $enquiry->country_name }}</span></td>
                         <td><span class="fw-medium text-gray-300">{{ $enquiry->contact }}</span></td>
                         <td><span class="fw-medium text-gray-300">{{ $enquiry->page_name }}</span></td>
-                        <td><span class="fw-medium text-gray-300">{{ $enquiry->message }}</span></td>
+                        <!-- <td><span class="fw-medium text-gray-300">{{ $enquiry->message }}</span></td> -->
                         <!-- <td>
                                     <a href="{{ $enquiry->page_url }}" target="_blank" class="fw-medium text-primary">
                                 {{ Str::limit($enquiry->page_url, 50) }}
@@ -146,9 +193,20 @@
                         </td> -->
                         <td>
                             <span class="fw-medium text-gray-300">
-                                {{ \Carbon\Carbon::parse($enquiry->created_at)->format('d M, Y H:i') }}
+                                {{ \Carbon\Carbon::parse($enquiry->created_at)->format('d M, Y ') }}
                             </span>
                         </td>
+                        <td>
+    @if($enquiry->status == 'new')
+        <span class="badge new-status-blink">NEW</span>
+    @elseif($enquiry->status == 'contacted')
+        <span class="badge bg-warning">Contacted</span>
+    @elseif($enquiry->status == 'converted')
+        <span class="badge bg-success">Converted</span>
+    @else
+        <span class="badge bg-secondary">Not Interested</span>
+    @endif
+</td>
                         <td>
                             @if($enquiry->assigned_to)
                                 <span class="badge bg-success">
@@ -162,12 +220,10 @@
                         </td>
                         <td>
                             <!-- View Button -->
-                            <button class="btn btn-info btn-xs view-enquiry-btn" 
-                                    data-bs-toggle="modal" 
-                                    data-bs-target="#ViewEnquiry" 
-                                    data-enquiry='@json($enquiry)'>
-                                <i class="far fa-eye"></i>
-                            </button>
+                           <a href="{{ route('enquiry.view', $enquiry->id) }}"
+   class="btn btn-info btn-xs">
+    <i class="far fa-eye"></i>
+</a>
 
                             <!-- Delete Button -->
                             <form action="{{ route('enquiries.destroy', $enquiry->id) }}" 
@@ -238,138 +294,471 @@
     padding: 6px 0;
     font-size: 14px;
 }
+
+.lead-name-link {
+    color: #344054;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.lead-name-link:hover {
+    color: #0d6efd;
+    text-decoration: none;
+}
+
+
+
+
 </style>
 
 <!-- Enquiry Modal -->
-<div class="modal fade" id="ViewEnquiry" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Enquiry Details</h5>
-                <div style="
-    background:#eef4ff;
-    padding:10px 15px;
-    border-radius:8px;
-    margin-top:10px;
-    margin-bottom:10px;
-    border-left:4px solid #3b82f6;
-    margin-left: 50px;
-">
-    
-    <span id="modal_page_name" style="font-weight:500;"></span>
-</div>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body mb-10">
-                <form class="user" id="addUser" method="post">
-                    @csrf
-                    <input type="hidden" id="modal_enquiry_id" name="id">
+```html
+<div class="modal fade" id="ViewEnquiry" tabindex="-1" aria-hidden="true">
 
-                    <div class="row">
+    <div class="modal-dialog modal-dialog-centered">
 
-                        <!-- Readonly Fields -->
-                        <div class="form-group col-md-4">
-                            <label>Name:</label>
-                            <input type="text" class="form-control" id="modal_name" readonly>
-                        </div>
+        <div class="modal-content crm-card">
 
-                        <div class="form-group col-md-4">
-                            <label>Email:</label>
-                            <input type="email" class="form-control" id="modal_email" readonly>
-                        </div>
+            <!-- HEADER -->
+            <div class="crm-header d-flex justify-content-between align-items-start">
 
-                        <div class="form-group col-md-4">
-                            <label>Mobile:</label>
-                            <input type="tel" class="form-control" id="modal_contact" readonly>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label>Job Title:</label>
-                            <input type="text" 
-                                class="form-control" 
-                                id="modal_job_title" 
-                                name="job_title">
-                        </div>
-                                            <div class="form-group col-md-4">
-                        <label>Country:</label>
-                        <input type="text" class="form-control" id="modal_country" readonly>
+                <div>
+
+                    <h4 class="mb-2">
+                        Lead Details
+                    </h4>
+
+                    <div class="crm-page-box">
+
+                        <small class="text-muted d-block mb-1">
+                            Landing Page
+                        </small>
+
+                        <span id="modal_page_name"></span>
+
                     </div>
 
-                        <div class="form-group col-12">
-                            <label>Message:</label>
-                            <textarea class="form-control" id="modal_message" rows="3" readonly></textarea>
-                        </div>
-                     @if(
-                            session('role_id') != config('constants.roles.agent') ||
-                            session('can_assign_leads') == 1
-                        )
-                        <div class="form-group col-md-4">
-                            <label>Assign To (Agent)</label>
-                            <select name="assigned_to" id="modal_assigned_to" class="form-control">
-                                <option value="">Select Agent</option>
-                                @foreach($agents as $agent)
-                                    @if($agent)
-                                        <option value="{{ $agent->id }}">
-                                            {{ $agent->name ?? 'Unknown Agent' }}
-                                        </option>
-                                    @endif
-                                @endforeach
-                            </select>
-                        </div>
-                    @endif
-                        <!-- ✅ NEW CRM FIELDS -->
+                </div>
 
-                        <div class="form-group col-md-4">
-                            <label>Status</label>
-                            <select name="status" id="modal_status" class="form-control">
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"></button>
+
+            </div>
+
+            <!-- BODY -->
+            <div class="modal-body crm-body">
+
+                <form class="user" id="addUser" method="post">
+
+                    @csrf
+
+                    <input type="hidden"
+                           id="modal_enquiry_id"
+                           name="id">
+
+                    <div class="row g-4">
+
+                        <!-- NAME -->
+                        <div class="col-md-4">
+
+                            <label class="crm-label">
+                                Full Name
+                            </label>
+
+                            <input type="text"
+                                   class="form-control crm-input"
+                                   id="modal_name"
+                                   readonly>
+
+                        </div>
+
+                        <!-- EMAIL -->
+                        <div class="col-md-4">
+
+                            <label class="crm-label">
+                                Email Address
+                            </label>
+
+                            <input type="email"
+                                   class="form-control crm-input"
+                                   id="modal_email"
+                                   readonly>
+
+                        </div>
+
+                        <!-- MOBILE -->
+                        <div class="col-md-4">
+
+                            <label class="crm-label">
+                                Mobile Number
+                            </label>
+
+                            <input type="tel"
+                                   class="form-control crm-input"
+                                   id="modal_contact"
+                                   readonly>
+
+                        </div>
+
+                        <!-- JOB TITLE -->
+                        <div class="col-md-4">
+
+                            <label class="crm-label">
+                                Job Title
+                            </label>
+
+                            <input type="text"
+                                   class="form-control crm-input"
+                                   id="modal_job_title"
+                                   name="job_title">
+
+                        </div>
+
+                        <!-- COUNTRY -->
+                        <div class="col-md-4">
+
+                            <label class="crm-label">
+                                Country
+                            </label>
+
+                            <input type="text"
+                                   class="form-control crm-input"
+                                   id="modal_country"
+                                   readonly>
+
+                        </div>
+
+                        <!-- STATUS -->
+                        <div class="col-md-4">
+
+                            <label class="crm-label">
+                                Lead Status
+                            </label>
+
+                            <select name="status"
+                                    id="modal_status"
+                                    class="form-select crm-input">
+
                                 <option value="new">New</option>
                                 <option value="contacted">Contacted</option>
                                 <option value="not_interested">Not Interested</option>
                                 <option value="converted">Converted</option>
+
                             </select>
+
                         </div>
-                        <div class="form-group col-md-4" id="leadTypeField" style="display:none;">
-                        <label>Lead Type</label>
-                        <select name="lead_type" id="modal_lead_type" class="form-control">
-                            <option value="">Select</option>
-                            <option value="hot">Hot</option>
-                            <option value="warm">Warm</option>
-                            <option value="cold">Cold</option>
-                        </select>
+
+                        <!-- ASSIGN -->
+                        @if(
+                            session('role_id') != config('constants.roles.agent') ||
+                            session('can_assign_leads') == 1
+                        )
+
+                        <div class="col-md-4">
+
+                            <label class="crm-label">
+                                Assign To Agent
+                            </label>
+
+                            <select name="assigned_to"
+                                    id="modal_assigned_to"
+                                    class="form-select crm-input">
+
+                                <option value="">
+                                    Select Agent
+                                </option>
+
+                                @foreach($agents as $agent)
+
+                                    <option value="{{ $agent->id }}">
+                                        {{ $agent->name }}
+                                    </option>
+
+                                @endforeach
+
+                            </select>
+
+                        </div>
+
+                        @endif
+
+                        <!-- LEAD TYPE -->
+                        <div class="col-md-4"
+                             id="leadTypeField"
+                             style="display:none;">
+
+                            <label class="crm-label">
+                                Lead Type
+                            </label>
+
+                            <select name="lead_type"
+                                    id="modal_lead_type"
+                                    class="form-select crm-input">
+
+                                <option value="">Select</option>
+                                <option value="hot">Hot</option>
+                                <option value="warm">Warm</option>
+                                <option value="cold">Cold</option>
+
+                            </select>
+
+                        </div>
+
+                        <!-- FOLLOWUP -->
+                        <div class="col-md-4">
+
+                            <label class="crm-label">
+                                Follow-up Date
+                            </label>
+
+                            <input type="datetime-local"
+                                   name="followup_date"
+                                   id="modal_followup"
+                                   class="form-control crm-input">
+
+                        </div>
+
+                        <!-- AMOUNT -->
+                        <div class="col-md-4"
+                             id="amountField"
+                             style="display:none;">
+
+                            <label class="crm-label">
+                                Converted Amount
+                            </label>
+
+                            <input type="number"
+                                   step="0.01"
+                                   name="converted_amount"
+                                   id="modal_amount"
+                                   class="form-control crm-input">
+
+                        </div>
+
+                        <!-- MESSAGE -->
+                        <div class="col-12">
+
+                            <label class="crm-label">
+                                Client Message
+                            </label>
+
+                            <textarea class="form-control crm-textarea"
+                                      id="modal_message"
+                                      rows="3"
+                                      readonly></textarea>
+
+                        </div>
+
+                        <!-- REMARK -->
+                        <div class="col-12">
+
+                            <label class="crm-label">
+                                Internal Remark
+                            </label>
+
+                            <textarea name="remark"
+                                      id="modal_remark"
+                                      class="form-control crm-textarea"
+                                      rows="3"></textarea>
+
+                        </div>
+
                     </div>
 
-                        <div class="form-group col-md-4">
-                            <label>Follow-up Date</label>
-                            <input type="datetime-local" name="followup_date" id="modal_followup" class="form-control">
-                        </div>
+                    <!-- BUTTONS -->
+                    <div class="d-flex justify-content-between align-items-center mt-4">
 
-                        <div class="form-group col-md-4" id="amountField" style="display:none;">
-                            <label>Converted Amount</label>
-                            <input type="number" step="0.01" name="converted_amount" id="modal_amount" class="form-control">
-                        </div>
+                        <a href="#"
+                           id="exportLeadBtn"
+                           class="btn crm-export-btn">
 
-                        <div class="form-group col-12">
-                            <label>Remark</label>
-                            <textarea name="remark" id="modal_remark" class="form-control"></textarea>
-                        </div>
+                            Export Excel
 
-                    </div>
+                        </a>
 
-                    <!-- Submit button -->
-                    <div class="mt-3 text-end">
-                        <button type="submit" class="btn btn-primary">Update Lead</button>
+                        <button type="submit"
+                                class="btn crm-save-btn">
+
+                            Update Lead
+
+                        </button>
+
                     </div>
 
                 </form>
+
+                <!-- FOLLOWUP HISTORY -->
+                <div class="crm-history-wrapper">
+
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+
+                        <h6 class="mb-0 fw-bold">
+                            Follow-up History
+                        </h6>
+
+                        <span class="crm-badge">
+                            Timeline
+                        </span>
+
+                    </div>
+
+                    <div id="followHistoryBox"
+                         class="crm-history-box">
+
+                        Loading...
+
+                    </div>
+
+                </div>
+
             </div>
-              <hr>
-    <h6>📜 Follow-up History</h6>
-    <div id="followHistoryBox" style="max-height:200px; overflow-y:auto; background:#f8f9fb; padding:10px;">
-        Loading...
-    </div>
+
         </div>
+
     </div>
-    
+
 </div>
+
+<style>
+
+.modal-dialog{
+    max-width: 950px;
+}
+
+.crm-card{
+    border: none;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 10px 35px rgba(0,0,0,0.12);
+}
+
+.crm-header{
+    background: #ffffff;
+    padding: 18px 22px;
+    border-bottom: 1px solid #eaecf0;
+}
+
+.crm-header h4{
+    font-size: 20px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 8px;
+}
+
+.crm-page-box{
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 10px 14px;
+    width: fit-content;
+}
+
+.crm-page-box span{
+    font-size: 13px;
+    color: #344054;
+    font-weight: 500;
+}
+
+.crm-body{
+    background: #f9fafb;
+    padding: 22px;
+}
+
+.crm-label{
+    font-size: 13px;
+    font-weight: 600;
+    color: #344054;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.crm-input{
+    height: 44px;
+    border-radius: 10px;
+    border: 1px solid #d0d5dd;
+    background: #fff;
+    font-size: 14px;
+    box-shadow: none !important;
+}
+
+.crm-input:focus{
+    border-color: #2563eb;
+}
+
+.crm-textarea{
+    border-radius: 10px;
+    border: 1px solid #d0d5dd;
+    padding: 12px;
+    font-size: 14px;
+    background: #fff;
+    box-shadow: none !important;
+}
+
+.crm-save-btn{
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 22px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.crm-export-btn{
+    background: #16a34a;
+    color: #fff;
+    border-radius: 10px;
+    padding: 10px 18px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.crm-history-wrapper{
+    margin-top: 25px;
+    background: #fff;
+    border-radius: 14px;
+    padding: 18px;
+    border: 1px solid #eaecf0;
+}
+
+.crm-history-box{
+    max-height: 180px;
+    overflow-y: auto;
+}
+
+.crm-badge{
+    background: #eff6ff;
+    color: #2563eb;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.form-control[readonly]{
+    background: #f9fafb;
+}
+
+.row.g-4{
+    --bs-gutter-y: 1rem;
+}
+
+.crm-save-btn:hover{
+    background:#1d4ed8;
+    color:#fff;
+}
+
+.crm-export-btn:hover{
+    background:#15803d;
+    color:#fff;
+}
+
+</style>
+```
+
 
 
 <!-- JavaScript for Populating Modal -->

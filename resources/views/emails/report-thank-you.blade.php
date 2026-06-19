@@ -6,23 +6,27 @@ Dear {{ $data['customer_name'] }},
 {{ $data['email_body'] }}
 </p>
 
-@if(!empty($data['questions']))
-<h3>A Few Quick Questions</h3>
+<p>
+I'd love to ask a few quick questions:
+</p>
 
-<ol>
-@foreach($data['questions'] as $question)
-    <li>{{ $question }}</li>
-@endforeach
-</ol>
-@endif
+<p><strong>1.</strong> {{ $data['questions'][0] ?? '' }}</p>
+
+<p><strong>2.</strong> {{ $data['questions'][1] ?? '' }}</p>
+
+<p><strong>3.</strong> {{ $data['questions'][2] ?? '' }}</p>
 
 <p>
 Your answers will help us direct you to the most relevant sections, insights, and data points within the report rather than sending a generic overview.
 </p>
 
 <p>
+Looking forward to your response.
+</p>
+
+<p>
 Warm Regards,<br>
 <strong>M2Square Consultancy</strong><br>
 sales@m2squareconsultancy.com<br>
-+91 8788524747
++1 929-447-0100
 </p>

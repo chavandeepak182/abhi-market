@@ -21,34 +21,57 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xxl-3 col-sm-6">
-                    <div class="card" onclick="window.location='#';" style="cursor: pointer;">
-                        <div class="card-body">
-                            <h4 class="mb-2">{{ $industriesCount }}</h4>
-                            <span class="text-gray-600">Total Industries</span>
-                            <div class="flex-between gap-8 mt-16">
-                                <span class="flex-shrink-0 w-48 h-48 flex-center rounded-circle bg-main-two-600 text-white text-2xl">
-                                    <i class="ph-fill ph-certificate"></i>
-                                </span>
-                                <div id="earned-certificate" class="remove-tooltip-title rounded-tooltip-value"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xxl-3 col-sm-6">
-                    <div class="card" onclick="window.location='#';" style="cursor: pointer;">
-                        <div class="card-body">
-                            <h4 class="mb-2">{{ $servicesCount }}</h4>
-                            <span class="text-gray-600">Total Capabilities</span>
-                            <div class="flex-between gap-8 mt-16">
-                                <span class="flex-shrink-0 w-48 h-48 flex-center rounded-circle bg-purple-600 text-white text-2xl">
-                                    <i class="ph-fill ph-graduation-cap"></i>
-                                </span>
-                                <div id="course-progress" class="remove-tooltip-title rounded-tooltip-value"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<div class="col-xxl-3 col-sm-6">
+
+    <div class="card {{ $todaysLeadsCount > 0 ? 'new-lead-card' : '' }}"
+         onclick="window.location='{{ route('agent.today.leads') }}';"
+         style="cursor: pointer;">
+
+        <div class="card-body">
+
+            <h4 class="mb-2">{{ $todaysLeadsCount }}</h4>
+
+            <span class="text-gray-600">Today's Leads</span>
+
+            <div class="flex-between gap-8 mt-16">
+
+                <span class="flex-shrink-0 w-48 h-48 flex-center rounded-circle bg-success-600 text-white text-2xl">
+                    <i class="ph-fill ph-calendar-check"></i>
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<div class="col-xxl-3 col-sm-6">
+
+    <div class="card {{ $newLeadsCount > 0 ? 'new-lead-card' : '' }}"
+         onclick="window.location='{{ route('agent.new.leads') }}';"
+         style="cursor: pointer;">
+
+        <div class="card-body">
+
+            <h4 class="mb-2">{{ $newLeadsCount }}</h4>
+
+            <span class="text-gray-600">Total New Leads</span>
+
+            <div class="flex-between gap-8 mt-16">
+
+                <span class="flex-shrink-0 w-48 h-48 flex-center rounded-circle bg-danger-600 text-white text-2xl">
+                    <i class="ph-fill ph-bell-ringing"></i>
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
                 <div class="col-xxl-3 col-sm-6">
                     <div class="card" onclick="window.location='{{ route('enquiries.enquiryLead') }}';" style="cursor: pointer;">
                         <div class="card-body">
@@ -333,4 +356,51 @@
         </div>
     </div>
 </div>
+<style>
+    /* New Lead Dashboard Card Blink */
+.new-lead-card {
+    border: 2px solid #ff4d4f;
+    animation: blinkCard 1s infinite;
+    position: relative;
+}
+
+/* Glow Animation */
+@keyframes blinkCard {
+    0% {
+        box-shadow: 0 0 5px rgba(255, 77, 79, 0.3);
+        transform: scale(1);
+    }
+
+    50% {
+        box-shadow: 0 0 20px rgba(255, 77, 79, 0.9);
+        transform: scale(1.03);
+    }
+
+    100% {
+        box-shadow: 0 0 5px rgba(255, 77, 79, 0.3);
+        transform: scale(1);
+    }
+}
+
+/* Optional NEW Badge */
+.new-lead-card::after {
+    content: 'NEW';
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: red;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    animation: badgeBlink 1s infinite;
+}
+
+@keyframes badgeBlink {
+    0% { opacity: 1; }
+    50% { opacity: 0.4; }
+    100% { opacity: 1; }
+}
+</style>
 @endsection

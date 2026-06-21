@@ -70,97 +70,87 @@ if (!empty($enquiry->company_name)) {
 Log::info('Apollo Company Data', [
     'data' => $companyData
 ]);
-   $response = $claude->generate("
+  $response = $claude->generate("
 You are a senior B2B market research sales consultant at M2Square Consultancy.
-
-A new inbound lead has submitted an enquiry for a market research report.
 
 Lead Information:
 
-Client Name: {$enquiry->name}
+Client Name:
+{$enquiry->name}
 
-Client Designation: {$enquiry->job_title}
+Client Designation:
+{$enquiry->job_title}
 
-Client Company: {$enquiry->company_name}
+Client Company:
+{$enquiry->company_name}
 
-Country / Region: {$enquiry->visitor_country}
+Country:
+{$enquiry->visitor_country}
 
-Report They Inquired About:
+Report:
 {$enquiry->page_name}
 
 Company Intelligence:
 ".json_encode($companyData)."
 
-Your objective is to write a professional qualification email BEFORE sharing report samples, report extracts, pricing, or report details.
+TASK
 
-Instructions:
+Generate ONLY:
 
-1. Thank the prospect for their enquiry regarding:
-{$enquiry->page_name}
+1. Email Subject
+2. Introductory Email Body
+3. Three Qualification Questions
 
-2. Show light awareness of their company, industry, role, or market if information is available.
+VERY IMPORTANT RULES
 
-3. Never invent facts.
-If information is unavailable, simply skip it.
+EMAIL BODY RULES:
 
-4. Ask EXACTLY 3 qualification questions.
+DO NOT start with Dear
+DO NOT start with Hi
+DO NOT start with Hello
+DO NOT mention customer name
+DO NOT include any questions
+DO NOT include numbered points
+DO NOT include question marks
+DO NOT include closing statement
+DO NOT include regards
+DO NOT include signature
+
+The email_body should ONLY:
+
+Thank the prospect for the enquiry
+Mention the report title
+Mention that we would like to understand their requirements better before sharing relevant report insights
+Max
+imum 80 words
+
+QUESTIONS RULES
+
+Return EXACTLY 3 questions.
 
 Question 1:
-Understand the prospect's primary use case for the research.
-
-Examples:
-- market sizing
-- competitive benchmarking
-- strategic planning
-- investment evaluation
-- market entry
-- partnership assessment
+Understand the primary use case.
 
 Question 2:
 Understand the geographic focus.
 
-Examples:
-- global
-- regional
-- country-specific
-
 Question 3:
-Understand the business initiative, decision, or opportunity this research will support.
+Understand the business decision or strategic initiative.
 
-5. Explain that their answers will help us direct them to the most relevant sections, data points, and insights within the report instead of sending a generic overview.
+Questions must be returned ONLY inside the questions array.
 
-6. Keep the tone:
-- professional
-- warm
-- consultative
-- helpful
+SUBJECT RULE
 
-7. Do NOT:
-- discuss pricing
-- discuss discounts
-- discuss urgency
-- discuss competitors
-- provide report samples
-- provide report summaries
-- provide FAQs
+Subject should be:
 
-8. Email body must be less than 200 words.
+Your Inquiry — {$enquiry->page_name}
 
-9. Questions must be numbered:
-1.
-2.
-3.
-
-10. Subject format must be:
-
-Your Inquiry — {$enquiry->page_name} | A Quick Question
-
-Return ONLY valid JSON.
+RETURN ONLY VALID JSON
 
 {
-    \"subject\":\"\",
-    \"email_body\":\"\",
-    \"questions\":[
+    \"subject\": \"\",
+    \"email_body\": \"\",
+    \"questions\": [
         \"\",
         \"\",
         \"\"
@@ -201,39 +191,70 @@ if (json_last_error() !== JSON_ERROR_NONE) {
     return;
 }
 
-        Log::info('JSON Parsed Successfully');
+        $emailBody = $result['email_body'] ?? '';
 
-        // Save AI output
-        DB::table('ai_email_logs')->insert([
+$emailBody = preg_replace(
+    '/^Dear\s+[A-Za-z\s]+,\s*/i',
+    '',
+    $emailBody
+);
+
+$emailBody = trim($emailBody);
+
+$questions = $result['questions'] ?? [];
+
+foreach ($questions as &$question) {
+
+    $question = preg_replace(
+        '/^[0-9]+\.\s*/',
+        '',
+        $question
+    );
+}
+
+unset($question);
+
+Log::info('JSON Parsed Successfully');
+
+// Save AI output
+DB::table('ai_email_logs')->insert([
 
     'enquiry_id' => $enquiry->id,
 
-    'research_data' => $result['report_summary'] ?? '',
+    'research_data' => '',
 
     'email_subject' => $result['subject'] ?? '',
 
-    'email_body' => $result['email_body'] ?? '',
+    'email_body' => $emailBody,
 
-   'faqs' => json_encode($result['questions'] ?? []),
+    'faqs' => json_encode($questions),
 
     'status' => 'generated',
 
     'created_at' => now(),
     'updated_at' => now()
 ]);
-
 Log::info('AI data saved');
 
         // Send email
-        Mail::to($enquiry->email)->send(
-    new ReportThankYouMail([
-        'customer_name' => $enquiry->name,
-        'subject' => $result['subject'] ?? '',
-        'email_body' => $result['email_body'] ?? '',
-        'questions' => $result['questions'] ?? []
-    ])
-);
+ $agent = DB::table('users')
+    ->where('id', $enquiry->assigned_to)
+    ->first();
 
+$mail = Mail::to($enquiry->email);
+
+if ($agent && !empty($agent->email_id)) {
+    $mail->cc($agent->email_id);
+}
+
+$mail->send(
+    new ReportThankYouMail([
+    'customer_name' => $enquiry->name,
+    'subject' => $result['subject'] ?? '',
+    'email_body' => $emailBody,
+    'questions' => $questions
+])
+);
         Log::info('AI email sent successfully', [
             'email' => $enquiry->email
         ]);

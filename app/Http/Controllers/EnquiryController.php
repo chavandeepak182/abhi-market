@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Mail;
 use Twilio\Rest\Client;
 use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
+use App\Exports\LeadExport;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Jobs\ProcessEnquiryAI;
 
 
@@ -301,89 +303,212 @@ public function followupDetail($id)
 
     return view('admin.followups.detail', compact('enquiry', 'followups'));
 }
+
+
+
 public function update(Request $request)
 {
-    $roleId = session('role_id');
-    $userId = session('user_id');
-    
 
-    // ✅ Validation
-    $request->validate([
-        'id' => 'required|exists:enquiries,id',
-        'assigned_to' => 'nullable|exists:users,id',
-        'status' => 'required|in:new,contacted,not_interested,converted',
-        'followup_date' => 'nullable|date_format:Y-m-d\TH:i',
-        'remark' => 'nullable|string',
-        'converted_amount' => 'nullable|numeric',
-        'job_title' => 'nullable|string|max:255'
-    ]);
 
-    // ✅ Convert date
-    $followupDate = null;
-    if ($request->followup_date) {
-        $followupDate = \Carbon\Carbon::createFromFormat('Y-m-d\TH:i', $request->followup_date)
-            ->format('Y-m-d H:i:s');
+$roleId = session('role_id');
+$userId = session('user_id');
+
+// ✅ Validation
+$request->validate([
+
+    'id' => 'required|exists:enquiries,id',
+
+    'assigned_to' => 'nullable|exists:users,id',
+
+    'status' => 'required|in:new,contacted,not_interested,converted',
+
+    'followup_date' => 'nullable|array',
+
+    'followup_date.*' => 'nullable|date',
+
+    'remark' => 'nullable|array',
+
+    'remark.*' => 'nullable|string',
+    'client_reply' => 'nullable|array',
+'client_reply.*' => 'nullable|string',
+
+    'converted_amount' => 'nullable|numeric',
+
+    'job_title' => 'nullable|string|max:255'
+
+]);
+
+
+// ✅ Convert followup dates
+$followupDates = [];
+
+if ($request->followup_date) {
+
+    foreach ($request->followup_date as $key => $date) {
+
+        $followupDates[$key] = !empty($date)
+            ? Carbon::parse($date)->format('Y-m-d H:i:s')
+            : null;
+
     }
 
-    // ✅ Base query
-    $query = DB::table('enquiries')->where('id', $request->id);
+}
 
-    // ✅ Agent restriction
-    if ($roleId == config('constants.roles.agent')) {
-        $query->where('assigned_to', $userId);
+
+// ✅ Base query
+$query = DB::table('enquiries')
+
+    ->where('id', $request->id);
+
+// ✅ Agent restriction
+if ($roleId == config('constants.roles.agent')) {
+
+    $query->where('assigned_to', $userId);
+
+}
+
+// ✅ Check exists
+if (!$query->exists()) {
+
+    return redirect()->back()
+
+        ->with('error', 'Unauthorized or lead not found');
+
+}
+
+// =========================================
+// FOLLOWUP INSERT / UPDATE
+// =========================================
+
+if ($request->followup_date) {
+
+    foreach ($request->followup_date as $key => $date) {
+
+        // Skip empty row
+        if (
+            empty($date) &&
+            empty($request->remark[$key])
+        ) {
+            continue;
+        }
+
+        // =========================
+        // UPDATE EXISTING FOLLOWUP
+        // =========================
+
+        if (!empty($request->followup_id[$key])) {
+
+            DB::table('enquiry_followups')
+
+                ->where('id', $request->followup_id[$key])
+
+                ->update([
+
+                    'followup_date' => $followupDates[$key] ?? null,
+
+                    'remark' => $request->remark[$key] ?? null,
+                    'client_reply' => $request->client_reply[$key] ?? null,
+
+                    'status' => $request->status,
+
+                    'lead_type' => $request->lead_type,
+
+                    'job_title' => $request->job_title,
+
+                    'updated_at' => now()
+
+                ]);
+
+        }
+
+        // =========================
+        // INSERT NEW FOLLOWUP
+        // =========================
+
+        else {
+
+            DB::table('enquiry_followups')->insert([
+
+                'enquiry_id' => $request->id,
+
+                'followup_date' => $followupDates[$key] ?? null,
+
+                'remark' => $request->remark[$key] ?? null,
+
+                'status' => $request->status,
+
+                'lead_type' => $request->lead_type,
+                'client_reply' => $request->client_reply[$key] ?? null,
+
+                'job_title' => $request->job_title,
+
+                'user_id' => session('user_id'),
+
+                'created_at' => now()
+
+            ]);
+
+        }
+
     }
 
-    // ✅ Check exists
-    if (!$query->exists()) {
-        return redirect()->back()->with('error', 'Unauthorized or lead not found');
-    }
+}
 
-    // ✅ Update enquiry
-    $updateData = [
-        'status' => $request->status,
-        'followup_date' => $followupDate,
-        'remark' => $request->remark,
-         'job_title' => $request->job_title,
-        'converted_amount' => $request->status == 'converted' 
-            ? $request->converted_amount 
-            : null,
-            
-            'lead_type' => $request->status == 'contacted' ? $request->lead_type : null, // ✅ ADD
-        'updated_at' => now()
-    ];
+// ✅ Latest remark
+$remarks = $request->remark ?? [];
 
-    // ✅ Only admin can assign
-  if (
+// ✅ Update enquiry table
+$updateData = [
+
+    'status' => $request->status,
+
+    'followup_date' => !empty($followupDates)
+        ? end($followupDates)
+        : null,
+
+    'remark' => !empty($remarks)
+        ? end($remarks)
+        : null,
+
+    'job_title' => $request->job_title,
+
+    'converted_amount' => $request->status == 'converted'
+        ? $request->converted_amount
+        : null,
+
+    'lead_type' => $request->status == 'contacted'
+        ? $request->lead_type
+        : null,
+
+    'updated_at' => now()
+
+];
+
+// ✅ Only admin can assign
+if (
     $roleId != config('constants.roles.agent') ||
     session('can_assign_leads') == 1
 ) {
 
     $updateData['assigned_to'] = $request->assigned_to;
 
-    // ✅ Save who assigned the lead
     $updateData['assigned_by'] = session('user_id');
+
 }
 
-    $query->update($updateData);
+// ✅ Update enquiry
+$query->update($updateData);
 
-    // ✅ INSERT FOLLOW-UP HISTORY (ONLY ONCE)
-    if ($followupDate || $request->remark) {
-        DB::table('enquiry_followups')->insert([
-    'enquiry_id'   => $request->id,
-    'followup_date'=> $followupDate,
-    'remark'       => $request->remark,
-    'status'       => $request->status,
-    'lead_type'    => $request->lead_type,
-    'job_title'     => $request->job_title,
-    'user_id'      => session('user_id'), // ✅ KEEP HERE
-    'created_at'   => now()
-]);
-    }
+// ✅ Redirect
+return redirect()
 
-    // ✅ Redirect back to same page
-   return redirect()->route('followup.detail', $request->id)
+    ->route('followup.detail', $request->id)
+
     ->with('success', 'Follow-up updated successfully');
+
+
 }
+
 public function contactLead()
 {
     $contacts = DB::table('contact')
@@ -420,13 +545,36 @@ public function store(Request $request)
         $country = null;
 
         if (!empty($validated['country_id'])) {
+
             $country = DB::table('countries')
                 ->where('id', $validated['country_id'])
                 ->first();
         }
 
+        // =========================
+        // ✅ Region Logic
+        // =========================
+
+        $regionId = $country->region_id ?? null;
+
+        // =========================
+        // ✅ Auto Lead Assignment
+        // =========================
+
+        // APAC → Amol
+        if ($regionId == 1) {
+
+            $assignedTo = 3;
+
+        } else {
+
+            // Other Regions → Tarun
+            $assignedTo = 2;
+        }
+
         // Save enquiry
         $enquiryId = DB::table('enquiries')->insertGetId([
+
             'name'            => $validated['name'],
             'email'           => $validated['email'],
             'contact'         => $validated['contact'],
@@ -442,6 +590,11 @@ public function store(Request $request)
             'phone_code'      => $country->phone_code ?? null,
             'visitor_country' => null,
             'usage_type'      => $validated['usage_type'],
+
+            // ✅ Added Region Logic
+            'region_id'       => $regionId,
+            'assigned_to'     => $assignedTo,
+
             'created_at'      => now(),
             'updated_at'      => now(),
         ]);
@@ -468,6 +621,80 @@ public function store(Request $request)
 }
 
 
+
+// excel
+
+
+public function exportLead($id)
+{
+    return Excel::download(
+        new LeadExport($id),
+        'lead-'.$id.'.xlsx'
+    );
+}
+public function showLead($id)
+{
+// Lead Details
+$enquiry = DB::table('enquiries')
+
+
+    ->leftJoin('countries', 'enquiries.country_id', '=', 'countries.id')
+
+    ->leftJoin('users', 'enquiries.assigned_to', '=', 'users.id')
+
+    ->select(
+        'enquiries.*',
+
+        'countries.name as country_name',
+
+        'users.name as agent_name'
+    )
+
+    ->where('enquiries.id', $id)
+
+    ->first();
+
+// Agents List
+$agents = DB::table('users')
+    ->where('role_id', config('constants.roles.agent'))
+    ->whereNull('deleted_at')
+    ->get();
+
+// Followup History
+$followups = DB::table('enquiry_followups')
+    ->where('enquiry_id', $id)
+    ->orderBy('created_at', 'asc')
+    ->get();
+
+// Latest Followup
+$latestFollowup = DB::table('enquiry_followups')
+    ->where('enquiry_id', $id)
+    ->latest('id')
+    ->first();
+    $emails = DB::table('ai_email_logs')
+    ->where('enquiry_id', $id)
+    ->orderBy('email_date', 'asc')
+    ->get();
+
+return view(
+    'admin.enquiry.show',
+    compact(
+        'enquiry',
+        'agents',
+        'followups',
+        'latestFollowup',
+        'emails'
+    )
+);
+
+
+}
+public function view($id)
+{
+    $enquiry = \DB::table('enquiries')->where('id', $id)->first();
+
+    return view('admin.enquiry.view', compact('enquiry'));
+}
 
 public function destroy($id)
 {

@@ -106,9 +106,23 @@ Route::middleware('isAgent')->group(function () {
         Route::get('agent/dashboard', [AgentController::class, 'dashboard'])->name('agent.dashboard');
       
     });
+Route::get('/agent/new-leads', [AgentController::class, 'newLeads'])
+    ->name('agent.new.leads');
+
+Route::get('/agent/today-leads', [AgentController::class, 'todayLeads'])
+    ->name('agent.today.leads');
 
 
+Route::get('/admin/enquiry/view/{id}', [EnquiryController::class, 'view'])
+    ->name('enquiry.view');
 
+    Route::get('/admin/enquiry/{id}', [EnquiryController::class, 'showLead'])
+    ->name('enquiry.show');
+
+Route::get(
+    '/admin/enquiry-export/{id}',
+    [EnquiryController::class, 'exportLead']
+)->name('enquiry.export');
 // New
 Route::get('/blogs/{slug}', [FrontendController::class, 'showBlog'])->name('blog.show');
 

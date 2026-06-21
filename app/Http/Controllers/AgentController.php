@@ -23,8 +23,17 @@ class AgentController extends Controller
     ]);
 $userId = session('user_id');
     $reportsCount = DB::table('reports')->count();
-    $industriesCount = DB::table('industries')->count();
-    $servicesCount = DB::table('services')->count();
+    $newLeadsCount = DB::table('enquiries')
+    ->whereNull('deleted_at')
+    ->where('assigned_to', $userId)
+    ->where('status', 'new')
+    ->count();
+
+$todaysLeadsCount = DB::table('enquiries')
+    ->whereNull('deleted_at')
+    ->where('assigned_to', $userId)
+    ->whereDate('created_at', Carbon::today())
+    ->count();
      $enquiriesCount = DB::table('enquiries')
         ->whereNull('deleted_at')
         ->where('assigned_to', $userId)
@@ -32,9 +41,40 @@ $userId = session('user_id');
 
     return view('agent.dashboard', compact(
         'reportsCount',
-        'industriesCount',
-        'servicesCount',
+        'newLeadsCount',
+        'todaysLeadsCount',
         'enquiriesCount'
     ));
+}
+public function newLeads()
+{
+    $userId = session('user_id');
+
+    $leads = DB::table('enquiries')
+        ->whereNull('deleted_at')
+        ->where('assigned_to', $userId)
+        ->where('status', 'new')
+        ->latest()
+        ->paginate(10);
+
+    return view('agent.new-leads', compact('leads'));
+}
+
+public function todayLeads()
+{
+    $leads = DB::table('enquiries')
+
+        // Deleted leads exclude
+        ->whereNull('deleted_at')
+
+        // Only today's leads
+        ->whereDate('created_at', today())
+
+        // Latest first
+        ->orderBy('created_at', 'desc')
+
+        ->paginate(10);
+
+    return view('agent.today-leads', compact('leads'));
 }
 }

@@ -26,6 +26,10 @@ use App\Http\Controllers\GalleryFolderController;
 use App\Http\Controllers\PressReleaseController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\GmailController;
+use App\Http\Controllers\SampleReportController;
+
+
 
 Route::get('/test-mail', function () {
 
@@ -38,6 +42,28 @@ Route::get('/test-mail', function () {
 
     return 'Mail Sent';
 });
+
+
+// sample report
+
+Route::get(
+'/admin/sample-reports',
+[SampleReportController::class,'index']
+)->name('sample-reports.index');
+
+Route::get(
+'/admin/sample-reports/create',
+[SampleReportController::class,'create']
+)->name('sample-reports.create');
+
+Route::post(
+'/admin/sample-reports/store',
+[SampleReportController::class,'store']
+)->name('sample-reports.store');
+
+// gmail
+Route::get('/google/auth', [GmailController::class,'redirect']);
+Route::get('/google/callback', [GmailController::class,'callback']);
 
 Route::get('/', [FrontendController::class, 'index'])->name('home');
 

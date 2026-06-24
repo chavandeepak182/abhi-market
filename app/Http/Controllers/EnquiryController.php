@@ -634,68 +634,139 @@ public function exportLead($id)
 }
 public function showLead($id)
 {
-// Lead Details
-$enquiry = DB::table('enquiries')
+    // Lead Details
+    $enquiry = DB::table('enquiries')
+        ->leftJoin(
+            'countries',
+            'enquiries.country_id',
+            '=',
+            'countries.id'
+        )
+        ->leftJoin(
+            'users',
+            'enquiries.assigned_to',
+            '=',
+            'users.id'
+        )
+        ->select(
+            'enquiries.*',
+            'countries.name as country_name',
+            'users.name as agent_name'
+        )
+        ->where('enquiries.id', $id)
+        ->first();
 
+    // Agents List
+    $agents = DB::table('users')
+        ->where(
+            'role_id',
+            config('constants.roles.agent')
+        )
+        ->whereNull('deleted_at')
+        ->get();
 
-    ->leftJoin('countries', 'enquiries.country_id', '=', 'countries.id')
+    // Followup History
+    $followups = DB::table('enquiry_followups')
+        ->where('enquiry_id', $id)
+        ->orderBy('created_at', 'asc')
+        ->get();
 
-    ->leftJoin('users', 'enquiries.assigned_to', '=', 'users.id')
+    // Latest Followup
+    $latestFollowup = DB::table('enquiry_followups')
+        ->where('enquiry_id', $id)
+        ->latest('id')
+        ->first();
 
+    $emails = DB::table('ai_email_logs')
+    ->leftJoin(
+        'users',
+        'ai_email_logs.agent_id',
+        '=',
+        'users.id'
+    )
     ->select(
-        'enquiries.*',
-
-        'countries.name as country_name',
-
+        'ai_email_logs.*',
         'users.name as agent_name'
     )
-
-    ->where('enquiries.id', $id)
-
-    ->first();
-
-// Agents List
-$agents = DB::table('users')
-    ->where('role_id', config('constants.roles.agent'))
-    ->whereNull('deleted_at')
+    ->where('ai_email_logs.enquiry_id', $id)
+    ->orderBy('ai_email_logs.id', 'asc')
     ->get();
+    
 
-// Followup History
-$followups = DB::table('enquiry_followups')
-    ->where('enquiry_id', $id)
-    ->orderBy('created_at', 'asc')
-    ->get();
-
-// Latest Followup
-$latestFollowup = DB::table('enquiry_followups')
-    ->where('enquiry_id', $id)
-    ->latest('id')
-    ->first();
-    $emails = DB::table('ai_email_logs')
-    ->where('enquiry_id', $id)
-    ->orderBy('email_date', 'asc')
-    ->get();
-
-return view(
-    'admin.enquiry.show',
-    compact(
-        'enquiry',
-        'agents',
-        'followups',
-        'latestFollowup',
-        'emails'
-    )
-);
-
-
+    return view(
+        'admin.enquiry.show',
+        compact(
+            'enquiry',
+            'agents',
+            'followups',
+            'latestFollowup',
+            'emails'
+        )
+    );
 }
 public function view($id)
 {
-    $enquiry = \DB::table('enquiries')->where('id', $id)->first();
+    $enquiry = DB::table('enquiries')
+        ->where('id', $id)
+        ->first();
 
-    return view('admin.enquiry.view', compact('enquiry'));
+    $emails = DB::table('ai_email_logs')
+        ->where('enquiry_id', $id)
+        ->orderBy('email_date', 'asc')
+        ->get();
+
+    return view(
+        'admin.enquiry.view',
+        compact(
+            'enquiry',
+            'emails'
+        )
+    );
 }
 
+
+// upload sample report
+
+
+
+public function sendSampleReport(Request $request)
+{
+    $lead = DB::table('enquiries')
+        ->where('id', $request->enquiry_id)
+        ->first();
+
+    Mail::raw(
+        $request->message .
+        "\n\nSample Report:\n" .
+        $request->sample_report_link,
+
+        function ($mail) use ($lead) {
+
+            $mail->to($lead->email)
+                 ->subject('Sample Report');
+        }
+    );
+
+    DB::table('sample_report_logs')->insert([
+
+        'enquiry_id' => $lead->id,
+
+        'report_link' => $request->sample_report_link,
+
+        'message' => $request->message,
+
+        'created_at' => now(),
+
+        'updated_at' => now()
+
+    ]);
+
+    return back()
+        ->with(
+            'success',
+            'Sample Report Sent Successfully'
+        );
+}
 public function destroy($id)
 {
     DB::table('enquiries')

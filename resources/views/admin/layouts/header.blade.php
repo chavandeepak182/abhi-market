@@ -191,6 +191,21 @@
                                 </span>
                             </a>
                         </li>
+                                               @php
+    $roleId = session('role_id');
+@endphp
+
+{{-- Sample Reports --}}
+<li class="sidebar-menu__item {{ Request::is('admin/sample-reports*') ? 'activePage' : '' }}">
+    <a href="{{ route('sample-reports.index') }}" class="sidebar-menu__link">
+        <span class="icon">
+            <i class="ph ph-file-pdf"></i>
+        </span>
+        <span class="text">
+            Sample Reports
+        </span>
+    </a>
+</li>
                         @php
                             $role_id = session('role_id'); 
                         @endphp

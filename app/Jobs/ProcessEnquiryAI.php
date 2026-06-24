@@ -217,22 +217,32 @@ unset($question);
 Log::info('JSON Parsed Successfully');
 
 // Save AI output
+// Save AI output
 DB::table('ai_email_logs')->insert([
 
-    'enquiry_id' => $enquiry->id,
+    'enquiry_id'    => $enquiry->id,
 
     'research_data' => '',
 
     'email_subject' => $result['subject'] ?? '',
 
-    'email_body' => $emailBody,
+    'email_body'    => $emailBody,
 
-    'faqs' => json_encode($questions),
+    'faqs'          => json_encode($questions),
 
-    'status' => 'generated',
+    'direction'     => 'outgoing',
 
-    'created_at' => now(),
-    'updated_at' => now()
+    'from_email'    => config('mail.from.address'),
+
+    'to_email'      => $enquiry->email,
+
+    'email_date'    => now(),
+
+    'status'        => 'generated',
+    'agent_id' => $enquiry->assigned_to,
+
+    'created_at'    => now(),
+    'updated_at'    => now()
 ]);
 Log::info('AI data saved');
 
@@ -261,11 +271,15 @@ $mail->send(
 
         // Update status
         DB::table('ai_email_logs')
-            ->where('enquiry_id', $enquiry->id)
-            ->latest('id')
-            ->update([
-                'status' => 'sent'
-            ]);
+    ->where('enquiry_id', $enquiry->id)
+    ->latest('id')
+    ->update([
+        'status' => 'sent',
+        'direction' => 'outgoing',
+        'from_email' => config('mail.from.address'),
+        'to_email' => $enquiry->email,
+        'email_date' => now()
+    ]);
 
     } catch (\Throwable $e) {
 

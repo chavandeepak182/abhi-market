@@ -446,105 +446,92 @@ document.addEventListener('click', function(e){
 
 <div class="card mt-4">
 
-
-<div class="card-header">
-
-    <h5 class="mb-0">
-        Followup Timeline
-    </h5>
-
-</div>
-
-<div class="card-body">
-
-    @foreach($followups as $index => $f)
-
-        <div class="border-start border-primary ps-3 mb-4">
-
-            <h6 class="fw-bold text-primary">
-                {{ $index + 1 }} Followup
-            </h6>
-
-            <p class="mb-1">
-                <strong>Date:</strong>
-                {{ \Carbon\Carbon::parse($f->followup_date)->format('d M Y h:i A') }}
-            </p>
-
-            <p class="mb-1">
-                <strong>Status:</strong>
-                {{ ucfirst($f->status) }}
-            </p>
-
-            <div>
-                <strong>Remark:</strong>
-                {!! $f->remark !!}
-            </div>
-
-            @if(!empty($f->client_reply))
-                <div class="mt-2">
-                    <strong>Client Reply:</strong>
-                    {!! $f->client_reply !!}
-                </div>
-            @endif
-
-            <div class="mt-2">
-                <button type="button"
-                        class="btn btn-sm btn-warning edit-followup"
-                        data-id="{{ $f->id }}"
-                        data-date="{{ $f->followup_date ? \Carbon\Carbon::parse($f->followup_date)->format('Y-m-d\TH:i') : '' }}"
-                        data-remark="{{ strip_tags($f->remark) }}"
-                        data-reply="{{ $f->client_reply }}">
-                    Edit
-                </button>
-            </div>
-
-        </div>
-
-    @endforeach
-
-</div>
-@if(isset($emails) && count($emails))
-
-<div class="card mt-4">
     <div class="card-header">
-        <h5>Email Conversation</h5>
+        <h5 class="mb-0">Followup Timeline</h5>
     </div>
 
     <div class="card-body">
 
-        @foreach($emails as $mail)
+        @foreach($followups as $index => $f)
 
-        <div class="border p-3 mb-3">
-
-            <strong>
-                {{ $mail->direction == 'incoming'
-                    ? 'Customer Reply'
-                    : 'Company Email' }}
-            </strong>
-
-            <br>
-
-            Subject:
-            {{ $mail->email_subject }}
-
-            <hr>
-
-            {!! $mail->email_body !!}
-
-        </div>
+            {{-- your followup code --}}
 
         @endforeach
 
     </div>
-</div>
-
-@endif
 
 </div>
 
 @endif
 
 
+{{-- EMAIL CONVERSATION STARTS HERE --}}
+
+<div class="accordion" id="emailAccordion">
+
+@foreach($emails as $key => $mail)
+
+<div class="accordion-item mb-2">
+
+    <h2 class="accordion-header">
+
+        <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#email{{ $key }}">
+
+            <div class="w-100">
+
+                <strong>
+                    {{ $mail->from_email }}
+                </strong>
+
+                <br>
+
+                <small>
+                    {{ $mail->email_subject }}
+                </small>
+
+            </div>
+
+        </button>
+
+    </h2>
+
+    <div
+        id="email{{ $key }}"
+        class="accordion-collapse collapse">
+
+        <div class="accordion-body">
+
+            {!! nl2br(e($mail->email_body)) !!}
+
+        </div>
+
+    </div>
+
+</div>
+
+@endforeach
+
+</div>
+<style>
+    .accordion-button{
+    background:#fff;
+}
+
+.accordion-button:not(.collapsed){
+    background:#f8f9fa;
+}
+
+.accordion-body{
+    white-space:pre-wrap;
+    line-height:1.8;
+    font-size:15px;
+}
+</style>
+{{-- EMAIL CONVERSATION ENDS HERE --}}
         </div>
 
     </div>

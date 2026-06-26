@@ -543,7 +543,7 @@ public function store(Request $request)
         'job_title'    => 'nullable|string|max:255',
         'company_name' => 'nullable|string|max:255',
         'country_id'   => 'nullable|exists:countries,id',
-        'g-recaptcha-response' => 'required',
+        'g-recaptcha-response' => 'nullable',
         'usage_type'   => 'required|in:personal,office',
     ]);
 // Verify Google reCAPTCHA v3
@@ -556,8 +556,8 @@ $response = Http::asForm()->post(
     ]
 );
 
-
 $result = $response->json();
+
 \Log::info('Google Response', $result);
 
 // Log everything

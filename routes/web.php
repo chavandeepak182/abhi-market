@@ -61,6 +61,10 @@ Route::post(
 [SampleReportController::class,'store']
 )->name('sample-reports.store');
 
+
+// assign agent
+Route::post('/admin/enquiries/assign-agent', [EnquiryController::class, 'assignAgent'])
+    ->name('enquiry.assignAgent');
 // gmail
 Route::get('/google/auth', [GmailController::class,'redirect']);
 Route::get('/google/callback', [GmailController::class,'callback']);

@@ -151,28 +151,39 @@
                         </select>
                     </div>
 
-                    <!-- ASSIGNED TO -->
+                  <!-- ASSIGNED TO -->
                     <div class="col-md-4 mb-4">
 
                         <label class="form-label fw-bold">
                             Assign To
                         </label>
 
-                        <select name="assigned_to"
-                                class="form-control">
+                        @if(session('role_id') != config('constants.roles.agent') || session('can_assign_leads') == 1)
 
-                            @foreach($agents as $agent)
+                            <select name="assigned_to" class="form-control">
+                                <option value="">Select Agent</option>
 
-                                <option value="{{ $agent->id }}"
-                                    {{ $enquiry->assigned_to == $agent->id ? 'selected' : '' }}>
+                                @foreach($agents as $agent)
+                                    <option value="{{ $agent->id }}"
+                                        {{ $enquiry->assigned_to == $agent->id ? 'selected' : '' }}>
+                                        {{ $agent->name }}
+                                    </option>
+                                @endforeach
 
-                                    {{ $agent->name }}
+                            </select>
 
-                                </option>
+                        @else
 
-                            @endforeach
+                            <input type="text"
+                                class="form-control"
+                                value="{{ $enquiry->agent_name ?? 'Not Assigned' }}"
+                                readonly>
 
-                        </select>
+                            <input type="hidden"
+                                name="assigned_to"
+                                value="{{ $enquiry->assigned_to }}">
+
+                        @endif
 
                     </div>
 

@@ -51,30 +51,64 @@ public function newLeads()
     $userId = session('user_id');
 
     $leads = DB::table('enquiries')
-        ->whereNull('deleted_at')
-        ->where('assigned_to', $userId)
-        ->where('status', 'new')
-        ->latest()
+        ->leftJoin('countries', 'enquiries.country_id', '=', 'countries.id')
+        ->leftJoin('users', 'enquiries.assigned_to', '=', 'users.id')
+        ->whereNull('enquiries.deleted_at')
+        ->where('enquiries.assigned_to', $userId)
+        ->where('enquiries.status', 'new')
+        ->select(
+            'enquiries.*',
+            'countries.name as country_name',
+            'users.name as agent_name'
+        )
+        ->latest('enquiries.created_at')
         ->paginate(10);
 
-    return view('agent.new-leads', compact('leads'));
-}
+    $agents = [];
 
+    if (
+        session('role_id') != config('constants.roles.agent') ||
+        session('can_assign_leads') == 1
+    ) {
+        $agents = DB::table('users')
+            ->where('role_id', config('constants.roles.agent'))
+            ->whereNull('deleted_at')
+            ->select('id', 'name')
+            ->orderBy('name')
+            ->get();
+    }
+
+    return view('agent.new-leads', compact('leads', 'agents'));
+}
 public function todayLeads()
 {
     $leads = DB::table('enquiries')
-
-        // Deleted leads exclude
-        ->whereNull('deleted_at')
-
-        // Only today's leads
-        ->whereDate('created_at', today())
-
-        // Latest first
-        ->orderBy('created_at', 'desc')
-
+        ->leftJoin('countries', 'enquiries.country_id', '=', 'countries.id')
+        ->leftJoin('users', 'enquiries.assigned_to', '=', 'users.id')
+        ->whereNull('enquiries.deleted_at')
+        ->whereDate('enquiries.created_at', today())
+        ->select(
+            'enquiries.*',
+            'countries.name as country_name',
+            'users.name as agent_name'
+        )
+        ->orderBy('enquiries.created_at', 'desc')
         ->paginate(10);
 
-    return view('agent.today-leads', compact('leads'));
+    $agents = [];
+
+    if (
+        session('role_id') != config('constants.roles.agent') ||
+        session('can_assign_leads') == 1
+    ) {
+        $agents = DB::table('users')
+            ->where('role_id', config('constants.roles.agent'))
+            ->whereNull('deleted_at')
+            ->select('id', 'name')
+            ->orderBy('name')
+            ->get();
+    }
+
+    return view('agent.today-leads', compact('leads', 'agents'));
 }
 }

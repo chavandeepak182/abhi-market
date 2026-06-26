@@ -88,55 +88,66 @@
     </div>
 
     <!-- FILTER ROW -->
-    <form method="GET" action="{{ url('admin/enquiries') }}" class="row g-2 mt-3">
-                <!-- Email -->
-                <div class="col-md-2">
-                    <input type="text" name="email" class="form-control" 
-                        placeholder="Search Email" 
-                        value="{{ request('email') }}">
-                </div>
+   <form method="GET" action="{{ url('admin/enquiries') }}">
+    <div class="row align-items-end g-3">
 
-        <!-- Status -->
         <div class="col-md-2">
+            <label class="form-label">Email</label>
+            <input type="text"
+                   name="email"
+                   class="form-control"
+                   placeholder="Search Email"
+                   value="{{ request('email') }}">
+        </div>
+
+        <div class="col-md-2">
+            <label class="form-label">Status</label>
             <select name="status" class="form-control">
                 <option value="">All Status</option>
                 <option value="new" {{ request('status')=='new' ? 'selected' : '' }}>New</option>
                 <option value="contacted" {{ request('status')=='contacted' ? 'selected' : '' }}>Contacted</option>
                 <option value="converted" {{ request('status')=='converted' ? 'selected' : '' }}>Converted</option>
                 <option value="not_interested" {{ request('status')=='not_interested' ? 'selected' : '' }}>Not Interested</option>
+                <option value="unassigned" {{ request('status')=='unassigned' ? 'selected' : '' }}>Unassigned</option>
             </select>
         </div>
 
-        <!-- Agent -->
         <div class="col-md-2">
+            <label class="form-label">Agent</label>
             <select name="agent" class="form-control">
                 <option value="">All Agents</option>
                 @foreach($agents as $agent)
-                    <option value="{{ $agent->id }}" {{ request('agent')==$agent->id ? 'selected' : '' }}>
+                    <option value="{{ $agent->id }}"
+                        {{ request('agent') == $agent->id ? 'selected' : '' }}>
                         {{ $agent->name }}
                     </option>
                 @endforeach
             </select>
         </div>
 
-        <!-- From Date -->
         <div class="col-md-2">
-            <input type="date" name="from_date" class="form-control" value="{{ request('from_date') }}">
+            <label class="form-label">From</label>
+            <input type="date"
+                   name="from_date"
+                   class="form-control"
+                   value="{{ request('from_date') }}">
         </div>
 
-        <!-- To Date -->
         <div class="col-md-2">
-            <input type="date" name="to_date" class="form-control" value="{{ request('to_date') }}">
+            <label class="form-label">To</label>
+            <input type="date"
+                   name="to_date"
+                   class="form-control"
+                   value="{{ request('to_date') }}">
         </div>
 
-
-        <!-- Buttons -->
         <div class="col-md-2 d-flex gap-2">
             <button class="btn btn-primary w-100">Filter</button>
             <a href="{{ url('admin/enquiries') }}" class="btn btn-secondary w-100">Reset</a>
         </div>
 
-    </form>
+    </div>
+</form>
 
 </div>
     <div class="card overflow-hidden">
@@ -207,17 +218,28 @@
         <span class="badge bg-secondary">Not Interested</span>
     @endif
 </td>
-                        <td>
-                            @if($enquiry->assigned_to)
-                                <span class="badge bg-success">
-                                    {{ $enquiry->agent_name ?? 'Assigned' }}
-                                </span>
-                            @else
-                                <span class="badge bg-danger">
-                                    Unassigned
-                                </span>
-                            @endif
-                        </td>
+ <td>
+    @if(empty($enquiry->assigned_to))
+
+        <select class="form-select assign-agent"
+                data-id="{{ $enquiry->id }}">
+            <option value="">Select Agent</option>
+
+            @foreach($agents as $agent)
+                <option value="{{ $agent->id }}">
+                    {{ $agent->name }}
+                </option>
+            @endforeach
+        </select>
+
+    @else
+
+        <span class="badge bg-success">
+            {{ $enquiry->agent_name }}
+        </span>
+
+    @endif
+</td>
                         <td>
                             <!-- View Button -->
                            <a href="{{ route('enquiry.view', $enquiry->id) }}"
@@ -244,7 +266,7 @@
         </div>
         <div class="card-footer">
             <div class="d-flex justify-content-center">
-                {{ $enquiries->links('pagination::bootstrap-5') }}
+                {{ $enquiries->onEachSide(1)->links() }}
             </div>
         </div>
     </div>    
@@ -270,7 +292,79 @@
     </div>
 
 </div>
+
+<script>
+$(document).on('change', '.assign-agent', function () {
+
+    $.ajax({
+        url: "{{ route('enquiry.assignAgent') }}",
+        type: "POST",
+        data: {
+            _token: "{{ csrf_token() }}",
+            enquiry_id: $(this).data('id'),
+            agent_id: $(this).val()
+        },
+        success: function (response) {
+            alert(response.message);
+        },
+        error: function () {
+            alert('Failed to assign agent.');
+        }
+    });
+
+});
+</script>
 <style>
+
+    /* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.pagination .page-item {
+    margin: 0;
+}
+
+.pagination .page-link {
+    min-width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    background: #fff;
+    color: #0d6efd;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all .3s ease;
+}
+
+.pagination .page-link:hover {
+    background: #0d6efd;
+    color: #fff;
+    border-color: #0d6efd;
+}
+
+.pagination .page-item.active .page-link,
+.pagination .page-link.active {
+    background: #0d6efd;
+    color: #fff;
+    border-color: #0d6efd;
+}
+
+.pagination .page-item.disabled .page-link {
+    color: #999;
+    background: #f8f9fa;
+    border-color: #dee2e6;
+    cursor: not-allowed;
+}
 .simple-summary {
     max-width: 350px;
     background: #fff;
@@ -313,7 +407,7 @@
 </style>
 
 <!-- Enquiry Modal -->
-```html
+
 <div class="modal fade" id="ViewEnquiry" tabindex="-1" aria-hidden="true">
 
     <div class="modal-dialog modal-dialog-centered">
@@ -757,7 +851,6 @@
 }
 
 </style>
-```
 
 
 

@@ -58,37 +58,49 @@ class EnquiryController extends Controller
 }
 
     // =========================
-    // ✅ FILTERS START
-    // =========================
+// ✅ FILTERS START
+// =========================
 
-    // Status filter
-    if ($request->filled('status')) {
+// Status filter
+if ($request->filled('status')) {
+
+    if ($request->status == 'unassigned') {
+
+        // Show only unassigned leads
+        $query->whereNull('enquiries.assigned_to');
+
+    } else {
+
+        // Filter by lead status
         $query->where('enquiries.status', $request->status);
-    }
 
-    // Agent filter (only admin)
-    if ($request->filled('agent')) {
-        $query->where('enquiries.assigned_to', $request->agent);
     }
+}
 
-    // Date filters
-    if ($request->filled('from_date')) {
-        $query->whereDate('enquiries.created_at', '>=', $request->from_date);
-    }
+// Agent filter
+if ($request->filled('agent')) {
+    $query->where('enquiries.assigned_to', $request->agent);
+}
 
-    if ($request->filled('to_date')) {
-        $query->whereDate('enquiries.created_at', '<=', $request->to_date);
-    }
-    // Email filter
+// Date filters
+if ($request->filled('from_date')) {
+    $query->whereDate('enquiries.created_at', '>=', $request->from_date);
+}
+
+if ($request->filled('to_date')) {
+    $query->whereDate('enquiries.created_at', '<=', $request->to_date);
+}
+
+// Email filter
 if ($request->filled('email')) {
     $query->where('enquiries.email', 'like', '%' . $request->email . '%');
 }
 
-    // =========================
-    // ✅ FILTERS END
-    // =========================
+// =========================
+// ✅ FILTERS END
+// =========================
 
-    $enquiries = $query->paginate(15)->appends($request->all());
+    $enquiries = $query->paginate(50)->appends($request->all());
    
 
 $summaryQuery = clone $query;
@@ -501,14 +513,9 @@ $query->update($updateData);
 
 // ✅ Redirect
 return redirect()
-
-    ->route('followup.detail', $request->id)
-
-    ->with('success', 'Follow-up updated successfully');
-
-
+    ->route('enquiries.enquiryLead')
+    ->with('success', 'Lead updated successfully.');
 }
-
 public function contactLead()
 {
     $contacts = DB::table('contact')
@@ -536,8 +543,45 @@ public function store(Request $request)
         'job_title'    => 'nullable|string|max:255',
         'company_name' => 'nullable|string|max:255',
         'country_id'   => 'nullable|exists:countries,id',
+        'g-recaptcha-response' => 'required',
         'usage_type'   => 'required|in:personal,office',
     ]);
+// Verify Google reCAPTCHA v3
+$response = Http::asForm()->post(
+    'https://www.google.com/recaptcha/api/siteverify',
+    [
+        'secret'   => env('NOCAPTCHA_SECRET'),
+        'response' => $request->input('g-recaptcha-response'),
+        'remoteip' => $request->ip(),
+    ]
+);
+
+
+$result = $response->json();
+\Log::info('Google Response', $result);
+
+// Log everything
+Log::info('===== RECAPTCHA DEBUG =====');
+Log::info('Token:', [
+    'token' => $request->input('g-recaptcha-response')
+]);
+
+Log::info('Google Response:', $result);
+
+if (!isset($result['success']) || $result['success'] !== true) {
+
+    Log::error('Recaptcha Failed', [
+        'response' => $result
+    ]);
+
+    return back()
+        ->withInput()
+        ->withErrors([
+            'captcha' => 'Captcha verification failed.'
+        ]);
+}
+
+Log::info('Recaptcha Passed');
 
     try {
 
@@ -564,12 +608,12 @@ public function store(Request $request)
         // APAC → Amol
         if ($regionId == 1) {
 
-            $assignedTo = 3;
+            $assignedTo = 88;
 
         } else {
 
             // Other Regions → Tarun
-            $assignedTo = 2;
+            $assignedTo = 29;
         }
 
         // Save enquiry
@@ -657,13 +701,20 @@ public function showLead($id)
         ->first();
 
     // Agents List
+   // Agents List
+$agents = collect();
+
+if (
+    session('role_id') != config('constants.roles.agent') ||
+    session('can_assign_leads') == 1
+) {
     $agents = DB::table('users')
-        ->where(
-            'role_id',
-            config('constants.roles.agent')
-        )
+        ->where('role_id', config('constants.roles.agent'))
         ->whereNull('deleted_at')
+        ->select('id', 'name')
+        ->orderBy('name')
         ->get();
+}
 
     // Followup History
     $followups = DB::table('enquiry_followups')
@@ -703,6 +754,28 @@ public function showLead($id)
             'emails'
         )
     );
+}
+
+
+public function assignAgent(Request $request)
+{
+    $request->validate([
+        'enquiry_id' => 'required|exists:enquiries,id',
+        'agent_id'   => 'required|exists:users,id',
+    ]);
+
+    DB::table('enquiries')
+        ->where('id', $request->enquiry_id)
+        ->update([
+            'assigned_to' => $request->agent_id,
+            'assigned_by' => session('user_id'),
+            'updated_at'  => now(),
+        ]);
+
+    return response()->json([
+        'success' => true,
+        'message' => 'Agent assigned successfully.'
+    ]);
 }
 public function view($id)
 {

@@ -53,7 +53,7 @@
                         <input type="hidden" name="report_title" value="{{ $report->report_title }}">
 
                         {{-- reCAPTCHA v3 hidden field --}}
-                        <!-- <input type="hidden" name="g-recaptcha-response" id="recaptchaResponse"> -->
+                       
 
                         {{-- Name --}}
                         <div class="form-group mb-3">
@@ -109,7 +109,15 @@
                             </label>
                         </div>
 
-                        <button type="submit" class="btn btn-primary w-100">Submit</button>
+                    <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
+
+                        <button type="submit" class="btn btn-primary w-100">
+                            Submit
+                        </button>
+
+
+
+
                     </form>
 
                 </div>
@@ -118,16 +126,7 @@
     </div>
 </div>
 
-{{-- Google reCAPTCHA v3 --}}
-<script src="https://www.google.com/recaptcha/api.js?render={{ config('captcha.sitekey') }}"></script>
-<script>
-    grecaptcha.ready(function() {
-        grecaptcha.execute("{{ config('captcha.sitekey') }}", {action: "submit"}).then(function(token) {
-            document.getElementById("recaptchaResponse").value = token;
-            console.log("✅ v3 token generated:", token);
-        });
-    });
-</script>
+
 <script>
 document.getElementById('country_id').addEventListener('change', function() {
     let selected = this.options[this.selectedIndex];
@@ -135,4 +134,42 @@ document.getElementById('country_id').addEventListener('change', function() {
     document.getElementById('phone_code').value = phoneCode ? phoneCode : '';
 });
 </script>
+
+
+<script>
+document.getElementById('country_id').addEventListener('change', function() {
+    let selected = this.options[this.selectedIndex];
+    let phoneCode = selected.getAttribute('data-phone');
+    document.getElementById('phone_code').value = phoneCode ? phoneCode : '';
+});
+</script>
+<script>
+console.log("Site Key:", "{{ env('NOCAPTCHA_SITEKEY') }}");
+</script>
+<script src="https://www.google.com/recaptcha/api.js?render={{ env('NOCAPTCHA_SITEKEY') }}"></script>
+
+<script>
+document.getElementById('enquiry-form').addEventListener('submit', function(e){
+
+    e.preventDefault();
+
+    grecaptcha.ready(function(){
+
+        grecaptcha.execute('{{ env("NOCAPTCHA_SITEKEY") }}', {
+            action: 'submit'
+        }).then(function(token){
+
+            console.log('TOKEN:', token);
+
+            document.getElementById('g-recaptcha-response').value = token;
+
+            document.getElementById('enquiry-form').submit();
+
+        });
+
+    });
+
+});
+</script>
+
 @endsection

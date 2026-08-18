@@ -88,7 +88,7 @@
                                         </a>
                                     </h5>
                                     <p class="mb-2 text-muted">
-                                        {{ Str::limit(strip_tags($press->content), 160, '...') }}
+                                        {{ Str::limit(strip_tags($press->meta_description), 160, '...') }}
                                     </p>
 
                                     <div class="d-flex flex-wrap small text-secondary">

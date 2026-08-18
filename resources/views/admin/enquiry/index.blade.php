@@ -37,14 +37,10 @@
 
     </div>
 
-    <!-- SUMMARY CARDS -->
-
-    <div class="summary-cards">
-
-        <div class="summary-card">
-            <span>Total Leads</span>
-            <h3>{{ $totalLeads }}</h3>
-        </div>
+    <!-- FILTER ROW -->
+  <!-- FILTER ROW -->
+<form method="GET" action="{{ url('admin/enquiries') }}">
+    <div class="row align-items-end g-3">
 
         <div class="summary-card hot-card">
             <span>Hot Leads</span>
@@ -94,11 +90,11 @@
 
             <select name="status">
                 <option value="">All Status</option>
-                <option value="new" {{ request('status')=='new' ? 'selected' : '' }}>New</option>
-                <option value="contacted" {{ request('status')=='contacted' ? 'selected' : '' }}>Contacted</option>
-                <option value="converted" {{ request('status')=='converted' ? 'selected' : '' }}>Converted</option>
-                <option value="not_interested" {{ request('status')=='not_interested' ? 'selected' : '' }}>Not Interested</option>
-                <option value="unassigned" {{ request('status')=='unassigned' ? 'selected' : '' }}>Unassigned</option>
+                <option value="new" {{ request('status') == 'new' ? 'selected' : '' }}>New</option>
+                <option value="contacted" {{ request('status') == 'contacted' ? 'selected' : '' }}>Contacted</option>
+                <option value="converted" {{ request('status') == 'converted' ? 'selected' : '' }}>Converted</option>
+                <option value="not_interested" {{ request('status') == 'not_interested' ? 'selected' : '' }}>Not Interested</option>
+                <option value="unassigned" {{ request('status') == 'unassigned' ? 'selected' : '' }}>Unassigned</option>
             </select>
 
             <select name="lead_type">

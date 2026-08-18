@@ -90,12 +90,15 @@
         <div class="row mt-4">
     <div class="col-md-6"></div>
 
-    <div class="col-md-6 text-white">
-        <p style="margin:0;margin-top: -101px;">
-            <strong style="font-size:20px;">Address:</strong> 
-            Office No. 710, 7th Floor, DNK Square, 111-112 Airport Road, 
-           <br> Sakore Nagar, Viman Nagar, Pune, Maharashtra 411014
-        </p>
+   <div class="row mt-4">
+    <div class="col-12">
+        <div class="footer-address text-white">
+            <p class="mb-0">
+                <strong>Address:</strong><br>
+                Office No. 710, 7th Floor, DNK Square, 111-112 Airport Road,
+                Sakore Nagar, Viman Nagar, Pune, Maharashtra 411014
+            </p>
+        </div>
     </div>
 </div>
 
@@ -120,6 +123,78 @@
         <!-- Footer Copyright Section End -->
     </div>
 </footer>
+<style>
+.footer-address {
+    margin-top: 20px;
+}
+
+.footer-address p {
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.footer-address strong {
+    font-size: 20px;
+}
+
+/* Copyright */
+.footer-copyright {
+    text-align: left;
+}
+
+.footer-copyright p {
+    line-height: 1.6;
+}
+
+.footer-copyright a {
+    color: #fff;
+    text-decoration: underline;
+}
+
+/* Mobile Footer */
+@media (max-width: 767px) {
+
+    .footer-address {
+        margin-top: 20px;
+        padding: 0 10px;
+        text-align: center;
+    }
+
+    .footer-address p {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .footer-address strong {
+        font-size: 18px;
+    }
+
+    /* Copyright center on mobile */
+    .footer-copyright {
+        text-align: center !important;
+    }
+
+    .footer-copyright .row {
+        text-align: center !important;
+    }
+
+    .footer-copyright .col-md-6 {
+        width: 100%;
+        text-align: center !important;
+        margin-bottom: 10px;
+    }
+
+    .footer-copyright .text-md-end {
+        text-align: center !important;
+    }
+
+    .footer-copyright p {
+        text-align: center !important;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+</style>
 <!-- Footer Section End -->
 <script>
     const backToTop = document.getElementById('backToTop');

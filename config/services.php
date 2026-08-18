@@ -44,5 +44,12 @@ return [
     'openai' => [
     'api_key' => env('OPENAI_API_KEY'),
 ],
+// =========================
+    // CallHippo
+    // =========================
+    'callhippo' => [
+        'api_key' => env('CALLHIPPO_API_KEY'),
+        'base_url' => env('CALLHIPPO_BASE_URL'),
+    ],
 
 ];

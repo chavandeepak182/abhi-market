@@ -8,7 +8,7 @@
         </h5>
 
         <p class="card-text">
-            {!! \Illuminate\Support\Str::limit(strip_tags($report->description), 200) !!}
+            {!! \Illuminate\Support\Str::limit(strip_tags($report->meta_description), 200) !!}
             <a href="{{ route('reports.details', $report->slug) }}" class="text-info">Read More <i class="fa fa-external-link-alt"></i></a>
         </p>
 

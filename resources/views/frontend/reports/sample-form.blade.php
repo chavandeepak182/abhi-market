@@ -111,9 +111,10 @@
 
                     <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
 
-                        <button type="submit" class="btn btn-primary w-100">
+                        <button type="submit" id="submitBtn" class="btn btn-primary w-100">
                             Submit
                         </button>
+
 
 
 
@@ -149,19 +150,33 @@ console.log("Site Key:", "{{ env('NOCAPTCHA_SITEKEY') }}");
 <script src="https://www.google.com/recaptcha/api.js?render={{ env('NOCAPTCHA_SITEKEY') }}"></script>
 
 <script>
+let isSubmitting = false;
+
 document.getElementById('enquiry-form').addEventListener('submit', function(e){
+
+    if (isSubmitting) {
+        e.preventDefault();
+        return false;
+    }
 
     e.preventDefault();
 
-    grecaptcha.ready(function(){
+    isSubmitting = true;
+
+    let submitBtn = document.getElementById('submitBtn');
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = "Submitting...";
+
+    grecaptcha.ready(function () {
 
         grecaptcha.execute('{{ env("NOCAPTCHA_SITEKEY") }}', {
             action: 'submit'
         }).then(function(token){
 
-            console.log('TOKEN:', token);
-
             document.getElementById('g-recaptcha-response').value = token;
+
+            // Remove this submit listener before submitting
+            document.getElementById('enquiry-form').removeEventListener('submit', arguments.callee);
 
             document.getElementById('enquiry-form').submit();
 

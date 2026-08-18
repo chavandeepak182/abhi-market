@@ -74,11 +74,11 @@
                         <img src="{{ asset($blog->image) }}" class="card-img-top" alt="{{ $blog->blog_name }}">
                         <div class="card-body">
                             <h5 class="card-title">{{ $blog->blog_name }}</h5>
-                            <p class="card-text">{{ Str::limit(strip_tags($blog->description), 120, '...') }}</p>
+                            <p class="card-text">{{ Str::limit(strip_tags($blog->meta_description), 120, '...') }}</p>
                         </div>
                         <div class="card-footer bg-white border-0">
                             <small class="text-muted">
-                                {{ \Carbon\Carbon::parse($blog->created_at)->format('F d, Y') }}
+                                {{ \Carbon\Carbon::parse($blog->publish_date)->format('F d, Y') }}
                             </small>
                         </div>
                     </div>

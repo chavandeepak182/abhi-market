@@ -88,10 +88,12 @@
     </div>
 
     <!-- FILTER ROW -->
-   <form method="GET" action="{{ url('admin/enquiries') }}">
+  <!-- FILTER ROW -->
+<form method="GET" action="{{ url('admin/enquiries') }}">
     <div class="row align-items-end g-3">
 
-        <div class="col-md-2">
+        <!-- Email -->
+        <div class="col">
             <label class="form-label">Email</label>
             <input type="text"
                    name="email"
@@ -99,23 +101,44 @@
                    placeholder="Search Email"
                    value="{{ request('email') }}">
         </div>
+        <!-- Email Type -->
+<div class="col">
+    <label class="form-label">Email Type</label>
 
-        <div class="col-md-2">
+    <select name="email_type" class="form-control">
+        <option value="">All Email Types</option>
+
+        <option value="personal"
+            {{ request('email_type') == 'personal' ? 'selected' : '' }}>
+            Personal
+        </option>
+
+        <option value="business"
+            {{ request('email_type') == 'business' ? 'selected' : '' }}>
+            Business
+        </option>
+    </select>
+</div>
+
+        <!-- Status -->
+        <div class="col">
             <label class="form-label">Status</label>
             <select name="status" class="form-control">
                 <option value="">All Status</option>
-                <option value="new" {{ request('status')=='new' ? 'selected' : '' }}>New</option>
-                <option value="contacted" {{ request('status')=='contacted' ? 'selected' : '' }}>Contacted</option>
-                <option value="converted" {{ request('status')=='converted' ? 'selected' : '' }}>Converted</option>
-                <option value="not_interested" {{ request('status')=='not_interested' ? 'selected' : '' }}>Not Interested</option>
-                <option value="unassigned" {{ request('status')=='unassigned' ? 'selected' : '' }}>Unassigned</option>
+                <option value="new" {{ request('status') == 'new' ? 'selected' : '' }}>New</option>
+                <option value="contacted" {{ request('status') == 'contacted' ? 'selected' : '' }}>Contacted</option>
+                <option value="converted" {{ request('status') == 'converted' ? 'selected' : '' }}>Converted</option>
+                <option value="not_interested" {{ request('status') == 'not_interested' ? 'selected' : '' }}>Not Interested</option>
+                <option value="unassigned" {{ request('status') == 'unassigned' ? 'selected' : '' }}>Unassigned</option>
             </select>
         </div>
 
-        <div class="col-md-2">
+        <!-- Agent -->
+        <div class="col">
             <label class="form-label">Agent</label>
             <select name="agent" class="form-control">
                 <option value="">All Agents</option>
+
                 @foreach($agents as $agent)
                     <option value="{{ $agent->id }}"
                         {{ request('agent') == $agent->id ? 'selected' : '' }}>
@@ -125,7 +148,23 @@
             </select>
         </div>
 
-        <div class="col-md-2">
+        <!-- Region -->
+        <div class="col">
+            <label class="form-label">Region</label>
+            <select name="region" class="form-control">
+                <option value="">All Regions</option>
+
+                @foreach($regions as $region)
+                    <option value="{{ $region->id }}"
+                        {{ request('region') == $region->id ? 'selected' : '' }}>
+                        {{ $region->region_name }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        <!-- From -->
+        <div class="col">
             <label class="form-label">From</label>
             <input type="date"
                    name="from_date"
@@ -133,7 +172,8 @@
                    value="{{ request('from_date') }}">
         </div>
 
-        <div class="col-md-2">
+        <!-- To -->
+        <div class="col">
             <label class="form-label">To</label>
             <input type="date"
                    name="to_date"
@@ -141,9 +181,19 @@
                    value="{{ request('to_date') }}">
         </div>
 
-        <div class="col-md-2 d-flex gap-2">
-            <button class="btn btn-primary w-100">Filter</button>
-            <a href="{{ url('admin/enquiries') }}" class="btn btn-secondary w-100">Reset</a>
+        <!-- Buttons -->
+        <div class="col">
+            <label class="form-label">&nbsp;</label>
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary w-100">
+                    Filter
+                </button>
+
+                <a href="{{ url('admin/enquiries') }}"
+                   class="btn btn-secondary w-100">
+                    Reset
+                </a>
+            </div>
         </div>
 
     </div>
@@ -158,8 +208,9 @@
                         <th class="fixed-width"><div class="form-check"><input class="form-check-input" type="checkbox" id="selectAll"></div></th>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Email ID</th>
-                        <th>Usage type </th>
+                       <th>Email ID</th>
+                        <th>Email Type</th>
+                        <th>Usage type</th>
                         <th>Designation</th>
                         <th>country</th>
                         <th>Mobile No.</th>
@@ -185,6 +236,15 @@
                         </a>
                         </td>
                         <td><span class="fw-medium text-gray-300">{{ $enquiry->email }}</span></td>
+                        <td>
+                            @if($enquiry->email_type == 'business')
+                                <span class="badge bg-success">Business</span>
+                            @elseif($enquiry->email_type == 'personal')
+                                <span class="badge bg-secondary">Personal</span>
+                            @else
+                                <span class="badge bg-warning text-dark">Unknown</span>
+                            @endif
+                        </td>
                         <td>
                             @if($enquiry->usage_type == 'office')
                                 <span class="badge bg-success">Office</span>
@@ -218,28 +278,90 @@
         <span class="badge bg-secondary">Not Interested</span>
     @endif
 </td>
- <td>
-    @if(empty($enquiry->assigned_to))
+<!-- <td>-->
+<!--    @if(empty($enquiry->assigned_to))-->
+
+<!--        <select class="form-select assign-agent"-->
+<!--                data-id="{{ $enquiry->id }}">-->
+<!--            <option value="">Select Agent</option>-->
+
+<!--            @foreach($agents as $agent)-->
+<!--                <option value="{{ $agent->id }}">-->
+<!--                    {{ $agent->name }}-->
+<!--                </option>-->
+<!--            @endforeach-->
+<!--        </select>-->
+
+<!--    @else-->
+
+<!--        <span class="badge bg-success">-->
+<!--            {{ $enquiry->agent_name }}-->
+<!--        </span>-->
+
+<!--    @endif-->
+<!--</td>-->
+<td>
+    @if(session('role_id') == config('constants.roles.admin'))
+
+        {{-- ONLY ADMIN CAN ASSIGN / CHANGE AGENT --}}
 
         <select class="form-select assign-agent"
                 data-id="{{ $enquiry->id }}">
+
             <option value="">Select Agent</option>
 
             @foreach($agents as $agent)
-                <option value="{{ $agent->id }}">
+                <option value="{{ $agent->id }}"
+                    {{ $enquiry->assigned_to == $agent->id ? 'selected' : '' }}>
                     {{ $agent->name }}
                 </option>
             @endforeach
+
         </select>
 
     @else
 
-        <span class="badge bg-success">
-            {{ $enquiry->agent_name }}
-        </span>
+        {{-- Team Lead / Normal Agent --}}
+        @if(!empty($enquiry->assigned_to))
+
+            <span class="badge bg-success">
+                {{ $enquiry->agent_name }}
+            </span>
+
+        @else
+
+            <span class="badge bg-secondary">
+                Not Assigned
+            </span>
+
+        @endif
 
     @endif
 </td>
+<!--<td>-->
+<!--    <select-->
+<!--        class="form-select assign-agent"-->
+<!--        data-id="{{ $enquiry->id }}"-->
+<!--        style="min-width: 160px;"-->
+<!--    >-->
+
+<!--        <option value="">-->
+<!--            Unassigned-->
+<!--        </option>-->
+
+<!--        @foreach($agents as $agent)-->
+
+<!--            <option-->
+<!--                value="{{ $agent->id }}"-->
+<!--                {{ (string)$enquiry->assigned_to === (string)$agent->id ? 'selected' : '' }}-->
+<!--            >-->
+<!--                {{ $agent->name }}-->
+<!--            </option>-->
+
+<!--        @endforeach-->
+
+<!--    </select>-->
+<!--</td>-->
                         <td>
                             <!-- View Button -->
                            <a href="{{ route('enquiry.view', $enquiry->id) }}"

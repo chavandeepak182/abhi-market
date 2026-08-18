@@ -137,7 +137,9 @@
 
         <!-- Main Content -->
         <div class="col-lg-8 mb-5 mb-lg-0">
-            <h1 class="mb-3">{{ $pressRelease->title }}</h1>
+           <strong class="mb-3 d-block">
+    {{ $pressRelease->title }}
+</strong>
 
             <p class="text-white mb-4" style="background:#006186;">
                 Published on {{ \Carbon\Carbon::parse($pressRelease->publish_date)->format('F d, Y') }}

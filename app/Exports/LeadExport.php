@@ -2,9 +2,9 @@
 
 namespace App\Exports;
 
-use App\Models\Enquiry;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Illuminate\Support\Facades\DB;
 
 class LeadExport implements FromCollection, WithHeadings
 {
@@ -17,21 +17,38 @@ class LeadExport implements FromCollection, WithHeadings
 
     public function collection()
     {
-        return Enquiry::where('id', $this->id)->get([
-            'id',
-            'name',
-            'email',
-            'contact',
-            'job_title',
-            'company_name',
-            'usage_type',
-            'status',
-            'lead_type',
-            'remark',
-            'followup_date',
-            'converted_amount',
-            'created_at'
-        ]);
+        return DB::table('enquiries')
+            ->leftJoin(
+                'users',
+                'enquiries.assigned_to',
+                '=',
+                'users.id'
+            )
+            ->leftJoin(
+                'regions',
+                'enquiries.region_id',
+                '=',
+                'regions.id'
+            )
+            ->where('enquiries.id', $this->id)
+            ->select(
+                'enquiries.id',
+                'enquiries.name',
+                'enquiries.email',
+                'enquiries.contact',
+                'enquiries.job_title',
+                'enquiries.company_name',
+                'enquiries.usage_type',
+                'enquiries.status',
+                'enquiries.lead_type',
+                'enquiries.remark',
+                'enquiries.followup_date',
+                'enquiries.converted_amount',
+                'enquiries.created_at',
+                'users.name as assigned_to',
+                'regions.region_name as region'
+            )
+            ->get();
     }
 
     public function headings(): array
@@ -49,7 +66,9 @@ class LeadExport implements FromCollection, WithHeadings
             'Remark',
             'Followup Date',
             'Converted Amount',
-            'Created At'
+            'Created At',
+            'Assigned To',
+            'Region'
         ];
     }
 }

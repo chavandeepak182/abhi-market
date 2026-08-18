@@ -167,3 +167,55 @@
 <script src="{{ asset('assets') }}/js/wow.min.js"></script>
 <!-- Main Custom js file -->
 <script src="{{ asset('assets') }}/js/function.js"></script>
+<!-- Auto-detect visitor's timezone for every enquiry form (mirrors CRM's
+     lead capture: local time + region-based auto agent assignment are
+     computed server-side from this). Injects a hidden `timezone` field
+     into any enquiry form on the page instead of requiring each form
+     partial to be edited individually. -->
+<script>
+(function () {
+    var ENQUIRY_ACTION = "{{ route('enquiry.store') }}";
+
+    function detectedTimezone() {
+        try {
+            return Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+        } catch (e) {
+            return '';
+        }
+    }
+
+    function ensureTimezoneField(form) {
+        var field = form.querySelector('input[name="timezone"]');
+
+        if (!field) {
+            field = document.createElement('input');
+            field.type = 'hidden';
+            field.name = 'timezone';
+            form.appendChild(field);
+        }
+
+        field.value = detectedTimezone();
+    }
+
+    function wireEnquiryForms() {
+        var forms = document.querySelectorAll('form[action="' + ENQUIRY_ACTION + '"]');
+
+        forms.forEach(function (form) {
+            ensureTimezoneField(form);
+
+            // Re-stamp right before submit too, in case the tab sat open
+            // long enough for the detected zone to matter, or the field
+            // got stripped by other form-handling JS on the page.
+            form.addEventListener('submit', function () {
+                ensureTimezoneField(form);
+            });
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', wireEnquiryForms);
+    } else {
+        wireEnquiryForms();
+    }
+})();
+</script>

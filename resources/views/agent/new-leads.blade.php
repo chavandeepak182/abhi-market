@@ -177,7 +177,7 @@
                         <td class="fixed-width"><div class="form-check"><input class="form-check-input" type="checkbox"></div></td>
                         <td><span class="fw-medium text-gray-300">{{ $lead->id }}</span></td>
                        <td>
-                            <a href="{{ route('enquiry.show', $lead->id) }}"
+                            <a href="{{ route('agent.lead.details', $lead->id) }}"
                         class="lead-name-link">
 
                             {{ $lead->name }}

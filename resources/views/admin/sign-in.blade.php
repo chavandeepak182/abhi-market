@@ -50,6 +50,17 @@
                     <h2 class="mb-8">Welcome to Back! &#128075;</h2>
                     <p class="text-gray-600 text-15 mb-32">Please sign in to your account and start the adventure</p>
 
+                    @if(session('error'))
+                        <div class="alert alert-danger mb-24" role="alert">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+                    @if(session('success'))
+                        <div class="alert alert-success mb-24" role="alert">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
                     <form action="{{Route('userLogin')}}" method="post">
                         @csrf
                         <div class="mb-24">
@@ -66,7 +77,7 @@
                             <label for="current-password" class="form-label mb-8 h6">Password</label>
                             <div class="position-relative">
                                 <input type="password" name="password" class="form-control py-11 ps-40" id="password" placeholder="Enter Password">
-                                <span class="toggle-password position-absolute top-50 inset-inline-end-0 me-16 translate-middle-y ph ph-eye-slash" id="#current-password"></span>
+                                <span class="toggle-password position-absolute top-50 inset-inline-end-0 me-16 translate-middle-y ph ph-eye-slash" id="#password"></span>
                                 <span class="position-absolute top-50 translate-middle-y ms-16 text-gray-600 d-flex"><i class="ph ph-lock"></i></span>
                                 @error('password')
                                     <span class="text-danger">{{ $message }}</span>

@@ -142,12 +142,126 @@ Route::get('/agent/new-leads', [AgentController::class, 'newLeads'])
 Route::get('/agent/today-leads', [AgentController::class, 'todayLeads'])
     ->name('agent.today.leads');
 
+// ================= Admin Agent Management =================
+Route::middleware('isAdmin')->prefix('admin')->group(function () {
+
+    Route::get('agent-regions', [AgentController::class, 'regionsIndex'])
+        ->name('agent.regions');
+    Route::post('agent-regions', [AgentController::class, 'regionsUpdate'])
+        ->name('agent.regions.update');
+
+    Route::get('agents', [AgentController::class, 'index'])
+        ->name('agents.index');
+    Route::get('agents/create', [AgentController::class, 'create'])
+        ->name('agents.create');
+    Route::post('agents', [AgentController::class, 'store'])
+        ->name('agents.store');
+    Route::get('agents/{id}/edit', [AgentController::class, 'edit'])
+        ->name('agents.edit');
+    Route::put('agents/{id}', [AgentController::class, 'update'])
+        ->name('agents.update');
+    Route::delete('agents/{id}', [AgentController::class, 'destroy'])
+        ->name('agents.destroy');
+    Route::post('agents/{id}/toggle-status', [AgentController::class, 'toggleStatus'])
+        ->name('agents.toggle-status');
+    Route::post('agents/{id}/reset-password', [AgentController::class, 'resetPassword'])
+        ->name('agents.reset-password');
+    Route::get('agents/{id}', [AgentController::class, 'show'])
+        ->name('agents.show');
+});
+
 
 Route::get('/admin/enquiry/view/{id}', [EnquiryController::class, 'view'])
     ->name('enquiry.view');
 
     Route::get('/admin/enquiry/{id}', [EnquiryController::class, 'showLead'])
     ->name('enquiry.show');
+
+// ================= CRM-style Lead Detail Page (Admin) =================
+Route::middleware('isAdmin')->group(function () {
+
+    Route::get('/admin/leads/{lead}', [App\Http\Controllers\LeadController::class, 'show'])
+        ->name('leads.show');
+
+    Route::post('/admin/leads/{lead}/reassign-agent', [App\Http\Controllers\LeadController::class, 'reassignAgent'])
+        ->name('admin.lead.reassign-agent');
+
+    Route::post('/admin/leads/{lead}/update-crm', [App\Http\Controllers\LeadController::class, 'updateCrm'])
+        ->name('admin.crm.update');
+
+    Route::post('/admin/leads/{lead}/email', [App\Http\Controllers\LeadController::class, 'sendEmail'])
+        ->name('admin.email.send');
+
+    // Today's Tasks + Meetings Scheduled (admin - all agents)
+    Route::get('/admin/tasks/today', [App\Http\Controllers\Admin\TaskController::class, 'today'])
+        ->name('admin.tasks.today');
+    Route::post('/admin/tasks/{id}/toggle', [App\Http\Controllers\Admin\TaskController::class, 'toggleTask'])
+        ->name('admin.tasks.toggle');
+    Route::get('/admin/tasks/meetings-today', [App\Http\Controllers\Admin\TaskController::class, 'meetingsToday'])
+        ->name('admin.tasks.meetings-today');
+    Route::post('/admin/tasks/meeting/{id}/toggle-conducted', [App\Http\Controllers\Admin\TaskController::class, 'toggleMeetingConducted'])
+        ->name('admin.tasks.meeting.toggle-conducted');
+//     Route::get(
+//     'enquiry/meetings/upcoming',
+//     [EnquiryController::class, 'upcomingMeetings']
+// )->name('enquiry.meetings.upcoming');    
+
+    // Email templates (compose-email dropdown + automatic followup schedule)
+    Route::get('/admin/email-templates', [App\Http\Controllers\EmailTemplateController::class, 'index'])
+        ->name('email-templates.index');
+    Route::get('/admin/email-templates/create', [App\Http\Controllers\EmailTemplateController::class, 'create'])
+        ->name('email-templates.create');
+    Route::post('/admin/email-templates', [App\Http\Controllers\EmailTemplateController::class, 'store'])
+        ->name('email-templates.store');
+    Route::get('/admin/email-templates/{template}/edit', [App\Http\Controllers\EmailTemplateController::class, 'edit'])
+        ->name('email-templates.edit');
+    Route::put('/admin/email-templates/{template}', [App\Http\Controllers\EmailTemplateController::class, 'update'])
+        ->name('email-templates.update');
+    Route::delete('/admin/email-templates/{template}', [App\Http\Controllers\EmailTemplateController::class, 'destroy'])
+        ->name('email-templates.destroy');
+});
+
+// ================= CRM-style Lead Detail Page (Agent) =================
+Route::middleware('isAgent')->group(function () {
+
+    Route::get('/agent/lead/{id}', [AgentController::class, 'leadDetails'])
+        ->name('agent.lead.details');
+
+    Route::get('/agent/leads', [AgentController::class, 'myLeads'])
+        ->name('agent.leads');
+
+    Route::get('/agent/calendar', [AgentController::class, 'calendar'])
+        ->name('agent.calendar');
+
+    // Today's Tasks + Meetings Scheduled (agent - own leads only)
+    Route::get('/agent/tasks', [AgentController::class, 'todayTasks'])
+        ->name('agent.tasks');
+    Route::post('/agent/task/{id}/toggle', [AgentController::class, 'toggleTask'])
+        ->name('agent.task.toggle');
+    Route::get('/agent/meetings/today', [AgentController::class, 'meetingsToday'])
+        ->name('agent.meetings.today');
+    Route::post('/agent/meeting/{id}/toggle-conducted', [AgentController::class, 'toggleMeetingConducted'])
+        ->name('agent.meeting.toggleConducted');
+
+    Route::get('/agent/meetings/upcoming', [AgentController::class, 'upcomingMeetings'])
+    ->name('agent.meetings.upcoming');    
+});
+
+// ================= Shared lead-detail actions (admin + agent) =================
+Route::middleware('isAdminAgent')->group(function () {
+
+    Route::post('/enquiry/{id}/status', [EnquiryController::class, 'updateStatus'])
+        ->name('enquiry.status.update');
+
+    Route::post('/enquiry/{id}/note', [EnquiryController::class, 'storeNote'])
+        ->name('enquiry.note.store');
+
+    Route::post('/enquiry/{id}/email', [EnquiryController::class, 'sendEmailShared'])
+        ->name('enquiry.email.send');
+
+    Route::post('/enquiry/{id}/meeting', [EnquiryController::class, 'storeMeeting'])
+        ->name('enquiry.meeting.store');
+});
 
 Route::get(
     '/admin/enquiry-export/{id}',
@@ -442,3 +556,27 @@ Route::middleware('isAdminAgent')->group(function () {
 Route::get('/news/{slug}', [NewsController::class, 'show'])->name('news.show');
 Route::get('/news', [NewsController::class, 'news'])->name('news');
 
+Route::middleware('isAdminAgent')->group(function () {
+    Route::get('/admin/agent-regions', [AgentController::class, 'regions'])
+        ->name('agent.regions');
+
+    Route::post('/admin/agent-regions', [AgentController::class, 'updateRegions'])
+        ->name('agent.regions.update');
+
+    // --- Agent management (list / create / edit / view leads / delete) ---
+    Route::get('/admin/agents', [AgentController::class, 'index'])->name('agents.index');
+    Route::get('/admin/agents/create', [AgentController::class, 'create'])->name('agents.create');
+    Route::post('/admin/agents', [AgentController::class, 'store'])->name('agents.store');
+    Route::get('/admin/agents/{id}', [AgentController::class, 'show'])->name('agents.show');
+    Route::get('/admin/agents/{id}/edit', [AgentController::class, 'edit'])->name('agents.edit');
+    Route::put('/admin/agents/{id}', [AgentController::class, 'update'])->name('agents.update');
+    Route::delete('/admin/agents/{id}', [AgentController::class, 'destroy'])->name('agents.destroy');
+   Route::get('/admin/agent-regions', [AgentController::class, 'regionsIndex'])
+    ->name('agent.regions');
+
+Route::post('/admin/agent-regions', [AgentController::class, 'regionsUpdate'])
+    ->name('agent.regions.update');
+});
+
+Route::post('/admin/agents/{id}/toggle-status', [AgentController::class, 'toggleStatus'])
+    ->name('agents.toggle-status');

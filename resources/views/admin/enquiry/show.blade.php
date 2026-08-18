@@ -543,6 +543,175 @@ document.addEventListener('click', function(e){
 }
 </style>
 {{-- EMAIL CONVERSATION ENDS HERE --}}
+
+{{-- COMPOSE EMAIL (CC / Reply-To / BCC / Attachments / Template) STARTS HERE --}}
+
+<div class="card mt-4">
+
+    <div class="card-header">
+        <h5 class="mb-0">Compose Email</h5>
+    </div>
+
+    <div class="card-body">
+
+        <form action="{{ route('admin.email.send', $enquiry->id) }}"
+              method="POST"
+              enctype="multipart/form-data">
+
+            @csrf
+
+            @if(isset($emailTemplate) && $emailTemplate)
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Template</label>
+                    <select name="template_id" id="templateSelect" class="form-control">
+                        <option value="">-- No template --</option>
+                        <option value="{{ $emailTemplate->id }}"
+                                data-subject="{{ $emailTemplate->subject }}"
+                                data-body="{{ $emailTemplate->body }}">
+                            {{ $emailTemplate->name }}
+                        </option>
+                    </select>
+                    <small class="text-muted">
+                        Picking this only starts the follow-up countdown on send - subject/body below are always yours to edit.
+                    </small>
+                </div>
+            @endif
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-bold">Subject</label>
+                    <input type="text" name="subject" id="emailSubject" class="form-control" required>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-bold">Reply-To (optional)</label>
+                    <input type="email" name="reply_to_email" class="form-control"
+                           placeholder="Different from lead's own email, if needed">
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-bold">CC (comma separated)</label>
+                    <input type="text" name="cc_email" class="form-control"
+                           placeholder="agent@example.com, another@example.com">
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-bold">BCC (comma separated)</label>
+                    <input type="text" name="bcc_email" class="form-control">
+                </div>
+
+                <div class="col-md-12 mb-3">
+                    <label class="form-label fw-bold">Message</label>
+                    <textarea name="body" id="emailBody" rows="6" class="form-control" required></textarea>
+                    <small class="text-muted">
+                       <small class="text-muted">
+    Placeholders available:
+    @{{name}},
+    @{{report_name}},
+    @{{agent_name}},
+    @{{company}}
+</small>S
+                    </small>
+                </div>
+
+                <div class="col-md-12 mb-3">
+                    <label class="form-label fw-bold">Attachments (up to 5, 10MB total)</label>
+                    <input type="file" name="attachments[]" class="form-control" multiple>
+                </div>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-paper-plane"></i> Send Email
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+@if(isset($emailTemplate) && $emailTemplate)
+<script>
+document.getElementById('templateSelect')?.addEventListener('change', function () {
+    const opt = this.options[this.selectedIndex];
+    if (!opt.dataset.subject && !opt.dataset.body) return;
+    document.getElementById('emailSubject').value = opt.dataset.subject || '';
+    document.getElementById('emailBody').value = opt.dataset.body || '';
+});
+</script>
+@endif
+
+{{-- EMAIL THREAD (email_messages: sent history, with CC/BCC/attachments) --}}
+
+<div class="card mt-4">
+
+    <div class="card-header">
+        <h5 class="mb-0">Email Thread</h5>
+    </div>
+
+    <div class="card-body">
+
+        <div class="accordion" id="emailThreadAccordion">
+
+            @forelse($emailThread as $key => $mail)
+
+                <div class="accordion-item mb-2">
+
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#emailThread{{ $key }}">
+                            <div class="w-100">
+                                <strong>{{ $mail->to_email }}</strong>
+                                @if($mail->delivery_status === 'failed')
+                                    <span class="badge bg-danger">Failed</span>
+                                @else
+                                    <span class="badge bg-success">Sent</span>
+                                @endif
+                                <br>
+                                <small>{{ $mail->subject }}</small>
+                                @if($mail->cc_email)
+                                    <br><small class="text-muted">CC: {{ $mail->cc_email }}</small>
+                                @endif
+                            </div>
+                        </button>
+                    </h2>
+
+                    <div id="emailThread{{ $key }}" class="accordion-collapse collapse">
+                        <div class="accordion-body">
+
+                            {!! nl2br(e($mail->body)) !!}
+
+                            @if($mail->delivery_error)
+                                <p class="text-danger mt-2 mb-0">Error: {{ $mail->delivery_error }}</p>
+                            @endif
+
+                            @if($mail->attachments->count())
+                                <hr>
+                                @foreach($mail->attachments as $att)
+                                    <a href="{{ asset('storage/'.$att->file_path) }}" target="_blank" class="d-block">
+                                        📎 {{ $att->file_name }}
+                                    </a>
+                                @endforeach
+                            @endif
+
+                        </div>
+                    </div>
+
+                </div>
+
+            @empty
+                <p class="text-muted mb-0">No emails sent yet through the compose form.</p>
+            @endforelse
+
+        </div>
+
+    </div>
+
+</div>
+
+{{-- COMPOSE EMAIL ENDS HERE --}}
         </div>
 
     </div>

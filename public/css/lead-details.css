@@ -1,0 +1,653 @@
+/* =====================================================================
+   LEAD DETAILS PAGE
+   Prefixed with `ld-` so nothing here collides with crm.css
+   ===================================================================== */
+
+.ld-wrap{
+    max-width:1180px;
+}
+
+/* ---- Back link ------------------------------------------------------ */
+
+.ld-back{
+    display:inline-flex;
+    align-items:center;
+    color:#5b6472;
+    text-decoration:none;
+    margin-bottom:16px;
+}
+
+.ld-back svg{
+    width:22px;
+    height:22px;
+}
+
+/* ---- Generic card --------------------------------------------------- */
+
+.ld-card{
+    background:#fff;
+    border:1px solid #e8ebf0;
+    border-radius:14px;
+    padding:26px 28px;
+    margin-bottom:22px;
+    box-shadow:0 1px 3px rgba(16,24,40,.04);
+}
+
+.ld-card-title{
+    font-size:18px;
+    font-weight:700;
+    color:#1f2a37;
+    margin:0 0 20px;
+}
+
+.ld-added-banner{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:linear-gradient(135deg,#eef4ff,#f5f9ff);
+    border:1px solid #dbe7fb;
+    color:#334155;
+    font-size:13.5px;
+    padding:10px 16px;
+    border-radius:10px;
+    margin:-6px 0 20px;
+}
+
+.ld-added-banner svg{
+    width:18px;
+    height:18px;
+    color:#2563eb;
+    flex-shrink:0;
+}
+
+.ld-added-banner strong{
+    color:#1d4ed8;
+}
+
+/* ---- Profile card --------------------------------------------------- */
+
+.ld-profile-flex{
+    display:flex;
+    gap:24px;
+}
+
+.ld-profile-main{
+    flex:1;
+    min-width:0;
+}
+
+.ld-profile-body{
+    display:flex;
+    gap:44px;
+    margin-top:6px;
+}
+
+.ld-contact-col{
+    width:250px;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.ld-contact-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    color:#1f2a37;
+    font-size:15px;
+    word-break:break-word;
+}
+
+.ld-contact-row svg{
+    width:20px;
+    height:20px;
+    color:#5b6472;
+    flex-shrink:0;
+}
+
+.ld-fields{
+    flex:1;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    column-gap:30px;
+    row-gap:22px;
+}
+
+.ld-field .ld-label{
+    display:block;
+    color:#8a94a6;
+    font-size:13px;
+    margin-bottom:5px;
+}
+
+.ld-field .ld-value{
+    color:#1f2a37;
+    font-size:15px;
+    font-weight:600;
+}
+
+/* Action icons (email / call / meeting) */
+
+.ld-profile-actions{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+}
+
+.ld-action-btn{
+    width:42px;
+    height:42px;
+    border:1px solid #d7e3f2;
+    border-radius:10px;
+    background:#fff;
+    color:#1668c0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.ld-action-btn:hover{
+    background:#1668c0;
+    color:#fff;
+    border-color:#1668c0;
+}
+
+.ld-action-btn svg{
+    width:20px;
+    height:20px;
+}
+
+.ld-edit-btn{
+    margin-top:24px;
+    border:1px solid #1668c0;
+    color:#1668c0;
+    background:#fff;
+    padding:10px 22px;
+    border-radius:8px;
+    font-weight:600;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.ld-edit-btn:hover{
+    background:#eef4fc;
+}
+
+.ld-edit-btn svg{
+    width:16px;
+    height:16px;
+}
+
+/* ---- Email history -------------------------------------------------- */
+
+.ld-email-item{
+    border:1px solid #eceef2;
+    border-radius:10px;
+    padding:16px 18px;
+    margin-bottom:14px;
+    cursor:pointer;
+    transition:.15s;
+}
+
+/* Gmail-style conversation groups */
+.ld-email-thread{border:1px solid #e5e7eb;border-radius:12px;margin:14px 0;overflow:hidden;background:#fff}.ld-email-thread-head{display:flex;justify-content:space-between;gap:15px;padding:15px 18px;background:#f8fafc;color:#1f2937}.ld-email-thread-head span{color:#64748b;font-size:13px}.ld-email-thread .ld-email-item{margin:0;border:0;border-top:1px solid #eef2f7;border-radius:0;padding:0;cursor:default}.ld-email-thread summary{display:flex;justify-content:space-between;gap:14px;padding:14px 18px;cursor:pointer;list-style:none}.ld-email-thread summary::-webkit-details-marker{display:none}.ld-email-meta{display:flex;align-items:center;gap:8px;color:#64748b;font-size:13px;white-space:nowrap}.ld-email-message{padding:4px 18px 18px;line-height:1.6;color:#334155}.ld-thread-reply{margin:14px 18px 18px}.ld-conflict{display:none}.ld-conflict.show{display:block}
+.ld-email-history-scroll{max-height:600px;overflow-y:auto;padding-right:6px}
+.ld-email-history-scroll::-webkit-scrollbar{width:6px}
+.ld-email-history-scroll::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:10px}
+
+.ld-email-item:hover{
+    border-color:#c9d6ea;
+    box-shadow:0 2px 8px rgba(16,24,40,.06);
+}
+
+.ld-email-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+}
+
+.ld-email-subject{
+    font-weight:600;
+    color:#1f2a37;
+}
+
+.ld-email-badge{
+    font-size:11px;
+    padding:3px 10px;
+    border-radius:20px;
+    font-weight:600;
+    flex-shrink:0;
+}
+
+.ld-email-badge.sent{
+    background:#e0f2fe;
+    color:#0369a1;
+}
+
+.ld-email-badge.received{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.ld-email-preview{
+    color:#6b7280;
+    font-size:14px;
+    margin:6px 0;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+.ld-email-date{
+    color:#9aa3b2;
+    font-size:13px;
+}
+
+/* ---- Notes ---------------------------------------------------------- */
+
+.ld-notes-grid{
+    display:flex;
+    flex-wrap:wrap;
+    gap:18px;
+    align-items:stretch;
+}
+
+.ld-note-card{
+    width:210px;
+    min-height:130px;
+    border:1px solid #e3e7ee;
+    border-radius:10px;
+    padding:14px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+}
+
+.ld-note-text{
+    color:#374151;
+    font-size:14px;
+    white-space:pre-wrap;
+    overflow:hidden;
+}
+
+.ld-note-edit{
+    align-self:flex-start;
+    margin-top:12px;
+    border:none;
+    background:none;
+    color:#5b6472;
+    cursor:pointer;
+    padding:0;
+}
+
+.ld-note-edit:hover{
+    color:#1668c0;
+}
+
+.ld-note-edit svg{
+    width:18px;
+    height:18px;
+}
+
+.ld-note-add{
+    width:64px;
+    border:1px dashed #c9d0db;
+    border-radius:10px;
+    background:#fafbfc;
+    color:#1668c0;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.ld-note-add:hover{
+    background:#eef4fc;
+}
+
+.ld-note-add svg{
+    width:28px;
+    height:28px;
+}
+
+/* ---- Activities / Follow up / Meetings ------------------------------ */
+
+.ld-timeline-item{
+    border:1px solid #eceef2;
+    border-radius:10px;
+    padding:16px 18px;
+    margin-bottom:14px;
+}
+
+.ld-timeline-title{
+    font-weight:700;
+    color:#1f2a37;
+}
+
+.ld-timeline-sub{
+    color:#374151;
+    margin:5px 0;
+}
+
+.ld-timeline-item.bold-sub .ld-timeline-sub{
+    font-weight:600;
+}
+
+.ld-timeline-meta{
+    color:#9aa3b2;
+    font-size:13px;
+}
+
+.ld-empty{
+    color:#9aa3b2;
+    font-size:14px;
+    padding:6px 0;
+}
+
+/* ---- Badges --------------------------------------------------------- */
+
+.ld-badge{
+    display:inline-block;
+    padding:3px 12px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:600;
+}
+
+.ld-badge.status-new{ background:#e5e7eb; color:#374151; }
+.ld-badge.status-contacted{ background:#dbeafe; color:#1d4ed8; }
+.ld-badge.status-engaged{ background:#dcfce7; color:#166534; }
+.ld-badge.status-converted{ background:#ecfccb; color:#365314; }
+.ld-badge.status-not_interested{ background:#fee2e2; color:#991b1b; }
+.ld-badge.type-hot{ background:#fee2e2; color:#dc2626; }
+.ld-badge.type-warm{ background:#fef3c7; color:#b45309; }
+.ld-badge.type-cold{ background:#dbeafe; color:#2563eb; }
+.ld-badge-danger{ background:#fee2e2; color:#991b1b; margin-left:8px; }
+
+/* ---- Modals --------------------------------------------------------- */
+
+.ld-modal-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,.5);
+    display:none;
+    align-items:flex-start;
+    justify-content:center;
+    z-index:2000;
+    padding:40px 16px;
+    overflow-y:auto;
+}
+
+.ld-modal-overlay.open{
+    display:flex;
+}
+
+.ld-modal{
+    background:#fff;
+    width:100%;
+    max-width:560px;
+    border-radius:14px;
+    padding:26px 28px;
+    box-shadow:0 20px 60px rgba(16,24,40,.25);
+}
+
+.ld-modal.wide{
+    max-width:740px;
+}
+
+.ld-modal-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.ld-modal-head h3{
+    font-size:18px;
+    color:#1f2a37;
+    margin:0;
+}
+
+.ld-modal-close{
+    border:none;
+    background:none;
+    font-size:26px;
+    line-height:1;
+    color:#9aa3b2;
+    cursor:pointer;
+}
+
+.ld-modal-close:hover{
+    color:#1f2a37;
+}
+
+/* ---- Forms ---------------------------------------------------------- */
+
+.ld-form-group{
+    margin-bottom:16px;
+}
+
+.ld-form-group label{
+    display:block;
+    font-weight:600;
+    color:#374151;
+    margin-bottom:6px;
+    font-size:14px;
+}
+
+.ld-input,
+.ld-select,
+.ld-textarea{
+    width:100%;
+    border:1px solid #d7dce4;
+    border-radius:8px;
+    padding:10px 12px;
+    font-size:14px;
+    font-family:inherit;
+    background:#fff;
+}
+
+.ld-input:focus,
+.ld-select:focus,
+.ld-textarea:focus{
+    outline:none;
+    border-color:#1668c0;
+    box-shadow:0 0 0 3px rgba(22,104,192,.12);
+}
+
+.ld-textarea{
+    min-height:110px;
+    resize:vertical;
+}
+
+.ld-form-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+}
+
+.ld-local-preview{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:#eff6ff;
+    border:1px solid #bfdbfe;
+    border-radius:8px;
+    padding:8px 12px;
+    font-size:13px;
+    color:#1d4ed8;
+    margin-top:-6px;
+}
+
+.ld-local-preview.ld-local-preview-active{
+    background:#ecfdf5;
+    border-color:#a7f3d0;
+    color:#047857;
+}
+
+.ld-local-preview-clock{
+    font-size:15px;
+}
+
+.ld-btn{
+    background:#1668c0;
+    color:#fff;
+    border:none;
+    padding:11px 24px;
+    border-radius:8px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.ld-btn:hover{
+    background:#0f4c81;
+}
+
+.ld-btn-outline{
+    background:#fff;
+    border:1px solid #d7dce4;
+    color:#374151;
+    padding:11px 24px;
+    border-radius:8px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.ld-modal-actions{
+    display:flex;
+    justify-content:flex-end;
+    gap:12px;
+    margin-top:8px;
+}
+
+/* Conflict warning inside meeting modal */
+
+.ld-conflict{
+    display:none;
+    background:#fef2f2;
+    border:1px solid #fecaca;
+    color:#991b1b;
+    padding:12px 14px;
+    border-radius:8px;
+    font-size:14px;
+    margin-bottom:16px;
+}
+
+.ld-conflict.show{
+    display:block;
+}
+
+/* Email view modal */
+
+.ld-view-meta{
+    color:#6b7280;
+    font-size:13px;
+    margin-bottom:14px;
+}
+
+.ld-view-body{
+    color:#374151;
+    font-size:14px;
+    line-height:1.6;
+    max-height:50vh;
+    overflow:auto;
+    border-top:1px solid #eceef2;
+    padding-top:14px;
+}
+
+.ld-call-number{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:20px;
+    font-weight:700;
+    color:#1668c0;
+    text-decoration:none;
+    margin-bottom:18px;
+}
+
+/* CKEditor sizing inside the compose modal */
+
+.ck-editor__editable{
+    min-height:220px;
+}
+
+/* ---- Toasts --------------------------------------------------------- */
+
+.ld-toast-wrap{
+    position:fixed;
+    top:20px;
+    right:20px;
+    z-index:3000;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.ld-toast{
+    min-width:280px;
+    max-width:380px;
+    padding:14px 16px;
+    border-radius:10px;
+    color:#fff;
+    font-size:14px;
+    box-shadow:0 8px 24px rgba(16,24,40,.2);
+    animation:ld-slide .25s ease;
+}
+
+.ld-toast.success{ background:#16a34a; }
+.ld-toast.error{ background:#dc2626; }
+.ld-toast.info{ background:#1668c0; }
+
+@keyframes ld-slide{
+    from{ opacity:0; transform:translateX(20px); }
+    to{ opacity:1; transform:none; }
+}
+
+/* ---- Responsive ----------------------------------------------------- */
+
+@media(max-width:992px){
+
+    .ld-profile-flex{
+        flex-direction:column;
+    }
+
+    .ld-profile-actions{
+        flex-direction:row;
+    }
+
+    .ld-profile-body{
+        flex-direction:column;
+        gap:24px;
+    }
+
+    .ld-contact-col{
+        width:100%;
+    }
+
+    .ld-fields{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:576px){
+
+    .ld-fields{
+        grid-template-columns:1fr;
+    }
+
+    .ld-form-row{
+        grid-template-columns:1fr;
+    }
+
+    .ld-note-card{
+        width:100%;
+    }
+}

@@ -191,7 +191,7 @@
     <td>{{ $lead->id }}</td>
 
     <td>
-        <a href="{{ route('enquiry.show', $lead->id) }}" class="lead-name-link">
+        <a href="{{ route('agent.lead.details', $lead->id) }}" class="lead-name-link">
             {{ $lead->name }}
         </a>
     </td>

@@ -32,6 +32,7 @@
         <link rel="stylesheet" href="{{ asset('dashboard') }}/assets/css/main.css">
         <!-- Fontawesome -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+        @stack('styles')
 
         <!-- Summernote CSS -->
         <!-- Include CSS -->
@@ -191,6 +192,15 @@
                                 </span>
                             </a>
                         </li>
+
+                        @if($roleId == config('constants.roles.admin'))
+                        <li class="sidebar-menu__item {{ Request::is('admin/agents') || Request::is('admin/agents/*') || Request::is('admin/agent-regions') ? 'activePage' : '' }}">
+                            <a href="{{ route('agents.index') }}" class="sidebar-menu__link">
+                                <span class="icon"><i class="ph ph-users"></i></span>
+                                <span class="text">Agents</span>
+                            </a>
+                        </li>
+                        @endif
                                                @php
     $roleId = session('role_id');
 @endphp

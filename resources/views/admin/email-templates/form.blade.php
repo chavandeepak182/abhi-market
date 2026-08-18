@@ -1,0 +1,17 @@
+@extends('admin.layouts.header')
+@section('content')
+<div style="padding:30px;max-width:850px"><h1>{{ $template->exists ? 'Edit email message' : 'Create email message' }}</h1><p style="color:#64748b">Use simple placeholders in the email text: <code>@{{name}}</code>, <code>@{{report_name}}</code>, <code>@{{agent_name}}</code>, <code>@{{company}}</code>.</p>
+@if(session('success'))
+    <div class="alert-success">{{ session('success') }}</div>
+@endif
+@if($errors->any())
+    <div class="alert-danger">
+        <ul style="margin:0;padding-left:18px">
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+<form class="section-card" method="POST" action="{{ $template->exists ? route('email-templates.update',$template) : route('email-templates.store') }}">@csrf @if($template->exists) @method('PUT') @endif<div class="form-group"><label>Internal name</label><input class="form-control" name="name" value="{{ old('name',$template->name) }}" placeholder="Example: First follow-up reminder" required></div><div class="form-group"><label>When should this email be used?</label><select class="form-control" id="templateType" name="type"><option value="global" @selected(old('type',$template->type)==='global')>Sample Report — sent manually by an agent</option><option value="followup" @selected(old('type',$template->type)==='followup')>Automatic follow-up email</option></select></div><div id="followupSettings"><div class="form-group"><label>Which follow-up is this?</label><select class="form-control" name="followup_number"><option value="1" @selected((int)old('followup_number',$template->followup_number)===1)>Follow-up 1 — first reminder</option><option value="2" @selected((int)old('followup_number',$template->followup_number)===2)>Follow-up 2</option><option value="3" @selected((int)old('followup_number',$template->followup_number)===3)>Follow-up 3</option><option value="4" @selected((int)old('followup_number',$template->followup_number)===4)>Follow-up 4</option><option value="5" @selected((int)old('followup_number',$template->followup_number)===5)>Follow-up 5</option><option value="6" @selected((int)old('followup_number',$template->followup_number)===6)>Follow-up 6 — final reminder</option></select></div><div class="form-group"><label>Send how many minutes after lead creation?</label><input class="form-control" min="1" max="525600" type="number" name="days_after_creation" value="{{ old('days_after_creation',$template->days_after_creation) }}" placeholder="Example: 4320 (= 3 days)"><small>The email will not send if the lead has already replied.</small></div></div><div class="form-group"><label>Email subject</label><input class="form-control" name="subject" value="{{ old('subject',$template->subject) }}" required></div><div class="form-group"><label>Email message</label><textarea class="form-control" style="height:240px;padding:12px" name="body" required>{{ old('body',$template->body) }}</textarea></div><button class="btn-primary">Save email message</button></form></div><script>const type=document.getElementById('templateType'),settings=document.getElementById('followupSettings'),followupFields=settings.querySelectorAll('select[name="followup_number"],input[name="days_after_creation"]');function toggle(){const isFollowup=type.value==='followup';settings.style.display=isFollowup?'block':'none';followupFields.forEach(f=>f.disabled=!isFollowup)}type.addEventListener('change',toggle);toggle();</script>
+@endsection

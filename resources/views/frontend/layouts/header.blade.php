@@ -4,7 +4,7 @@
     <script 
         src="https://www.paypal.com/sdk/js?client-id=BAA7qbjGHxnIpeIxf8a_2LH0VFXDc2c6mSOP55nXnPcbklSJhJI4wnNtIA313kdOfWBFjGGiT_ST0kwDqs&components=hosted-buttons&disable-funding=venmo&currency=USD">
     </script>
-
+<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
     <!-- Google Tag Manager -->
     <script>
         (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':

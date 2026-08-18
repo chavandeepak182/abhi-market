@@ -61,7 +61,7 @@ public function blog(Request $request)
                 'blog_category.category_name'
             )
             ->leftJoin('blog_category', 'blog.category_id', '=', 'blog_category.pid')
-            ->where('blog.status', 'active');
+             ->orderBy('blog.publish_date', 'desc');
 
         // Search
         if ($request->filled('search')) {
@@ -357,10 +357,313 @@ public function searchByTitle(Request $request)
 
 //export enquiery
 
+// public function export(Request $request, $type)
+// {
+//     $query = DB::table('enquiries')
+//         ->leftJoin('countries', 'enquiries.country_id', '=', 'countries.id')
+//         ->whereNull('enquiries.deleted_at');
+
+//     // =========================
+//     // APPLY FILTERS
+//     // =========================
+
+//     // Status
+//     if ($request->filled('status')) {
+//         $query->where('enquiries.status', $request->status);
+//     }
+
+//     // Agent
+//     if ($request->filled('agent')) {
+//         $query->where('enquiries.assigned_to', $request->agent);
+//     }
+
+//     // Email
+//     if ($request->filled('email')) {
+//         $query->where('enquiries.email', 'like', '%' . $request->email . '%');
+//     }
+
+//     // From Date
+//     if ($request->filled('from_date')) {
+//         $query->whereDate('enquiries.created_at', '>=', $request->from_date);
+//     }
+
+//     // To Date
+//     if ($request->filled('to_date')) {
+//         $query->whereDate('enquiries.created_at', '<=', $request->to_date);
+//     }
+
+//     // =========================
+//     // GET DATA
+//     // =========================
+
+//     $enquiries = $query->select(
+//             'enquiries.id',
+//             'enquiries.name',
+//             'enquiries.email',
+//             'countries.name as country_name',
+//             'enquiries.phone_code',
+//             'enquiries.usage_type',
+//             'enquiries.job_title',
+//             'enquiries.contact',
+//             'enquiries.page_name',
+//             'enquiries.visitor_country',
+//             'enquiries.created_at'
+//         )
+//         ->orderBy('enquiries.created_at', 'desc')
+//         ->get();
+
+//     // =========================
+//     // CSV EXPORT
+//     // =========================
+
+//     if ($type == 'csv') {
+
+//         $filename = 'enquiries_' . date('Y_m_d_H_i_s') . '.csv';
+
+//         $headers = [
+//             'Content-Type' => 'text/csv',
+//             'Content-Disposition' => "attachment; filename=\"$filename\"",
+//         ];
+
+//         $callback = function () use ($enquiries) {
+
+//             $file = fopen('php://output', 'w');
+
+//             // Header Row
+//             fputcsv($file, [
+//                 'ID',
+//                 'Name',
+//                 'Email',
+//                 'Country',
+//                 'Phone Code',
+//                 'Usage Type',
+//                 'Job Title',
+//                 'Contact',
+//                 'Visitor Country',
+//                 'Page',
+//                 'Date'
+//             ]);
+
+//             // Data Rows
+//             foreach ($enquiries as $enquiry) {
+
+//                 fputcsv($file, [
+//                     $enquiry->id,
+//                     $enquiry->name,
+//                     $enquiry->email,
+//                     $enquiry->country_name ?? '-',
+//                     $enquiry->phone_code ?? '-',
+//                     $enquiry->usage_type ?? '-',
+//                     $enquiry->job_title ?? '-',
+//                     $enquiry->contact ?? '-',
+//                     $enquiry->visitor_country ?? '-',
+//                     $enquiry->page_name ?? '-',
+//                     Carbon::parse($enquiry->created_at)->format('d M, Y H:i'),
+//                 ]);
+//             }
+
+//             fclose($file);
+//         };
+
+//         return Response::stream($callback, 200, $headers);
+//     }
+
+//     // =========================
+//     // JSON EXPORT
+//     // =========================
+
+//     if ($type == 'json') {
+
+//         $filename = 'enquiries_' . date('Y_m_d_H_i_s') . '.json';
+
+//         $data = $enquiries->map(function ($e) {
+
+//             return [
+//                 'id' => $e->id,
+//                 'name' => $e->name,
+//                 'email' => $e->email,
+//                 'country' => $e->country_name ?? '-',
+//                 'phone_code' => $e->phone_code ?? '-',
+//                 'usage_type' => $e->usage_type ?? '-',
+//                 'job_title' => $e->job_title ?? '-',
+//                 'contact' => $e->contact ?? '-',
+//                 'visitor_country' => $e->visitor_country ?? '-',
+//                 'page' => $e->page_name ?? '-',
+//                 'date' => Carbon::parse($e->created_at)->format('d M, Y H:i'),
+//             ];
+//         });
+
+//         return response()->json($data);
+//     }
+
+//     return back()->with('status', 'Invalid export type');
+// }
+// public function export(Request $request, $type)
+// {
+//     $query = DB::table('enquiries')
+//     ->leftJoin('countries', 'enquiries.country_id', '=', 'countries.id')
+//     ->leftJoin('users', 'enquiries.assigned_to', '=', 'users.id')
+//     ->whereNull('enquiries.deleted_at');
+
+//     // =========================
+//     // APPLY FILTERS
+//     // =========================
+
+//     // Status
+//     if ($request->filled('status')) {
+//         $query->where('enquiries.status', $request->status);
+//     }
+
+//     // Agent
+//     if ($request->filled('agent')) {
+//         $query->where('enquiries.assigned_to', $request->agent);
+//     }
+
+//     // Email
+//     if ($request->filled('email')) {
+//         $query->where('enquiries.email', 'like', '%' . $request->email . '%');
+//     }
+
+//     // From Date
+//     if ($request->filled('from_date')) {
+//         $query->whereDate('enquiries.created_at', '>=', $request->from_date);
+//     }
+
+//     // To Date
+//     if ($request->filled('to_date')) {
+//         $query->whereDate('enquiries.created_at', '<=', $request->to_date);
+//     }
+
+//     // =========================
+//     // GET DATA
+//     // =========================
+
+//     $enquiries = $query->select(
+//             'enquiries.id',
+//             'enquiries.name',
+//             'enquiries.email',
+//             'countries.name as country_name',
+//             'enquiries.phone_code',
+//             'enquiries.usage_type',
+//             'enquiries.job_title',
+//             'enquiries.contact',
+//             'enquiries.page_name',
+//             'enquiries.visitor_country',
+//             'enquiries.created_at',
+//             'users.name as assigned_to',
+//         )
+//         ->orderBy('enquiries.created_at', 'desc')
+//         ->get();
+
+//     // =========================
+//     // CSV EXPORT
+//     // =========================
+
+//     if ($type == 'csv') {
+
+//         $filename = 'enquiries_' . date('Y_m_d_H_i_s') . '.csv';
+
+//         $headers = [
+//             'Content-Type' => 'text/csv',
+//             'Content-Disposition' => "attachment; filename=\"$filename\"",
+//         ];
+
+//         $callback = function () use ($enquiries) {
+
+//             $file = fopen('php://output', 'w');
+
+//             // Header Row
+//             fputcsv($file, [
+//                 'ID',
+//                 'Name',
+//                 'Email',
+//                 'Country',
+//                 'Phone Code',
+//                 'Usage Type',
+//                 'Job Title',
+//                 'Contact',
+//                 'Visitor Country',
+//                 'Page',
+//                 'Date',
+//                 'Assigned To'
+//             ]);
+
+//             // Data Rows
+//             foreach ($enquiries as $enquiry) {
+
+//                 fputcsv($file, [
+//                     $enquiry->id,
+//                     $enquiry->name,
+//                     $enquiry->email,
+//                     $enquiry->country_name ?? '-',
+//                     $enquiry->phone_code ?? '-',
+//                     $enquiry->usage_type ?? '-',
+//                     $enquiry->job_title ?? '-',
+//                     $enquiry->contact ?? '-',
+//                     $enquiry->visitor_country ?? '-',
+//                     $enquiry->page_name ?? '-',
+//                     Carbon::parse($enquiry->created_at)->format('d M, Y H:i'),
+//                     $enquiry->assigned_to ?? 'Unassigned'
+//                 ]);
+//             }
+
+//             fclose($file);
+//         };
+
+//         return Response::stream($callback, 200, $headers);
+//     }
+
+//     // =========================
+//     // JSON EXPORT
+//     // =========================
+
+//     if ($type == 'json') {
+
+//         $filename = 'enquiries_' . date('Y_m_d_H_i_s') . '.json';
+
+//         $data = $enquiries->map(function ($e) {
+
+//             return [
+//                 'id' => $e->id,
+//                 'name' => $e->name,
+//                 'email' => $e->email,
+//                 'country' => $e->country_name ?? '-',
+//                 'phone_code' => $e->phone_code ?? '-',
+//                 'usage_type' => $e->usage_type ?? '-',
+//                 'job_title' => $e->job_title ?? '-',
+//                 'contact' => $e->contact ?? '-',
+//                 'visitor_country' => $e->visitor_country ?? '-',
+//                 'page' => $e->page_name ?? '-',
+//                 'date' => Carbon::parse($e->created_at)->format('d M, Y H:i'),
+//             ];
+//         });
+
+//         return response()->json($data);
+//     }
+
+//     return back()->with('status', 'Invalid export type');
+// }
 public function export(Request $request, $type)
 {
     $query = DB::table('enquiries')
-        ->leftJoin('countries', 'enquiries.country_id', '=', 'countries.id')
+        ->leftJoin(
+            'countries',
+            'enquiries.country_id',
+            '=',
+            'countries.id'
+        )
+        ->leftJoin(
+            'users',
+            'enquiries.assigned_to',
+            '=',
+            'users.id'
+        )
+        ->leftJoin(
+            'regions',
+            'enquiries.region_id',
+            '=',
+            'regions.id'
+        )
         ->whereNull('enquiries.deleted_at');
 
     // =========================
@@ -369,47 +672,100 @@ public function export(Request $request, $type)
 
     // Status
     if ($request->filled('status')) {
-        $query->where('enquiries.status', $request->status);
+        $query->where(
+            'enquiries.status',
+            $request->status
+        );
     }
 
     // Agent
     if ($request->filled('agent')) {
-        $query->where('enquiries.assigned_to', $request->agent);
+        $query->where(
+            'enquiries.assigned_to',
+            $request->agent
+        );
+    }
+
+    // Region
+    if ($request->filled('region')) {
+        $query->where(
+            'enquiries.region_id',
+            $request->region
+        );
     }
 
     // Email
     if ($request->filled('email')) {
-        $query->where('enquiries.email', 'like', '%' . $request->email . '%');
+        $query->where(
+            'enquiries.email',
+            'like',
+            '%' . $request->email . '%'
+        );
+    }
+
+    // Email Type
+    if ($request->filled('email_type')) {
+        $query->where(
+            'enquiries.email_type',
+            $request->email_type
+        );
     }
 
     // From Date
     if ($request->filled('from_date')) {
-        $query->whereDate('enquiries.created_at', '>=', $request->from_date);
+        $query->whereDate(
+            'enquiries.created_at',
+            '>=',
+            $request->from_date
+        );
     }
 
     // To Date
     if ($request->filled('to_date')) {
-        $query->whereDate('enquiries.created_at', '<=', $request->to_date);
+        $query->whereDate(
+            'enquiries.created_at',
+            '<=',
+            $request->to_date
+        );
     }
 
     // =========================
     // GET DATA
     // =========================
 
-    $enquiries = $query->select(
+    $enquiries = $query
+        ->select(
             'enquiries.id',
             'enquiries.name',
             'enquiries.email',
+
+            // Email Type
+            'enquiries.email_type',
+
+            // Country
             'countries.name as country_name',
+
+            // Phone
             'enquiries.phone_code',
+
+            // Region
+            'regions.region_name as region_name',
+
+            // Other details
             'enquiries.usage_type',
             'enquiries.job_title',
             'enquiries.contact',
             'enquiries.page_name',
             'enquiries.visitor_country',
-            'enquiries.created_at'
+            'enquiries.created_at',
+
+            // Assigned Agent
+            'users.name as assigned_to'
         )
-        ->orderBy('enquiries.created_at', 'desc')
+        ->orderBy(
+            'enquiries.created_at',
+            'desc'
+        )
         ->get();
 
     // =========================
@@ -418,54 +774,97 @@ public function export(Request $request, $type)
 
     if ($type == 'csv') {
 
-        $filename = 'enquiries_' . date('Y_m_d_H_i_s') . '.csv';
+        $filename = 'enquiries_' .
+            date('Y_m_d_H_i_s') .
+            '.csv';
 
         $headers = [
             'Content-Type' => 'text/csv',
-            'Content-Disposition' => "attachment; filename=\"$filename\"",
+            'Content-Disposition' =>
+                "attachment; filename=\"$filename\"",
         ];
 
         $callback = function () use ($enquiries) {
 
             $file = fopen('php://output', 'w');
 
-            // Header Row
+            // =========================
+            // HEADER ROW
+            // =========================
+
             fputcsv($file, [
                 'ID',
                 'Name',
                 'Email',
+                'Email Type',
                 'Country',
                 'Phone Code',
+                'Region',
                 'Usage Type',
                 'Job Title',
                 'Contact',
                 'Visitor Country',
                 'Page',
-                'Date'
+                'Date',
+                'Assigned To'
             ]);
 
-            // Data Rows
+            // =========================
+            // DATA ROWS
+            // =========================
+
             foreach ($enquiries as $enquiry) {
 
                 fputcsv($file, [
                     $enquiry->id,
                     $enquiry->name,
                     $enquiry->email,
+
+                    // Email Type
+                    $enquiry->email_type ?? '-',
+
+                    // Country
                     $enquiry->country_name ?? '-',
+
+                    // Phone Code
                     $enquiry->phone_code ?? '-',
+
+                    // Region
+                    $enquiry->region_name ?? '-',
+
+                    // Usage Type
                     $enquiry->usage_type ?? '-',
+
+                    // Job Title
                     $enquiry->job_title ?? '-',
+
+                    // Contact
                     $enquiry->contact ?? '-',
+
+                    // Visitor Country
                     $enquiry->visitor_country ?? '-',
+
+                    // Page
                     $enquiry->page_name ?? '-',
-                    Carbon::parse($enquiry->created_at)->format('d M, Y H:i'),
+
+                    // Date
+                    Carbon::parse(
+                        $enquiry->created_at
+                    )->format('d M, Y H:i'),
+
+                    // Assigned To
+                    $enquiry->assigned_to ?? 'Unassigned'
                 ]);
             }
 
             fclose($file);
         };
 
-        return Response::stream($callback, 200, $headers);
+        return Response::stream(
+            $callback,
+            200,
+            $headers
+        );
     }
 
     // =========================
@@ -474,7 +873,9 @@ public function export(Request $request, $type)
 
     if ($type == 'json') {
 
-        $filename = 'enquiries_' . date('Y_m_d_H_i_s') . '.json';
+        $filename = 'enquiries_' .
+            date('Y_m_d_H_i_s') .
+            '.json';
 
         $data = $enquiries->map(function ($e) {
 
@@ -482,20 +883,53 @@ public function export(Request $request, $type)
                 'id' => $e->id,
                 'name' => $e->name,
                 'email' => $e->email,
+
+                // Email Type
+                'email_type' => $e->email_type ?? '-',
+
+                // Country
                 'country' => $e->country_name ?? '-',
+
+                // Phone Code
                 'phone_code' => $e->phone_code ?? '-',
+
+                // Region
+                'region' => $e->region_name ?? '-',
+
+                // Usage Type
                 'usage_type' => $e->usage_type ?? '-',
+
+                // Job Title
                 'job_title' => $e->job_title ?? '-',
+
+                // Contact
                 'contact' => $e->contact ?? '-',
-                'visitor_country' => $e->visitor_country ?? '-',
+
+                // Visitor Country
+                'visitor_country' =>
+                    $e->visitor_country ?? '-',
+
+                // Page
                 'page' => $e->page_name ?? '-',
-                'date' => Carbon::parse($e->created_at)->format('d M, Y H:i'),
+
+                // Date
+                'date' => Carbon::parse(
+                    $e->created_at
+                )->format('d M, Y H:i'),
+
+                // Assigned To
+                'assigned_to' =>
+                    $e->assigned_to ?? 'Unassigned',
             ];
         });
 
         return response()->json($data);
     }
 
-    return back()->with('status', 'Invalid export type');
+    return back()->with(
+        'status',
+        'Invalid export type'
+    );
 }
+
 }

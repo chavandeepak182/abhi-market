@@ -459,6 +459,553 @@
     </div>
     <!-- Our Approach Section End -->
 
+    <!-- Our Team -->
+<div class="team-area pt-80 pb-70" id="team">
+    <div class="container">
+
+        <div class="section-title">
+            <h3 class="wow fadeInUp mt-16" style="margin-top: 19px;">Our Teams</h3>
+            <h2 class="wow fadeInUp" data-wow-delay="0.2s">
+                Our <span>Teams</span>
+            </h2>
+        </div>
+
+        <div class="row pt-45 justify-content-center">
+
+            <!-- Dilip Kumar Yadav -->
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-duration="750">
+                <div class="team-card">
+                    <img src="{{ asset('assets/images/team/dilip-y.jpg') }}" alt="Dilip Kumar Yadav">
+
+                    <ul class="social-link">
+                        <li>
+                            <a href="https://www.linkedin.com/in/dilip-kumar-83a65722/" target="_blank" rel="noopener">
+                                <i class="bx bxl-linkedin-square"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="content">
+                        <h3>Dilip Kumar Yadav</h3>
+                        <span>Founder &amp; CFO</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Swapnil Dhamale -->
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-duration="750">
+                <div class="team-card">
+                    <img src="{{ asset('assets/images/team/swapnil.jpg') }}" alt="Swapnil Dhamale">
+
+                    <ul class="social-link">
+                        <li>
+                            <a href="https://www.linkedin.com/in/swapnil-dhamale-5423381a/" target="_blank" rel="noopener">
+                                <i class="bx bxl-linkedin-square"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="content">
+                        <h3>Swapnil Dhamale</h3>
+                        <span>AVP</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deepak Chavan -->
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-duration="750">
+                <div class="team-card">
+                    <img src="{{ asset('assets/images/team/deepak-c.jpg') }}" alt="Deepak Chavan">
+
+                    <ul class="social-link">
+                        <li>
+                            <a href="https://www.linkedin.com/in/deepak-chavan-970a40193" target="_blank" rel="noopener">
+                                <i class="bx bxl-linkedin-square"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="content">
+                        <h3>Deepak Chavan</h3>
+                        <span>Technical Lead</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ekta Chaurasia -->
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-duration="750">
+                <div class="team-card">
+                    <img src="{{ asset('assets/images/team/ekta.webp') }}" alt="Ekta Chaurasia">
+
+                    <ul class="social-link">
+                        <li>
+                            <a href="https://www.linkedin.com/in/amol-dagale-001b3a312/" target="_blank" rel="noopener">
+                                <i class="bx bxl-linkedin-square"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="content">
+                        <h3>Ekta Chaurasia</h3>
+                        <span>Sr. Research Analyst</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shwetal Surve -->
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-duration="750">
+                <div class="team-card">
+                    <img src="{{ asset('assets/images/team/shwetal.webp') }}" alt="Shwetal Surve">
+
+                    <ul class="social-link">
+                        <li>
+                            <a href="#" target="_blank">
+                                <i class="bx bxl-linkedin-square"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="content">
+                        <h3>Shwetal Surve</h3>
+                        <span>Research Analyst</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Atiquee Sayyad -->
+            <!-- <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-duration="750">
+                <div class="team-card">
+                    <img src="{{ asset('assets/images/team/Atiquee.webp') }}" alt="Atiquee Sayyad">
+
+                    <ul class="social-link">
+                        <li>
+                            <a href="#" target="_blank">
+                                <i class="bx bxl-linkedin-square"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="content">
+                        <h3>Atiquee Sayyad</h3>
+                        <span>Business Development Executive</span>
+                    </div>
+                </div>
+            </div> -->
+
+            <!-- Janavi Meshram -->
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-duration="750">
+                <div class="team-card">
+                    <img src="{{ asset('assets/images/team/janvi.png') }}" alt="Janavi Meshram">
+
+                    <ul class="social-link">
+                        <li>
+                            <a href="#" target="_blank">
+                                <i class="bx bxl-linkedin-square"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="content">
+                        <h3>Janavi Meshram</h3>
+                        <span>Business Development Executive</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ankita Kaushik -->
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-duration="750">
+                <div class="team-card">
+                    <img src="{{ asset('assets/images/team/ankita_k.png') }}" alt="Ankita Kaushik">
+
+                    <ul class="social-link">
+                        <li>
+                            <a href="#" target="_blank">
+                                <i class="bx bxl-linkedin-square"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="content">
+                        <h3>Ankita Kaushik</h3>
+                        <span>Business Analyst</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Amol Shinde -->
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-duration="750">
+                <div class="team-card">
+                    <img src="{{ asset('assets/images/team/amol_shinde.png') }}" alt="Amol Shinde">
+
+                    <ul class="social-link">
+                        <li>
+                            <a href="#" target="_blank">
+                                <i class="bx bxl-linkedin-square"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="content">
+                        <h3>Amol Shinde</h3>
+                        <span>Sr. SEO Executive</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Yakub Fakir -->
+            <!-- <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-duration="750">
+                <div class="team-card">
+                    <img src="{{ asset('assets/images/team/yakub_fakir.webp') }}" alt="Yakub Fakir">
+
+                    <ul class="social-link">
+                        <li>
+                            <a href="#" target="_blank">
+                                <i class="bx bxl-linkedin-square"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="content">
+                        <h3>Yakub Fakir</h3>
+                        <span>Human Resources</span>
+                    </div>
+                </div>
+            </div> -->
+
+            <!-- Amit Saroj -->
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-duration="750">
+                <div class="team-card">
+                    <img src="{{ asset('assets/images/team/amit_saroj.webp') }}" alt="Amit Saroj">
+
+                    <ul class="social-link">
+                        <li>
+                            <a href="https://www.linkedin.com/in/amit-saroj-56520744/" target="_blank" rel="noopener">
+                                <i class="bx bxl-linkedin-square"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="content">
+                        <h3>Amit Saroj</h3>
+                        <span>Graphic Designer</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Srushti Wadne -->
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-duration="750">
+                <div class="team-card">
+                    <img src="{{ asset('assets/images/team/srushti_wadne.webp') }}" alt="Srushti Wadne">
+
+                    <ul class="social-link">
+                        <li>
+                            <a href="https://www.linkedin.com/in/srushti-wadne-2b4081241/" target="_blank" rel="noopener">
+                                <i class="bx bxl-linkedin-square"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="content">
+                        <h3>Srushti Wadne</h3>
+                        <span>Content Developer</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<style>
+
+/* =========================================
+   TEAM CARD
+========================================= */
+
+.team-card {
+    position: relative;
+    overflow: hidden;
+    background: #f5f5f5;
+    transition: 0.4s ease;
+    margin-bottom: 30px;
+    border-radius: 0;
+}
+
+.team-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+}
+
+
+/* =========================================
+   TEAM IMAGE
+   Same size as screenshot
+========================================= */
+
+.team-card img {
+    width: 103%;
+    height: 309px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+
+    /* BLACK & WHITE */
+    filter: grayscale(100%);
+
+    transition: 0.4s ease;
+}
+
+
+/*
+   Keep image BLACK & WHITE on hover
+*/
+.team-card:hover img {
+    filter: grayscale(100%);
+    transform: scale(1.03);
+}
+
+
+/* =========================================
+   BLUE BOTTOM CONTENT
+========================================= */
+
+.team-card .content {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+
+    background: #0878df;
+    color: #fff;
+
+    text-align: center;
+
+    padding: 8px 10px 10px;
+
+    /*
+       Rounded top-left shape
+       like your screenshot
+    */
+    border-top-left-radius: 55px;
+
+    z-index: 2;
+}
+
+
+/* =========================================
+   TEAM NAME
+========================================= */
+
+.team-card .content h3 {
+    margin: 0;
+
+    color: #fff;
+
+    font-size: 20px;
+    font-weight: 700;
+
+    line-height: 1.3;
+}
+
+
+/* =========================================
+   DESIGNATION
+========================================= */
+
+.team-card .content span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #fff;
+
+    font-size: 16px;
+    font-weight: 400;
+
+    line-height: 1.3;
+}
+
+
+/* =========================================
+   LINKEDIN ICON
+========================================= */
+
+.team-card .social-link {
+    position: absolute;
+
+    top: 62px;
+    right: 37px;
+
+    list-style: none;
+
+    margin: 0;
+    padding: 0;
+
+    opacity: 0;
+
+    transition: 0.3s ease;
+
+    z-index: 5;
+}
+
+
+/* Show LinkedIn on hover */
+
+.team-card:hover .social-link {
+    opacity: 1;
+}
+
+
+/* =========================================
+   LINKEDIN BUTTON
+========================================= */
+
+.team-card .social-link li a {
+    width: 38px;
+    height: 38px;
+
+    background: #0878df;
+    color: #fff;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+
+    font-size: 19px;
+
+    transition: 0.3s ease;
+}
+
+
+/* LinkedIn hover */
+
+.team-card .social-link li a:hover {
+    background: #fff;
+    color: #0878df;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 991px) {
+
+    .team-card img {
+        height: 340px;
+    }
+
+    .team-card .content {
+        padding: 8px 10px 10px;
+    }
+
+    .team-card .content h3 {
+        font-size: 18px;
+    }
+
+    .team-card .content span {
+        font-size: 14px;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 767px) {
+
+    .team-card {
+        margin-bottom: 25px;
+    }
+
+    .team-card img {
+        height: 320px;
+    }
+
+    .team-card .content {
+        padding: 8px 10px 10px;
+
+        border-top-left-radius: 45px;
+    }
+
+    .team-card .content h3 {
+        font-size: 17px;
+    }
+
+    .team-card .content span {
+        font-size: 14px;
+    }
+
+    /*
+       Show LinkedIn on mobile
+       because hover does not work properly
+       on touch devices
+    */
+
+    .team-card .social-link {
+        opacity: 1;
+
+        top: 15px;
+        right: 15px;
+    }
+
+    .team-card .social-link li a {
+        width: 36px;
+        height: 36px;
+
+        font-size: 18px;
+    }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 480px) {
+
+    .team-card img {
+        height: 290px;
+    }
+
+    .team-card .content {
+        padding: 7px 8px 9px;
+
+        border-top-left-radius: 40px;
+    }
+
+    .team-card .content h3 {
+        font-size: 15px;
+    }
+
+    .team-card .content span {
+        font-size: 13px;
+    }
+
+    .team-card .social-link {
+        top: 12px;
+        right: 12px;
+    }
+
+    .team-card .social-link li a {
+        width: 34px;
+        height: 34px;
+
+        font-size: 17px;
+    }
+
+}
+
+</style>
 
 <!-- Some Fact Section Start -->
     <div class="fact-counter">

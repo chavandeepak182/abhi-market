@@ -129,7 +129,19 @@
                     </a>
                 </div>
 
+
                 <h1 class="display-5 fw-bold" style="color:#fff">{{ $blog->blog_name }}</h1>
+                 <ul class="breadcrumb mt-2" style="background:transparent; padding:0; margin:0; list-style:none;">
+                        <li style="display:inline; margin-right:8px;">
+                            <a href="{{ url('/') }}" style="color:#00aaff; text-decoration:none; font-weight:600;">Home &gt;</a>
+                        </li>
+                        <li style="display:inline; margin-right:8px;">
+                            <a href="{{ url('/blogs') }}" style="color:#00aaff; text-decoration:none; font-weight:600;">Blogs &gt;</a>
+                        </li>
+                        <li class="active" style="display:inline; color:#00aaff; font-weight:700;">
+                            {{ $blog->blog_name }}
+                        </li>
+                    </ul>
             </div>
         </div>
     </div>
@@ -144,11 +156,11 @@
         <div class="col-lg-8 mb-5 mb-lg-0">
             <img src="{{ asset($blog->image) }}" alt="{{ $blog->blog_name }}" class="img-fluid rounded mb-4 shadow-sm">
 
-            <h1 class="mb-3">{{ $blog->blog_name }}</h1>
+           <strong class="mb-3 d-block">{{ $blog->blog_name }}</strong>
             
 
             <p class="text-muted mb-4">
-                Published on {{ \Carbon\Carbon::parse($blog->created_at)->format('F d, Y') }} 
+                Published on {{ \Carbon\Carbon::parse($blog->publish_date)->format('F d, Y') }} 
                 <span class="mx-2">|</span>
                 Category: <strong>{{ $blog->category_name }}</strong>
             </p>

@@ -23,9 +23,7 @@
                 </div>
 <div class="col-xxl-3 col-sm-6">
 
-    <div class="card {{ $todaysLeadsCount > 0 ? 'new-lead-card' : '' }}"
-         onclick="window.location='{{ route('agent.today.leads') }}';"
-         style="cursor: pointer;">
+    <div class="card {{ $todaysLeadsCount > 0 ? 'new-lead-card' : '' }}">
 
         <div class="card-body">
 
@@ -48,9 +46,7 @@
 </div>
 <div class="col-xxl-3 col-sm-6">
 
-    <div class="card {{ $newLeadsCount > 0 ? 'new-lead-card' : '' }}"
-         onclick="window.location='{{ route('agent.new.leads') }}';"
-         style="cursor: pointer;">
+    <div class="card {{ $newLeadsCount > 0 ? 'new-lead-card' : '' }}">
 
         <div class="card-body">
 

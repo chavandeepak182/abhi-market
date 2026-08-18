@@ -16,6 +16,264 @@ use App\Jobs\ProcessEnquiryAI;
 
 class EnquiryController extends Controller
 {
+//  public function enquiryLead(Request $request)
+// {
+//     $roleId = session('role_id');
+//     $userId = session('user_id');
+
+//     $query = DB::table('enquiries')
+//     ->leftJoin('countries', 'enquiries.country_id', '=', 'countries.id')
+//     ->leftJoin('users', 'enquiries.assigned_to', '=', 'users.id') // ✅ ADD THIS
+//     ->whereNull('enquiries.deleted_at')
+//     ->orderBy('enquiries.created_at', 'desc')
+//     ->select(
+//         'enquiries.*',
+//         'countries.name as country_name',
+//         'users.name as agent_name'
+//     );
+
+//     // ✅ Agent restriction
+//   if ($roleId == config('constants.roles.agent')) {
+
+//     // ✅ Team Lead Agent
+//     if (session('can_assign_leads') == 1) {
+
+//         $query->where(function($q) use ($userId) {
+
+//             $q->where('enquiries.assigned_to', $userId)
+//               ->orWhere('enquiries.assigned_by', $userId);
+
+//         });
+
+//     } else {
+
+//         // ✅ Normal agent
+//         $query->where('enquiries.assigned_to', $userId);
+
+//     }
+// }
+
+//     if ($request->type == 'today') {
+//     $query->whereDate('enquiries.followup_date', \Carbon\Carbon::today());
+// }
+
+//     // =========================
+// // ✅ FILTERS START
+// // =========================
+
+// // Status filter
+// if ($request->filled('status')) {
+
+//     if ($request->status == 'unassigned') {
+
+//         // Show only unassigned leads
+//         $query->whereNull('enquiries.assigned_to');
+
+//     } else {
+
+//         // Filter by lead status
+//         $query->where('enquiries.status', $request->status);
+
+//     }
+// }
+
+// // Agent filter
+// if ($request->filled('agent')) {
+//     $query->where('enquiries.assigned_to', $request->agent);
+// }
+
+// // Date filters
+// if ($request->filled('from_date')) {
+//     $query->whereDate('enquiries.created_at', '>=', $request->from_date);
+// }
+
+// if ($request->filled('to_date')) {
+//     $query->whereDate('enquiries.created_at', '<=', $request->to_date);
+// }
+
+// // Email filter
+// if ($request->filled('email')) {
+//     $query->where('enquiries.email', 'like', '%' . $request->email . '%');
+// }
+
+// // =========================
+// // ✅ FILTERS END
+// // =========================
+
+//     $enquiries = $query->paginate(50)->appends($request->all());
+   
+
+// $summaryQuery = clone $query;
+
+// $totalLeads = $summaryQuery->count();
+
+// $thisMonth = (clone $summaryQuery)
+//     ->whereMonth('enquiries.created_at', Carbon::now()->month)
+//     ->count();
+
+// $todayLeads = (clone $summaryQuery)
+//     ->whereDate('enquiries.created_at', Carbon::today())
+//     ->count();
+
+//     // Agents list (for admin filter dropdown)
+//   $agents = [];
+
+// // Admin OR agents with assign permission
+// if (
+//     $roleId != config('constants.roles.agent') ||
+//     session('can_assign_leads') == 1
+// ) {
+//     $agents = DB::table('users')
+//         ->where('role_id', config('constants.roles.agent'))
+//         ->whereNull('deleted_at')
+//         ->select('id', 'name')
+//         ->get();
+// }
+// return view('admin.enquiry.index', compact(
+//     'enquiries',
+//     'agents',
+//     'totalLeads',
+//     'thisMonth',
+//     'todayLeads'
+// ));
+// }
+//  public function enquiryLead(Request $request)
+// {
+//     $roleId = session('role_id');
+//     $userId = session('user_id');
+
+//     $query = DB::table('enquiries')
+//     ->leftJoin('countries', 'enquiries.country_id', '=', 'countries.id')
+//     ->leftJoin('users', 'enquiries.assigned_to', '=', 'users.id') // ✅ ADD THIS
+//     ->whereNull('enquiries.deleted_at')
+//     ->orderBy('enquiries.created_at', 'desc')
+//     ->select(
+//         'enquiries.*',
+//         'countries.name as country_name',
+//         'users.name as agent_name'
+//     );
+
+//     // ✅ Agent restriction
+//   if ($roleId == config('constants.roles.agent')) {
+
+//     // ✅ Team Lead Agent
+//     if (session('can_assign_leads') == 1) {
+
+//         $query->where(function($q) use ($userId) {
+
+//             $q->where('enquiries.assigned_to', $userId)
+//               ->orWhere('enquiries.assigned_by', $userId);
+
+//         });
+
+//     } else {
+
+//         // ✅ Normal agent
+//         $query->where('enquiries.assigned_to', $userId);
+
+//     }
+// }
+
+//     if ($request->type == 'today') {
+//     $query->whereDate('enquiries.followup_date', \Carbon\Carbon::today());
+// }
+
+//     // =========================
+// // ✅ FILTERS START
+// // =========================
+
+// // Status filter
+// if ($request->filled('status')) {
+
+//     if ($request->status == 'unassigned') {
+
+//         // Show only unassigned leads
+//         $query->whereNull('enquiries.assigned_to');
+
+//     } else {
+
+//         // Filter by lead status
+//         $query->where('enquiries.status', $request->status);
+
+//     }
+// }
+
+// // Agent filter
+// if ($request->filled('agent')) {
+//     $query->where('enquiries.assigned_to', $request->agent);
+// }
+
+// // Region filter
+// if ($request->filled('region')) {
+//     $query->where('enquiries.region_id', $request->region);
+// }
+
+// // Date filters
+
+// // Date filters
+// if ($request->filled('from_date')) {
+//     $query->whereDate('enquiries.created_at', '>=', $request->from_date);
+// }
+
+// if ($request->filled('to_date')) {
+//     $query->whereDate('enquiries.created_at', '<=', $request->to_date);
+// }
+
+// // Email filter
+// if ($request->filled('email')) {
+//     $query->where('enquiries.email', 'like', '%' . $request->email . '%');
+// }
+
+// // =========================
+// // ✅ FILTERS END
+// // =========================
+
+//     $enquiries = $query->paginate(50)->appends($request->all());
+   
+
+// $summaryQuery = clone $query;
+
+// $totalLeads = $summaryQuery->count();
+
+// $thisMonth = (clone $summaryQuery)
+//     ->whereMonth('enquiries.created_at', Carbon::now()->month)
+//     ->count();
+
+// $todayLeads = (clone $summaryQuery)
+//     ->whereDate('enquiries.created_at', Carbon::today())
+//     ->count();
+
+//     // Agents list (for admin filter dropdown)
+//   // Agents list (for admin filter dropdown)
+// $agents = [];
+
+// // Admin OR agents with assign permission
+// if (
+//     $roleId != config('constants.roles.agent') ||
+//     session('can_assign_leads') == 1
+// ) {
+//     $agents = DB::table('users')
+//         ->where('role_id', config('constants.roles.agent'))
+//         ->whereNull('deleted_at')
+//         ->select('id', 'name')
+//         ->get();
+// }
+
+// // Region list
+// $regions = DB::table('regions')
+//     ->select('id', 'region_name')
+//     ->orderBy('region_name')
+//     ->get();
+
+// return view('admin.enquiry.index', compact(
+//     'enquiries',
+//     'agents',
+//     'regions',
+//     'totalLeads',
+//     'thisMonth',
+//     'todayLeads'
+// ));
+// }
  public function enquiryLead(Request $request)
 {
     $roleId = session('role_id');
@@ -82,6 +340,13 @@ if ($request->filled('agent')) {
     $query->where('enquiries.assigned_to', $request->agent);
 }
 
+// Region filter
+if ($request->filled('region')) {
+    $query->where('enquiries.region_id', $request->region);
+}
+
+// Date filters
+
 // Date filters
 if ($request->filled('from_date')) {
     $query->whereDate('enquiries.created_at', '>=', $request->from_date);
@@ -94,6 +359,13 @@ if ($request->filled('to_date')) {
 // Email filter
 if ($request->filled('email')) {
     $query->where('enquiries.email', 'like', '%' . $request->email . '%');
+}
+// Email Type filter
+if ($request->filled('email_type')) {
+    $query->where(
+        'enquiries.email_type',
+        $request->email_type
+    );
 }
 
 // =========================
@@ -116,7 +388,8 @@ $todayLeads = (clone $summaryQuery)
     ->count();
 
     // Agents list (for admin filter dropdown)
-   $agents = [];
+   // Agents list (for admin filter dropdown)
+$agents = [];
 
 // Admin OR agents with assign permission
 if (
@@ -129,9 +402,17 @@ if (
         ->select('id', 'name')
         ->get();
 }
+
+// Region list
+$regions = DB::table('regions')
+    ->select('id', 'region_name')
+    ->orderBy('region_name')
+    ->get();
+
 return view('admin.enquiry.index', compact(
     'enquiries',
     'agents',
+    'regions',
     'totalLeads',
     'thisMonth',
     'todayLeads'
@@ -528,11 +809,111 @@ public function contactLead()
     {
         return view('frontend.enquiry-form');
     }
+//     public function store(Request $request)
+// {
+//     $validated = $request->validate([
+//         'name'         => 'required|string|max:255',
+//         'email'        => 'required|email|max:255',
+//         'contact'      => 'required|string|max:15',
+//         'amount'       => 'nullable|numeric',
+//         'address'      => 'nullable|string',
+//         'message'      => 'nullable|string',
+//         'enquiry_type' => 'nullable|string',
+//         'page_url'     => 'nullable|url',
+//         'page_name'    => 'nullable|string',
+//         'job_title'    => 'nullable|string|max:255',
+//         'company_name' => 'nullable|string|max:255',
+//         'country_id'   => 'nullable|exists:countries,id',
+//         'usage_type'   => 'required|in:personal,office',
+//     ]);
+
+//     try {
+
+//         // Get selected country
+//         $country = null;
+
+//         if (!empty($validated['country_id'])) {
+
+//             $country = DB::table('countries')
+//                 ->where('id', $validated['country_id'])
+//                 ->first();
+//         }
+
+//         // =========================
+//         // ✅ Region Logic
+//         // =========================
+
+//         $regionId = $country->region_id ?? null;
+
+//         // =========================
+//         // ✅ Auto Lead Assignment
+//         // =========================
+
+//         // APAC → Amol
+//         if ($regionId == 1) {
+
+//             $assignedTo = 30;
+
+//         } else {
+
+//             // Other Regions → Tarun
+//             $assignedTo = 29;
+//         }
+
+//         // Save enquiry
+//         $enquiryId = DB::table('enquiries')->insertGetId([
+
+//             'name'            => $validated['name'],
+//             'email'           => $validated['email'],
+//             'contact'         => $validated['contact'],
+//             'amount'          => $validated['amount'] ?? null,
+//             'address'         => $validated['address'] ?? null,
+//             'message'         => $validated['message'] ?? null,
+//             'enquiry_type'    => $validated['enquiry_type'] ?? null,
+//             'page_url'        => $validated['page_url'] ?? null,
+//             'page_name'       => $validated['page_name'] ?? null,
+//             'job_title'       => $validated['job_title'] ?? null,
+//             'company_name'    => $validated['company_name'] ?? null,
+//             'country_id'      => $validated['country_id'] ?? null,
+//             'phone_code'      => $country->phone_code ?? null,
+//             'visitor_country' => null,
+//             'usage_type'      => $validated['usage_type'],
+
+//             // ✅ Added Region Logic
+//             'region_id'       => $regionId,
+//             'assigned_to'     => $assignedTo,
+
+//             'created_at'      => now(),
+//             'updated_at'      => now(),
+//         ]);
+
+//         \Log::info('Enquiry saved successfully.', [
+//             'enquiry_id' => $enquiryId
+//         ]);
+
+//         // Dispatch AI job
+//         ProcessEnquiryAI::dispatch($enquiryId);
+
+//     } catch (\Exception $e) {
+
+//         \Log::error('Enquiry store failed: ' . $e->getMessage());
+
+//         return back()->withErrors([
+//             'msg' => 'Something went wrong, please try again.'
+//         ]);
+//     }
+
+//     $slug = $request->slug;
+
+//     return redirect()->route('thank.you', $slug);
+// }
 public function store(Request $request)
 {
+    
     $validated = $request->validate([
         'name'         => 'required|string|max:255',
-        'email'        => 'required|email|max:255',
+        // 'email'        => 'required|email|max:255',
+        'email' => 'required|email:rfc,dns|max:255',
         'contact'      => 'required|string|max:15',
         'amount'       => 'nullable|numeric',
         'address'      => 'nullable|string',
@@ -543,7 +924,7 @@ public function store(Request $request)
         'job_title'    => 'nullable|string|max:255',
         'company_name' => 'nullable|string|max:255',
         'country_id'   => 'nullable|exists:countries,id',
-        'g-recaptcha-response' => 'nullable',
+        'g-recaptcha-response' => 'required',
         'usage_type'   => 'required|in:personal,office',
     ]);
 // Verify Google reCAPTCHA v3
@@ -558,20 +939,21 @@ $response = Http::asForm()->post(
 
 $result = $response->json();
 
-\Log::info('Google Response', $result);
+Log::info('Google Response', $result);
 
-// Log everything
-Log::info('===== RECAPTCHA DEBUG =====');
-Log::info('Token:', [
-    'token' => $request->input('g-recaptcha-response')
-]);
-
-Log::info('Google Response:', $result);
-
-if (!isset($result['success']) || $result['success'] !== true) {
-
-    Log::error('Recaptcha Failed', [
-        'response' => $result
+if (
+    !($result['success'] ?? false) ||
+    ($result['score'] ?? 0) < 0.7 ||
+    ($result['action'] ?? '') !== 'submit' ||
+    ($result['hostname'] ?? '') !== request()->getHost()
+) {
+    Log::warning('reCAPTCHA blocked', [
+        'ip' => $request->ip(),
+        'email' => $request->email,
+        'score' => $result['score'] ?? null,
+        'action' => $result['action'] ?? null,
+        'hostname' => $result['hostname'] ?? null,
+        'response' => $result,
     ]);
 
     return back()
@@ -581,8 +963,45 @@ if (!isset($result['success']) || $result['success'] !== true) {
         ]);
 }
 
-Log::info('Recaptcha Passed');
+Log::info('reCAPTCHA Passed', [
+    'score' => $result['score'],
+    'action' => $result['action'],
+]);
+// =========================
+// EMAIL TYPE DETECTION
+// =========================
 
+$email = strtolower(trim($validated['email']));
+
+$personalEmailDomains = [
+    'gmail.com',
+    'googlemail.com',
+    'yahoo.com',
+    'yahoo.in',
+    'hotmail.com',
+    'outlook.com',
+    'live.com',
+    'icloud.com',
+    'me.com',
+    'mac.com',
+    'aol.com',
+    'protonmail.com',
+    'proton.me',
+    'mail.com',
+    'zoho.com',
+];
+
+$emailDomain = '';
+
+if (str_contains($email, '@')) {
+    $emailDomain = strtolower(
+        trim(substr(strrchr($email, '@'), 1))
+    );
+}
+
+$emailType = in_array($emailDomain, $personalEmailDomains, true)
+    ? 'personal'
+    : 'business';
     try {
 
         // Get selected country
@@ -594,33 +1013,70 @@ Log::info('Recaptcha Passed');
                 ->where('id', $validated['country_id'])
                 ->first();
         }
+// =========================
+// ✅ Region Logic
+// =========================
 
-        // =========================
-        // ✅ Region Logic
-        // =========================
+$regionId = $country->region_id ?? null;
 
-        $regionId = $country->region_id ?? null;
+// =========================
+// ✅ Region IDs
+// =========================
 
-        // =========================
-        // ✅ Auto Lead Assignment
-        // =========================
+// APAC
+$apacRegions = [1];
 
-        // APAC → Amol
-        if ($regionId == 1) {
+// North America + Latin America
+$americaRegions = [2, 3];
 
-            $assignedTo = 88;
+// Europe
+$europeRegions = [4];
 
-        } else {
+// Middle East
+$middleEastRegions = [5];
 
-            // Other Regions → Tarun
-            $assignedTo = 29;
-        }
+
+// =========================
+// ✅ Auto Lead Assignment
+// =========================
+
+if (in_array($regionId, $americaRegions)) {
+
+    // 🇺🇸 North America + 🌎 Latin America
+    $assignedTo = 81;
+
+} elseif (in_array($regionId, $apacRegions) || in_array($regionId, $middleEastRegions)) {
+
+    // 🌏 APAC + 🌍 Middle East
+    $assignedTo = 28;
+
+} elseif (in_array($regionId, $europeRegions)) {
+
+    // 🇪🇺 Europe
+    $assignedTo = 30;
+
+} else {
+
+    // Other / Unknown regions
+    $assignedTo = 28;
+}  
+// Prevent duplicate submission within 2 minutes
+$alreadySubmitted = DB::table('enquiries')
+    ->where('email', $validated['email'])
+    ->where('page_name', $validated['page_name'])
+    ->where('created_at', '>=', now()->subMinutes(2))
+    ->exists();
+
+if ($alreadySubmitted) {
+    return redirect()->route('thank.you', $request->slug);
+}
 
         // Save enquiry
-        $enquiryId = DB::table('enquiries')->insertGetId([
+       $enquiryId = DB::table('enquiries')->insertGetId([
 
             'name'            => $validated['name'],
-            'email'           => $validated['email'],
+            'email'           => $email,
+            'email_type'      => $emailType,
             'contact'         => $validated['contact'],
             'amount'          => $validated['amount'] ?? null,
             'address'         => $validated['address'] ?? null,
@@ -648,7 +1104,7 @@ Log::info('Recaptcha Passed');
         ]);
 
         // Dispatch AI job
-        ProcessEnquiryAI::dispatch($enquiryId);
+        // ProcessEnquiryAI::dispatch($enquiryId);
 
     } catch (\Exception $e) {
 
@@ -663,6 +1119,7 @@ Log::info('Recaptcha Passed');
 
     return redirect()->route('thank.you', $slug);
 }
+
 
 
 
